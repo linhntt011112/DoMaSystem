@@ -1,1 +1,2 @@
 git config  user.name "TanHM" && git config user.email tan.hm1211@gmail.com
+git config  user.name "LinhNTT" && git config user.email linhntt011199@gmail.com
