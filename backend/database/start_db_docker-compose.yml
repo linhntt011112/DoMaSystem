@@ -1,5 +1,7 @@
 # docker-compose -f database/start_db_docker-compose.yml up -d
 # docker exec -it DMS-mysql /bin/bash
+# docker-compose -f database/start_db_docker-compose.yml down
+
 version: "3.9"
 
 services:
