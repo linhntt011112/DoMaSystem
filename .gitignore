@@ -1,3 +1,5 @@
 backend/venv/
 backend/__pycache__/
 backend/database/db-data/
+backend/database/__pycache__/
+backend/database/models/__pycache__/
