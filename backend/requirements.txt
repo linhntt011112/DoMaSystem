@@ -3,3 +3,4 @@ uvicorn==0.16.0  # uvicorn[standard]
 sqlalchemy==1.4.29
 mysql-connector-python==8.0.26
 passlib==1.7.4
+python-jose==3.3.0
