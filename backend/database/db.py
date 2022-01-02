@@ -5,6 +5,18 @@ from database.config import db_config
 from database.models import Base
 
 
+class User:
+    def __init__(self, id, password, name):
+        self.password = password
+        self.name = name
+        self.id = id
+
+users = [
+    User("linh", "linh0111", "Linh Nguyễn"),
+    User("tan", "tan1112", "Tân Hoàng")
+]
+users = {user.id: user for user in users}
+
 engine = create_engine(db_config.DB_URL, echo=True, future=True)
 
 
@@ -19,8 +31,10 @@ class SessionLocal:
             cls.__instance__ = super().__new__(cls)
         return cls.__instance__
 
-def create_tables():           #new
+
+def create_tables():           # new
 	Base.metadata.create_all(bind=engine)
  
 
-create_tables()
+# create_tables()
+

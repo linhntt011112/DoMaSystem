@@ -1,30 +1,24 @@
-from fastapi import FastAPI, Form, HTTPException, Depends
+from typing import Optional
+
+from fastapi import FastAPI, Form, HTTPException, Depends, Cookie, Request, Response
 from fastapi.security import APIKeyCookie
-from starlette.responses import Response, HTMLResponse
+from starlette.responses import HTMLResponse
 from starlette import status
 from jose import jwt
+
+from config import session_config
+from database.db import users
+from session import SessionManger
 
 
 app = FastAPI()
 
-cookie_sec = APIKeyCookie(name="session")
+# cookie_sec = APIKeyCookie(name="session")
 
-secret_key = "someactualsecret"
-
-users = {"dmontagu": {"password": "secret1"}, "tiangolo": {"password": "secret2"}}
+secret_key = session_config.SECRET_KEY
 
 
-def get_current_user(session: str = Depends(cookie_sec)):
-    try:
-        payload = jwt.decode(session, secret_key)
-        user = users[payload["sub"]]
-        return user
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="Invalid authentication"
-        )
-
-
+@app.get("/")
 @app.get("/login")
 def login_page():
     return HTMLResponse(
@@ -41,20 +35,40 @@ def login_page():
 
 @app.post("/login")
 def login(response: Response, username: str = Form(...), password: str = Form(...)):
-    if username not in users:
+    user_id = username
+    if user_id not in users:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, detail="Invalid user or password"
         )
-    db_password = users[username]["password"]
+    db_password = users[user_id].password
     if not password == db_password:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, detail="Invalid user or password"
         )
-    token = jwt.encode({"sub": username}, secret_key)
+    token = SessionManger.make_session_token(user_id)
     response.set_cookie("session", token)
     return {"ok": True}
 
 
+@app.get("/logout")
+def logout(response: Response):
+    response.delete_cookie("session")
+    return {"ok": True}
+
+
 @app.get("/private")
-def read_private(username: str = Depends(get_current_user)):
-    return {"username": username, "private": "get some private data"}
+def read_private(request: Request):
+    if "session" not in request.cookies:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Please login!"
+        )
+    session_token = str(request.cookies['session'])
+    user_id = SessionManger.get_session_user_id(session_token)
+    if user_id not in users:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Please login!"
+        )
+    user = users[user_id]
+    return {"username": user.name,
+            # 'request': request.cookies
+            }
