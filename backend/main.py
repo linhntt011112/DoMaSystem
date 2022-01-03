@@ -1,10 +1,12 @@
 from typing import Optional
 
 from fastapi import FastAPI, Form, HTTPException, Depends, Cookie, Request, Response
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import APIKeyCookie
 from starlette.responses import HTMLResponse
 from starlette import status
 from jose import jwt
+from pydantic import Bas
 
 from config import session_config
 from database.db import users
@@ -12,6 +14,19 @@ from session import SessionManger
 
 
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # cookie_sec = APIKeyCookie(name="session")
 
@@ -33,8 +48,11 @@ def login_page():
     )
 
 
+class 
+
 @app.post("/login")
-def login(response: Response, username: str = Form(...), password: str = Form(...)):
+def login(response: Response, username: str, password: str):
+    print(response)
     user_id = username
     if user_id not in users:
         raise HTTPException(
