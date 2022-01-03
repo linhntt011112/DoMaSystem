@@ -6,7 +6,7 @@ from fastapi.security import APIKeyCookie
 from starlette.responses import HTMLResponse
 from starlette import status
 from jose import jwt
-from pydantic import Bas
+from pydantic import BaseModel
 
 from config import session_config
 from database.db import users
@@ -48,18 +48,20 @@ def login_page():
     )
 
 
-class 
+class UserIn(BaseModel):
+    username: str
+    password: str
 
-@app.post("/login")
-def login(response: Response, username: str, password: str):
-    print(response)
-    user_id = username
+@app.post("/login", response_model=UserIn)
+def login(response: Response, user: UserIn):
+    print(user)
+    user_id = user.username
     if user_id not in users:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, detail="Invalid user or password"
         )
     db_password = users[user_id].password
-    if not password == db_password:
+    if not user.password == db_password:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, detail="Invalid user or password"
         )
