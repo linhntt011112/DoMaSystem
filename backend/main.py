@@ -8,7 +8,7 @@ from starlette import status
 from jose import jwt
 from pydantic import BaseModel
 
-from config import session_config
+from config import session_config, frontend_config
 from database.db import users
 from session import SessionManger
 
@@ -17,7 +17,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost",
-    "http://localhost:3000",
+    frontend_config.URL,
 ]
 
 app.add_middleware(
@@ -52,7 +52,7 @@ class UserIn(BaseModel):
     username: str
     password: str
 
-@app.post("/login", response_model=UserIn)
+@app.post("/login")
 def login(response: Response, user: UserIn):
     print(user)
     user_id = user.username
