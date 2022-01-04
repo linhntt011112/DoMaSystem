@@ -1,8 +1,13 @@
 import React from 'react';
 import './login.scss';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const { Component } = React
+
+function withNavigation(Component) {
+  return props => <Component {...props} navigate={useNavigate()} />;
+}
 
 class LoginPage extends Component {
   constructor(props){
@@ -37,8 +42,9 @@ class LoginPage extends Component {
       .then(response => {
         console.log(response.data)
         if (response.data.ok) {
+          // this.props.handleSuccessfulAuth(response.data);
           console.log(this.props);
-          this.props.history.push("/dashboard");
+          this.props.navigate("/dashboard");
         }
       })
       .catch(error => {
@@ -83,4 +89,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default withNavigation(LoginPage);
