@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import session, sessionmaker
 
 from database.config import db_config
-from database.models import Base
+from database.models import Base, Person, Position
 
 
 class User:
@@ -20,11 +20,14 @@ users = {user.id: user for user in users}
 engine = create_engine(db_config.DB_URL, echo=True, future=True)
 
 
-class SessionLocal:  
+class DBSessionLocal:  
     __instance__ = None
     
     def __init__(self):
-        self.new = sessionmaker(autocommit=False,autoflush=False, bind=self.engine)
+        self.new = sessionmaker(autocommit=False,autoflush=False, bind=engine)
+        
+    def get_session(self):
+        return self.new()
     
     def __new__(cls):  # Singleton
         if cls.__instance__ is None:
@@ -35,6 +38,21 @@ class SessionLocal:
 def create_tables():           # new
 	Base.metadata.create_all(bind=engine)
  
+ 
+def create_sample_data():
+    db_session = DBSessionLocal().get_session()
+    pos1 = db_session.query(Position).filter(Position.name == 'NhanVien').all()[0]
+    users = [
+        Person(username='linh', password='linh0111', position_id=pos1.id, position=pos1),
+        Person(username='Tan', password='tan1112', position_id=pos1.id, position=pos1)
+    ]
 
-# create_tables()
+    [db_session.add(user) for user in users]
+    db_session.commit()
+ 
+
+
+create_tables()
+create_sample_data()
+# create
 
