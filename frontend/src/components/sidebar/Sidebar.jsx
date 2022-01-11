@@ -1,6 +1,6 @@
 import React from 'react'
 import './sidebar.css'
-import { LineStyle, Timeline,TrendingUp, PersonOutline, AccountBalance } from '@material-ui/icons'
+import { LineStyle, Timeline,TrendingUp } from '@material-ui/icons'
 
 export default function Sidebar() {
     return (

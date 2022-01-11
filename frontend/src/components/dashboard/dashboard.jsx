@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Topbar from "../topbar/Topbar";
 import Sidebar from "../sidebar/Sidebar";
 import "./dashboard.css";
+import UserList from "../pages/userList/UserList";
 
 function withNavigation(Component) {
   return props => <Component {...props} navigate={useNavigate()} />;
@@ -31,18 +32,18 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <Topbar/>
-          <div className="container">
-            <Sidebar />
-            <div className="others">
-              Other pages
-            </div>
-          </div>
-          <button onClick={() => this.handleLogoutClick()}>Logout</button>
+      <Router>
+        <Topbar/>
+        <div className="container">
+          <Sidebar />
+          <Routes>
+            <Route path="/users">
+              <UserList />
+            </Route>
+          </Routes>
         </div>
-      </div>
+        <button onClick={() => this.handleLogoutClick()}>Logout</button>
+      </Router>
     );
   }
 };
