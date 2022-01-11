@@ -78,17 +78,14 @@ def logout(response: Response):
 
 @app.get("/get_current_user")
 def read_private(request: Request):
-    if "session" not in request.cookies:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="Please login!"
-        )
-    session_token = str(request.cookies['session'])
-    user_id = SessionManger.get_session_user_id(session_token)
-    if user_id not in users:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN, detail="Please login!"
-        )
-    user = users[user_id]
-    return {"username": user.name,
+    user_name = ""
+    if "session" in request.cookies:
+        session_token = str(request.cookies['session'])
+        user_id = SessionManger.get_session_user_id(session_token)
+        
+        if user_id  in users:
+            user = users[user_id]
+            user_name = user.name
+    return {"username": user_name,
             # 'request': request.cookies
             }
