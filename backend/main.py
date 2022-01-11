@@ -76,7 +76,7 @@ def logout(response: Response):
     return {"ok": True}
 
 
-@app.get("/private")
+@app.get("/get_current_user")
 def read_private(request: Request):
     if "session" not in request.cookies:
         raise HTTPException(
