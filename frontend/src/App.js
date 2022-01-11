@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route , Routes } from 'react-router-dom';
+import { BrowserRouter, Route , Switch } from 'react-router-dom';
 import './App.css';
 
 import Dashboard from './components/dashboard/dashboard';
@@ -13,11 +13,11 @@ class App extends Component {
     return (
       <div>
         <BrowserRouter>
-          <Routes>
-            <Route exact path="/" element={<LoginPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <AdminRoute path="/dashboard/users" element={<UserList />} />
-          </Routes>
+          <Switch>
+            <Route exact path="/" component={LoginPage} />
+            <AdminRoute path="/dashboard" component={Dashboard} />
+            <AdminRoute path="/dashboard/users" component={UserList} />
+          </Switch>
         </BrowserRouter>        
       </div>
     );

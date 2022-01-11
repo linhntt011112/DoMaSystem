@@ -1,12 +1,12 @@
 import React from 'react';
 import './login.scss';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const { Component } = React
 
 function withNavigation(Component) {
-  return props => <Component {...props} navigate={useNavigate()} />;
+  return props => <Component {...props} navigate={useHistory()} />;
 }
 
 class LoginPage extends Component {
@@ -44,7 +44,7 @@ class LoginPage extends Component {
         if (response.data.ok) {
           // this.props.handleSuccessfulAuth(response.data);
           console.log(this.props);
-          this.props.navigate("/dashboard");
+          this.props.history.push("/dashboard");
         }
       })
       .catch(error => {

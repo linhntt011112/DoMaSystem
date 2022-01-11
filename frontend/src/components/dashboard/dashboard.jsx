@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Topbar from "../topbar/Topbar";
 import Sidebar from "../sidebar/Sidebar";
 import "./dashboard.css";
 import UserList from "../pages/userList/UserList";
 
 function withNavigation(Component) {
-  return props => <Component {...props} navigate={useNavigate()} />;
+  return props => <Component {...props} navigate={useHistory()} />;
 }
 
 class Dashboard extends Component {
@@ -21,7 +21,7 @@ class Dashboard extends Component {
     axios
       .get("http://127.0.0.1:3009/logout", { withCredentials: true })
       .then(response => {
-        this.props.navigate("/");
+        this.props.history.push("/");
         console.log("Ok")
       })
       .catch(error => {
@@ -32,11 +32,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div>
-        <Topbar/>
-        <div className="container">
-          <Sidebar />
-        </div>
+      <div className="dashboard">
         <button onClick={() => this.handleLogoutClick()}>Logout</button>
       </div>
     );
