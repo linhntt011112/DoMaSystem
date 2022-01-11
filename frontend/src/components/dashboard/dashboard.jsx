@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { useNavigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Topbar from "../topbar/Topbar";
 import Sidebar from "../sidebar/Sidebar";
 import "./dashboard.css";
@@ -32,18 +32,13 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <Router>
+      <div>
         <Topbar/>
         <div className="container">
           <Sidebar />
-          <Routes>
-            <Route path="/users">
-              <UserList />
-            </Route>
-          </Routes>
         </div>
         <button onClick={() => this.handleLogoutClick()}>Logout</button>
-      </Router>
+      </div>
     );
   }
 };
