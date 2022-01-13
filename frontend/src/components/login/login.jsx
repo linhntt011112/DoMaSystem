@@ -2,6 +2,8 @@ import React from 'react';
 import './login.scss';
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
+import auth from "./auth";
+import Cookies from 'js-cookie';
 
 const { Component } = React
 
@@ -40,11 +42,15 @@ class LoginPage extends Component {
         { withCredentials: true }
       )
       .then(response => {
-        console.log(response.data)
-        if (response.data.ok) {
-          // this.props.handleSuccessfulAuth(response.data);
-          console.log(this.props);
-          this.props.history.push("/dashboard");
+        console.log(response)
+        if (response.data.ok) { 
+          if(response.status === 200){
+            Cookies.set('session', response.headers['session'])
+          }
+          auth.login(() => {
+            console.log(this.props);
+            this.props.history.push("/dashboard");
+          });
         }
       })
       .catch(error => {

@@ -15,8 +15,9 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={LoginPage} />
-            <AdminRoute path="/dashboard" component={Dashboard} />
-            <AdminRoute path="/dashboard/users" component={UserList} />
+            <AdminRoute exact path="/dashboard" component={Dashboard} />
+            <AdminRoute exact path="/dashboard/users" component={UserList} />
+            <Route path="*" component={() => "404 NOT FOUND"} />
           </Switch>
         </BrowserRouter>        
       </div>

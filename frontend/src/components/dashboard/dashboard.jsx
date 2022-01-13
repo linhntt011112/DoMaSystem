@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
-import Topbar from "../topbar/Topbar";
-import Sidebar from "../sidebar/Sidebar";
 import "./dashboard.css";
-import UserList from "../pages/userList/UserList";
+import auth from "../login/auth";
 
 function withNavigation(Component) {
   return props => <Component {...props} navigate={useHistory()} />;
@@ -17,12 +15,22 @@ class Dashboard extends Component {
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
   }
 
+  getCurrentUser() {
+    axios
+      .get("http://127.0.0.1:3009/get_current_user", { withCredentials: true })
+      .then(response => {
+        console.log(response.data)
+      })
+  }
+
   handleLogoutClick() {
     axios
       .get("http://127.0.0.1:3009/logout", { withCredentials: true })
       .then(response => {
-        this.props.history.push("/");
-        console.log("Ok")
+        auth.logout(() => {
+          this.props.history.push("/");
+          console.log("Ok")
+        });
       })
       .catch(error => {
         console.log("logout error", error);
@@ -30,7 +38,10 @@ class Dashboard extends Component {
   }
 
 
+
+
   render() {
+    this.getCurrentUser();
     return (
       <div className="dashboard">
         <button onClick={() => this.handleLogoutClick()}>Logout</button>
