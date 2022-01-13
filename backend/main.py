@@ -13,13 +13,12 @@ from config import session_config, frontend_config
 from database.db import users
 from session import SessionManger
 
-from utils import as_form
+from utils import as_form, OAuth2PasswordBearerWithCookie
 
 
 app = FastAPI()
 
 origins = [
-    "http://localhost",
     frontend_config.URL,
 ]
 
@@ -27,7 +26,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["*"], 
     allow_headers=["*"],
 )
 
@@ -58,8 +57,9 @@ class UserIn(BaseModel):
     
 
 @app.post("/login")
-def login(response: Response, user: UserIn = Depends(UserIn.as_form)):
+def login(request: Request, response: Response, user: UserIn):
     print(user)
+    print(request.cookies)
     user_id = user.username
     if user_id not in users:
         raise HTTPException(
@@ -71,7 +71,7 @@ def login(response: Response, user: UserIn = Depends(UserIn.as_form)):
             status_code=status.HTTP_403_FORBIDDEN, detail="Invalid user or password"
         )
     token = SessionManger.make_session_token(user_id)
-    response.set_cookie("session", token)
+    response.set_cookie("session", token, httponly=True, secure=True, samesite='none')
     return {"ok": True}
 
 
