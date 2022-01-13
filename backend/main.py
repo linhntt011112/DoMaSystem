@@ -8,9 +8,12 @@ from starlette import status
 from jose import jwt
 from pydantic import BaseModel
 
+
 from config import session_config, frontend_config
 from database.db import users
 from session import SessionManger
+
+from utils import as_form
 
 
 app = FastAPI()
@@ -48,12 +51,14 @@ def login_page():
     )
 
 
+@as_form
 class UserIn(BaseModel):
     username: str
     password: str
+    
 
 @app.post("/login")
-def login(response: Response, user: UserIn):
+def login(response: Response, user: UserIn = Depends(UserIn.as_form)):
     print(user)
     user_id = user.username
     if user_id not in users:
