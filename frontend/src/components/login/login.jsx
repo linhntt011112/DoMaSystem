@@ -6,6 +6,7 @@ import auth from "./auth";
 import Cookies from 'js-cookie';
 
 const { Component } = React
+axios.defaults.withCredentials = true;
 
 function withNavigation(Component) {
   return props => <Component {...props} navigate={useHistory()} />;
@@ -44,9 +45,6 @@ class LoginPage extends Component {
       .then(response => {
         console.log(response)
         if (response.data.ok) { 
-          if(response.status === 200){
-            Cookies.set('session', response.headers['session'])
-          }
           auth.login(() => {
             console.log(this.props);
             this.props.history.push("/dashboard");

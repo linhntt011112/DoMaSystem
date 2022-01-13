@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import "./dashboard.css";
 import auth from "../login/auth";
 
+axios.defaults.withCredentials = true;
+
 function withNavigation(Component) {
   return props => <Component {...props} navigate={useHistory()} />;
 }
