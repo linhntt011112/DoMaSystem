@@ -1,0 +1,42 @@
+export const userRows = [
+    { 
+        id: 1, 
+        username: 'Jon Snow', 
+        avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg",
+        email: "hon@gmail.com",
+        status: "active",
+        transaction: "$120.00",
+    },
+    { 
+        id: 2, 
+        username: 'Jon Snow', 
+        avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg",
+        email: "hon@gmail.com",
+        status: "active",
+        transaction: "$120.00",
+    },
+    { 
+        id:3, 
+        username: 'Jon Snow', 
+        avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg",
+        email: "hon@gmail.com",
+        status: "active",
+        transaction: "$120.00",
+    },
+    { 
+        id: 4, 
+        username: 'Jon Snow', 
+        avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg",
+        email: "hon@gmail.com",
+        status: "active",
+        transaction: "$120.00",
+    },
+    { 
+        id: 5, 
+        username: 'Jon Snow', 
+        avatar: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg",
+        email: "hon@gmail.com",
+        status: "active",
+        transaction: "$120.00",
+    },
+  ];
