@@ -77,7 +77,7 @@ def login(request: Request, response: Response, user: UserIn):
 
 @app.get("/logout")
 def logout(response: Response):
-    response.delete_cookie("session")
+    response.set_cookie("session", "", httponly=True, secure=True, samesite='none')
     return {"ok": True}
 
 
