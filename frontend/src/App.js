@@ -6,6 +6,7 @@ import Dashboard from './components/dashboard/dashboard';
 import LoginPage from './components/login/login'
 import UserList from './components/pages/userList/UserList';
 import AdminRoute from './routes/AdminRoute';
+import User from './components/pages/user/User';
 
 class App extends Component {
 
@@ -17,7 +18,7 @@ class App extends Component {
             <Route exact path="/" component={LoginPage} />
             <AdminRoute exact path="/dashboard" component={Dashboard} />
             <AdminRoute exact path="/dashboard/users" component={UserList} />
-            <Route path="*" component={() => "404 NOT FOUND"} />
+            <AdminRoute path="/dashboard/user/:userId" component={User} />
           </Switch>
         </BrowserRouter>        
       </div>
