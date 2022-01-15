@@ -6,8 +6,7 @@ export default function User() {
     return (
         <div className='user'>
             <div className='userTitleContainer'>
-                <h1 className='userTitle'>Edit User</h1>
-                <button className='userAddButton'>Create</button>
+                <h1 className='userTitle'>Thông tin chi tiết</h1>
             </div>
             <div className='userContainer'>
                 <div className='userShow'>
@@ -18,15 +17,14 @@ export default function User() {
                             className='userShowImg'
                         />
                         <div className='userShowTopTitle'>
-                            <span className='userShowUsername'>Anna Becker</span>
-                            <span className='userShowUserTitle'>Software Engineer</span>
+                            <span className='userShowUsername'>Nguyen Thi B</span>
                         </div>
                     </div>
                     <div className='userShowBottom'>
                         <span className='userShowTitle'>Account Details</span>
                         <div className='userShowInfo'>
                             <PermIdentity className='userShowIcon'/>
-                            <span className='userShowInfoTitle'>annabeck99</span>
+                            <span className='userShowInfoTitle'><b>Tên tài khoản: </b>annabeck99</span>
                         </div>
                         <div className='userShowInfo'>
                             <CalendarToday className='userShowIcon'/>

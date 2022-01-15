@@ -1,16 +1,19 @@
 import React from 'react'
 import './sidebar.css'
 import { TrendingUp, Group, Assignment, CallMade, ChromeReaderMode, PriorityHigh, Security } from '@material-ui/icons'
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
     return (
         <div className='sidebar'>
             <div className='sidebarWrapper'>
                 <div className='sidebarMenu'>
-                    <h3 className='sidebarTitle'>
-                        <Group className='sidebarIcon'/>
-                        Nhân viên
-                    </h3>
+                    <Link to={"/dashboard/users/"} className='link'>
+                        <h3 className='sidebarTitle'>
+                            <Group className='sidebarIcon'/>
+                            Nhân viên
+                        </h3>
+                    </Link> 
                 </div>
                 <div className='sidebarMenu'>
                     <h3 className='sidebarTitle'>

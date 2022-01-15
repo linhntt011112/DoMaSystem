@@ -2,6 +2,7 @@ import React from 'react';
 import './login.scss';
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
+import Logo from '../../img/logo_4.png';
 
 const { Component } = React
 axios.defaults.withCredentials = true;
@@ -31,22 +32,24 @@ class LoginPage extends Component {
 
   handleSubmit(event) {
     const { username, password } = this.state;
-    axios
-      .post(
-        "http://127.0.0.1:3009/login",
-        {
-            username: username,
-            password: password
-        },
-        { withCredentials: true }
-      )
+    let loginForm = document.getElementById('loginForm');
+    let formData = new FormData(loginForm);
+    axios({
+      method: "post",
+      url: "http://127.0.0.1:3009/login",
+      data: {
+        username: username,
+        password: password
+        // formData
+      },
+      // headers: { "Content-Type": "multipart/form-data" },
+      withCredentials: true
+    })
       .then(response => {
         console.log(response)
         if (response.data.ok) { 
-          // auth.login(() => {
-            console.log(this.props);
-            this.props.history.push("/dashboard");
-          // });
+          console.log(this.props);
+          this.props.history.push("/dashboard");
         }
       })
       .catch(error => {
@@ -57,9 +60,12 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <section id="login-page">
-        <form onSubmit={this.handleSubmit}>
-          <h2>Welcome!</h2>
+      <section id="login-page"> 
+        <form id="loginForm" name='loginForm' onSubmit={this.handleSubmit}>
+          <img src={Logo} alt='' className='logo'/>
+          <h2>
+            Welcome!
+          </h2>
           <fieldset>
             <legend>Log In</legend>
             <ul>

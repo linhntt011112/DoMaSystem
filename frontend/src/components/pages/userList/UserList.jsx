@@ -45,8 +45,8 @@ export default function UserList() {
                 return(
                     <>
                         <Link to={"/dashboard/user/"+params.row.id}>
-                            <button className='userListEdit'>Edit</button>
-                        </Link>    
+                            <button className='userListEdit'>Chi tiết</button>
+                        </Link>       
                         <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.id)}/>
                     </>
                     
@@ -57,6 +57,9 @@ export default function UserList() {
       
     return (
         <div className='userList'>
+            <div className='userListTop'>
+                <button className='userAddButton'>Create</button>
+            </div>
             <DataGrid
                 rows={data}
                 disableSelectionOnClick

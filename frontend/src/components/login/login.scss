@@ -13,6 +13,11 @@ section#login-page {
   animation: Gradient 15s ease infinite;
   box-sizing: border-box;
   form {
+    .logo{
+      width: 110px;
+      height: auto;
+      margin: auto;
+    }
     grid-column: 2;
     grid-row: 2;
     display: grid;
