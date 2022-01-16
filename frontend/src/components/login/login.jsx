@@ -1,100 +1,85 @@
-import React from 'react';
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+
+// import ErrorMessage from "./ErrorMessage";
+import { UserContext } from "../../context/UserContext";
 import './login.scss';
-import axios from "axios";
-import { useHistory } from 'react-router-dom';
 import Logo from '../../img/logo_4.png';
 
-const { Component } = React
-axios.defaults.withCredentials = true;
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
+  let history = useHistory();
 
-function withNavigation(Component) {
-  return props => <Component {...props} navigate={useHistory()} />;
-}
+  const [, setToken] = useContext(UserContext);
 
-class LoginPage extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      username: "",
-      password: "",
-      loginErrors: ""
+  const submitLogin = async () => {
+    let form = new FormData();
+    form.append("username", username);
+    form.append("password", password);
+
+    const requestOptions = {
+      method: "POST",
+      headers: { 
+        // "Content-Type": "application/www-form-urlencoded"
+       },
+      body: form,
+      // body: JSON.stringify(
+      //   `grant_type=&username=${username}&password=${password}&scope=&client_id=&client_secret=`
+      // ),
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
+    const response = await fetch("http://127.0.0.1:3009/api/token", requestOptions);
+    const data = await response.json();
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
+    if (response.ok) {
+      setToken(data.access_token);
+      history.push("/dashboard");
+      // console.log('ok');
+    }
+  };
 
-  handleSubmit(event) {
-    const { username, password } = this.state;
-    let loginForm = document.getElementById('loginForm');
-    let formData = new FormData(loginForm);
-    axios({
-      method: "post",
-      url: "http://127.0.0.1:3009/login",
-      data: {
-        username: username,
-        password: password
-        // formData
-      },
-      // headers: { "Content-Type": "multipart/form-data" },
-      withCredentials: true
-    })
-      .then(response => {
-        console.log(response)
-        if (response.data.ok) { 
-          console.log(this.props);
-          this.props.history.push("/dashboard");
-        }
-      })
-      .catch(error => {
-        console.log("login error", error);
-      });
-    event.preventDefault();
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitLogin();
+  };
 
-  render() {
-    return (
-      <section id="login-page"> 
-        <form id="loginForm" name='loginForm' onSubmit={this.handleSubmit}>
-          <img src={Logo} alt='' className='logo'/>
-          <h2>
-            Welcome!
-          </h2>
-          <fieldset>
-            <legend>Log In</legend>
-            <ul>
-              <li>
-                <label for="username">Username:</label>
-                <input 
-                  type="text" 
-                  id="username" 
-                  name="username"
-                  onChange={this.handleChange}
-                  required
-                />
-              </li>
-              <li>
-                <label for="password">Password:</label>
-                <input 
-                  type="password" 
-                  id="password" 
-                  name="password"
-                  onChange={this.handleChange}
-                required/>
-              </li>
-            </ul>
-          </fieldset>
-          <button type="submit">Login</button>
-        </form>
-      </section>
-    )
-  }
-}
+  return (
+    <section id="login-page"> 
+      <form id="loginForm" name='loginForm' onSubmit={handleSubmit}>
+        <img src={Logo} alt='' className='logo'/>
+        <h2>
+          Welcome!
+        </h2>
+        <fieldset>
+          <legend>Log In</legend>
+          <ul>
+            <li>
+              <label for="username">Username:</label>
+              <input 
+                type="text" 
+                id="username" 
+                name="username"
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </li>
+            <li>
+              <label for="password">Password:</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+              required/>
+            </li>
+          </ul>
+        </fieldset>
+        <button type="submit">Login</button>
+      </form>
+    </section>
+  );
+};
 
-export default withNavigation(LoginPage);
+export default Login;
