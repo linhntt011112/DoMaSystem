@@ -2,7 +2,9 @@ import React,  { useState, useContext } from "react";
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import "./dashboard.css";
+
 import { UserContext } from "../../context/UserContext";
+import Login from '../login/login';
 
 
 axios.defaults.withCredentials = true;
@@ -10,6 +12,10 @@ axios.defaults.withCredentials = true;
 const Dashboard = () => {
   const [token, setToken] = useContext(UserContext);
   let history = useHistory();
+  if (!token){
+    history.push("/");
+  }
+  
   const getCurrentUser = async () => {
     // axios
     //   .get("http://127.0.0.1:3009/get_current_user", { withCredentials: true })
@@ -59,10 +65,9 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      {getCurrentUser}
-      <button onClick={handleLogoutClick}>Logout</button>
+        <button onClick={handleLogoutClick}>Logout</button>
     </div>
-  );
+    );
 };
 
 export default Dashboard;
