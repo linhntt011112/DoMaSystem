@@ -1,10 +1,10 @@
-import React,  { useState, useContext } from "react";
+import React,  { useContext } from "react";
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import "./dashboard.css";
 
 import { UserContext } from "../../context/UserContext";
-import Login from '../login/login';
+import FeaturedInfo from "../featuredInfo/FeaturedInfo";
 
 
 axios.defaults.withCredentials = true;
@@ -65,7 +65,9 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-        <button onClick={handleLogoutClick}>Logout</button>
+      <h3 className="pageTitle">Welcome Admin!</h3>
+      <FeaturedInfo />
+      <button onClick={handleLogoutClick}>Logout</button>
     </div>
     );
 };
