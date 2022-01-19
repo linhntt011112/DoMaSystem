@@ -12,9 +12,9 @@ axios.defaults.withCredentials = true;
 const Dashboard = () => {
   const [token, setToken] = useContext(UserContext);
   let history = useHistory();
-  if (!token){
-    history.push("/");
-  }
+  // if (!token){
+  //   history.push("/");
+  // }
   
   const getCurrentUser = async () => {
     // axios

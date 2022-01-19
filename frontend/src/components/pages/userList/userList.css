@@ -5,16 +5,17 @@
 }
 
 .userAddButton{
-    width: 80px;
-    border: none;
+    border: 1px solid #ff9b44;
     padding: 5px;
-    background-color: teal;
-    border-radius: 5px;
+    background-color: #ff9b44;
+    border-radius: 50px;
     cursor: pointer;
     color: white;
     font-size: 16px;
     display: block;
     margin: 10px 10px 10px auto;
+    font-weight: 500;
+    min-width: 140px;
 }
 
 .userListUser{
@@ -47,4 +48,29 @@
 .userListInfo{
     color: #3bb077;
     margin-right: 20px;
+}
+
+.modal-title{
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+}
+
+.userAddItem{
+    display: flex;
+    flex-direction: column;
+}
+
+.userAddItem>label{
+    margin-right: 5px;
+    font-size: 15px;
+    padding: 7px 0px;
+    color: #1f1f1f;
+}
+
+.userAddInput{
+    width: 250px;
+    height: 30px;
+    box-shadow: none;
+    font-size: 15px;
 }

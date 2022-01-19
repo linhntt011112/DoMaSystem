@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import "./userList.css";
 import { DataGrid } from '@mui/x-data-grid';
-import { DeleteOutline } from '@material-ui/icons';
+import { DeleteOutline, Add } from '@material-ui/icons';
 import { userRows } from '../../../dummyData';
 import { Link } from "react-router-dom";
+import AddUser from "../../popup/AddUser/AddUser";
+import Button from '@mui/material/Button';
+import {Col, Container, Row} from "react-bootstrap";
 
 export default function UserList() {
     const [data, setData] = useState(userRows);
+    const [buttonPopup, setButtonPopup] = useState(false);
 
     const handleDelete = (id)=>{
         setData(data.filter(item=>item.id !== id));
@@ -57,17 +61,147 @@ export default function UserList() {
       
     return (
         <div className='userList'>
-            <div className='userListTop'>
-                <button className='userAddButton'>Create</button>
-            </div>
-            <DataGrid
-                rows={data}
-                disableSelectionOnClick
-                columns={columns}
-                pageSize={8}
-                rowsPerPageOptions={[5]}
-                checkboxSelection
-            />
+            <main>
+                <div className='userListTop'>
+                    <Button
+                        className='userAddButton'
+                        style={{
+                            margin: '10px 10px 10px auto',
+                            display: 'flex',
+                            border: '1px solid #ff9b44',
+                            padding: '5px',
+                            backgroundColor: '#ff9b44',
+                            borderRadius: '50px',
+                            cursor: 'pointer',
+                            color: 'white',
+                            fontSize: '16px',
+                            textTransform: 'inherit',
+                        }}
+                        startIcon={<Add/>}
+                        onClick={() => setButtonPopup(true)}
+                    >
+                        Add Employee
+                    </Button>
+                </div>
+                <div style={{ height: 'calc(100vh - 110px)' }}>
+                    <DataGrid
+                        rows={data}
+                        disableSelectionOnClick
+                        columns={columns}
+                        pageSize={8}
+                        rowsPerPageOptions={[5]}
+                        checkboxSelection
+                    />
+                </div>
+            </main>
+            <AddUser trigger={buttonPopup} setTrigger={setButtonPopup}>
+                <h5 className='modal-title'>Add Employee</h5>
+                <Container className='modal-body'>
+                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                            <div className='userAddItem'>
+                                <label>
+                                    Ten tai khoan
+                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    className='userAddInput'
+                                />
+                            </div>
+                        </Col>
+                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                            <div className='userAddItem'>
+                                <label>
+                                    Username
+                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    className='userAddInput'
+                                />
+                            </div>
+                        </Col>
+                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                            <div className='userAddItem'>
+                                <label>
+                                    Username
+                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    className='userAddInput'
+                                />
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                            <div className='userAddItem'>
+                                <label>
+                                    Username
+                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    className='userAddInput'
+                                />
+                            </div>
+                        </Col>
+                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                            <div className='userAddItem'>
+                                <label>
+                                    Username
+                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    className='userAddInput'
+                                />
+                            </div>
+                        </Col>
+                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                            <div className='userAddItem'>
+                                <label>
+                                    Username
+                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    className='userAddInput'
+                                />
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                        <Col sm={6} style={{padding: '15px 15px 0 15px'}}>
+                            <div className='userAddItem'>
+                                <label>
+                                    Username
+                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    className='userAddInput'
+                                />
+                            </div>
+                        </Col>
+                        <Col sm={6} style={{padding: '15px 15px 0 15px'}}>
+                            <div className='userAddItem'>
+                                <label>
+                                    Username
+                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    className='userAddInput'
+                                />
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
+            </AddUser>
         </div>
+
     )
 }

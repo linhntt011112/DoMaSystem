@@ -10,7 +10,7 @@ const AdminRoute = ({component: Component, ...rest}) => {
             return (
                 <div>
                     <Topbar/>
-                    <div className="container">
+                    <div className="adminContainer">
                         <Sidebar />
                         <Component {...props} />
                     </div>

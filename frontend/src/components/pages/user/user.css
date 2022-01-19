@@ -9,9 +9,18 @@
     justify-content: space-between;
 }
 
+.profileEdit{
+    margin-right: 30px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color: white;
+    cursor: pointer;
+}
+
 .userContainer{
     display: flex;
-    margin-top: 20px;
 }
 
 .userShow{
@@ -19,6 +28,13 @@
     padding: 20px;
     -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    margin: 30px;
+}
+
+.card-title {
+    color: #1f1f1f;
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .userUpdate{
@@ -32,11 +48,12 @@
 .userShowTop {
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .userShowImg{
-    width: 40px;
-    height: 40px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -49,14 +66,22 @@
 
 .userShowUsername{
     font-weight: 600;
+    font-size: 24px;
 }
 
-.userShowUserTitle{
-    font-weight: 300;
+.userShowUserCode{
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.userShowUserDateOfJoined{
+    color: #8e8e8e;
+    font-size: 12px;
 }
 
 .userShowBottom{
-    margin-top: 20px;
     margin-left: 20px
 }
 
@@ -69,21 +94,45 @@
 .userShowInfo{
     display: flex;
     align-items: center;
-    margin: 20px 0px;
     color: #444;
 }
 
-.userShowIcon{
-    font-size: 16px !important;
+.title{
+    color: #4f4f4f;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+.column1 {
+    float: left;
+    width: 20%;
+}
+
+.column2 {
+    float: left;
+    width: 80%;
 }
 
 .userShowInfoTitle{
-    margin-left: 10px;
+    margin: 20px 0px;
 }
 
 .userUpdateTitle{
     font-size: 24px;
     font-weight: 600;
+}
+.userShowJobColumn1{
+
+    width: 50%;
+}
+
+.userShowJobColumn11{
+    float: left;
+    width: 20%;
+}
+
+.userShowJobColumn12{
+    float: left;
+    width: 80%;
 }
 
 .userUpdateForm{

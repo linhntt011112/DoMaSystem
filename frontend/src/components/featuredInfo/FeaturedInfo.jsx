@@ -1,6 +1,6 @@
 import React from 'react'
 import './featuredInfo.css';
-import { ArrowDownward, Group } from '@material-ui/icons';
+import { Group } from '@material-ui/icons';
 
 export default function FeaturedInfo() {
     return (
