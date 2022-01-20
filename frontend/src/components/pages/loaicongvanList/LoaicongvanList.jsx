@@ -1,39 +1,32 @@
-import React, { useState } from 'react'
-import "./userList.css";
-import { DataGrid } from '@mui/x-data-grid';
-import { DeleteOutline, Add } from '@material-ui/icons';
-import { userRows } from '../../../dummyUsersData';
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import './LoaicongvanList.css'
+import {loaicongvanRows} from "../../../dummyLoaiCongVanData";
+import {Link} from "react-router-dom";
+import {Add, DeleteOutline} from "@material-ui/icons";
+import {Button} from "@mui/material";
+import {DataGrid} from "@mui/x-data-grid";
 import Popup from "../../popup/Popup/Popup";
-import { Button } from '@mui/material';
-import AddUser from "../../popup/AddUser/AddUser";
+import AddLoaiCongVan from "../../popup/AddLoaiCongVan/AddLoaiCongVan";
 
-export default function UserList() {
-    const [data, setData] = useState(userRows);
+export default function LoaicongvanList() {
+    const [data, setData] = useState(loaicongvanRows);
     const [buttonPopup, setButtonPopup] = useState(false);
 
     const handleDelete = (id)=>{
         setData(data.filter(item=>item.id !== id));
     };
+
     const columns = [
-        { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'fullname', headerName: 'Họ và tên', flex: 1, renderCell: (params)=>{
-            return (
-                <div className="userListUser">
-                    <img className='userListImg' src={params.row.avatar} alt=''/>
-                    {params.row.fullname}
-                </div>
-            )
-        } },
-        { field: 'username', headerName: 'Tên tài khoản', width: 160 },
+        { field: 'maloai', headerName: 'Ma loai', width: 100},
+        { field: 'loaicongvan', headerName: 'Loai cong van', flex: 1 },
         {
-          field: 'dob',
-          headerName: 'Ngày sinh',
-          width: 150,
+            field: 'trangthai',
+            headerName: 'Trang thai',
+            width: 150,
         },
         {
-            field: 'address',
-            headerName: 'Địa chỉ',
+            field: 'nguoicapnhat',
+            headerName: 'Nguoi cap nhat',
             flex: 1,
         },
         {
@@ -48,28 +41,28 @@ export default function UserList() {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Link to={"/dashboard/user/"+params.row.id}>
+                        {/*<Link to={"/dashboard/user/"+params.row.id}>*/}
                             <button className='userListEdit'>Chi tiết</button>
-                        </Link>       
+                        {/*</Link>*/}
                         <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.id)}/>
                     </>
-                    
+
                 )
             }
         }
-      ];
-      
+    ];
+
     return (
-        <div className='userList'>
+        <div className='loaicongvanList'>
             <main>
                 <div className='userListTop'>
-                    <h2 className='userListTitle'>Danh sách nhân viên</h2>
                     <Button
-                        className='userAddButton'
+                        className='userAddCongVan'
                         style={{
                             margin: '10px 10px 10px auto',
                             display: 'flex',
                             border: '1px solid #ff9b44',
+                            padding: '5px',
                             backgroundColor: '#ff9b44',
                             borderRadius: '50px',
                             cursor: 'pointer',
@@ -80,7 +73,7 @@ export default function UserList() {
                         startIcon={<Add/>}
                         onClick={() => setButtonPopup(true)}
                     >
-                        Thêm mới
+                        Them moi
                     </Button>
                 </div>
                 <div style={{ height: 'calc(100vh - 110px)' }}>
@@ -95,7 +88,7 @@ export default function UserList() {
                 </div>
             </main>
             <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                <AddUser />
+                <AddLoaiCongVan />
             </Popup>
         </div>
     )

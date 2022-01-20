@@ -1,0 +1,87 @@
+.userUpdate{
+    flex: 2;
+}
+
+.userUpdateHeader{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+
+.userUpdateTitle{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.userUpdateForm{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.userUpdateItem{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+::placeholder{
+    margin-left: 5px;
+}
+
+.userUpdateItem>label{
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.userUpdateInput{
+    width: 250px;
+    height: 30px;
+    box-shadow: none;
+    font-size: 15px;
+}
+
+::placeholder{
+    padding-left: 5px;
+}
+
+.userUpdateRight{
+    display: flex;
+    justify-content: center;
+}
+
+.userUpdateUpload{
+    display: flex;
+    align-items: center;
+}
+
+.userUpdateImg{
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+}
+
+.userUpdateIcon{
+    cursor: pointer;
+}
+
+.userUpdateButton{
+    cursor: pointer;
+    background-color: #ff9b44;
+    border: 1px solid #ff9b44;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    min-width: 200px;
+    padding: 10px 20px;
+    color: white;
+}
+
+.userUpdateFooter{
+    text-align: center;
+    margin-top: 40px;
+}

@@ -16,10 +16,12 @@ export default function Sidebar() {
                     </Link> 
                 </div>
                 <div className='sidebarMenu'>
-                    <h3 className='sidebarTitle'>
-                        <Assignment className='sidebarIcon'/>
-                        Loại công văn
-                    </h3>
+                    <Link to={"/dashboard/loai-cong-van/"} className='link'>
+                        <h3 className='sidebarTitle'>
+                            <Assignment className='sidebarIcon'/>
+                            Loại công văn
+                        </h3>
+                    </Link>
                 </div>
                 <div className='sidebarMenu'>
                     <h3 className='sidebarTitle'>
