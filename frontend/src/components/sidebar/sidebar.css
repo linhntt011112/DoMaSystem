@@ -64,3 +64,9 @@
 .sidebarTitle.active, .sidebarTitle:hover{
     background-color: rgb(180, 180, 233);
 }
+
+@media only screen and (max-width:1366px) {
+    .sidebar {
+        flex: 1;
+    }
+}

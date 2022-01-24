@@ -17,16 +17,16 @@ export default function LoaicongvanList() {
     };
 
     const columns = [
-        { field: 'maloai', headerName: 'Ma loai', width: 100},
-        { field: 'loaicongvan', headerName: 'Loai cong van', flex: 1 },
+        { field: 'maloai', headerName: 'Mã loại', width: 100},
+        { field: 'loaicongvan', headerName: 'Loại công văn', flex: 1 },
         {
             field: 'trangthai',
-            headerName: 'Trang thai',
+            headerName: 'Trạng thái',
             width: 150,
         },
         {
             field: 'nguoicapnhat',
-            headerName: 'Nguoi cap nhat',
+            headerName: 'Người cập nhật',
             flex: 1,
         },
         {
@@ -73,7 +73,7 @@ export default function LoaicongvanList() {
                         startIcon={<Add/>}
                         onClick={() => setButtonPopup(true)}
                     >
-                        Them moi
+                        Thêm mới
                     </Button>
                 </div>
                 <div style={{ height: 'calc(100vh - 110px)' }}>

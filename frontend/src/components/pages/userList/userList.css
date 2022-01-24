@@ -53,3 +53,8 @@
     color: #3bb077;
     margin-right: 20px;
 }
+
+.MuiButton-startIcon{
+    margin-right: 5px !important;
+    margin-bottom: 4px !important;
+}

@@ -83,7 +83,7 @@ export default function UserList() {
                         Thêm mới
                     </Button>
                 </div>
-                <div style={{ height: 'calc(100vh - 110px)' }}>
+                <div style={{ height: 'calc(100vh - 170px)' }}>
                     <DataGrid
                         rows={data}
                         disableSelectionOnClick

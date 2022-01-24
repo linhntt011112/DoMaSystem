@@ -10,7 +10,7 @@ export default function EditUser() {
         <div>
             <div className='userUpdate'>
                 <div className='userUpdateHeader'>
-                    <span className='userUpdateTitle'>Profile Information</span>
+                    <span className='userUpdateTitle'>Cập nhật thông tin</span>
                 </div>
                 <div className='userUpdateRight'>
                     <div className='userUpdateUpload'>
@@ -26,7 +26,7 @@ export default function EditUser() {
                     </div>
                 </div>
                 <Container className='modal-body'>
-                    <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thong tin ca nhan</h6>
+                    <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin cá nhân</h6>
                     <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
@@ -65,7 +65,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Permission
+                                    Phân quyền
                                 </label>
                                 <FormControlLabel control={<Checkbox />} label="Admin" />
                             </div>
@@ -122,7 +122,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Ngay cap
+                                    Ngày cấp
                                 </label>
                                 <BasicDatePicker />
                             </div>
@@ -130,7 +130,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Noi cap
+                                    Nơi cấp
                                 </label>
                                 <input
                                     type="text"
@@ -140,12 +140,12 @@ export default function EditUser() {
                             </div>
                         </Col>
                     </Row>
-                    <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thong tin cong viec</h6>
+                    <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin công việc</h6>
                     <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Ngay vao lam
+                                    Ngày vào làm
                                 </label>
                                 <BasicDatePicker />
                             </div>
@@ -153,7 +153,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Phong ban
+                                    Phòng ban
                                 </label>
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
@@ -175,8 +175,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Chuc vu
-                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                    Chức vụ
                                 </label>
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
@@ -200,7 +199,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Tai khoan ngan hang
+                                    Tài khoản ngân hàng
                                 </label>
                                 <input
                                     type="text"
@@ -212,7 +211,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Ngan hang
+                                    Ngân hàng
                                 </label>
                                 <input
                                     type="text"
@@ -224,7 +223,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Hoc van
+                                    Học vấn
                                 </label>
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
@@ -248,7 +247,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Dan toc
+                                    Dân tộc
                                 </label>
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
@@ -270,7 +269,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Quoc tich
+                                    Quốc tịch
                                 </label>
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
@@ -292,7 +291,7 @@ export default function EditUser() {
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                             <div className='userUpdateItem'>
                                 <label>
-                                    Ton giao
+                                    Tôn giáo
                                 </label>
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
@@ -314,7 +313,7 @@ export default function EditUser() {
                     </Row>
                 </Container>
                 <div className='userUpdateFooter'>
-                    <button className='userUpdateButton'>Update</button>
+                    <button className='userUpdateButton'>Cập nhật</button>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ export default function User() {
                 <div className='userTitleContainer'>
                     <ArrowBack className='userTitleContainerIcon' onClick={() => history.goBack()} ></ArrowBack>
                     <h1 className='userTitle'>Thông tin chi tiết</h1>
-                    <button className='profileEdit' onClick={() => setButtonPopup(true)}>Edit</button>
+                    <button className='profileEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
                 </div>
                 <div className='userContainer'>
                     <div className='userShow'>

@@ -7,7 +7,7 @@
     background-color: rgb(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     overflow: scroll;
 }
 
@@ -15,7 +15,7 @@
     position: relative;
     padding: 32px;
     width: 100%;
-    max-width: 900px;
+    max-width: fit-content;
     background-color: #FFF;
     overflow: scroll;
 }
@@ -30,7 +30,7 @@
     padding: 0;
     position: absolute;
     right: 10px;
-    top: 35px;
+    top: 5px;
     z-index: 99;
     cursor: pointer;
 }
@@ -38,4 +38,10 @@
 ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
+}
+
+@media only screen and (max-width:1366px) {
+    /*.popup-inner {*/
+    /*    margin-top: 80px;*/
+    /*}*/
 }
