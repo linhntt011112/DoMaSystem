@@ -1,2 +1,2 @@
 from .base import Base
-from .person import Position, Person
+from .user import Position, User
