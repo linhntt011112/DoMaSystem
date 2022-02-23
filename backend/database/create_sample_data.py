@@ -1,25 +1,84 @@
+import datetime
+
 from sqlalchemy.orm import session, sessionmaker
+from sqlalchemy.schema import MetaData
 
 from database.db import DBSessionLocal, engine
-from database.models import Base, Person, Position
+from database.models import Base, User, Position
+from database.utils import Hasher
+
+
+def get_hash_password(password):
+    return Hasher.get_password_hash(password)
+
 
 def create_tables():           # new
 	Base.metadata.create_all(bind=engine)
  
  
-def create_sample_data():
+def drop_all_tables():
+    Base.metadata.drop_all(bind=engine)
+
+
+def create_sample_positions():
     db_session = DBSessionLocal().get_session()
-    pos1 = db_session.query(Position).filter(Position.name == 'NhanVien').all()[0]
+    
+    positions = [
+        Position(name='admin'),
+        Position(name='Nhan vien')
+    ]
+    
+    [db_session.add(position) for position in positions]
+    db_session.commit()
+    
+ 
+def create_sample_users():
+    db_session = DBSessionLocal().get_session()
+    
+    positions = db_session.query(Position).all()  # .filter(Position.name == 'NhanVien')
+    positions = {position.name: position for position in positions}
+    
     users = [
-        Person(username='linh', password='linh0111', position_id=pos1.id, position=pos1),
-        Person(username='Tan', password='tan1112', position_id=pos1.id, position=pos1)
+        User(
+            username = 'abc123',
+            password = get_hash_password('linh0111'),
+            fullname = 'Nguyen Thi B',
+            dob = datetime.date(1991, 1, 1),
+            address = "Ho Chi Minh",
+            avatar = "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg",
+            update_date = datetime.datetime.today().date(),
+            position_id = positions['Nhan vien'].id,
+            position = positions['Nhan vien']
+            ),
+        User(
+            username = 'admin123',
+            password = get_hash_password('linh0111'),
+            fullname = 'Nguyen Thi A',
+            dob = datetime.date(1991, 1, 1),
+            address = "Ho Chi Minh",
+            avatar = "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg",
+            update_date = datetime.datetime.today().date(),
+            position_id = positions['admin'].id,
+            position = positions['admin']
+            ),
+        User(
+            username = 'cnt123',
+            password = get_hash_password('linh0111'),
+            fullname = 'Nguyen Thi C',
+            dob = datetime.date(1995, 4, 1),
+            address = "205 Nguyen Xi",
+            avatar = "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg",
+            update_date = datetime.datetime.today().date(),
+            position_id = positions['Nhan vien'].id,
+            position = positions['Nhan vien']
+            ),
     ]
 
     [db_session.add(user) for user in users]
     db_session.commit()
- 
 
 
-# create_tables()
-# create_sample_data()
-# create
+drop_all_tables()
+create_tables()
+create_sample_positions()
+create_sample_users()
