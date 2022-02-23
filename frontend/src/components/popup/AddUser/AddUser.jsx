@@ -187,7 +187,7 @@ export default function AddUser() {
                             <label>
                                 Phòng ban
                             </label>
-                            <Box sx={{ minWidth: 120 }}>
+                            <Box sx={{ minWidth: 259 }}>
                                 <FormControl fullWidth>
                                     <Select
                                         labelId="demo-simple-select-label"
@@ -209,7 +209,7 @@ export default function AddUser() {
                                 Chức vụ
                                 <span className='text-danger' style={{color: 'red'}}>  *</span>
                             </label>
-                            <Box sx={{ minWidth: 120 }}>
+                            <Box sx={{ minWidth: 259 }}>
                                 <FormControl fullWidth>
                                     <Select
                                         labelId="demo-simple-select-label"
@@ -254,7 +254,7 @@ export default function AddUser() {
                             <label>
                                 Học vấn
                             </label>
-                            <Box sx={{ minWidth: 120 }}>
+                            <Box sx={{ minWidth: 252 }}>
                                 <FormControl fullWidth>
                                     <Select
                                         labelId="demo-simple-select-label"
@@ -277,7 +277,7 @@ export default function AddUser() {
                             <label>
                                 Dân tộc
                             </label>
-                            <Box sx={{ minWidth: 120 }}>
+                            <Box sx={{ minWidth: 259 }}>
                                 <FormControl fullWidth>
                                     <Select
                                         labelId="demo-simple-select-label"
@@ -298,7 +298,7 @@ export default function AddUser() {
                             <label>
                                 Quốc tịch
                             </label>
-                            <Box sx={{ minWidth: 120 }}>
+                            <Box sx={{ minWidth: 259 }}>
                                 <FormControl fullWidth>
                                     <Select
                                         labelId="demo-simple-select-label"
@@ -319,7 +319,7 @@ export default function AddUser() {
                             <label>
                                 Tôn giáo
                             </label>
-                            <Box sx={{ minWidth: 120 }}>
+                            <Box sx={{ minWidth: 259 }}>
                                 <FormControl fullWidth>
                                     <Select
                                         labelId="demo-simple-select-label"

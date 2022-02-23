@@ -1,63 +1,66 @@
 import React from "react";
-import "./addLoaiCongVan.css";
-import {Box, FormControl, MenuItem, Select} from "@mui/material";
+import "./detailLoaiCongVan.css";
+import {Box, FormControl, Select, MenuItem} from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
 
-export default function AddLoaiCongVan() {
-    const [loaiTrangThai, setLoaiTrangThai] = React.useState('');
-    const [loaiNguoiKy, setLoaiNguoiKy] = React.useState('');
-
-    const handleChangeLoaiTrangThai = (event) => {
-        setLoaiTrangThai(event.target.value);
-    };
-
-    const handleChangeLoaiNguoiKy = (event) => {
-        setLoaiNguoiKy(event.target.value);
-    };
-
+export default function DetailLoaiCongVan() {
     return(
-        <div className='addLoaiCongVan'>
-            <h5 className='modal-title'>Thêm mới loại công văn</h5>
-            <div className='modal-body'>
-                <div className='loaiCongVanAddItem'>
+        <div className="detailLoaiCongVan">
+            <h5 className="modal-title">
+                Chi tiết loại công văn
+                <EditIcon />
+            </h5>
+            <div className="modal-body">
+                <div className="loaiCongVanDetailItem">
                     <label>
                         Mã loại
-                        <span className='text-danger' style={{color: 'red'}}>  *</span>
+                        <span className='text-danger' style={{color: 'red'}}> *</span>
                     </label>
-                    <input
+                    <input 
                         type="text"
-                        className='loaiCongVanAddInput'
+                        className="loaiCongVanDetailInput"
+                        placeholder="PD"
+                        disabled="true"
                     />
                 </div>
-                <div className='loaiCongVanAddItem'>
+                <div className="loaiCongVanDetailItem">
                     <label>
                         Loại công văn
-                        <span className='text-danger' style={{color: 'red'}}>  *</span>
+                        <span className='text-danger' style={{color: 'red'}}> *</span>
                     </label>
-                    <input
+                    <input 
                         type="text"
-                        className='loaiCongVanAddInput'
+                        className="loaiCongVanDetailInput"
+                        placeholder="Phuc dap"
+                        disabled="true"
                     />
                 </div>
-                <div className='loaiCongVanAddItem'>
+                <div className="loaiCongVanDetailItem">
                     <label>
                         Mô tả
+                        <span className='text-danger' style={{color: 'red'}}> *</span>
                     </label>
-                    <input
+                    <input 
                         type="text"
-                        className='loaiCongVanAddInput'
+                        className="loaiCongVanDetailInput"
+                        placeholder="Phuc dap"
+                        disabled="true"
                     />
                 </div>
-                <div className='loaiCongVanAddItem'>
+                <div className="loaiCongVanDetailItem">
                     <label>
                         Trạng thái
+                        <span className='text-danger' style={{color: 'red'}}> *</span>
                     </label>
                     <Box sx={{ }} style={{width: '100%'}}>
                         <FormControl fullWidth>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={loaiTrangThai}
-                                onChange={handleChangeLoaiTrangThai}
+                                // value={loaiTrangThai}
+                                // onChange={handleChangeLoaiTrangThai}
+                                defaultValue={3}
+                                disabled="true"
                             >
                                 <MenuItem value={1}>Hoạt động 1</MenuItem>
                                 <MenuItem value={2}>Hoạt động 2</MenuItem>
@@ -66,7 +69,7 @@ export default function AddLoaiCongVan() {
                         </FormControl>
                     </Box>
                 </div>
-                <div className='loaiCongVanAddItem'>
+                <div className='loaiCongVanDetailItem'>
                     <label>
                         Người ký (áp dụng cho văn bản đi)
                     </label>
@@ -75,8 +78,10 @@ export default function AddLoaiCongVan() {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={loaiNguoiKy}
-                                onChange={handleChangeLoaiNguoiKy}
+                                // value={loaiNguoiKy}
+                                // onChange={handleChangeLoaiNguoiKy}
+                                defaultValue={3}
+                                disabled="true"
                             >
                                 <MenuItem value={1}>Hoạt động 1</MenuItem>
                                 <MenuItem value={2}>Hoạt động 2</MenuItem>
@@ -86,9 +91,7 @@ export default function AddLoaiCongVan() {
                     </Box>
                 </div>
             </div>
-            <div className='modal-footer'>
-                <button className='userAddButtonSubmit' type='submit'>Lưu</button>
-            </div>
         </div>
     )
+    
 }

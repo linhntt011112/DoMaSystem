@@ -155,7 +155,7 @@ export default function EditUser() {
                                 <label>
                                     Phòng ban
                                 </label>
-                                <Box sx={{ minWidth: 120 }}>
+                                <Box sx={{ minWidth: 260 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -177,7 +177,7 @@ export default function EditUser() {
                                 <label>
                                     Chức vụ
                                 </label>
-                                <Box sx={{ minWidth: 120 }}>
+                                <Box sx={{ minWidth: 260 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -225,7 +225,7 @@ export default function EditUser() {
                                 <label>
                                     Học vấn
                                 </label>
-                                <Box sx={{ minWidth: 120 }}>
+                                <Box sx={{ minWidth: 260 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -249,7 +249,7 @@ export default function EditUser() {
                                 <label>
                                     Dân tộc
                                 </label>
-                                <Box sx={{ minWidth: 120 }}>
+                                <Box sx={{ minWidth: 260 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -271,7 +271,7 @@ export default function EditUser() {
                                 <label>
                                     Quốc tịch
                                 </label>
-                                <Box sx={{ minWidth: 120 }}>
+                                <Box sx={{ minWidth: 260 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -293,7 +293,7 @@ export default function EditUser() {
                                 <label>
                                     Tôn giáo
                                 </label>
-                                <Box sx={{ minWidth: 120 }}>
+                                <Box sx={{ minWidth: 260 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
