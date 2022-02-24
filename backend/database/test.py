@@ -1,5 +1,4 @@
-from database.db import engine, DBSessionLocal
-from database.models import User, Position
+from database.models import *
 
 
 # db_session = DBSessionLocal().get_session()
@@ -9,11 +8,7 @@ from database.models import User, Position
 # print(positions[0].as_dict())
 # print(users[0].as_dict())
 
-from db import get_user_by_name
+from common_queries import query_all
 
-user = get_user_by_name('abc123')
-if user is not None:
-    print(user.as_dict())
-
-else:
-    print('Not found!')
+for item in query_all(NguoiDung) + query_all(LoaiCongVan):
+    print(item.as_dict())

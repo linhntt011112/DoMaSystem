@@ -4,6 +4,7 @@
 
 # docker-compose -f database/start_db_docker-compose.yml start -d
 # docker-compose -f database/start_db_docker-compose.yml stop -d
+# mysql -u admin --protocol=tcp -p
 
 version: "3.9"
 
@@ -17,7 +18,7 @@ services:
             MYSQL_USER: admin
             MYSQL_PASSWORD: 123456
         volumes:
-            - ./db-data:/var/lib/mysql
+            - ./db-data:/var/lib/mysql:delegated
             # - ./docker-db/db-data:/var/lib/mysql
             # - ./docker-db/mysqld.sock:/var/run/mysqld/mysqld.sock
         # entrypoint:
