@@ -20,17 +20,6 @@ def create_tables():           # new
 def drop_all_tables():
     Base.metadata.drop_all(bind=engine)
 
-
-# def create_sample_positions():
-#     db_session = DBSessionLocal().get_session()
-    
-#     positions = [
-#         Position(name='admin'),
-#         Position(name='Nhan vien')
-#     ]
-    
-#     [db_session.add(position) for position in positions]
-#     db_session.commit()
     
  
 def create_sample_nguoi_dung():

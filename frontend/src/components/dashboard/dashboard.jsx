@@ -36,16 +36,17 @@ const Dashboard = () => {
     };
     // console.log(token);
 
-    const response = fetch("http://127.0.0.1:3009/api/users/me", requestOptions);
+    const response = await fetch("http://127.0.0.1:3009/api/users/me", requestOptions);
     if (response.ok) {
-      const data = response.json();
-      console.log(data.username);
+      const data = await response.json();
+      console.log(data);
       if (data.username === "") {  
         history.push("/");
       }
     }
     else{
-      console.log("not ok");
+      console.log("----------not ok");
+      console.log(response);
       history.push("/");
     }
   };
@@ -68,6 +69,7 @@ const Dashboard = () => {
       <h3 className="pageTitle">Welcome Admin!</h3>
       <FeaturedInfo />
       <button onClick={handleLogoutClick}>Logout</button>
+      <button onClick={getCurrentUser}>getCurrentUser</button>
     </div>
     );
 };

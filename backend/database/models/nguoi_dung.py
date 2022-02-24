@@ -1,6 +1,6 @@
 import secrets
 from sqlalchemy import Column, Integer, String, Boolean, Date
-from sqlalchemy import ForeignKey, Sequence
+from sqlalchemy import ForeignKey, Sequence, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 
@@ -47,6 +47,9 @@ class NguoiDung(Base):
     dan_toc = Column(String(100), nullable=True)
     quoc_tich = Column(String(100), nullable=True)
     ton_giao = Column(String(100), nullable=True)
+    
+    __table_args__ = (UniqueConstraint('ho_ten', name='unique_items'),
+                     )
     
     
     def as_dict(self):

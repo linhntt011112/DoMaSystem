@@ -9,6 +9,14 @@ def query_all(class_name):
     # Session.remove()
     
     return res
+
+
+def query_filter(class_name, condition):
+    Session()
+    res = Session.query(class_name).filter(condition).all()
+    # Session.remove()
+    
+    return res
   
 
 def add_and_commit(data):
