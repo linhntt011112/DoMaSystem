@@ -4,11 +4,13 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from config import frontend_config
-from login import app
+from api import user, login
+
 
 origins = [
     frontend_config.URL,
 ]
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,6 +19,9 @@ app.add_middleware(
     allow_methods=["*"], 
     allow_headers=["*"],
 )
+
+app.include_router(user.router)
+app.include_router(login.router)
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
