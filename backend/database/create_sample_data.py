@@ -3,6 +3,8 @@ import datetime
 from sqlalchemy.orm import session, sessionmaker
 from sqlalchemy.schema import MetaData
 
+import os
+print(os.getcwd())
 from database.db import engine
 from database.models import *
 import database.common_queries as  common_queries 
@@ -96,7 +98,8 @@ def create_sample_loai_cong_van():
     common_queries.add_and_commit([loai_cong_van_s[0], ass_nguoi_dung_cong_van1])
 
 
-drop_all_tables()
-create_tables()
-create_sample_nguoi_dung()
-create_sample_loai_cong_van()
+def run_all():
+    drop_all_tables()
+    create_tables()
+    create_sample_nguoi_dung()
+    create_sample_loai_cong_van()

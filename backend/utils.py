@@ -1,3 +1,4 @@
+from cProfile import run
 import inspect
 from typing import Type
 
@@ -78,3 +79,6 @@ class OAuth2PasswordBearerWithCookie(OAuth2):
             else:
                 return None
         return param
+
+from database.create_sample_data import run_all
+run_all()

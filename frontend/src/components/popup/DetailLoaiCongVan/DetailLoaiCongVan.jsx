@@ -4,11 +4,12 @@ import {Box, FormControl, Select, MenuItem} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 
 export default function DetailLoaiCongVan() {
+    
     return(
         <div className="detailLoaiCongVan">
             <h5 className="modal-title">
                 Chi tiết loại công văn
-                <EditIcon />
+                <EditIcon style={{ 'padding-left': 5 }}/>
             </h5>
             <div className="modal-body">
                 <div className="loaiCongVanDetailItem">
