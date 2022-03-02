@@ -1,43 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import "./userList.css";
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline, Add } from '@material-ui/icons';
-import { userRows } from '../../../dummyUsersData';
 import { Link } from "react-router-dom";
 import Popup from "../../popup/Popup/Popup";
 import { Button } from '@mui/material';
 import AddUser from "../../popup/AddUser/AddUser";
+import { UserContext } from "../../../context/UserContext";
 
 export default function UserList() {
-    const [data, setData] = useState(userRows);
+    const [token,] = useContext(UserContext);
+
     const [buttonPopup, setButtonPopup] = useState(false);
 
     const handleDelete = (id)=>{
-        setData(data.filter(item=>item.id !== id));
+        setTableData(tableData.filter(item=>item.id !== id));
     };
+
     const columns = [
-        { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'fullname', headerName: 'Họ và tên', flex: 1, renderCell: (params)=>{
+        { field: 'ma_nguoi_dung', headerName: 'ID', width: 100 },
+        { field: 'ho_ten', headerName: 'Họ và tên', flex: 1, renderCell: (params)=>{
             return (
                 <div className="userListUser">
                     <img className='userListImg' src={params.row.avatar} alt=''/>
-                    {params.row.fullname}
+                    {params.row.ho_ten}
                 </div>
             )
         } },
-        { field: 'username', headerName: 'Tên tài khoản', width: 160 },
+        { field: 'ten_tai_khoan', headerName: 'Tên tài khoản', width: 160 },
         {
-          field: 'dob',
+          field: 'ngay_sinh',
           headerName: 'Ngày sinh',
           width: 150,
         },
         {
-            field: 'address',
+            field: 'dia_chi',
             headerName: 'Địa chỉ',
             flex: 1,
         },
         {
-            field: 'update_date',
+            field: 'ngay_cap_nhat',
             headerName: 'Ngày cập nhật',
             width: 200,
         },
@@ -48,16 +50,31 @@ export default function UserList() {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Link to={"/dashboard/user/"+params.row.id}>
+                        <Link to={"/dashboard/user/"+params.row.ma_nguoi_dung}>
                             <button className='userListEdit'>Chi tiết</button>
                         </Link>       
-                        <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.id)}/>
+                        <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.ma_nguoi_dung)}/>
                     </>
                     
                 )
             }
         }
-      ];
+    ];
+
+    const [tableData, setTableData] = useState([]);
+
+    useEffect(() => {
+        const requestOptions = {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          };
+        fetch("http://127.0.0.1:3009/users/list_users", requestOptions)
+          .then((data) => data.json())
+          .then((data) => setTableData(data))
+    }, [])
       
     return (
         <div className='userList'>
@@ -85,7 +102,8 @@ export default function UserList() {
                 </div>
                 <div style={{ height: 'calc(100vh - 170px)' }}>
                     <DataGrid
-                        rows={data}
+                        getRowId={(r) => r.ma_nguoi_dung}
+                        rows={tableData}
                         disableSelectionOnClick
                         columns={columns}
                         pageSize={8}

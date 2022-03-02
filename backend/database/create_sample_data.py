@@ -4,6 +4,7 @@ from sqlalchemy.orm import session, sessionmaker
 from sqlalchemy.schema import MetaData
 
 import os
+import timeit
 print(os.getcwd())
 from database.db import engine
 from database.models import *
@@ -34,8 +35,8 @@ def create_sample_nguoi_dung():
             ho_ten = 'Nguyen Thi A',
             ten_tai_khoan = 'nta',
             password = get_hash_password('nta'),
-            # ngay_sinh = Column(Date, nullable=True)
-            # dia_chi = Column(String(100), nullable=True)
+            ngay_sinh = datetime.datetime(1982, 2, 24),
+            dia_chi = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             ngay_cap_nhat = datetime.datetime(2022, 2, 24),
             # ngay_vao_lam = Column(Date, nullable=True)
             # dien_thoai = Column(String(15), nullable=True)
@@ -63,6 +64,8 @@ def create_sample_nguoi_dung():
             ho_ten = 'Nguyen Van B',
             ten_tai_khoan = 'nvb',
             password = get_hash_password('nvb'),
+            dia_chi = 'So 4 ngach 42 Dai hoc Bach Khoa Ho Chi Minh',
+            ngay_sinh = datetime.datetime(1992, 2, 24),
             ngay_cap_nhat = datetime.datetime(2022, 2, 24),
             
             phan_quyen = PhanQuyen.user,
@@ -99,7 +102,11 @@ def create_sample_loai_cong_van():
 
 
 def run_all():
-    drop_all_tables()
-    create_tables()
-    create_sample_nguoi_dung()
-    create_sample_loai_cong_van()
+    print(timeit.timeit(lambda : drop_all_tables(), number=1))
+    print(timeit.timeit(lambda : create_tables(), number=1))
+    print(timeit.timeit(lambda : create_sample_nguoi_dung(), number=1))
+    print(timeit.timeit(lambda : create_sample_loai_cong_van(), number=1))
+    # drop_all_tables()
+    # create_tables()
+    # create_sample_nguoi_dung()
+    # create_sample_loai_cong_van()
