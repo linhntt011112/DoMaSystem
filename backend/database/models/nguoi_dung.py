@@ -53,5 +53,5 @@ class NguoiDung(Base):
     
     
     def as_dict(self):
-        secrets = set(['ma_nguoi_dung', 'ho_ten', 'ten_tai_khoan', 'password', 'ngay_cap_nhat', 'phan_quyen', 'cccd'])
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns if c.name  in secrets}
+        secrets = set(['password'])
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns if c.name not in secrets}

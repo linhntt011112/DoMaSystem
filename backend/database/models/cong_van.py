@@ -28,8 +28,8 @@ class LoaiCongVan(Base):
     nguoi_ki_s = relationship('AssociationNguoiKiCongVan', back_populates="loai_cong_van")
     
     def as_dict(self):
-        secrets = set(['id', 'ma_loai', 'loai_cong_van', 'trang_thai', 'ngay_cap_nhat', 'mo_ta'])
-        res = {c.name: getattr(self, c.name) for c in self.__table__.columns if c.name in secrets}
+        secrets = set(['nguoi_cap_nhat', 'nguoi_ki_s'])
+        res = {c.name: getattr(self, c.name) for c in self.__table__.columns if c.name not in secrets}
         res['nguoi_cap_nhat'] = self.nguoi_cap_nhat.ho_ten
         res['nguoi_ki'] = [nguoi_ki.nguoi_ki.ho_ten for nguoi_ki in self.nguoi_ki_s]
         return res
