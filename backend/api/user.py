@@ -11,7 +11,7 @@ from .models import Token, TokenData
 from .config import SECRET_KEY, ALGORITHM
 
 
-router = APIRouter(prefix="/api")
+router = APIRouter(prefix="/users")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -65,11 +65,23 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     return user
 
 
-@router.get("/users/me")
+@router.get("/me")
 async def read_users_me(current_user = Depends(get_current_user)):
     return current_user.as_dict()
 
 
-@router.get("/users/me/items")
+@router.get("/me/items")
 async def read_own_items(current_user = Depends(get_current_user)):
     return [{"item_id": "Foo", "owner": current_user.as_dict()}]
+
+
+@router.get("/list_users")
+async def read_own_items(current_user = Depends(get_current_user)):
+    if current_user.phan_quyen == PhanQuyen.admin:
+        return [user.as_dict() for user in query_all(NguoiDung)]
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User is not admin!",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
