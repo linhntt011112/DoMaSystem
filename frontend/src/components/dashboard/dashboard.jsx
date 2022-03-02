@@ -36,7 +36,42 @@ const Dashboard = () => {
     };
     // console.log(token);
 
-    const response = await fetch("http://127.0.0.1:3009/api/users/me", requestOptions);
+    const response = await fetch("http://127.0.0.1:3009/users/me", requestOptions);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      if (data.username === "") {  
+        history.push("/");
+      }
+    }
+    else{
+      console.log("----------not ok");
+      console.log(response);
+      history.push("/");
+    }
+  };
+
+  const getUserList = async () => {
+    // axios
+    //   .get("http://127.0.0.1:3009/get_current_user", { withCredentials: true })
+    //   .then(response => {
+    //     console.log(response.data.username)
+    //     if (response.data.username === "") {  
+    //       this.props.history.push("/");
+    //     }
+    //   })
+
+    
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+    // console.log(token);
+
+    const response = await fetch("http://127.0.0.1:3009/users/list_users", requestOptions);
     if (response.ok) {
       const data = await response.json();
       console.log(data);
@@ -70,6 +105,7 @@ const Dashboard = () => {
       <FeaturedInfo />
       <button onClick={handleLogoutClick}>Logout</button>
       <button onClick={getCurrentUser}>getCurrentUser</button>
+      <button onClick={getUserList}>getUserList</button>
     </div>
     );
 };
