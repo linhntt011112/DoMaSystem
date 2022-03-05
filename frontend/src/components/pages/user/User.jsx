@@ -1,15 +1,35 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import './user.css';
 import Popup from "../../popup/Popup/Popup";
 import EditUser from "../../popup/EditUser/EditUser";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { ArrowBack } from '@material-ui/icons';
+import { UserContext } from "../../../context/UserContext";
 
 export default function User() {
+    const [token,] = useContext(UserContext);
     const [buttonPopup, setButtonPopup] = useState(false);
     let history = useHistory();
 
+    const { userId } = useParams();
+
+    const [userData, setUserData] = useState("");
+
+    useEffect(() => {
+        const requestOptions = {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          };
+        fetch(`http://127.0.0.1:3009/users/id/${userId}`, requestOptions)
+          .then((data) => data.json())
+          .then((data) => setUserData(data))
+    }, [])
+
     return (
+        
         <div className='user'>
             <main>
                 <div className='userTitleContainer'>
@@ -26,9 +46,9 @@ export default function User() {
                                 className='userShowImg'
                             />
                             <div className='userShowTopTitle'>
-                                <span className='userShowUsername'>Nguyen Thi B</span>
-                                <span className='userShowUserCode'><b>Mã nhân viên: </b>1001</span>
-                                <span className='userShowUserDateOfJoined'><b>Ngày vào làm: </b>19/01/2022</span>
+                                <span className='userShowUsername'>{userData.ho_ten}</span>
+                                <span className='userShowUserCode'><b>Mã nhân viên: </b>{userData.ma_nguoi_dung}</span>
+                                <span className='userShowUserDateOfJoined'><b>Ngày vào làm: </b>{userData.ngay_vao_lam}</span>
                             </div>
                         </div>
                         <div className='userShowBottom'>
@@ -40,10 +60,10 @@ export default function User() {
                                     <div className='title'>Phân quyền: </div>
                                 </div>
                                 <div className="column2">
-                                    <div className='userShowInfoTitle'>bnt1001</div>
-                                    <div className='userShowInfoTitle'>+1 123 456</div>
-                                    <div className='userShowInfoTitle'>btn1001@gmail.com</div>
-                                    <div className='userShowInfoTitle'>Nhân viên</div>
+                                    <div className='userShowInfoTitle'>{userData.ten_tai_khoan}</div>
+                                    <div className='userShowInfoTitle'>{userData.dien_thoai}</div>
+                                    <div className='userShowInfoTitle'>{userData.email}</div>
+                                    <div className='userShowInfoTitle'>{userData.phan_quyen ? 'Admin' : 'Nhan Vien'}</div>
                                 </div>
                             </div>
                         </div>
@@ -64,13 +84,13 @@ export default function User() {
                                     <div className='title'>Quê quán: </div>
                                 </div>
                                 <div className="column2">
-                                    <div className='userShowInfoTitle'>Nu</div>
-                                    <div className='userShowInfoTitle'>19/01/1897</div>
-                                    <div className='userShowInfoTitle'>New York | USA</div>
-                                    <div className='userShowInfoTitle'>35467897895</div>
-                                    <div className='userShowInfoTitle'>19/01/1897</div>
-                                    <div className='userShowInfoTitle'>New York | USA</div>
-                                    <div className='userShowInfoTitle'>New York | USA</div>
+                                    <div className='userShowInfoTitle'>{userData.gioi_tinh ? 'Nam' : 'Nu'}</div>
+                                    <div className='userShowInfoTitle'>{userData.ngay_sinh}</div>
+                                    <div className='userShowInfoTitle'>{userData.dia_chi}</div>
+                                    <div className='userShowInfoTitle'>{userData.cccd}</div>
+                                    <div className='userShowInfoTitle'>{userData.ngay_cap}</div>
+                                    <div className='userShowInfoTitle'>{userData.noi_cap}</div>
+                                    <div className='userShowInfoTitle'>{userData.que_quan}</div>
                                 </div>
                             </div>
                         </div>
@@ -90,10 +110,10 @@ export default function User() {
 
                             </div>
                             <div className="userShowJobColumn12">
-                                <div className='userShowInfoTitle'>Giam doc</div>
-                                <div className='userShowInfoTitle'>Giam doc</div>
-                                <div className='userShowInfoTitle'>19011897</div>
-                                <div className='userShowInfoTitle'>New York Bank</div>
+                                <div className='userShowInfoTitle'>{userData.phong_ban}</div>
+                                <div className='userShowInfoTitle'>{userData.chuc_vu}</div>
+                                <div className='userShowInfoTitle'>{userData.tk_ngan_hang}</div>
+                                <div className='userShowInfoTitle'>{userData.ngan_hang}</div>
                             </div>
                         </div>
                         <div className="row userShowJobColumn1">
@@ -104,10 +124,10 @@ export default function User() {
                                 <div className='title'>Tôn giáo: </div>
                             </div>
                             <div className="userShowJobColumn12">
-                                <div className='userShowInfoTitle'>Dai hoc</div>
-                                <div className='userShowInfoTitle'>Kinh</div>
-                                <div className='userShowInfoTitle'>Việt Nam</div>
-                                <div className='userShowInfoTitle'>Khong</div>
+                                <div className='userShowInfoTitle'>{userData.hoc_van}</div>
+                                <div className='userShowInfoTitle'>{userData.dan_toc}</div>
+                                <div className='userShowInfoTitle'>{userData.quoc_tich}</div>
+                                <div className='userShowInfoTitle'>{userData.ton_giao}</div>
                             </div>
                         </div>
                     </div>

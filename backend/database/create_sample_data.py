@@ -1,3 +1,4 @@
+# python -m database.create_sample_data.py
 import datetime
 
 from sqlalchemy.orm import session, sessionmaker
@@ -38,27 +39,27 @@ def create_sample_nguoi_dung():
             ngay_sinh = datetime.datetime(1982, 2, 24),
             dia_chi = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             ngay_cap_nhat = datetime.datetime(2022, 2, 24),
-            # ngay_vao_lam = Column(Date, nullable=True)
-            # dien_thoai = Column(String(15), nullable=True)
-            # email = Column(String(15), nullable=True)
+            ngay_vao_lam = datetime.datetime(1982, 2, 24),
+            dien_thoai = '123456789012',
+            email = 'nta@gmail.com',
             
             phan_quyen = PhanQuyen.admin,
             gioi_tinh = GioiTinh.nu,
             
             cccd = '123456789012',
-            # ngay_cap = Column(Date, nullable=True)
-            # noi_cap = Column(String(100), nullable=True)
-            # que_quan = Column(String(100), nullable=True)
+            ngay_cap = datetime.datetime(1982, 2, 24),
+            noi_cap = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            que_quan = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             
             tk_ngan_hang = '12345678',
-            # ngan_hang = Column(String(100), nullable=True)
+            ngan_hang = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             
-            # phong_ban = Column(String(100), nullable=True)
-            # chuc_vu = Column(String(100), nullable=True)
-            # hoc_van = Column(String(100), nullable=True)
-            # dan_toc = Column(String(100), nullable=True)
-            # quoc_tich = Column(String(100), nullable=True)
-            # ton_giao = Column(String(100), nullable=True)
+            phong_ban = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            chuc_vu = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            hoc_van = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            dan_toc = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            quoc_tich = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            ton_giao = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             ),
         NguoiDung(
             ho_ten = 'Nguyen Van B',

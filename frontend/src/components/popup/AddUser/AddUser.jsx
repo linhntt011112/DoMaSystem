@@ -11,6 +11,7 @@ export default function AddUser() {
     const [loaiDanToc, setLoaiDanToc] = React.useState('');
     const [loaiQuocTich, setLoaiQuocTich] = React.useState('');
     const [loaiTonGiao, setLoaiTonGiao] = React.useState('');
+    const [hoVaTen, setHoVaTen] = React.useState('');
 
     const handleChangeLoaiChucVu = (event) => {
         setLoaiChucVu(event.target.value);
@@ -36,6 +37,19 @@ export default function AddUser() {
         setLoaiTonGiao(event.target.value);
     }
 
+    const handleChangeHoVaTen = (event) => {
+        setHoVaTen(event.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        submitAddUser();
+    }
+
+    const submitAddUser = async() => {
+        console.log(hoVaTen);
+    }
+   
     return (
         <div>
             <h5 className='modal-title'>Thêm mới nhân viên</h5>
@@ -46,7 +60,7 @@ export default function AddUser() {
                         <div className='userAddItem'>
                             <label>
                                 Họ và tên
-                                <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                <span className='text-danger' style={{color: 'red'}} onChange={handleChangeHoVaTen}>  *</span>
                             </label>
                             <input
                                 type="text"
@@ -338,7 +352,7 @@ export default function AddUser() {
                 </Row>
             </Container>
             <div className='modal-footer'>
-                <button className='userAddButtonSubmit' type='submit'>Thêm</button>
+                <button className='userAddButtonSubmit' type='submit' onClick={handleSubmit}>Thêm</button>
             </div>
         </div>
     )

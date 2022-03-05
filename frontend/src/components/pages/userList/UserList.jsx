@@ -18,7 +18,7 @@ export default function UserList() {
     };
 
     const columns = [
-        { field: 'ma_nguoi_dung', headerName: 'ID', width: 100 },
+        { field: 'ma_nguoi_dung', headerName: 'Mã người dùng', width: 100 },
         { field: 'ho_ten', headerName: 'Họ và tên', flex: 1, renderCell: (params)=>{
             return (
                 <div className="userListUser">
@@ -50,7 +50,7 @@ export default function UserList() {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Link to={"/dashboard/user/"+params.row.ma_nguoi_dung}>
+                        <Link to={"/dashboard/user/"+params.row.ma_nguoi_dung} params={{id: params.row.ma_nguoi_dung}}>
                             <button className='userListEdit'>Chi tiết</button>
                         </Link>       
                         <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.ma_nguoi_dung)}/>

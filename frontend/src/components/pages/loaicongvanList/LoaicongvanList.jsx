@@ -1,15 +1,16 @@
-import React, {useState} from "react";
+import React,  { useState, useEffect, useContext } from "react";
 import './LoaicongvanList.css'
-import {loaicongvanRows} from "../../../dummyLoaiCongVanData";
 import {Add, DeleteOutline} from "@material-ui/icons";
 import {Button} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
 import Popup from "../../popup/Popup/Popup";
 import AddLoaiCongVan from "../../popup/AddLoaiCongVan/AddLoaiCongVan";
 import DetailLoaiCongVan from "../../popup/DetailLoaiCongVan/DetailLoaiCongVan";
+import { UserContext } from "../../../context/UserContext";
 
 export default function LoaicongvanList() {
-    const [data, setData] = useState(loaicongvanRows);
+    const [token,] = useContext(UserContext);
+    
     const [addButtonPopup, setAddButtonPopup] = useState(false);
     const [detailButtonPopup, setDetailButtonPopup] = useState(false);
 
@@ -51,6 +52,21 @@ export default function LoaicongvanList() {
             }
         }
     ];
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const requestOptions = {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          };
+        fetch("", requestOptions)
+          .then((data) => data.json())
+          .then((data) => setData(data))
+    }, [])
 
     return (
         <div className='loaicongvanList'>
