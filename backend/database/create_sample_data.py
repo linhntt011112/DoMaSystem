@@ -110,3 +110,5 @@ def run_all():
     # create_tables()
     # create_sample_nguoi_dung()
     # create_sample_loai_cong_van()
+
+run_all()
