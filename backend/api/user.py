@@ -89,7 +89,7 @@ async def read_own_items(current_user = Depends(get_current_user)):
 @router.get("/id/{user_id}")
 async def get_user_by_id(user_id: int, current_user = Depends(get_current_user)):
     if current_user.phan_quyen == PhanQuyen.admin:
-        user = query_filter(NguoiDung, condition=(NguoiDung.id == user_id))
+        user = query_filter(NguoiDung, condition=(NguoiDung.ma_nguoi_dung == user_id))
         if len(user) > 0:
             user = user[0]
             return user.as_dict()

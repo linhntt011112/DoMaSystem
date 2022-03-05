@@ -86,6 +86,30 @@ const Dashboard = () => {
     }
   };
 
+  const getUserById = async () => {
+
+    
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+    // console.log(token);
+
+    const response = await fetch("http://127.0.0.1:3009/users/id/1", requestOptions);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+    }
+    else{
+      console.log("----------not ok");
+      console.log(response);
+      history.push("/");
+    }
+  };
+
   const handleLogoutClick = () => {
     axios
       .post("http://127.0.0.1:3009/api/delete_token", { withCredentials: true })
@@ -106,6 +130,7 @@ const Dashboard = () => {
       <button onClick={handleLogoutClick}>Logout</button>
       <button onClick={getCurrentUser}>getCurrentUser</button>
       <button onClick={getUserList}>getUserList</button>
+      <button onClick={getUserById}>getUserById</button>
     </div>
     );
 };
