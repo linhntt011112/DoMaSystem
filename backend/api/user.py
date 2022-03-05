@@ -85,3 +85,23 @@ async def read_own_items(current_user = Depends(get_current_user)):
             detail="User is not admin!",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+@router.get("/id/{user_id}")
+async def get_user_by_id(user_id: int, current_user = Depends(get_current_user)):
+    if current_user.phan_quyen == PhanQuyen.admin:
+        user = query_filter(NguoiDung, condition=(NguoiDung.id == user_id))
+        if len(user) > 0:
+            user = user[0]
+            return user.as_dict()
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Can not find user with id = {user_id}",
+                headers={"WWW-Authenticate": "Bearer"},
+            ) 
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User is not admin!",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
