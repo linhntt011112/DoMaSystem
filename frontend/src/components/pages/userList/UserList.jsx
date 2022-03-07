@@ -3,9 +3,8 @@ import "./userList.css";
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline, Add } from '@material-ui/icons';
 import { Link } from "react-router-dom";
-import Popup from "../../popup/Popup/Popup";
+import AddUserPopup from "../../popup/AddUserPopup/AddUserPopup";
 import { Button } from '@mui/material';
-import AddUser from "../../popup/AddUser/AddUser";
 import { UserContext } from "../../../context/UserContext";
 
 export default function UserList() {
@@ -14,11 +13,11 @@ export default function UserList() {
     const [buttonPopup, setButtonPopup] = useState(false);
 
     const handleDelete = (id)=>{
-        setTableData(tableData.filter(item=>item.id !== id));
+        setTableData(tableData.filter(item=>item.ma_nguoi_dung !== id));
     };
 
     const columns = [
-        { field: 'ma_nguoi_dung', headerName: 'Mã người dùng', width: 100 },
+        { field: 'ma_nguoi_dung', headerName: 'ID', width: 100 },
         { field: 'ho_ten', headerName: 'Họ và tên', flex: 1, renderCell: (params)=>{
             return (
                 <div className="userListUser">
@@ -112,9 +111,8 @@ export default function UserList() {
                     />
                 </div>
             </main>
-            <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                <AddUser />
-            </Popup>
+            <AddUserPopup trigger={buttonPopup} setTrigger={setButtonPopup}>
+            </AddUserPopup>
         </div>
     )
 }

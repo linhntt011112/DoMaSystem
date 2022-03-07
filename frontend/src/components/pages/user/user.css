@@ -118,8 +118,11 @@
     margin: 20px 0px;
 }
 
-.userShowJobColumn1{
+.userShowInfoTitle:empty{
+    height: 20px;
+}
 
+.userShowJobColumn1{
     width: 50%;
 }
 
@@ -146,3 +149,4 @@
         width: 75%;
     }
 }
+

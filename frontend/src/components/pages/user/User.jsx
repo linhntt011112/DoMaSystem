@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import './user.css';
 import Popup from "../../popup/Popup/Popup";
-import EditUser from "../../popup/EditUser/EditUser";
+import EditUserPopup from "../../popup/EditUserPopup/EditUserPopup";
 import { useHistory, useParams } from "react-router-dom";
 import { ArrowBack } from '@material-ui/icons';
 import { UserContext } from "../../../context/UserContext";
@@ -78,7 +78,7 @@ export default function User() {
                                     <div className='title'>Giới tính: </div>
                                     <div className='title'>Ngày sinh: </div>
                                     <div className='title'>Địa chỉ: </div>
-                                    <div className='title'>CMND: </div>
+                                    <div className='title'>CCCD: </div>
                                     <div className='title'>Ngày cấp: </div>
                                     <div className='title'>Nơi cấp: </div>
                                     <div className='title'>Quê quán: </div>
@@ -133,9 +133,8 @@ export default function User() {
                     </div>
                 </div>
             </main>
-            <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                <EditUser />
-            </Popup>
+            <EditUserPopup trigger={buttonPopup} setTrigger={setButtonPopup}>
+            </EditUserPopup>
         </div>
     )
 }

@@ -1,0 +1,5 @@
+.congVanDiList{
+    flex: 5;
+    position: sticky;
+    top: 60px;
+}

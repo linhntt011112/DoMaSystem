@@ -24,10 +24,12 @@ export default function Sidebar() {
                     </Link>
                 </div>
                 <div className='sidebarMenu'>
-                    <h3 className='sidebarTitle'>
-                        <CallMade className='sidebarIcon'/>    
-                        Công văn đi
-                    </h3>
+                    <Link to={"/dashboard/cong-van-di/"} className='link'> 
+                        <h3 className='sidebarTitle'>
+                            <CallMade className='sidebarIcon'/>    
+                            Công văn đi
+                        </h3>
+                    </Link>
                     <ul className='sidebarList'>
                         <li className='sidebarListItem'>
                             <ChromeReaderMode className='sidebarIcon'/>

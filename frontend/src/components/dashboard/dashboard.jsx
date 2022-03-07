@@ -12,19 +12,19 @@ axios.defaults.withCredentials = true;
 const Dashboard = () => {
   const [token, setToken] = useContext(UserContext);
   let history = useHistory();
-  // if (!token){
-  //   history.push("/");
-  // }
+  if (!token){
+    history.push("/");
+  }
   
   const getCurrentUser = async () => {
-    // axios
-    //   .get("http://127.0.0.1:3009/get_current_user", { withCredentials: true })
-    //   .then(response => {
-    //     console.log(response.data.username)
-    //     if (response.data.username === "") {  
-    //       this.props.history.push("/");
-    //     }
-    //   })
+    axios
+      .get("http://127.0.0.1:3009/get_current_user", { withCredentials: true })
+      .then(response => {
+        console.log(response.data.username)
+        if (response.data.username === "") {  
+          this.props.history.push("/");
+        }
+      })
 
     
     const requestOptions = {
@@ -52,14 +52,14 @@ const Dashboard = () => {
   };
 
   const getUserList = async () => {
-    // axios
-    //   .get("http://127.0.0.1:3009/get_current_user", { withCredentials: true })
-    //   .then(response => {
-    //     console.log(response.data.username)
-    //     if (response.data.username === "") {  
-    //       this.props.history.push("/");
-    //     }
-    //   })
+    axios
+      .get("http://127.0.0.1:3009/get_current_user", { withCredentials: true })
+      .then(response => {
+        console.log(response.data.username)
+        if (response.data.username === "") {  
+          this.props.history.push("/");
+        }
+      })
 
     
     const requestOptions = {

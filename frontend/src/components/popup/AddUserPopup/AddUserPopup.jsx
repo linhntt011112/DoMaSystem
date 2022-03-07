@@ -1,103 +1,159 @@
-import React from 'react'
-import { Publish } from "@material-ui/icons";
-import './editUser.css'
-import {Row, Col, Container} from "react-bootstrap";
-import {Box, Checkbox, FormControl, FormControlLabel, MenuItem, Select} from "@mui/material";
+import React, { useState } from 'react'
+import "./addUserPopup.css";
+import {Col, Container, Row} from "react-bootstrap";
+import {Checkbox, FormControlLabel, Box, FormControl, Select, MenuItem} from "@mui/material";
 import BasicDatePicker from "../DatePicker/DatePicker";
+import { Close } from '@material-ui/icons';
 
-export default function EditUser() {
-    return (
-        <div>
-            <div className='userUpdate'>
-                <div className='userUpdateHeader'>
-                    <span className='userUpdateTitle'>Cập nhật thông tin</span>
-                </div>
-                <div className='userUpdateRight'>
-                    <div className='userUpdateUpload'>
-                        <img
-                            className='userUpdateImg'
-                            src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg"
-                            alt=''
-                        />
-                        <label htmlFor='file'>
-                            <Publish className='userUpdateIcon'/>
-                        </label>
-                        <input type="file" id="file" style={{display: "none"}}/>
-                    </div>
-                </div>
+export default function AddUserPopup(props) {
+    const [loaiChucVu, setLoaiChucVu] = React.useState('');
+    const [loaiPhongBan, setLoaiPhongBan] = React.useState('');
+    const [loaiHocVan, setLoaiHocVan] = React.useState('');
+    const [loaiDanToc, setLoaiDanToc] = React.useState('');
+    const [loaiQuocTich, setLoaiQuocTich] = React.useState('');
+    const [loaiTonGiao, setLoaiTonGiao] = React.useState('');
+    const [ho_va_ten, setHoVaTen] = useState("");
+    const [ten_tai_khoan, setTenTaiKhoan] = useState("");
+    const [gioi_tinh, setGioiTinh] = useState("");
+    const [phan_quyen, setPhanQuyen] = useState("");
+    const [dien_thoai, setDienThoai] = useState("");
+    const [email, setEmail] = useState("");
+    const [cccd, setCCCD] = useState("");
+    const [ngay_cap, setNgayCap] = useState("");
+    const [ngay_sinh, setNgaySinh] = useState("");
+    const [noi_cap, setNoiCap] = useState("");
+    const [dia_chi, setDiaChi] = useState("");
+    const [que_quan, setQueQuan] = useState("");
+    const [ngay_vao_lam, setNgayVaoLam] = useState("");
+    const [tk_ngan_hang, setTKNganHang] = useState("");
+    const [ngan_hang, setNganHang] = useState("");
+
+    const handleChangeLoaiChucVu = (event) => {
+        setLoaiChucVu(event.target.value);
+    };
+
+    const handleChangeLoaiPhongBan = (event) => {
+        setLoaiPhongBan(event.target.value);
+    }
+
+    const handleChangeLoaiHocVan = (event) => {
+        setLoaiHocVan(event.target.value);
+    }
+
+    const handleChangeLoaiDanToc = (event) => {
+        setLoaiDanToc(event.target.value);
+    }
+
+    const handleChangeLoaiQuocTich = (event) => {
+        setLoaiQuocTich(event.target.value);
+    }
+
+    const handleChangeLoaiTonGiao = (event) => {
+        setLoaiTonGiao(event.target.value);
+    }
+
+    const handleChangeHoVaTen = (event) => {
+        setHoVaTen(event.target.value);
+    }
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // submitAddUser();
+        props.setTrigger(false);
+    }
+
+    const submitAddUser = async() => {
+        // console.log(hoVaTen);
+        // console.log(loaiPhongBan);
+        console.log(phan_quyen);
+    }
+   
+    return (props.trigger) ? (
+        <div className="popup-main">
+            <form className="popup-inner" onSubmit={handleSubmit}>
+                <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
+                <h5 className='modal-title'>Thêm mới nhân viên</h5>
                 <Container className='modal-body'>
                     <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin cá nhân</h6>
                     <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Họ và tên
                                     <span className='text-danger' style={{color: 'red'}}>  *</span>
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder='Nguyen Thi B'
-                                    className='userUpdateInput'
+                                    className='userAddInput'
+                                    onChange={(e) => setHoVaTen(e.target.value)}
+                                    required
+                                    pattern='^[a-zA-Z]{1,}(?: [a-zA-Z]+){0,5}$'
                                 />
+                                <span className='errorMessage'>Chua it nhat 4 ki tu</span>
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Tên tài khoản
                                     <span className='text-danger' style={{color: 'red'}}>  *</span>
                                 </label>
                                 <input
+                                    name='ten_tai_khoan'
                                     type="text"
-                                    placeholder='bnt1001'
-                                    className='userUpdateInput'
+                                    className='userAddInput'
+                                    onChange={(e) => setTenTaiKhoan(e.target.value)}
+                                    required
+                                    pattern='^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$'
                                 />
+                                <span className='errorMessage'>Ten nguoi dung khong hop le</span>
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Giới tính
                                 </label>
-                                <FormControlLabel control={<Checkbox defaultChecked/>} label="Nữ" />
+                                <FormControlLabel control={<Checkbox onChange={(e) => setGioiTinh(e.target.checked)}/>} label="Nữ" />
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Phân quyền
                                 </label>
-                                <FormControlLabel control={<Checkbox />} label="Admin" />
+                                <FormControlLabel control={<Checkbox onChange={(e) => setPhanQuyen(e.target.checked)}/>} label="Admin" />
                             </div>
                         </Col>
                     </Row>
                     <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Điện thoại
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder='+1 123 456'
-                                    className='userUpdateInput'
+                                    className='userAddInput'
+                                    onChange={(e) => setDienThoai(e.target.value)}
                                 />
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Email
                                 </label>
                                 <input
-                                    type="text"
-                                    placeholder='btn1001@gmail.com'
-                                    className='userUpdateInput'
+                                    type="email"
+                                    className='userAddInput'
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Ngày sinh
                                 </label>
@@ -107,20 +163,19 @@ export default function EditUser() {
                     </Row>
                     <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
-                                    CMND
-                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                    CCCD
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder='265123221221'
-                                    className='userUpdateInput'
+                                    className='userAddInput'
+                                    onChange={(e) => setCCCD(e.target.value)}
                                 />
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Ngày cấp
                                 </label>
@@ -128,22 +183,48 @@ export default function EditUser() {
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Nơi cấp
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder='Ha Nam'
-                                    className='userUpdateInput'
+                                    className='userAddInput'
+                                    onChange={(e) => setNoiCap(e.target.value)}
                                 />
                             </div>
                         </Col>
                     </Row>
+                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                        <div className='userAddItem' style={{padding: '15px 0px 0px 15px'}}>
+                            <label>
+                                Địa chỉ
+                            </label>
+                            <input
+                                type="text"
+                                className='userAddInput'
+                                style={{width: '830px'}}
+                                onChange={(e) => setDiaChi(e.target.value)}
+                            />
+                        </div>
+                    </Row>
+                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                        <div className='userAddItem' style={{padding: '15px 0px 0px 15px'}}>
+                            <label>
+                                Quê quán
+                            </label>
+                            <input
+                                type="text"
+                                className='userAddInput'
+                                style={{width: '830px'}}
+                                onChange={(e) => setQueQuan(e.target.value)}
+                            />
+                        </div>
+                    </Row>
                     <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin công việc</h6>
                     <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Ngày vào làm
                                 </label>
@@ -151,18 +232,17 @@ export default function EditUser() {
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Phòng ban
                                 </label>
-                                <Box sx={{ minWidth: 260 }}>
+                                <Box sx={{ minWidth: 259 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
+                                            value={loaiPhongBan}
+                                            onChange={handleChangeLoaiPhongBan}
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -173,18 +253,17 @@ export default function EditUser() {
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Chức vụ
                                 </label>
-                                <Box sx={{ minWidth: 260 }}>
+                                <Box sx={{ minWidth: 259 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiChucVu}
-                                            // onChange={handleChangeLoaiChucVu}
-                                            defaultValue={3}
+                                            value={loaiChucVu}
+                                            onChange={handleChangeLoaiChucVu}
                                         >
                                             <MenuItem value={1}>Giam doc1</MenuItem>
                                             <MenuItem value={2}>Giam doc2</MenuItem>
@@ -197,42 +276,41 @@ export default function EditUser() {
                     </Row>
                     <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Tài khoản ngân hàng
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder='2121212121'
                                     className='userAddInput'
+                                    onChange={(e) => setTKNganHang(e.target.value)}
                                 />
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Ngân hàng
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder='Vietcombank'
-                                    className='userUpdateInput'
+                                    className='userAddInput'
+                                    onChange={(e) => setNganHang(e.target.value)}
                                 />
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Học vấn
                                 </label>
-                                <Box sx={{ minWidth: 260 }}>
+                                <Box sx={{ minWidth: 252 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiHocVan}
-                                            // onChange={handleChangeLoaiHocVan}
-                                            defaultValue={3}
+                                            value={loaiHocVan}
+                                            onChange={handleChangeLoaiHocVan}
                                         >
                                             <MenuItem value={1}>Dai hoc</MenuItem>
                                             <MenuItem value={2}>Tieng Anh</MenuItem>
@@ -245,18 +323,17 @@ export default function EditUser() {
                     </Row>
                     <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Dân tộc
                                 </label>
-                                <Box sx={{ minWidth: 260 }}>
+                                <Box sx={{ minWidth: 259 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiDanToc}
-                                            // onChange={handleChangeLoaiDanToc}
-                                            defaultValue={3}
+                                            value={loaiDanToc}
+                                            onChange={handleChangeLoaiDanToc}
                                         >
                                             <MenuItem value={1}>Kinh</MenuItem>
                                             <MenuItem value={2}>Tieng Anh</MenuItem>
@@ -267,18 +344,17 @@ export default function EditUser() {
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Quốc tịch
                                 </label>
-                                <Box sx={{ minWidth: 260 }}>
+                                <Box sx={{ minWidth: 259 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiQuocTich}
-                                            // onChange={handleChangeLoaiQuocTich}
-                                            defaultValue={3}
+                                            value={loaiQuocTich}
+                                            onChange={handleChangeLoaiQuocTich}
                                         >
                                             <MenuItem value={1}>Viet Nam</MenuItem>
                                             <MenuItem value={2}>Tieng Anh</MenuItem>
@@ -289,18 +365,17 @@ export default function EditUser() {
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userUpdateItem'>
+                            <div className='userAddItem'>
                                 <label>
                                     Tôn giáo
                                 </label>
-                                <Box sx={{ minWidth: 260 }}>
+                                <Box sx={{ minWidth: 259 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiTonGiao}
-                                            // onChange={handleChangeLoaiTonGiao}
-                                            defaultValue={3}
+                                            value={loaiTonGiao}
+                                            onChange={handleChangeLoaiTonGiao}
                                         >
                                             <MenuItem value={1}>Khong</MenuItem>
                                             <MenuItem value={2}>Tieng Anh</MenuItem>
@@ -312,10 +387,10 @@ export default function EditUser() {
                         </Col>
                     </Row>
                 </Container>
-                <div className='userUpdateFooter'>
-                    <button className='userUpdateButton'>Cập nhật</button>
+                <div className='modal-footer'>
+                    <button className='userAddButtonSubmit'>Thêm</button>
                 </div>
-            </div>
+            </form>
         </div>
-    )
-}
+    ) : "";
+};

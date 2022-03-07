@@ -8,6 +8,9 @@ export default function Popup(props) {
             <div className="popup-inner">
                 <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                 { props.children }
+                <div className='modal-footer'>
+                    <button className='buttonSubmit' type='submit' onClick={() => props.setTrigger(false)}>Lưu</button>
+                </div>
             </div>
         </div>
     ) : "";

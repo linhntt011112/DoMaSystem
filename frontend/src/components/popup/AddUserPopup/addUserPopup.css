@@ -40,3 +40,14 @@
     padding: 10px 20px;
     color: white;
 }
+
+.errorMessage{
+    font-size: 12px;
+    padding: 3px;
+    color: red;
+    display: none;
+}
+
+.userAddInput:invalid ~ .errorMessage{
+    display: block;
+}
