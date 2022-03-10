@@ -1,9 +1,9 @@
 import React from "react";
-import "./addLoaiCongVan.css";
+import "./editLoaiCongVan.css";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import { Close } from '@material-ui/icons';
 
-export default function AddLoaiCongVan(props) {
+export default function EditLoaiCongVan(props) {
     const [loaiTrangThai, setLoaiTrangThai] = React.useState('');
 
     const handleChangeLoaiTrangThai = (event) => {
@@ -11,11 +11,11 @@ export default function AddLoaiCongVan(props) {
     };
 
     return (props.trigger) ? (
-        <div className="add-loai-cong-van-popup-main">
+        <div className="edit-loai-cong-van-popup-main">
             <form className="popup-inner">
                 <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                 <div className='addLoaiCongVan'>
-                    <h5 className='modal-title'>Thêm mới loại công văn</h5>
+                    <h5 className='modal-title'>Chỉnh sửa loại công văn</h5>
                     <div className='modal-body'>
                         <div className='loaiCongVanAddItem'>
                             <label>
@@ -25,6 +25,7 @@ export default function AddLoaiCongVan(props) {
                             <input
                                 type="text"
                                 className='loaiCongVanAddInput'
+                                defaultValue="PD"
                                 required
                             />
                         </div>
@@ -37,6 +38,7 @@ export default function AddLoaiCongVan(props) {
                                 type="text"
                                 className='loaiCongVanAddInput'
                                 required
+                                defaultValue="Phúc đáp"
                             />
                         </div>
                         <div className='loaiCongVanAddItem'>
@@ -46,6 +48,7 @@ export default function AddLoaiCongVan(props) {
                             <input
                                 type="text"
                                 className='loaiCongVanAddInput'
+                                defaultValue="Phúc đáp"
                             />
                         </div>
                         <div className='loaiCongVanAddItem'>
@@ -57,7 +60,7 @@ export default function AddLoaiCongVan(props) {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={loaiTrangThai}
+                                        defaultValue={1}
                                         onChange={handleChangeLoaiTrangThai}
                                     >
                                         <MenuItem value={1}>Hoạt động 1</MenuItem>

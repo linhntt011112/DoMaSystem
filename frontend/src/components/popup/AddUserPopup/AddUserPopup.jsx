@@ -90,7 +90,7 @@ export default function AddUserPopup(props) {
                                     required
                                     pattern='^[a-zA-Z]{1,}(?: [a-zA-Z]+){0,5}$'
                                 />
-                                <span className='errorMessage'>Chua it nhat 4 ki tu</span>
+                                <span className='errorMessage'>Chứa ít nhất 4 kí tự</span>
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
@@ -107,7 +107,7 @@ export default function AddUserPopup(props) {
                                     required
                                     pattern='^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$'
                                 />
-                                <span className='errorMessage'>Ten nguoi dung khong hop le</span>
+                                <span className='errorMessage'>Tên người dùng không hợp lệ</span>
                             </div>
                         </Col>
                         <Col sm={4} style={{padding: '15px 15px 0 15px'}}>

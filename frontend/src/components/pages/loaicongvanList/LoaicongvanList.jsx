@@ -7,12 +7,16 @@ import Popup from "../../popup/Popup/Popup";
 import AddLoaiCongVan from "../../popup/AddLoaiCongVan/AddLoaiCongVan";
 import DetailLoaiCongVan from "../../popup/DetailLoaiCongVan/DetailLoaiCongVan";
 import { UserContext } from "../../../context/UserContext";
+import {loaicongvanRows} from "../../../dummyLoaiCongVanData";
+import { Visibility, Edit } from '@mui/icons-material';
+import EditLoaiCongVan from "../../popup/EditLoaiCongVan/EditLoaiCongVan";
 
 export default function LoaicongvanList() {
     const [token,] = useContext(UserContext);
     
     const [addButtonPopup, setAddButtonPopup] = useState(false);
     const [detailButtonPopup, setDetailButtonPopup] = useState(false);
+    const [editButtonPopup, setEditButtonPopup] = useState(false);
 
     const handleDelete = (id)=>{
         setData(data.filter(item=>item.id !== id));
@@ -43,8 +47,8 @@ export default function LoaicongvanList() {
             renderCell: (params)=>{
                 return(
                     <>
-                       
-                        <button className='userListEdit' onClick={() => setDetailButtonPopup(true)}>Chi tiết</button>
+                        <Visibility className='userListView' onClick={() => setDetailButtonPopup(true)}></Visibility>
+                        <Edit className='userListEditIcon' onClick={() => setEditButtonPopup(true)}></Edit>
                         <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.id)}/>
                     </>
 
@@ -53,7 +57,7 @@ export default function LoaicongvanList() {
         }
     ];
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(loaicongvanRows);
 
     useEffect(() => {
         const requestOptions = {
@@ -104,11 +108,11 @@ export default function LoaicongvanList() {
                 </div>
             </main>
             <AddLoaiCongVan trigger={addButtonPopup} setTrigger={setAddButtonPopup}>
-                <AddLoaiCongVan />
             </AddLoaiCongVan>
             <Popup trigger={detailButtonPopup} setTrigger={setDetailButtonPopup}>
                 <DetailLoaiCongVan />
             </Popup>
+            <EditLoaiCongVan trigger={editButtonPopup} setTrigger={setEditButtonPopup}></EditLoaiCongVan>
         </div>
     )
 }
