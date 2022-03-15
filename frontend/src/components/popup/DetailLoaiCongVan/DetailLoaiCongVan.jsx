@@ -1,7 +1,6 @@
 import React from "react";
 import "./detailLoaiCongVan.css";
 import {Box, FormControl, Select, MenuItem} from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
 
 export default function DetailLoaiCongVan() {
     
@@ -9,7 +8,6 @@ export default function DetailLoaiCongVan() {
         <div className="detailLoaiCongVan">
             <h5 className="modal-title">
                 Chi tiết loại công văn
-                <EditIcon style={{ 'padding-left': 5 }}/>
             </h5>
             <div className="modal-body">
                 <div className="loaiCongVanDetailItem">
@@ -60,27 +58,6 @@ export default function DetailLoaiCongVan() {
                                 id="demo-simple-select"
                                 // value={loaiTrangThai}
                                 // onChange={handleChangeLoaiTrangThai}
-                                defaultValue={3}
-                                disabled="true"
-                            >
-                                <MenuItem value={1}>Hoạt động 1</MenuItem>
-                                <MenuItem value={2}>Hoạt động 2</MenuItem>
-                                <MenuItem value={3}>Hoạt động 3</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Box>
-                </div>
-                <div className='loaiCongVanDetailItem'>
-                    <label>
-                        Người ký (áp dụng cho văn bản đi)
-                    </label>
-                    <Box sx={{ }} style={{width: '100%'}}>
-                        <FormControl fullWidth>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                // value={loaiNguoiKy}
-                                // onChange={handleChangeLoaiNguoiKy}
                                 defaultValue={3}
                                 disabled="true"
                             >

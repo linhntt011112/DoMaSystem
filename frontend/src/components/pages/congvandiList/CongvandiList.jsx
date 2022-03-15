@@ -3,30 +3,31 @@ import {Add, DeleteOutline} from "@material-ui/icons";
 import {Button} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
 import './CongvandiList.css';
+import {congvandiRows} from "../../../dummyCongVanDiData";
+import { Link } from "react-router-dom";
 
 export default function CongvandiList() {
-    const [data, setData] = useState([]);
 
     const handleDelete = (id)=>{
         setData(data.filter(item=>item.id !== id));
     };
 
     const columns = [
-        {field: 'so_cong_van', headerName: 'So cong van', width: 100},
-        {field: 'noi_nhan', headerName: 'Noi nhan', flex: 1},
+        {field: 'so_cong_van_di', headerName: 'Số công văn đi', width: 100},
+        {field: 'ten_cong_van_di', headerName: 'Tên công văn đi', flex: 1},
         {
             field: 'nguoi_ky',
-            headerName: 'Nguoi ky',
+            headerName: 'Người ký',
             width: 150,
         },
         {
             field: 'ngay_ky',
-            headerName: 'Ngay ky',
+            headerName: 'Ngày ký',
             width: 150,
         },
         {
             field: 'bo_phan_phat_hanh',
-            headerName: 'Bo phan phat hanh',
+            headerName: 'Bộ phận phát hành',
             width: 200,
         },
         {
@@ -36,7 +37,7 @@ export default function CongvandiList() {
         },
         {
             field: 'trich_yeu_noi_dung',
-            headerName: 'Trich yeu noi dung',
+            headerName: 'Trích yếu nội dung',
             flex: 1,
         },
         {
@@ -46,15 +47,18 @@ export default function CongvandiList() {
             renderCell: (params)=>{
                 return(
                     <>
-                       
-                        <button className='congVanListEdit'>Chi tiết</button>
-                        <DeleteOutline className='congVanListDelete' onClick={()=>handleDelete(params.row.id)}/>
+                        <Link to={"/dashboard/cong-van-di/"+params.row.so_cong_van_di} params={{id: params.row.so_cong_van_di}}>
+                            <button className='congVanDiListEdit'>Chi tiết</button>
+                        </Link>
+                        <DeleteOutline className='congVanDiListDelete' onClick={()=>handleDelete(params.row.id)}/>
                     </>
 
                 )
             }
         }
-    ]
+    ];
+
+    const [data, setData] = useState(congvandiRows);
 
     return (
         <div className='congVanDiList'>

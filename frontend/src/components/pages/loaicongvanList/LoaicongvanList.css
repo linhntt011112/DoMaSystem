@@ -3,3 +3,13 @@
     position: sticky;
     top: 60px;
 }
+.userListView{
+    color: #3bb077;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.userListEditIcon{
+    padding-right: 5px;
+    cursor: pointer;
+}
