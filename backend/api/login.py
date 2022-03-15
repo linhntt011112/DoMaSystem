@@ -12,7 +12,9 @@ from .models import Token, TokenData
 from .user import get_user, authenticate_user, get_current_user
 
 
-router = APIRouter(prefix="/api")
+router = APIRouter(
+    prefix="/api"
+    )
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
@@ -42,7 +44,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.post("delete_token")
+@router.post("/delete_token")
 async def logout():
     # access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     # access_token = create_access_token(

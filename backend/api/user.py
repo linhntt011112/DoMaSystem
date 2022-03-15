@@ -13,7 +13,7 @@ from .config import SECRET_KEY, ALGORITHM
 
 router = APIRouter(prefix="/users")
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/token")
 
 
 def get_user_by_username(username):
@@ -68,11 +68,6 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 @router.get("/me")
 async def read_users_me(current_user = Depends(get_current_user)):
     return current_user.as_dict()
-
-
-@router.get("/me/items")
-async def read_own_items(current_user = Depends(get_current_user)):
-    return [{"item_id": "Foo", "owner": current_user.as_dict()}]
 
 
 @router.get("/list_users")

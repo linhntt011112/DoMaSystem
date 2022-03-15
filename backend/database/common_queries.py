@@ -4,32 +4,37 @@ from database.db import Session
 
 
 def query_all(class_name):
-    Session()
-    res = Session.query(class_name).all()
+    session = Session()
+    res = session.query(class_name).all()
     # Session.remove()
     
     return res
 
 
 def query_filter(class_name, condition):
-    Session()
-    res = Session.query(class_name).filter(condition).all()
+    session = Session()
+    res = session.query(class_name).filter(condition).all()
     # Session.remove()
     
     return res
+
+
+def update(class_name, condition):
+    session = Session()
+    res = session.query(class_name).update()
   
 
 def add_and_commit(data):
-    Session()
+    session = Session()
     if isinstance(data, Iterable):
-        Session.add_all(data)
+        session.add_all(data)
     else:
-        Session.add(data)
+        session.add(data)
         
     try:
-        Session.commit()
-    except:
-        Session.rollback()
+        session.commit()
+    except Exception as e:
+        session.rollback()
         raise 
     
     # Session.remove()
