@@ -10,11 +10,7 @@ print(os.getcwd())
 from database.db import engine
 from database.models import *
 import database.common_queries as  common_queries 
-from database.utils import Hasher
-
-
-def get_hash_password(password):
-    return Hasher.get_password_hash(password)
+from api.utils import Hasher
 
 
 def create_tables():           # new
@@ -35,7 +31,9 @@ def create_sample_nguoi_dung():
         NguoiDung(
             ho_ten = 'Nguyen Thi A',
             ten_tai_khoan = 'nta',
-            password = get_hash_password('nta'),
+            password_salt = 'salt_nta',
+            password = Hasher.get_password_hash(Hasher.salt_password('nta', 'salt_nta')),
+            
             ngay_sinh = datetime.datetime(1982, 2, 24),
             dia_chi = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             ngay_cap_nhat = datetime.datetime(2022, 2, 24),
@@ -64,7 +62,8 @@ def create_sample_nguoi_dung():
         NguoiDung(
             ho_ten = 'Nguyen Van B',
             ten_tai_khoan = 'nvb',
-            password = get_hash_password('nvb'),
+            password_salt = 'salt_ntb',
+            password = Hasher.get_password_hash(Hasher.salt_password('ntb', 'salt_ntb')),
             dia_chi = 'So 4 ngach 42 Dai hoc Bach Khoa Ho Chi Minh',
             ngay_sinh = datetime.datetime(1992, 2, 24),
             ngay_cap_nhat = datetime.datetime(2022, 2, 24),
@@ -106,10 +105,11 @@ def run_all():
     print(timeit.timeit(lambda : drop_all_tables(), number=1))
     print(timeit.timeit(lambda : create_tables(), number=1))
     print(timeit.timeit(lambda : create_sample_nguoi_dung(), number=1))
-    print(timeit.timeit(lambda : create_sample_loai_cong_van(), number=1))
+    # print(timeit.timeit(lambda : create_sample_loai_cong_van(), number=1))
     # drop_all_tables()
     # create_tables()
     # create_sample_nguoi_dung()
     # create_sample_loai_cong_van()
 
-run_all()
+if __name__ == "__main__":
+    run_all()

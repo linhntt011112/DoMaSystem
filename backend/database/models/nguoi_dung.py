@@ -23,6 +23,7 @@ class NguoiDung(Base):
     ho_ten = Column(String(50), nullable=False)
     ten_tai_khoan = Column(String(50), nullable=False)
     password = Column(String(64), nullable=False)
+    password_salt = Column(String(64), nullable=False)
     ngay_sinh = Column(Date, nullable=True)
     dia_chi = Column(String(100), nullable=True)
     ngay_cap_nhat = Column(Date, nullable=False)

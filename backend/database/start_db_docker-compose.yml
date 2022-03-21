@@ -1,24 +1,24 @@
-# docker-compose -f database/start_db_docker-compose.yml up -d
+# COMPOSE_PROJECT_NAME=DMS docker-compose -f database/start_db_docker-compose.yml up -d
 # docker exec -it DMS-mysql /bin/bash
-# docker-compose -f database/start_db_docker-compose.yml down
+# COMPOSE_PROJECT_NAME=DMS docker-compose -f database/start_db_docker-compose.yml down
 
-# docker-compose -f database/start_db_docker-compose.yml start -d
-# docker-compose -f database/start_db_docker-compose.yml stop -d
+# COMPOSE_PROJECT_NAME=DMS docker-compose -f database/start_db_docker-compose.yml start -d
+# COMPOSE_PROJECT_NAME=DMS docker-compose -f database/start_db_docker-compose.yml stop -d
 # mysql -u admin --protocol=tcp -p
 
 version: "3.9"
 
 services:
-    mysql-db:
+    DMS-mysql:
         image: "mysql:8.0.26"
-        container_name: DMS-mysql
+        container_name: DMS-mysql-container
         environment:
             MYSQL_ROOT_PASSWORD: 123456
             MYSQL_DATABASE: DMS
             MYSQL_USER: admin
             MYSQL_PASSWORD: 123456
         volumes:
-            - ./db-data:/var/lib/mysql:delegated
+            - ./db-data:/var/lib/mysql
             # - ./docker-db/db-data:/var/lib/mysql
             # - ./docker-db/mysqld.sock:/var/run/mysqld/mysqld.sock
         # entrypoint:

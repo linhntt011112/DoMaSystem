@@ -5,13 +5,13 @@ from jose import JWTError, jwt
 
 from database.models import *
 from database.common_queries import query_all, query_filter
-from database.utils import Hasher
+from .utils import Hasher
 
 from .models import Token, TokenData
 from .config import SECRET_KEY, ALGORITHM
 
 
-router = APIRouter(prefix="/users")
+router = APIRouter(prefix="/user")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/token")
 
@@ -24,13 +24,6 @@ def get_user_by_username(username):
         return None
 
 
-def verify_password(plain_password, hashed_password):
-    return Hasher.verify_password(plain_password, hashed_password)
-
-
-def get_password_hash(password):
-    return Hasher.get_password_hash(password)
-
 
 def get_user(username: str):
     return get_user_by_username(username)
@@ -40,7 +33,7 @@ def authenticate_user(username: str, password: str):
     user: NguoiDung = get_user(username)
     if not user:
         return False
-    if not verify_password(password, user.password):
+    if not Hasher.verify_password(Hasher.salt_password(password, user.password_salt), user.password):
         return False
     return user
     

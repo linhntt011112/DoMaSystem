@@ -10,11 +10,10 @@ from jose import JWTError, jwt
 from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from .models import Token, TokenData
 from .user import get_user, authenticate_user, get_current_user
+from database.models import static_table
 
 
-router = APIRouter(
-    prefix="/api"
-    )
+router = APIRouter()
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
@@ -38,8 +37,9 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    user_permission = 'admin' if user.phan_quyen==static_table.PhanQuyen.admin else 'user'
     access_token = create_access_token(
-        data={"sub": user.ten_tai_khoan}, expires_delta=access_token_expires
+        data={"sub": user.ten_tai_khoan, "permissions": user_permission}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
 

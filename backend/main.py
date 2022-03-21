@@ -20,8 +20,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(user.router)
-app.include_router(login.router)
+app_router = APIRouter(prefix='/api')
+app_router.include_router(user.router )
+app_router.include_router(login.router)
+app.include_router(app_router)
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
