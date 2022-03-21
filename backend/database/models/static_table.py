@@ -5,16 +5,19 @@ from .base import Base
 
 
 class GioiTinh:
+    type = bool
     nam = True
     nu = False
     
 
 class PhanQuyen:
+    type = bool
     admin = True
     user = False
     
 
 class TrangThaiLoaiCongVan:
+    type = bool
     hoat_dong = True
     khong_hoat_dong = False
   
