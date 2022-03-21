@@ -4,29 +4,19 @@ import { useHistory } from 'react-router-dom';
 import "./dashboard.css";
 
 import { UserContext } from "../../context/UserContext";
+import { useToken } from "../../context/TokenContext";
+import * as backend_config from "../../config/backend"
 import FeaturedInfo from "../featuredInfo/FeaturedInfo";
 
 
 axios.defaults.withCredentials = true;
 
 const Dashboard = () => {
-  const [token, setToken] = useContext(UserContext);
   let history = useHistory();
-  if (!token){
-    history.push("/");
-  }
+  const {token, setToken} = useToken();
   
   const getCurrentUser = async () => {
-    axios
-      .get("http://127.0.0.1:3009/get_current_user", { withCredentials: true })
-      .then(response => {
-        console.log(response.data.username)
-        if (response.data.username === "") {  
-          this.props.history.push("/");
-        }
-      })
 
-    
     const requestOptions = {
       method: "GET",
       headers: {
@@ -36,7 +26,7 @@ const Dashboard = () => {
     };
     // console.log(token);
 
-    const response = await fetch("http://127.0.0.1:3009/users/me", requestOptions);
+    const response = await fetch(backend_config.USER_GET_CURRENT_API, requestOptions);
     if (response.ok) {
       const data = await response.json();
       console.log(data);
@@ -52,16 +42,7 @@ const Dashboard = () => {
   };
 
   const getUserList = async () => {
-    axios
-      .get("http://127.0.0.1:3009/get_current_user", { withCredentials: true })
-      .then(response => {
-        console.log(response.data.username)
-        if (response.data.username === "") {  
-          this.props.history.push("/");
-        }
-      })
 
-    
     const requestOptions = {
       method: "GET",
       headers: {
@@ -71,7 +52,7 @@ const Dashboard = () => {
     };
     // console.log(token);
 
-    const response = await fetch("http://127.0.0.1:3009/users/list_users", requestOptions);
+    const response = await fetch(backend_config.USER_GET_LIST_API, requestOptions);
     if (response.ok) {
       const data = await response.json();
       console.log(data);
@@ -98,7 +79,8 @@ const Dashboard = () => {
     };
     // console.log(token);
 
-    const response = await fetch("http://127.0.0.1:3009/users/id/1", requestOptions);
+    let id = 1;
+    const response = await fetch(backend_config.USER_GET_BY_ID_API.replace('{id}', 1), requestOptions);
     if (response.ok) {
       const data = await response.json();
       console.log(data);
@@ -111,16 +93,8 @@ const Dashboard = () => {
   };
 
   const handleLogoutClick = () => {
-    axios
-      .post("http://127.0.0.1:3009/api/delete_token", { withCredentials: true })
-      .then(response => {
-          // console.log(token);
-          setToken(null);
-          history.push("/");
-      })
-      .catch(error => {
-        console.log("logout error", error);
-      });
+    setToken(null);
+    history.push('/login');
   };
 
   return (

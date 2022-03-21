@@ -1,0 +1,1 @@
+. node_venv/bin/activate && npm start

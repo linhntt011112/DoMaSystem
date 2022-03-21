@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 
 // import ErrorMessage from "./ErrorMessage";
 import { UserContext } from "../../context/UserContext";
+import { useToken } from "../../context/TokenContext";
+import * as backend_config from "../../config/backend"
+
 import './login.scss';
 import Logo from '../../img/logo_4.png';
 
@@ -12,7 +15,8 @@ const Login = () => {
   // const [errorMessage, setErrorMessage] = useState("");
   let history = useHistory();
 
-  const [, setToken] = useContext(UserContext);
+  // const [, setToken] = useContext(UserContext);
+  const {setToken} = useToken();
 
   const submitLogin = async () => {
     let form = new FormData();
@@ -30,7 +34,7 @@ const Login = () => {
       // ),
     };
 
-    const response = await fetch("http://127.0.0.1:3009/api/token", requestOptions);
+    const response = await fetch(backend_config.BACKEND_URL_TOKEN, requestOptions);
     const data = await response.json();
 
     if (response.ok) {
