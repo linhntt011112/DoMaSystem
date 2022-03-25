@@ -1,2 +1,2 @@
 # uvicorn main:app --port 3009 --reload
-uvicorn main:app --port 3009
+. /mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv && python main.py
