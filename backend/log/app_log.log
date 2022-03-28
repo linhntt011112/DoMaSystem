@@ -572,3 +572,30 @@ AttributeError: 'NguoiDung' object has no attribute 'username'
 2022-03-28 23:43:38.897 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
 2022-03-28 23:43:38.897 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
 2022-03-28 23:43:38.898 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
+2022-03-28 23:44:41.124 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4NDg3NjgxfQ.6gaeQNmcsHtamb0K-lZKmZ8tbBjE1CyKzuevCgJUvKc
+2022-03-28 23:44:41.125 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54136 - "POST /api/v1/token HTTP/1.1" 200
+2022-03-28 23:44:48.699 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54144 - "OPTIONS /users/list_users HTTP/1.1" 200
+2022-03-28 23:44:48.703 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54144 - "GET /users/list_users HTTP/1.1" 404
+2022-03-28 23:49:29.804 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54164 - "OPTIONS /api/v1/user/list HTTP/1.1" 200
+2022-03-28 23:49:29.816 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54164 - "GET /api/v1/user/list HTTP/1.1" 200
+2022-03-28 23:49:36.742 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54166 - "GET /api/v1/user/list HTTP/1.1" 200
+2022-03-28 23:52:49.318 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54182 - "GET /api/v1/user/list HTTP/1.1" 200
+2022-03-28 23:53:59.026 | INFO     | uvicorn.server:shutdown:263 - Shutting down
+2022-03-28 23:53:59.128 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
+2022-03-28 23:53:59.129 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
+2022-03-28 23:53:59.129 | INFO     | uvicorn.server:serve:94 - Finished server process [4879]
+2022-03-28 23:53:59.901 | INFO     | uvicorn.server:serve:84 - Started server process [5448]
+2022-03-28 23:53:59.901 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
+2022-03-28 23:53:59.902 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
+2022-03-28 23:53:59.902 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
+2022-03-28 23:54:09.548 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54202 - "GET /api/v1/user/list HTTP/1.1" 200
+2022-03-28 23:54:56.542 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54208 - "POST /api/v1/token HTTP/1.1" 401
+2022-03-28 23:55:38.069 | INFO     | api.login:login_for_access_token:51 - username: nvb ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudmIiLCJwZXJtaXNzaW9ucyI6InVzZXIiLCJleHAiOjE2NDg0ODgzMzh9.jn4JEYKnZc_kOlRlJzoEgXov8A2sFQDFzhkvxhC3Izg
+2022-03-28 23:55:38.070 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "POST /api/v1/token HTTP/1.1" 200
+2022-03-28 23:55:42.529 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "OPTIONS /api/v1/user/me HTTP/1.1" 200
+2022-03-28 23:55:42.539 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "GET /api/v1/user/me HTTP/1.1" 200
+2022-03-28 23:55:45.058 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "GET /api/v1/user/list HTTP/1.1" 403
+2022-03-28 23:55:47.764 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "OPTIONS /api/v1/user/id/1 HTTP/1.1" 200
+2022-03-28 23:55:47.771 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "GET /api/v1/user/id/1 HTTP/1.1" 403
+2022-03-28 23:55:49.393 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "GET /api/v1/user/list HTTP/1.1" 403
+2022-03-28 23:55:49.892 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "GET /api/v1/user/id/1 HTTP/1.1" 403

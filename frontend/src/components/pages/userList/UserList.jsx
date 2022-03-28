@@ -5,10 +5,10 @@ import { DeleteOutline, Add } from '@material-ui/icons';
 import { Link } from "react-router-dom";
 import AddUserPopup from "../../popup/AddUserPopup/AddUserPopup";
 import { Button } from '@mui/material';
-import { UserContext } from "../../../context/UserContext";
+import * as backend_config from "../../../config/backend"
 
-export default function UserList() {
-    const [token,] = useContext(UserContext);
+export default function UserList(props) {
+    const token = props.token;
 
     const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -63,14 +63,7 @@ export default function UserList() {
     const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
-        const requestOptions = {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + token,
-            },
-          };
-        fetch("http://127.0.0.1:3009/users/list_users", requestOptions)
+        backend_config.makeRequest("GET", backend_config.USER_GET_LIST_API, token)
           .then((data) => data.json())
           .then((data) => setTableData(data))
     }, [])
