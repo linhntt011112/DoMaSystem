@@ -6,3 +6,569 @@
 2022-03-25 18:01:42.142 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
 2022-03-25 18:01:42.143 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
 2022-03-25 18:01:42.143 | INFO     | uvicorn.server:serve:94 - Finished server process [55869]
+2022-03-28 23:17:59.250 | INFO     | uvicorn.server:serve:84 - Started server process [46492]
+2022-03-28 23:17:59.258 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
+2022-03-28 23:17:59.258 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
+2022-03-28 23:17:59.264 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
+2022-03-28 23:18:01.746 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37266 - "GET / HTTP/1.1" 404
+2022-03-28 23:18:02.017 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37266 - "GET /favicon.ico HTTP/1.1" 404
+2022-03-28 23:18:05.816 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37266 - "GET /docs HTTP/1.1" 200
+2022-03-28 23:18:06.162 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37266 - "GET /openapi.json HTTP/1.1" 200
+2022-03-28 23:18:48.824 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37270 - "POST /api/v1/token HTTP/1.1" 500
+2022-03-28 23:18:48.826 | ERROR    | uvicorn.protocols.http.httptools_impl:run_asgi:379 - Exception in ASGI application
+
+Traceback (most recent call last):
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/main.py", line 64, in <module>
+    server.run()
+    │      └ <function Server.run at 0x7ff1765a8f70>
+    └ <uvicorn.server.Server object at 0x7ff179f2af40>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/uvicorn/server.py", line 68, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ None
+           │       │   │    └ <function Server.serve at 0x7ff1765a9040>
+           │       │   └ <uvicorn.server.Server object at 0x7ff179f2af40>
+           │       └ <function run at 0x7ff1779f4550>
+           └ <module 'asyncio' from '/mnt/disk1/tan_hm/personal/python_environment/Python-3.9.6/Lib/asyncio/__init__.py'>
+
+  File "/mnt/disk1/tan_hm/personal/python_environment/Python-3.9.6/Lib/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x7ff1756283c0>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+
+> File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 376, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+                   │   │    │      │    │        │    └ <function RequestResponseCycle.send at 0x7ff17504b3a0>
+                   │   │    │      │    │        └ <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff17083b7f0>
+                   │   │    │      │    └ <function RequestResponseCycle.receive at 0x7ff17504b430>
+                   │   │    │      └ <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff17083b7f0>
+                   │   │    └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+                   │   └ <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff17083b7f0>
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7ff1756178e0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 75, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff17083b7...
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff1708...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x7ff175020bb0>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7ff1756178e0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/fastapi/applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff17083b7...
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff1708...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff17083b7...
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff1708...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7ff1708a7160>
+          └ <fastapi.applications.FastAPI object at 0x7ff175020bb0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7ff1708a6d30>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff1708...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x7ff1708a7100>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7ff1708a7160>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 92, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': 'localhost:3009', 'connection': 'keep-alive', 'content-length': '45', 'sec-ch-ua': '" Not A;Brand";v="99", "...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7ff1708a6d30>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff1708...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x7ff173876790>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7ff1708a7100>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 147, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7ff1708a7100>>, ...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff1708...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <starlette.exceptions.ExceptionMiddleware object at 0x7ff1708a70d0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7ff1708a7100>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x7ff1708a6ee0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff1708...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <fastapi.routing.APIRouter object at 0x7ff1740bb7f0>
+          └ <starlette.exceptions.ExceptionMiddleware object at 0x7ff1708a70d0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 656, in __call__
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x7ff1708a6ee0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff1708...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │     └ <function Route.handle at 0x7ff1738b08b0>
+          └ <fastapi.routing.APIRoute object at 0x7ff170895340>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 259, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x7ff1708a6ee0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7ff1708...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <function request_response.<locals>.app at 0x7ff1708a60d0>
+          └ <fastapi.routing.APIRoute object at 0x7ff170895340>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 61, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x7ff17083be50>
+                     └ <function get_request_handler.<locals>.app at 0x7ff1708a6040>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x7ff17389f5e0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'form_data': <fastapi.security.oauth2.OAuth2PasswordRequestForm object at 0x7ff17083bfa0>, 'db': <sqlalchemy.orm.session.Ses...
+                 │         └ <function login_for_access_token at 0x7ff1708dbee0>
+                 └ <fastapi.dependencies.models.Dependant object at 0x7ff170895370>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/api/login.py", line 38, in login_for_access_token
+    user = authenticate_user(db, email=form_data.username, password=form_data.password)
+           │                 │         │         │                  │         └ 'nta'
+           │                 │         │         │                  └ <fastapi.security.oauth2.OAuth2PasswordRequestForm object at 0x7ff17083bfa0>
+           │                 │         │         └ 'nta'
+           │                 │         └ <fastapi.security.oauth2.OAuth2PasswordRequestForm object at 0x7ff17083bfa0>
+           │                 └ <sqlalchemy.orm.session.Session object at 0x7ff16e7eda60>
+           └ <function authenticate_user at 0x7ff1708db550>
+
+TypeError: authenticate_user() got an unexpected keyword argument 'email'
+2022-03-28 23:19:43.625 | INFO     | uvicorn.server:shutdown:263 - Shutting down
+2022-03-28 23:19:43.726 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
+2022-03-28 23:19:43.727 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
+2022-03-28 23:19:43.727 | INFO     | uvicorn.server:serve:94 - Finished server process [46492]
+2022-03-28 23:19:45.050 | INFO     | uvicorn.server:serve:84 - Started server process [48637]
+2022-03-28 23:19:45.051 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
+2022-03-28 23:19:45.051 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
+2022-03-28 23:19:45.053 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
+2022-03-28 23:19:49.024 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37316 - "GET /docs HTTP/1.1" 200
+2022-03-28 23:19:49.157 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37316 - "GET /openapi.json HTTP/1.1" 200
+2022-03-28 23:19:55.495 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37320 - "POST /api/v1/token HTTP/1.1" 500
+2022-03-28 23:19:55.498 | ERROR    | uvicorn.protocols.http.httptools_impl:run_asgi:379 - Exception in ASGI application
+
+Traceback (most recent call last):
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 513, in cmd_query
+    self._cmysql.query(query,
+    │    │       │     └ b"SELECT nguoi_dung.ma_nguoi_dung AS nguoi_dung_ma_nguoi_dung, nguoi_dung.ho_ten AS nguoi_dung_ho_ten, nguoi_dung.ten_tai_kho...
+    │    │       └ <method 'query' of '_mysql_connector.MySQL' objects>
+    │    └ <_mysql_connector.MySQL object at 0x55ea854b7ef0>
+    └ <mysql.connector.connection_cext.CMySQLConnection object at 0x7fa8a07aca00>
+
+_mysql_connector.MySQLInterfaceError: Table 'markitone_custom_company.nguoi_dung' doesn't exist
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+    │    │       └ <function DefaultDialect.do_execute at 0x7fa8a5306280>
+    │    └ <sqlalchemy.dialects.mysql.mysqlconnector.MySQLDialect_mysqlconnector object at 0x7fa8a4dfe4c0>
+    └ <sqlalchemy.engine.base.Connection object at 0x7fa8a07ac850>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+    │      │       │          └ {'ten_tai_khoan_1': 'nta'}
+    │      │       └ 'SELECT nguoi_dung.ma_nguoi_dung AS nguoi_dung_ma_nguoi_dung, nguoi_dung.ho_ten AS nguoi_dung_ho_ten, nguoi_dung.ten_tai_khoa...
+    │      └ <function CMySQLCursor.execute at 0x7fa8a37ff700>
+    └ <mysql.connector.cursor_cext.CMySQLCursorBuffered object at 0x7fa8a0547100>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/mysql/connector/cursor_cext.py", line 269, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+             │    │              │         │    └ False
+             │    │              │         └ <mysql.connector.cursor_cext.CMySQLCursorBuffered object at 0x7fa8a0547100>
+             │    │              └ b"SELECT nguoi_dung.ma_nguoi_dung AS nguoi_dung_ma_nguoi_dung, nguoi_dung.ho_ten AS nguoi_dung_ho_ten, nguoi_dung.ten_tai_kho...
+             │    └ None
+             └ <mysql.connector.cursor_cext.CMySQLCursorBuffered object at 0x7fa8a0547100>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 518, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+          │      └ <function get_mysql_exception at 0x7fa8a3bbb310>
+          └ <module 'mysql.connector.errors' from '/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/my...
+
+mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'markitone_custom_company.nguoi_dung' doesn't exist
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/main.py", line 64, in <module>
+    server.run()
+    │      └ <function Server.run at 0x7fa8a8d7df70>
+    └ <uvicorn.server.Server object at 0x7fa8ac6fff40>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/uvicorn/server.py", line 68, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ None
+           │       │   │    └ <function Server.serve at 0x7fa8a8d7e040>
+           │       │   └ <uvicorn.server.Server object at 0x7fa8ac6fff40>
+           │       └ <function run at 0x7fa8aa1c9550>
+           └ <module 'asyncio' from '/mnt/disk1/tan_hm/personal/python_environment/Python-3.9.6/Lib/asyncio/__init__.py'>
+
+  File "/mnt/disk1/tan_hm/personal/python_environment/Python-3.9.6/Lib/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x7fa8a7dfd3c0>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+
+> File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 376, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+                   │   │    │      │    │        │    └ <function RequestResponseCycle.send at 0x7fa8a78203a0>
+                   │   │    │      │    │        └ <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a300fcd0>
+                   │   │    │      │    └ <function RequestResponseCycle.receive at 0x7fa8a7820430>
+                   │   │    │      └ <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a300fcd0>
+                   │   │    └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+                   │   └ <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a300fcd0>
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7fa8a7dec8e0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 75, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a300fc...
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a30...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x7fa8a77f5bb0>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7fa8a7dec8e0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/fastapi/applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a300fc...
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a30...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a300fc...
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a30...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7fa8a307f1f0>
+          └ <fastapi.applications.FastAPI object at 0x7fa8a77f5bb0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7fa8a306edc0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a30...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x7fa8a307f190>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7fa8a307f1f0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 92, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': 'localhost:3009', 'connection': 'keep-alive', 'content-length': '45', 'sec-ch-ua': '" Not A;Brand";v="99", "...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7fa8a306edc0>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a30...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x7fa8a604b790>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7fa8a307f190>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 147, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7fa8a307f190>>, ...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a30...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <starlette.exceptions.ExceptionMiddleware object at 0x7fa8a307f160>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7fa8a307f190>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x7fa8a306ef70>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a30...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <fastapi.routing.APIRouter object at 0x7fa8a68907f0>
+          └ <starlette.exceptions.ExceptionMiddleware object at 0x7fa8a307f160>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 656, in __call__
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x7fa8a306ef70>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a30...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │     └ <function Route.handle at 0x7fa8a60858b0>
+          └ <fastapi.routing.APIRoute object at 0x7fa8a306c3d0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 259, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x7fa8a306ef70>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7fa8a30...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <function request_response.<locals>.app at 0x7fa8a306e160>
+          └ <fastapi.routing.APIRoute object at 0x7fa8a306c3d0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 61, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x7fa8a300fc40>
+                     └ <function get_request_handler.<locals>.app at 0x7fa8a306e0d0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x7fa8a60745e0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'form_data': <fastapi.security.oauth2.OAuth2PasswordRequestForm object at 0x7fa8a307f910>, 'db': <sqlalchemy.orm.session.Ses...
+                 │         └ <function login_for_access_token at 0x7fa8a30c1040>
+                 └ <fastapi.dependencies.models.Dependant object at 0x7fa8a306c400>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/api/login.py", line 38, in login_for_access_token
+    user = authenticate_user(db, username=form_data.username, password=form_data.password)
+           │                 │            │         │                  │         └ 'nta'
+           │                 │            │         │                  └ <fastapi.security.oauth2.OAuth2PasswordRequestForm object at 0x7fa8a307f910>
+           │                 │            │         └ 'nta'
+           │                 │            └ <fastapi.security.oauth2.OAuth2PasswordRequestForm object at 0x7fa8a307f910>
+           │                 └ <sqlalchemy.orm.session.Session object at 0x7fa8a0fc2ac0>
+           └ <function authenticate_user at 0x7fa8a30b1550>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/api/core/user.py", line 50, in authenticate_user
+    user: db_models.User = crud_user.get_user(db, username)
+          │                │         │        │   └ 'nta'
+          │                │         │        └ <sqlalchemy.orm.session.Session object at 0x7fa8a0fc2ac0>
+          │                │         └ <function get_user at 0x7fa8a3597b80>
+          │                └ <module 'database.crud.user' from '/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/database/crud/user.py'>
+          └ <module 'database.db_models' from '/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/database/db_models/__init__.py'>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/database/crud/user.py", line 22, in get_user
+    return get_user_by_ten_tai_khoan(db, ten_tai_khoan)
+           │                         │   └ 'nta'
+           │                         └ <sqlalchemy.orm.session.Session object at 0x7fa8a0fc2ac0>
+           └ <function get_user_by_ten_tai_khoan at 0x7fa8a3597a60>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/database/crud/user.py", line 14, in get_user_by_ten_tai_khoan
+    user = common_queries.query_filter(db, db_models.NguoiDung, db_models.NguoiDung.ten_tai_khoan==ten_tai_khoan)
+           │              │            │   │         │          │         │         │              └ 'nta'
+           │              │            │   │         │          │         │         └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7fa8a4dd04f0>
+           │              │            │   │         │          │         └ <class 'database.db_models.nguoi_dung.NguoiDung'>
+           │              │            │   │         │          └ <module 'database.db_models' from '/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/database/db_models/__init__.py'>
+           │              │            │   │         └ <class 'database.db_models.nguoi_dung.NguoiDung'>
+           │              │            │   └ <module 'database.db_models' from '/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/database/db_models/__init__.py'>
+           │              │            └ <sqlalchemy.orm.session.Session object at 0x7fa8a0fc2ac0>
+           │              └ <function query_filter at 0x7fa8a3597820>
+           └ <module 'database.common_queries' from '/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/database/common_queries.py'>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/database/common_queries.py", line 18, in query_filter
+    res = session.query(class_name).filter(condition).all()
+          │       │     │                  └ <sqlalchemy.sql.elements.BinaryExpression object at 0x7fa8a300fdf0>
+          │       │     └ <class 'database.db_models.nguoi_dung.NguoiDung'>
+          │       └ <function Session.query at 0x7fa8a4ea7d30>
+          └ <sqlalchemy.orm.session.Session object at 0x7fa8a0fc2ac0>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 2759, in all
+    return self._iter().all()
+           │    └ <function Query._iter at 0x7fa8a4ec8790>
+           └ <sqlalchemy.orm.query.Query object at 0x7fa8a0fe13d0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/query.py", line 2894, in _iter
+    result = self.session.execute(
+             │    │       └ <function Session.execute at 0x7fa8a4ea7700>
+             │    └ <sqlalchemy.orm.session.Session object at 0x7fa8a0fc2ac0>
+             └ <sqlalchemy.orm.query.Query object at 0x7fa8a0fe13d0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1692, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+             │    │           │          │             └ immutabledict({'_sa_orm_load_options': default_load_options(_legacy_uniquing=True), '_result_disable_adapt_to_context': True,...
+             │    │           │          └ immutabledict({})
+             │    │           └ <sqlalchemy.sql.selectable.Select object at 0x7fa8a079a1c0>
+             │    └ <function Connection._execute_20 at 0x7fa8a53be0d0>
+             └ <sqlalchemy.engine.base.Connection object at 0x7fa8a07ac850>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1614, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+           │    │     │             │               └ immutabledict({'_sa_orm_load_options': default_load_options(_legacy_uniquing=True), '_result_disable_adapt_to_context': True,...
+           │    │     │             └ immutabledict({})
+           │    │     └ ({},)
+           │    └ <sqlalchemy.engine.base.Connection object at 0x7fa8a07ac850>
+           └ <bound method ClauseElement._execute_on_connection of <sqlalchemy.sql.selectable.Select object at 0x7fa8a079a1c0>>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/sql/elements.py", line 325, in _execute_on_connection
+    return connection._execute_clauseelement(
+           │          └ <function Connection._execute_clauseelement at 0x7fa8a53bdee0>
+           └ <sqlalchemy.engine.base.Connection object at 0x7fa8a07ac850>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1481, in _execute_clauseelement
+    ret = self._execute_context(
+          │    └ <function Connection._execute_context at 0x7fa8a53be1f0>
+          └ <sqlalchemy.engine.base.Connection object at 0x7fa8a07ac850>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1845, in _execute_context
+    self._handle_dbapi_exception(
+    │    └ <function Connection._handle_dbapi_exception at 0x7fa8a53be3a0>
+    └ <sqlalchemy.engine.base.Connection object at 0x7fa8a07ac850>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2026, in _handle_dbapi_exception
+    util.raise_(
+    │    └ <function raise_ at 0x7fa8a94c2820>
+    └ <module 'sqlalchemy.util' from '/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchem...
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1802, in _execute_context
+    self.dialect.do_execute(
+    │    │       └ <function DefaultDialect.do_execute at 0x7fa8a5306280>
+    │    └ <sqlalchemy.dialects.mysql.mysqlconnector.MySQLDialect_mysqlconnector object at 0x7fa8a4dfe4c0>
+    └ <sqlalchemy.engine.base.Connection object at 0x7fa8a07ac850>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 732, in do_execute
+    cursor.execute(statement, parameters)
+    │      │       │          └ {'ten_tai_khoan_1': 'nta'}
+    │      │       └ 'SELECT nguoi_dung.ma_nguoi_dung AS nguoi_dung_ma_nguoi_dung, nguoi_dung.ho_ten AS nguoi_dung_ho_ten, nguoi_dung.ten_tai_khoa...
+    │      └ <function CMySQLCursor.execute at 0x7fa8a37ff700>
+    └ <mysql.connector.cursor_cext.CMySQLCursorBuffered object at 0x7fa8a0547100>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/mysql/connector/cursor_cext.py", line 269, in execute
+    result = self._cnx.cmd_query(stmt, raw=self._raw,
+             │    │              │         │    └ False
+             │    │              │         └ <mysql.connector.cursor_cext.CMySQLCursorBuffered object at 0x7fa8a0547100>
+             │    │              └ b"SELECT nguoi_dung.ma_nguoi_dung AS nguoi_dung_ma_nguoi_dung, nguoi_dung.ho_ten AS nguoi_dung_ho_ten, nguoi_dung.ten_tai_kho...
+             │    └ None
+             └ <mysql.connector.cursor_cext.CMySQLCursorBuffered object at 0x7fa8a0547100>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/mysql/connector/connection_cext.py", line 518, in cmd_query
+    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,
+          │      └ <function get_mysql_exception at 0x7fa8a3bbb310>
+          └ <module 'mysql.connector.errors' from '/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/my...
+
+sqlalchemy.exc.ProgrammingError: (mysql.connector.errors.ProgrammingError) 1146 (42S02): Table 'markitone_custom_company.nguoi_dung' doesn't exist
+[SQL: SELECT nguoi_dung.ma_nguoi_dung AS nguoi_dung_ma_nguoi_dung, nguoi_dung.ho_ten AS nguoi_dung_ho_ten, nguoi_dung.ten_tai_khoan AS nguoi_dung_ten_tai_khoan, nguoi_dung.password AS nguoi_dung_password, nguoi_dung.password_salt AS nguoi_dung_password_salt, nguoi_dung.ngay_sinh AS nguoi_dung_ngay_sinh, nguoi_dung.dia_chi AS nguoi_dung_dia_chi, nguoi_dung.ngay_cap_nhat AS nguoi_dung_ngay_cap_nhat, nguoi_dung.ngay_vao_lam AS nguoi_dung_ngay_vao_lam, nguoi_dung.dien_thoai AS nguoi_dung_dien_thoai, nguoi_dung.email AS nguoi_dung_email, nguoi_dung.phan_quyen AS nguoi_dung_phan_quyen, nguoi_dung.gioi_tinh AS nguoi_dung_gioi_tinh, nguoi_dung.cccd AS nguoi_dung_cccd, nguoi_dung.ngay_cap AS nguoi_dung_ngay_cap, nguoi_dung.noi_cap AS nguoi_dung_noi_cap, nguoi_dung.que_quan AS nguoi_dung_que_quan, nguoi_dung.tk_ngan_hang AS nguoi_dung_tk_ngan_hang, nguoi_dung.ngan_hang AS nguoi_dung_ngan_hang, nguoi_dung.phong_ban AS nguoi_dung_phong_ban, nguoi_dung.chuc_vu AS nguoi_dung_chuc_vu, nguoi_dung.hoc_van AS nguoi_dung_hoc_van, nguoi_dung.dan_toc AS nguoi_dung_dan_toc, nguoi_dung.quoc_tich AS nguoi_dung_quoc_tich, nguoi_dung.ton_giao AS nguoi_dung_ton_giao 
+FROM nguoi_dung 
+WHERE nguoi_dung.ten_tai_khoan = %(ten_tai_khoan_1)s]
+[parameters: {'ten_tai_khoan_1': 'nta'}]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+2022-03-28 23:20:04.827 | INFO     | uvicorn.server:shutdown:263 - Shutting down
+2022-03-28 23:20:04.928 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
+2022-03-28 23:20:04.929 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
+2022-03-28 23:20:04.929 | INFO     | uvicorn.server:serve:94 - Finished server process [48637]
+2022-03-28 23:20:49.060 | INFO     | uvicorn.server:serve:84 - Started server process [49887]
+2022-03-28 23:20:49.060 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
+2022-03-28 23:20:49.060 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
+2022-03-28 23:20:49.062 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
+2022-03-28 23:20:51.837 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37348 - "GET /docs HTTP/1.1" 200
+2022-03-28 23:20:51.941 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37348 - "GET /openapi.json HTTP/1.1" 200
+2022-03-28 23:20:57.975 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37352 - "POST /api/v1/token HTTP/1.1" 500
+2022-03-28 23:20:57.982 | ERROR    | uvicorn.protocols.http.httptools_impl:run_asgi:379 - Exception in ASGI application
+
+Traceback (most recent call last):
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/main.py", line 64, in <module>
+    server.run()
+    │      └ <function Server.run at 0x7f8f558a4f70>
+    └ <uvicorn.server.Server object at 0x7f8f59226f40>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/uvicorn/server.py", line 68, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ None
+           │       │   │    └ <function Server.serve at 0x7f8f558a5040>
+           │       │   └ <uvicorn.server.Server object at 0x7f8f59226f40>
+           │       └ <function run at 0x7f8f56cf0550>
+           └ <module 'asyncio' from '/mnt/disk1/tan_hm/personal/python_environment/Python-3.9.6/Lib/asyncio/__init__.py'>
+
+  File "/mnt/disk1/tan_hm/personal/python_environment/Python-3.9.6/Lib/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x7f8f549243c0>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+
+> File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 376, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+                   │   │    │      │    │        │    └ <function RequestResponseCycle.send at 0x7f8f543473a0>
+                   │   │    │      │    │        └ <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb36dc0>
+                   │   │    │      │    └ <function RequestResponseCycle.receive at 0x7f8f54347430>
+                   │   │    │      └ <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb36dc0>
+                   │   │    └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+                   │   └ <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb36dc0>
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f8f549148e0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 75, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb36d...
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x7f8f5431cbb0>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x7f8f549148e0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/fastapi/applications.py", line 208, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb36d...
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb36d...
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f8f4fba3190>
+          └ <fastapi.applications.FastAPI object at 0x7f8f5431cbb0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f8f4fba2d30>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x7f8f4fba3130>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x7f8f4fba3190>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 92, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': 'localhost:3009', 'connection': 'keep-alive', 'content-length': '45', 'sec-ch-ua': '" Not A;Brand";v="99", "...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x7f8f4fba2d30>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x7f8f52b72790>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f8f4fba3130>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 147, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x7f8f4fba3130>>, ...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <starlette.exceptions.ExceptionMiddleware object at 0x7f8f4fba3100>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x7f8f4fba3130>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/exceptions.py", line 82, in __call__
+    raise exc
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/exceptions.py", line 71, in __call__
+    await self.app(scope, receive, sender)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x7f8f4fba2ee0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <fastapi.routing.APIRouter object at 0x7f8f533b77f0>
+          └ <starlette.exceptions.ExceptionMiddleware object at 0x7f8f4fba3100>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 656, in __call__
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x7f8f4fba2ee0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │     └ <function Route.handle at 0x7f8f52bac8b0>
+          └ <fastapi.routing.APIRoute object at 0x7f8f4fb91370>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 259, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x7f8f4fba2ee0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x7f8f4fb...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.1'}, 'http_version': '1.1', 'server': ('127.0.0.1', 3009), 'cl...
+          │    └ <function request_response.<locals>.app at 0x7f8f4fba20d0>
+          └ <fastapi.routing.APIRoute object at 0x7f8f4fb91370>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 61, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x7f8f4fb36d00>
+                     └ <function get_request_handler.<locals>.app at 0x7f8f4fba2040>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 226, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x7f8f52b9b5e0>
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 159, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'form_data': <fastapi.security.oauth2.OAuth2PasswordRequestForm object at 0x7f8f4fba38e0>, 'db': <sqlalchemy.orm.session.Ses...
+                 │         └ <function login_for_access_token at 0x7f8f4fbd8ee0>
+                 └ <fastapi.dependencies.models.Dependant object at 0x7f8f4fb913a0>
+
+  File "/mnt/disk1/tan_hm/personal/Linh/DoMaSystem/backend/api/login.py", line 47, in login_for_access_token
+    data={"sub": user.username, "permissions": user.role.role_name},
+                 │                             └ <database.db_models.nguoi_dung.NguoiDung object at 0x7f8f4d091640>
+                 └ <database.db_models.nguoi_dung.NguoiDung object at 0x7f8f4d091640>
+
+AttributeError: 'NguoiDung' object has no attribute 'username'
+2022-03-28 23:21:45.219 | INFO     | uvicorn.server:shutdown:263 - Shutting down
+2022-03-28 23:21:45.321 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
+2022-03-28 23:21:45.322 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
+2022-03-28 23:21:45.323 | INFO     | uvicorn.server:serve:94 - Finished server process [49887]
+2022-03-28 23:21:57.714 | INFO     | uvicorn.server:serve:84 - Started server process [51292]
+2022-03-28 23:21:57.714 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
+2022-03-28 23:21:57.714 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
+2022-03-28 23:21:57.716 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
+2022-03-28 23:22:01.325 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37376 - "GET /docs HTTP/1.1" 200
+2022-03-28 23:22:01.427 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37376 - "GET /openapi.json HTTP/1.1" 200
+2022-03-28 23:22:10.331 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4NDg2MzMwfQ.eeKl1ocXE1z_geujLBRcs0aXozKzGfYoEPabF2xNbPo
+2022-03-28 23:22:10.342 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37380 - "POST /api/v1/token HTTP/1.1" 200
+2022-03-28 23:22:15.721 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37394 - "GET /api/v1/user/me HTTP/1.1" 200
+2022-03-28 23:22:20.892 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37398 - "GET /api/v1/user/list?limit=10&offset=0 HTTP/1.1" 200
+2022-03-28 23:33:05.152 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4NDg2OTg1fQ.jRQEqSJHu5KtVskwzFqnFF42hMsZsS8iMI401BFZT5Q
+2022-03-28 23:33:05.153 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37652 - "POST /api/v1/token HTTP/1.1" 200
+2022-03-28 23:33:12.190 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "OPTIONS /api/v1/user/me HTTP/1.1" 200
+2022-03-28 23:33:12.202 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "GET /api/v1/user/me HTTP/1.1" 200
+2022-03-28 23:33:13.748 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "OPTIONS /api/v1/user/list HTTP/1.1" 200
+2022-03-28 23:33:13.762 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "GET /api/v1/user/list HTTP/1.1" 200
+2022-03-28 23:33:14.428 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "OPTIONS /api/v1/user/id/1 HTTP/1.1" 200
+2022-03-28 23:33:14.445 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "GET /api/v1/user/id/1 HTTP/1.1" 200
+2022-03-28 23:35:41.273 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4NDg3MTQxfQ.sS5ntazvRNytE6_8u412Ky6BlDrWKI7zl40Zp2MM7HE
+2022-03-28 23:35:41.274 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37716 - "POST /api/v1/token HTTP/1.1" 200
+2022-03-28 23:43:38.897 | INFO     | uvicorn.server:serve:84 - Started server process [4879]
+2022-03-28 23:43:38.897 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
+2022-03-28 23:43:38.897 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
+2022-03-28 23:43:38.898 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)

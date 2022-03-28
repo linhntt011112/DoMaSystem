@@ -1,9 +1,9 @@
 class DBConfig:
-    DB_PORT: int = "2128"
+    DB_PORT: int = "3010"
     DB_USER: str = 'root'
-    DB_PASSWORD: str = '1'
+    DB_PASSWORD: str = '123456'
     DB_SERVER: str = 'localhost'
-    DB_NAME: str = 'markitone_custom_company'
+    DB_NAME: str = 'DMS'
     
     DB_URL: str = f'mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_SERVER}:{DB_PORT}/{DB_NAME}'
     

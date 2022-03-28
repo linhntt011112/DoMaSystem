@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 // import ErrorMessage from "./ErrorMessage";
@@ -15,8 +15,17 @@ const Login = () => {
   // const [errorMessage, setErrorMessage] = useState("");
   let history = useHistory();
 
-  // const [, setToken] = useContext(UserContext);
-  const {setToken} = useToken();
+  const {token, setToken} = useToken();
+  // const {context} = useContext(UserContext);
+  // const {token, setToken} = context.userToken;
+
+  const [responseData, setResponseData] = useState({});
+  // const {token, saveToken} = useContext(UserTokenContext);
+  // const setToken = saveToken;
+
+  useEffect(() => {
+    return () => {};
+  }, []);
 
   const submitLogin = async () => {
     let form = new FormData();
@@ -26,28 +35,29 @@ const Login = () => {
     const requestOptions = {
       method: "POST",
       headers: { 
-        // "Content-Type": "application/www-form-urlencoded"
        },
       body: form,
-      // body: JSON.stringify(
-      //   `grant_type=&username=${username}&password=${password}&scope=&client_id=&client_secret=`
-      // ),
     };
-
     const response = await fetch(backend_config.BACKEND_URL_TOKEN, requestOptions);
     const data = await response.json();
+    // setResponseData(data);
+
 
     if (response.ok) {
+      // console.log(data);
       setToken(data.access_token);
-      history.push("/dashboard");
-      // console.log('ok');
+      // console.log(token);
+      history.push("/");
+    }
+    else{
+      alert("Wrong username or password!")
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     submitLogin();
-  };
+  }
 
   return (
     <section id="login-page"> 

@@ -7,6 +7,7 @@ from loguru import logger
 from fastapi import Depends, FastAPI, APIRouter, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
+from database import db_models
 
 from database.db import get_db
 
@@ -35,7 +36,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 @router.post("/token", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db=Depends(get_db)):
-    user = authenticate_user(db, email=form_data.username, password=form_data.password)
+    user: db_models.NguoiDung = authenticate_user(db, username=form_data.username, password=form_data.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -44,10 +45,10 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username, "permissions": user.role.role_name}, 
+        data={"sub": user.ten_tai_khoan, "permissions": user.phan_quyen}, 
         expires_delta=access_token_expires
     )
-    logger.info(f'email: {user.username} ; token: {access_token}')
+    logger.info(f'username: {user.ten_tai_khoan} ; token: {access_token}')
     return {"access_token": access_token, "token_type": "bearer"}
 
 
