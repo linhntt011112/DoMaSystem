@@ -5,9 +5,10 @@ import EditUserPopup from "../../popup/EditUserPopup/EditUserPopup";
 import { useHistory, useParams } from "react-router-dom";
 import { ArrowBack } from '@material-ui/icons';
 import { UserContext } from "../../../context/UserContext";
+import * as backend_config from "../../../config/backend"
 
-export default function User() {
-    const [token,] = useContext(UserContext);
+export default function User(props) {
+    const token = props.token;
     const [buttonPopup, setButtonPopup] = useState(false);
     let history = useHistory();
 
@@ -16,14 +17,7 @@ export default function User() {
     const [userData, setUserData] = useState("");
 
     useEffect(() => {
-        const requestOptions = {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + token,
-            },
-          };
-        fetch(`http://127.0.0.1:3009/users/id/${userId}`, requestOptions)
+        backend_config.makeRequest("GET", backend_config.USER_GET_BY_ID_API.replace('{id}', userId), token)
           .then((data) => data.json())
           .then((data) => setUserData(data))
     }, [])

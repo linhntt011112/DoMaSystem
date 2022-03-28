@@ -599,3 +599,13 @@ AttributeError: 'NguoiDung' object has no attribute 'username'
 2022-03-28 23:55:47.771 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "GET /api/v1/user/id/1 HTTP/1.1" 403
 2022-03-28 23:55:49.393 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "GET /api/v1/user/list HTTP/1.1" 403
 2022-03-28 23:55:49.892 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54220 - "GET /api/v1/user/id/1 HTTP/1.1" 403
+2022-03-28 23:57:33.054 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54228 - "GET /api/v1/user/list HTTP/1.1" 403
+2022-03-28 23:57:41.433 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4NDg4NDYxfQ.d4wZricvJa0fFAOhFS3fmBz007R8H5FWyk4SsFjw_t8
+2022-03-28 23:57:41.434 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54230 - "POST /api/v1/token HTTP/1.1" 200
+2022-03-28 23:57:44.855 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54230 - "GET /api/v1/user/list HTTP/1.1" 200
+2022-03-28 23:57:50.892 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54232 - "OPTIONS /users/id/1 HTTP/1.1" 200
+2022-03-28 23:57:50.893 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54234 - "OPTIONS /users/id/1 HTTP/1.1" 200
+2022-03-28 23:57:50.898 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54234 - "GET /users/id/1 HTTP/1.1" 404
+2022-03-28 23:57:50.900 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54232 - "GET /users/id/1 HTTP/1.1" 404
+2022-03-29 00:01:20.626 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54248 - "GET /users/id/1 HTTP/1.1" 404
+2022-03-29 00:01:20.945 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54252 - "GET /api/v1/user/id/1 HTTP/1.1" 200
