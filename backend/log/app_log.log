@@ -558,3 +558,13 @@ AttributeError: 'NguoiDung' object has no attribute 'username'
 2022-03-28 23:22:10.342 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37380 - "POST /api/v1/token HTTP/1.1" 200
 2022-03-28 23:22:15.721 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37394 - "GET /api/v1/user/me HTTP/1.1" 200
 2022-03-28 23:22:20.892 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37398 - "GET /api/v1/user/list?limit=10&offset=0 HTTP/1.1" 200
+2022-03-28 23:33:05.152 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4NDg2OTg1fQ.jRQEqSJHu5KtVskwzFqnFF42hMsZsS8iMI401BFZT5Q
+2022-03-28 23:33:05.153 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37652 - "POST /api/v1/token HTTP/1.1" 200
+2022-03-28 23:33:12.190 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "OPTIONS /api/v1/user/me HTTP/1.1" 200
+2022-03-28 23:33:12.202 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "GET /api/v1/user/me HTTP/1.1" 200
+2022-03-28 23:33:13.748 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "OPTIONS /api/v1/user/list HTTP/1.1" 200
+2022-03-28 23:33:13.762 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "GET /api/v1/user/list HTTP/1.1" 200
+2022-03-28 23:33:14.428 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "OPTIONS /api/v1/user/id/1 HTTP/1.1" 200
+2022-03-28 23:33:14.445 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37656 - "GET /api/v1/user/id/1 HTTP/1.1" 200
+2022-03-28 23:35:41.273 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4NDg3MTQxfQ.sS5ntazvRNytE6_8u412Ky6BlDrWKI7zl40Zp2MM7HE
+2022-03-28 23:35:41.274 | INFO     | uvicorn.protocols.http.httptools_impl:send:441 - 127.0.0.1:37716 - "POST /api/v1/token HTTP/1.1" 200

@@ -6,7 +6,7 @@ import './App.css';
 import Dashboard from './components/dashboard/dashboard';
 import Login from './components/login/login';
 import UserList from './components/pages/userList/UserList';
-import AdminRoute from './routes/AdminRoute';
+import AdminRoute from './routes/admin/AdminRoute';
 import User from './components/pages/user/User';
 import LoaicongvanList from "./components/pages/loaicongvanList/LoaicongvanList";
 import CongvandiList from './components/pages/congvandiList/CongvandiList';
@@ -16,7 +16,6 @@ const App = () => {
 
   return (
     <>
-      {/* <Header title={message} /> */}
       <div>
         <BrowserRouter>
           <Switch>
