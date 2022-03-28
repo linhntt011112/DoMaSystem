@@ -18,7 +18,7 @@ class LoaiCongVan(Base):
     __tablename__ = 'loai_cong_van'
     ma_loai = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
     loai_cong_van = Column(String(50), nullable=False)
-    trang_thai = Column(Boolean, nullable=False)
+    trang_thai = Column(String(10), nullable=False)
     ngay_cap_nhat = Column(Date, nullable=False)
     mo_ta = Column(String(200), nullable=True)
     

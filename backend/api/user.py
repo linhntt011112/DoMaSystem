@@ -1,95 +1,99 @@
-from fastapi import Depends, FastAPI, APIRouter, HTTPException, status
+import traceback
+from loguru import logger
+from fastapi import Depends, FastAPI, APIRouter, HTTPException, status, Query
 from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
 from jose import JWTError, jwt
+import datetime
+import typing as t
 
-from database.models import *
-from database.common_queries import query_all, query_filter
+from typing import Optional, Union
+from pydantic import BaseModel
+from database.db_models.static_table import PhanQuyen
+
+from database import db_models, common_queries
+from database.db import get_db
+from database.crud import user as crud_user 
+from database.schemas import nguoi_dung as user_schemas
+
 from .utils import Hasher
-
-from .models import Token, TokenData
-from .config import SECRET_KEY, ALGORITHM
-
-
-router = APIRouter(prefix="/user")
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/token")
+from .exceptions import PERMISSION_EXCEPTION_HTTP, RESOURCE_NOT_FOUND_EXCEPTION_HTTP
+from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from .core.user import (
+    get_current_user, get_current_active_user,
+)
 
 
-def get_user_by_username(username):
-    user = query_filter(NguoiDung, NguoiDung.ten_tai_khoan == username)
-    if len(user) == 1:
-        return user[0]
-    else:
-        return None
+router = APIRouter(prefix='/user')
 
-
-
-def get_user(username: str):
-    return get_user_by_username(username)
-
-
-def authenticate_user(username: str, password: str):
-    user: NguoiDung = get_user(username)
-    if not user:
-        return False
-    if not Hasher.verify_password(Hasher.salt_password(password, user.password_salt), user.password):
-        return False
-    return user
-    
-
-async def get_current_user(token: str = Depends(oauth2_scheme)):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
-            raise credentials_exception
-        token_data = TokenData(username=username)
-    except JWTError:
-        raise credentials_exception
-    user = get_user(username=token_data.username)
-    if user is None:
-        raise credentials_exception
-    return user
 
 
 @router.get("/me")
-async def read_users_me(current_user = Depends(get_current_user)):
-    return current_user.as_dict()
+async def read_users_me(current_user = Depends(get_current_active_user)):
+    # logger.debug(current_user.role.role_name)
+    # return current_user.as_dict()
+    return user_schemas.UserBase.from_orm(current_user)
 
 
-@router.get("/list_users")
-async def read_own_items(current_user = Depends(get_current_user)):
+@router.get("/list")
+async def get_list_users(current_user:db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db),
+                        limit: int=10, offset: int=0,
+                        order_by=None):    
     if current_user.phan_quyen == PhanQuyen.admin:
-        return [user.as_dict() for user in query_all(NguoiDung)]
+        users = crud_user.select_list_user(db, limit=limit, offset=offset)
+        return [user_schemas.UserBase.from_orm(user) for user in users]
     else:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="User is not admin!",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+        raise PERMISSION_EXCEPTION_HTTP
+
 
 @router.get("/id/{user_id}")
-async def get_user_by_id(user_id: int, current_user = Depends(get_current_user)):
+async def get_user_by_id(user_id: int, current_user = Depends(get_current_active_user), db=Depends(get_db)):
     if current_user.phan_quyen == PhanQuyen.admin:
-        user = query_filter(NguoiDung, condition=(NguoiDung.ma_nguoi_dung == user_id))
-        if len(user) > 0:
-            user = user[0]
-            return user.as_dict()
+        user = crud_user.get_user_by_id(db, user_id)
+        if user is not None:
+            return user_schemas.UserBase.from_orm(user)
         else:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"Can not find user with id = {user_id}",
-                headers={"WWW-Authenticate": "Bearer"},
-            ) 
+            raise RESOURCE_NOT_FOUND_EXCEPTION_HTTP
     else:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="User is not admin!",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+        raise PERMISSION_EXCEPTION_HTTP
+
+
+# @router.post("/register")
+# async def create_user(user_register: user_schemas.UserRegister, db=Depends(get_db)):
+#     try:
+#         user = await create_user_core(db, user_register)
+#         if user is None:
+#             raise Exception()
+#         return user_schemas.UserBase.from_orm(user)
+#     except Exception as e:
+#         logger.error(str(e))
+#         # traceback.print_stack()
+#         full_error =  ''
+#         # logger.error(full_error)
+
+#         return {'error': full_error}
+    
+
+# @router.put("/update_info")
+# async def update_info_user(user_edit: user_schemas.UserEdit, current_user = Depends(get_current_active_user), db=Depends(get_db)):
+#     pass
+#     # role_name = "admin"
+#     # is_authorized = authorize_user_by_role_name(db, current_user, role_name)
+#     # if is_authorized:
+#     #     user = crud_user.get_user_by_id(db, user_id)
+#     #     if user is not None:
+#     #         return user_schemas.UserBase.from_orm(user)
+#     #     else:
+#     #         raise HTTPException(
+#     #             status_code=status.HTTP_404_NOT_FOUND,
+#     #             detail=f"Can not find user with id = {user_id}",
+#     #             headers={"WWW-Authenticate": "Bearer"},
+#     #         ) 
+#     # else:
+#     #     raise PERMISSION_EXCEPTION
+
+
+
+# @router.delete("/delete_user/{user_id}")
+# async def delete_user_by_id(current_user = Depends(get_current_active_user), db=Depends(get_db)):
+#     pass

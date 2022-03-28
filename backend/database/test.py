@@ -1,4 +1,4 @@
-from database.models import *
+from database.db_models import *
 
 
 # db_session = DBSessionLocal().get_session()

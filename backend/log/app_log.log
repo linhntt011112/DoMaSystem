@@ -1,0 +1,8 @@
+2022-03-25 18:01:39.833 | INFO     | uvicorn.server:serve:84 - Started server process [55869]
+2022-03-25 18:01:39.833 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
+2022-03-25 18:01:39.834 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
+2022-03-25 18:01:39.835 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
+2022-03-25 18:01:42.041 | INFO     | uvicorn.server:shutdown:263 - Shutting down
+2022-03-25 18:01:42.142 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
+2022-03-25 18:01:42.143 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
+2022-03-25 18:01:42.143 | INFO     | uvicorn.server:serve:94 - Finished server process [55869]

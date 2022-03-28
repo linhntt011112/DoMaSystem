@@ -5,21 +5,21 @@ from .base import Base
 
 
 class GioiTinh:
-    type = bool
-    nam = True
-    nu = False
+    type = str
+    nam = "Nam"
+    nu = "Nu"
     
 
 class PhanQuyen:
-    type = bool
-    admin = True
-    user = False
+    type = str
+    admin = "admin"
+    user = "user"
     
 
 class TrangThaiLoaiCongVan:
-    type = bool
-    hoat_dong = True
-    khong_hoat_dong = False
+    type = str
+    hoat_dong = "hoat_dong"
+    khong_hoat_dong = "khong_hoat_dong"
   
   
 class PhongBan(Base):

@@ -1,36 +1,64 @@
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, APIRouter, Depends, Request, status
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+# # https://pawamoy.github.io/posts/unify-logging-for-a-gunicorn-uvicorn-app/
+import os
+import logging
+import sys
 
-from config import frontend_config
-from api import user, login
+from uvicorn import Config, Server
+from loguru import logger
+from config import server_config
+
+LOG_LEVEL = logging.getLevelName(os.environ.get("LOG_LEVEL", "DEBUG"))
+JSON_LOGS = True if os.environ.get("JSON_LOGS", "0") == "1" else False
 
 
-origins = [
-    frontend_config.URL,
-]
-app = FastAPI()
+class InterceptHandler(logging.Handler):
+    def emit(self, record):
+        # Get corresponding Loguru level if it exists
+        try:
+            level = logger.level(record.levelname).name
+        except ValueError:
+            level = record.levelno
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"], 
-    allow_headers=["*"],
-)
+        # Find caller from where originated the logged message
+        frame, depth = logging.currentframe(), 2
+        while frame.f_code.co_filename == logging.__file__:
+            frame = frame.f_back
+            depth += 1
 
-app_router = APIRouter(prefix='/api')
-app_router.include_router(user.router )
-app_router.include_router(login.router)
-app.include_router(app_router)
+        logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
 
-@app.exception_handler(RequestValidationError)
-async def validation_exception_handler(request: Request, exc: RequestValidationError):
 
-    exc_str = f'{exc}'.replace('\n', ' ').replace('   ', ' ')
-    # or logger.error(f'{exc}')
-    await request.json()
-    print((request.json(), exc_str))
-    content = {'status_code': 10422, 'message': exc_str, 'data': None}
-    return JSONResponse(content=content, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
+def setup_logging(log_file='log/app_log.log'):
+    # intercept everything at the root logger
+    # logger.remove()
+    logging.root.handlers = [InterceptHandler()]
+    logging.root.setLevel(LOG_LEVEL)
+
+    # remove every other logger's handlers
+    # and propagate to root logger
+    for name in logging.root.manager.loggerDict.keys():
+        logging.getLogger(name).handlers = []
+        logging.getLogger(name).propagate = True
+    
+    # configure loguru
+    sys.stdout.reconfigure(encoding='utf-8') 
+    logger.configure(handlers=[{"sink": sys.stdout, "serialize": JSON_LOGS}])
+    logger.add(log_file, rotation="50 MB", level=logging.INFO, encoding="utf8")
+    
+
+
+if __name__ == '__main__':
+    server = Server(
+        Config(
+            "app:app",
+            host=server_config.host,
+            port=server_config.port,
+            log_level=LOG_LEVEL,
+        ),
+    )
+
+    # setup logging last, to make sure no library overwrites it
+    # (they shouldn't, but it happens)
+    setup_logging()
+
+    server.run()

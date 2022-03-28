@@ -31,8 +31,8 @@ class NguoiDung(Base):
     dien_thoai = Column(String(15), nullable=True)
     email = Column(String(15), nullable=True)
     
-    phan_quyen = Column(Boolean, nullable=False)
-    gioi_tinh = Column(Boolean, nullable=True)
+    phan_quyen = Column(String(10), nullable=False)
+    gioi_tinh = Column(String(10), nullable=True)
     
     cccd = Column(String(15), nullable=False)
     ngay_cap = Column(Date, nullable=True)

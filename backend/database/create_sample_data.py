@@ -6,9 +6,9 @@ from sqlalchemy.schema import MetaData
 
 import os
 import timeit
-print(os.getcwd())
-from database.db import engine
-from database.models import *
+# print(os.getcwd())
+from database.db import engine, get_session
+from database.db_models import *
 import database.common_queries as  common_queries 
 from api.utils import Hasher
 
@@ -77,11 +77,13 @@ def create_sample_nguoi_dung():
             ),
     ]
 
-    common_queries.add_and_commit(nguoi_dung_s)
+    # common_queries.add_and_commit(nguoi_dung_s)
+    [common_queries.add_and_commit(get_session(), nguoi_dung) for nguoi_dung in nguoi_dung_s]
     
     
 def create_sample_loai_cong_van():
-    nguoi_dung_s = common_queries.query_all(NguoiDung)
+    session = get_session()
+    nguoi_dung_s = common_queries.query_all(session, NguoiDung)
     nguoi_dung_s = {nguoi_dung.ten_tai_khoan: nguoi_dung for nguoi_dung in nguoi_dung_s}
     
     loai_cong_van_s = [
@@ -98,14 +100,14 @@ def create_sample_loai_cong_van():
     ass_nguoi_dung_cong_van1.nguoi_ki = nguoi_dung_s['nta']
     loai_cong_van_s[0].nguoi_ki_s.append(ass_nguoi_dung_cong_van1)
 
-    common_queries.add_and_commit([loai_cong_van_s[0], ass_nguoi_dung_cong_van1])
+    [common_queries.add_and_commit(session, obj) for obj in [loai_cong_van_s[0], ass_nguoi_dung_cong_van1]]
 
 
 def run_all():
     print(timeit.timeit(lambda : drop_all_tables(), number=1))
     print(timeit.timeit(lambda : create_tables(), number=1))
     print(timeit.timeit(lambda : create_sample_nguoi_dung(), number=1))
-    # print(timeit.timeit(lambda : create_sample_loai_cong_van(), number=1))
+    print(timeit.timeit(lambda : create_sample_loai_cong_van(), number=1))
     # drop_all_tables()
     # create_tables()
     # create_sample_nguoi_dung()
