@@ -8,6 +8,10 @@
 }
 
 .comment-form-title {
-    font-size: 22px;
+    font-size: 16px;
   }
+
+.comments-container{
+  margin-top: 20px;
+}
 

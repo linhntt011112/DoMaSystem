@@ -2,7 +2,7 @@ import React from "react";
 import './congVanDiChiTiet.css';
 import { ArrowBack } from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
-import { ErrorOutlineRounded, Create, ContentPaste, AttachFile } from '@mui/icons-material';
+import { ErrorOutlineRounded, Create, ContentPaste, AttachFile, People } from '@mui/icons-material';
 import Comments from "../../comments/Comments";
 
 export default function CongVanDiChiTiet() {
@@ -158,7 +158,13 @@ export default function CongVanDiChiTiet() {
                         <a href="">https://luatminhkhue.vn/mau-mot-so-cong-van-thong-dung-hien-hanh---cach-huong-dan-viet-cong-van.aspx</a>
                     </div>
                 </div>
-                <Comments currentUserId="1"/>
+                <div className="commentsContainer">
+                    <div className="commentsTitle">
+                        <People style={{margin: '2px 5px 0 0'}}/> 
+                        <h5>Trao doi</h5>
+                    </div>
+                    <Comments currentUserId="1"/>
+                </div>
             </main>
         </div>
     )

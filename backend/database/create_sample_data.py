@@ -1,4 +1,4 @@
-# python -m database.create_sample_data.py
+# python -m database.create_sample_data
 import datetime
 
 from sqlalchemy.orm import session, sessionmaker
@@ -111,5 +111,4 @@ def run_all():
     # create_sample_nguoi_dung()
     # create_sample_loai_cong_van()
 
-if __name__ == "__main__":
-    run_all()
+run_all()
