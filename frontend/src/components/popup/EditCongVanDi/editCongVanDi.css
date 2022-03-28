@@ -1,0 +1,74 @@
+.cong-van-di-update{
+    flex: 2;
+}
+
+.cong-van-di-update-header{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+
+.cong-van-di-update-title{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.cong-van-di-update-body{
+    display: flex;
+}
+
+.cong-van-di-update-body-column-1{
+    float: left;
+    padding: 20px;
+}
+
+.cong-van-di-update-body-column-2{
+    float: left;
+    padding: 20px;
+}
+
+.cong-van-di-update-item{
+    display: flex;
+    margin-top: 10px;
+}
+
+.cong-van-di-update-item>label{
+    margin-top: 10px;
+    font-size: 14px;
+    margin-right: 5px;
+    float: left;
+    width: 35%;
+}
+
+.cong-van-di-update-input{
+    width: 250px;
+    height: 30px;
+    box-shadow: none;
+    font-size: 15px;
+}
+
+.cong-van-di-update-select{
+    width: 255px;
+    height: 35px;
+    box-shadow: none;
+    font-size: 15px;
+}
+
+.cong-van-di-update-footer{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.cong-van-di-update-button{
+    cursor: pointer;
+    background-color: #ff9b44;
+    border: 1px solid #ff9b44;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    min-width: 200px;
+    padding: 10px 20px;
+    color: white;
+}

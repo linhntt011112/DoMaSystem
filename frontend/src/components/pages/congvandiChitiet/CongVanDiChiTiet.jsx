@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import './congVanDiChiTiet.css';
 import { ArrowBack } from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
 import { ErrorOutlineRounded, Create, ContentPaste, AttachFile, People } from '@mui/icons-material';
 import Comments from "../../comments/Comments";
+import EditCongVanDi from "../../popup/EditCongVanDi/EditCongVanDi";
 
 export default function CongVanDiChiTiet() {
     let history = useHistory();
+    const [buttonPopup, setButtonPopup] = useState(false);
 
     return (
         <div className="PageChiTietCongVanDi">
@@ -14,7 +16,7 @@ export default function CongVanDiChiTiet() {
                 <div className="congVanDiTitleContainer">
                     <ArrowBack className='congVanDiTitleContainerIcon' onClick={() => history.goBack()} ></ArrowBack>
                     <h1 className='congVanDiTitle'>Thông tin chi tiết</h1>
-                    <button className='congVanDiEdit'>Chỉnh sửa</button>
+                    <button className='congVanDiEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
                 </div>
                 <div className="thongTinChungContainer">
                     <div className="thongTinChungColumn1">
@@ -166,6 +168,7 @@ export default function CongVanDiChiTiet() {
                     <Comments currentUserId="1"/>
                 </div>
             </main>
+            <EditCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup}></EditCongVanDi>
         </div>
     )
 }

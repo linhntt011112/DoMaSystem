@@ -10,9 +10,9 @@ const AdminRoute = ({component: Component, ...rest}) => {
     let history = useHistory();
 
     const allUserPermissions = new Set(['user', 'admin']);
-    if(!userPermission || !allUserPermissions.has(userPermission)) {
-        history.push('/login');
-    }
+    // if(!userPermission || !allUserPermissions.has(userPermission)) {
+    //     history.push('/login');
+    // }
 
     return (
         <Route {...rest} component = {props => {
