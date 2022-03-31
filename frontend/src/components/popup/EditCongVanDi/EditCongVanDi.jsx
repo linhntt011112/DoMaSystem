@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Close } from '@material-ui/icons';
 import "./editCongVanDi.css";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import BasicDatePicker from "../DatePicker/DatePicker";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState } from "draft-js";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import Button from '@material-ui/core/Button';
 
 export default function EditCongVanDi(props) {
+    const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+    );
+
     const handleSubmit = (e) => {
         e.preventDefault();
         // submitAddUser();
         props.setTrigger(false);
     }
+
+    useEffect(() => {
+        console.log(editorState);
+      }, [editorState]);
     
     return (props.trigger) ? (
         <div className="popup-main">
@@ -314,6 +326,35 @@ export default function EditCongVanDi(props) {
                             </div>
                         </div>
                     </div>
+                    <div className="cong-van-di-update-item-reasone">
+                        <label>
+                            Ly Do
+                        </label>
+                        <input
+                            type="text"
+                            value="3969"
+                            className='cong-van-di-update-input-reason'
+                            disabled
+                        />
+                    </div>
+                    <div className="cong-van-di-update-item-content">Noi dung</div>
+                    <div style={{ border: "1px solid black", padding: '2px', minHeight: '400px' }}>
+                        <Editor
+                            editorState={editorState}
+                            onEditorStateChange={setEditorState}
+                        />
+                    </div>
+                    <input
+                        type="file"
+                        accept="*"
+                        style={{ display: 'none' }}
+                        id="contained-button-file"
+                    />
+                    <label htmlFor="contained-button-file">
+                        <Button className="cong-van-di-update-button" variant="contained" color="primary" component="span">
+                            Tep dinh kem
+                        </Button>
+                    </label>
                     <div className='cong-van-di-update-footer'>
                         <button className='cong-van-di-update-button'>Cập nhật</button>
                     </div>

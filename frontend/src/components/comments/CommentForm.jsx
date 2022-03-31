@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./commentForm.css";
 import { Send } from '@mui/icons-material';
+import Button from '@material-ui/core/Button';
 
 const CommentForm = ({
     handleSubmit, 
@@ -24,8 +25,20 @@ const CommentForm = ({
                 onChange={(e) => setText(e.target.value)}
             />
             <div className="comment-form-buttons">
-                <button className="comment-form-button" disabled={isTextareaDisabled} onClick={onSubmit}>{submitLabel}</button>
-                <button type="button" className="comment-form-button">Dinh kem</button>
+                <Button className="comment-form-button" variant="contained" color="primary" component="span" disabled={isTextareaDisabled} onClick={onSubmit}>
+                    {submitLabel}
+                </Button>
+                <input
+                    type="file"
+                    accept="*"
+                    style={{ display: 'none' }}
+                    id="contained-button-file"
+                />
+                <label htmlFor="contained-button-file">
+                    <Button className="comment-form-button" variant="contained" color="primary" component="span">
+                        Dinh kem
+                    </Button>
+                </label>
                 {hasCancelButton && (
                     <button 
                         type="button" 

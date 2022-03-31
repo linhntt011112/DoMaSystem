@@ -5,20 +5,22 @@
     border: 1px solid rgb(107, 114, 12);
   }
 
-.comment-form-button {
-    font-size: 16px;
-    padding: 8px 16px;
-    background: rgb(59, 130, 246);
-    border-radius: 8px;
-    color: white;
-    margin-right: 5px;
+.comment-form-button{
+  font-size: 16px !important;
+  padding: 8px 16px !important;
+  background: rgb(59, 130, 246) !important;
+  border-radius: 8px !important;
+  color: white !important;
+  margin-right: 5px !important;
+  text-transform: capitalize !important;
 }
 
 .comment-form-button:disabled {
-    opacity: 0.7;
-    cursor: default;
+    opacity: 0.7 !important;
+    cursor: default !important;
   }
 
 .buttonIcon{
   font-size: 1.0rem !important;
 }
+
