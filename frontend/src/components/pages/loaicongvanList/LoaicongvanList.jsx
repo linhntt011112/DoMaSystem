@@ -24,7 +24,7 @@ export default function LoaicongvanList() {
 
     const columns = [
         { field: 'maloai', headerName: 'Mã loại', width: 100},
-        { field: 'loaicongvan', headerName: 'Loại công văn', flex: 1 },
+        { field: 'ten', headerName: 'Loại công văn', flex: 1 },
         {
             field: 'trangthai',
             headerName: 'Trạng thái',

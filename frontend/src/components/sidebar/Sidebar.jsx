@@ -54,7 +54,12 @@ export default function Sidebar() {
                     </ul>
                 </div>
                 <div className='sidebarMenu'>
-                    <h3 className='sidebarTitle'>Công văn đến</h3>
+                    <Link to={"/dashboard/cong-van-den/"} className='link'> 
+                        <h3 className='sidebarTitle'>
+                            <CallMade className='sidebarIcon'/>    
+                            Công văn đến
+                        </h3>
+                    </Link>
                     <ul className='sidebarList'>
                         <li className='sidebarListItem'>
                             <ChromeReaderMode className='sidebarIcon'/>
