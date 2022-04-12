@@ -11,6 +11,7 @@ import User from './components/pages/user/User';
 import LoaicongvanList from "./components/pages/loaicongvanList/LoaicongvanList";
 import CongvandiList from './components/pages/congvandiList/CongvandiList';
 import CongVanDiChiTiet from './components/pages/congvandiChitiet/CongVanDiChiTiet';
+import CongVanDenList from './components/pages/congvandenList/CongVanDenList';
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
             <AdminRoute exact path="/dashboard/loai-cong-van/" component={LoaicongvanList}/>
             <AdminRoute exact path="/dashboard/cong-van-di/" component={CongvandiList}/>
             <AdminRoute exact path="/dashboard/cong-van-di/:soCongVanDi" component={CongVanDiChiTiet}/>
+            <AdminRoute exact path="/dashboard/cong-van-den/" component={CongVanDenList}/>
           </Switch>
         </BrowserRouter>        
       </div>

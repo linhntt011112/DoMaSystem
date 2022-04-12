@@ -326,7 +326,7 @@ export default function EditCongVanDi(props) {
                             </div>
                         </div>
                     </div>
-                    <div className="cong-van-di-update-item-reasone">
+                    <div className="cong-van-di-update-item-reason">
                         <label>
                             Ly Do
                         </label>

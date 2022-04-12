@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import {Add, DeleteOutline} from "@material-ui/icons";
 import {Button} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
-import './CongvandiList.css';
-import {congvandiRows} from "../../../dummyCongVanDiData";
+import './congvandenlist.css';
+import {congvandenRows} from "../../../dummyCongVanDenData";
 import { Link } from "react-router-dom";
-import AddCongVanDi from "../../popup/AddCongVanDi/AddCongVanDi";
+import AddCongVanDen from "../../popup/AddCongVanDen/AddCongVanDen";
 import Dropdown from "../../dropdown/dropdown";
 import { loaicongvanRows } from "../../../dummyLoaiCongVanData";
 import { muc_do_khan_cap_Rows } from "../../../dummyMucDoKhanCapData";
 import { muc_do_bao_mat_Rows } from "../../../dummyMucDoBaoMatData";
 import { tinh_trang_xu_ly_Rows } from "../../../dummyTinhTrangXuLyData";
 
-export default function CongvandiList() {
+export default function CongVanDenList() {
     const [buttonPopup, setButtonPopup] = useState(false);
     const [value_loaicongvan, setValue_LoaiCongVan] = useState(null);
     const [value_mucdokhancap, setValue_MucDoKhanCap] = useState(null);
@@ -24,16 +24,16 @@ export default function CongvandiList() {
     };
 
     const columns = [
-        {field: 'so_cong_van_di', headerName: 'Số công văn đi', width: 100},
-        {field: 'ten_cong_van_di', headerName: 'Tên công văn đi', flex: 1},
+        {field: 'so_cong_van', headerName: 'Số công văn đi', width: 100},
+        {field: 'ten_cong_van', headerName: 'Tên công văn đi', flex: 1},
         {
-            field: 'nguoi_ky',
-            headerName: 'Người ký',
+            field: 'nguoi_nhan',
+            headerName: 'Người nhan',
             width: 150,
         },
         {
-            field: 'ngay_ky',
-            headerName: 'Ngày ký',
+            field: 'ngay_nhan',
+            headerName: 'Ngày nhan',
             width: 150,
         },
         {
@@ -58,10 +58,10 @@ export default function CongvandiList() {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Link to={"/dashboard/cong-van-di/"+params.row.so_cong_van_di} params={{id: params.row.so_cong_van_di}}>
-                            <button className='congVanDiListEdit'>Chi tiết</button>
+                        <Link to={"/dashboard/cong-van-den/"+params.row.so_cong_van} params={{id: params.row.so_cong_van}}>
+                            <button className='congVanDenListEdit'>Chi tiết</button>
                         </Link>
-                        <DeleteOutline className='congVanDiListDelete' onClick={()=>handleDelete(params.row.id)}/>
+                        <DeleteOutline className='congVanDenListDelete' onClick={()=>handleDelete(params.row.id)}/>
                     </>
 
                 )
@@ -69,12 +69,12 @@ export default function CongvandiList() {
         }
     ];
 
-    const [data, setData] = useState(congvandiRows);
+    const [data, setData] = useState(congvandenRows);
 
     return (
-        <div className='congVanDiList'>
+        <div className='congVanDenList'>
             <main>
-                <div className='congVanDiListTop'>
+                <div className='congVanDenListTop'>
                     <Button
                         className='buttonAddCongVan'
                         style={{
@@ -150,8 +150,8 @@ export default function CongvandiList() {
                     />
                 </div>
             </main>
-            <AddCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup}>
-            </AddCongVanDi>
+            <AddCongVanDen trigger={buttonPopup} setTrigger={setButtonPopup}>
+            </AddCongVanDen>
         </div>
     )
 }
