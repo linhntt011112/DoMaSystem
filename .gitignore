@@ -6,3 +6,4 @@ backend/database/models/__pycache__/
 **/__pycache__/
 frontend/node_venv/
 github_token.txt
+backend/log/app_log.log

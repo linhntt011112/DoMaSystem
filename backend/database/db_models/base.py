@@ -2,11 +2,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Boolean, Date, DateTime
 from sqlalchemy import ForeignKey, Sequence, UniqueConstraint, Table
 
-BM = declarative_base()
+Base = declarative_base()
 
-class Base(BM):
-    __tablename__ = 'base'
-    id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
     
 
 class SaveFile(Base):

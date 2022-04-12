@@ -43,7 +43,7 @@ class LoaiCongVan(Base):
     loai_cong_van = Column(String(100), nullable=False)
     trang_thai = Column(Boolean, nullable=False)
     
-    ma_nguoi_cap_nhat = Column(Integer, nullable=False)
+    ma_nguoi_cap_nhat = Column(Integer, ForeignKey('nguoi_dung.ma_nguoi_dung'), nullable=False)
     nguoi_cap_nhat = relationship('NguoiDung', backref="ki_loai_cong_van")
     
     mo_ta = Column(String(100), nullable=False)
@@ -69,10 +69,11 @@ class MucDoKhanCap(Base):
     
     
 class TraoDoi(Base):
-    __tablename__ = 'loai_cong_van'
+    __tablename__ = 'trao_doi'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
     noi_dung = Column(String(100), nullable=False)
-    ma_nguoi_tao =  Column(Integer, nullable=False)
+    
+    ma_nguoi_tao =  Column(Integer, ForeignKey('nguoi_dung.ma_nguoi_dung'), nullable=False)
     
     nguoi_tao = relationship('NguoiDung', backref='trao_doi')
     
@@ -92,7 +93,7 @@ class CongVanDi(Base):
     ma_phong_ban_phat_hanh = Column(Integer, nullable=False)
     ngay_phat_hanh = Column(Date, nullable=False)
     
-    ma_loai_cong_van = Column(Integer, nullable=False)
+    ma_loai_cong_van = Column(Integer, ForeignKey('loai_cong_van.ma_loai'), nullable=False)
     loai_cong_van = relationship('LoaiCongVan', backref="cong_van")
     
     trich_yeu_noi_dung = Column(String(100), nullable=True)
@@ -112,11 +113,12 @@ class CongVanDi(Base):
     ma_nguoi_tao = Column(Integer, nullable=False)
     ma_nguoi_duyet = Column(Integer, nullable=False)
     
+    ngay_tao = Column(Date, nullable=False)
     ngay_duyet = Column(Date, nullable=True)
 
 
 
 class CongVanDi_TraoDoi(Base):
     __tablename__ = 'associate_cong_van_di__trao_doi'
-    ma_cong_van_di = Column(Integer, nullable=False)
-    ma_trao_doi = Column(Integer, nullable=False)
+    ma_cong_van_di = Column(Integer,  primary_key=True, nullable=False)
+    ma_trao_doi = Column(Integer, primary_key=True, nullable=False)

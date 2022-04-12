@@ -609,95 +609,11 @@ AttributeError: 'NguoiDung' object has no attribute 'username'
 2022-03-28 23:57:50.900 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54232 - "GET /users/id/1 HTTP/1.1" 404
 2022-03-29 00:01:20.626 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54248 - "GET /users/id/1 HTTP/1.1" 404
 2022-03-29 00:01:20.945 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54252 - "GET /api/v1/user/id/1 HTTP/1.1" 200
-2022-03-31 22:24:52.989 | INFO     | uvicorn.server:serve:84 - Started server process [681]
-2022-03-31 22:24:52.990 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
-2022-03-31 22:24:52.991 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
-2022-03-31 22:24:52.991 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
-2022-03-31 22:25:02.578 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4NzQyMTAyfQ.ph2dxvFRx2HtGebyKZMOkwGgPp8ctJN2tj4pmQaxEl4
-2022-03-31 22:25:02.579 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40524 - "POST /api/v1/token HTTP/1.1" 200
-2022-03-31 22:25:11.396 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40530 - "OPTIONS /api/v1/user/list HTTP/1.1" 200
-2022-03-31 22:25:11.411 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40530 - "GET /api/v1/user/list HTTP/1.1" 200
-2022-03-31 23:08:33.751 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4NzQ0NzEzfQ.JPV2nCx8fvKMNrjdL3YbFSW3KO2mafd7kHHxrJeVXgY
-2022-03-31 23:08:33.752 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40622 - "POST /api/v1/token HTTP/1.1" 200
-2022-03-31 23:31:14.712 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40706 - "OPTIONS /api/v1/user/list HTTP/1.1" 200
-2022-03-31 23:31:14.735 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40706 - "GET /api/v1/user/list HTTP/1.1" 200
-2022-03-31 23:31:16.817 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40706 - "OPTIONS /api/v1/user/id/1 HTTP/1.1" 200
-2022-03-31 23:31:16.842 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40706 - "GET /api/v1/user/id/1 HTTP/1.1" 200
-2022-03-31 23:31:16.844 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40714 - "OPTIONS /users/id/1 HTTP/1.1" 200
-2022-03-31 23:31:16.848 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40714 - "GET /users/id/1 HTTP/1.1" 404
-2022-03-31 23:52:24.587 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4NzQ3MzQ0fQ.R9N3ZMjae2sPsZeiBHC7w3XJDelddusTtQsg7NoEfMs
-2022-03-31 23:52:24.589 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40802 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-01 00:06:28.565 | INFO     | uvicorn.server:shutdown:263 - Shutting down
-2022-04-01 00:06:28.666 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
-2022-04-01 00:06:28.668 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
-2022-04-01 00:06:28.670 | INFO     | uvicorn.server:serve:94 - Finished server process [681]
-2022-04-01 16:16:05.751 | INFO     | uvicorn.server:serve:84 - Started server process [726]
-2022-04-01 16:16:05.752 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
-2022-04-01 16:16:05.752 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
-2022-04-01 16:16:05.752 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
-2022-04-01 16:16:12.890 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4ODA2MzcyfQ.yYK7gnpG10BvYooYixd5pynsjFenUMdzzRZrOHv_Rz0
-2022-04-01 16:16:12.891 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:51080 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-02 21:43:18.123 | INFO     | uvicorn.server:serve:84 - Started server process [859]
-2022-04-02 21:43:18.125 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
-2022-04-02 21:43:18.125 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
-2022-04-02 21:43:18.126 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
-2022-04-02 21:43:23.357 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4OTEyNDAzfQ.l7ll4VQylzm6veSwP-uIQZIOJV70UEY95kyy7aXE9YU
-2022-04-02 21:43:23.358 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:42612 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-02 22:02:54.560 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:42664 - "OPTIONS /api/v1/user/list HTTP/1.1" 200
-2022-04-02 22:02:54.597 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:42664 - "GET /api/v1/user/list HTTP/1.1" 200
-2022-04-02 22:02:59.788 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:42666 - "OPTIONS /api/v1/user/id/1 HTTP/1.1" 200
-2022-04-02 22:02:59.800 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:42666 - "GET /api/v1/user/id/1 HTTP/1.1" 200
-2022-04-02 22:02:59.801 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:42668 - "OPTIONS /users/id/1 HTTP/1.1" 200
-2022-04-02 22:02:59.805 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:42668 - "GET /users/id/1 HTTP/1.1" 404
-2022-04-03 08:49:51.573 | INFO     | uvicorn.server:serve:84 - Started server process [720]
-2022-04-03 08:49:51.574 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
-2022-04-03 08:49:51.575 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
-2022-04-03 08:49:51.576 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
-2022-04-03 08:49:56.075 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ4OTUyMzk2fQ.djgbtiF5_aR-SmI0hoir9gPNEaPNrgIBMrd8mccF50g
-2022-04-03 08:49:56.076 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:50328 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-03 08:49:57.984 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:50328 - "OPTIONS /api/v1/user/list HTTP/1.1" 200
-2022-04-03 08:49:57.998 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:50328 - "GET /api/v1/user/list HTTP/1.1" 200
-2022-04-03 08:50:03.178 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:50334 - "OPTIONS /api/v1/user/id/1 HTTP/1.1" 200
-2022-04-03 08:50:03.194 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:50334 - "GET /api/v1/user/id/1 HTTP/1.1" 200
-2022-04-03 08:50:03.196 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:50336 - "OPTIONS /users/id/1 HTTP/1.1" 200
-2022-04-03 08:50:03.201 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:50336 - "GET /users/id/1 HTTP/1.1" 404
-2022-04-03 08:50:09.236 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:50338 - "GET /api/v1/user/list HTTP/1.1" 200
-2022-04-05 22:21:36.105 | INFO     | uvicorn.server:serve:84 - Started server process [640]
-2022-04-05 22:21:36.106 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
-2022-04-05 22:21:36.106 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
-2022-04-05 22:21:36.107 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
-2022-04-05 22:21:40.623 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ5MTczOTAwfQ.NXenlKC0bXPmrhPJRoFksS_L_2jiR50MCahSuEACk4I
-2022-04-05 22:21:40.624 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:42486 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-05 23:24:29.629 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ5MTc3NjY5fQ.hZ5mGgTcd-ECR67D7Rb1n8r0bheTouDZiQZ-xTrlnQE
-2022-04-05 23:24:29.630 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:42562 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-05 23:43:36.226 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ5MTc4ODE2fQ.hDS8gyBlnRJ_lJNwBtzvtuUmxBLSSrOdlbpc0IelXEM
-2022-04-05 23:43:36.226 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:42634 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-06 00:01:26.017 | INFO     | uvicorn.server:shutdown:263 - Shutting down
-2022-04-06 00:01:26.119 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
-2022-04-06 00:01:26.120 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
-2022-04-06 00:01:26.120 | INFO     | uvicorn.server:serve:94 - Finished server process [640]
-2022-04-08 09:45:29.230 | INFO     | uvicorn.server:serve:84 - Started server process [698]
-2022-04-08 09:45:29.231 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
-2022-04-08 09:45:29.231 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
-2022-04-08 09:45:29.232 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
-2022-04-08 09:45:32.626 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ5Mzg3NzMyfQ.yhwp0jetFCIJtaNkdLnFXIGXyQuIOMmL7CNIS9OaGeI
-2022-04-08 09:45:32.626 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:58272 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-08 10:31:34.813 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ5MzkwNDk0fQ.LZBRPHC-h-nlxwCwGNDajbLNp89ZKr36F19O1QqrfII
-2022-04-08 10:31:34.814 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:58360 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-08 11:05:03.309 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ5MzkyNTAzfQ.Cl2ePgrQwUTJoBP9aSQzEu21ANGqj8_LiOMELWINw2c
-2022-04-08 11:05:03.310 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:58468 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-08 11:53:37.398 | INFO     | uvicorn.server:shutdown:263 - Shutting down
-2022-04-08 11:53:37.500 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
-2022-04-08 11:53:37.503 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
-2022-04-08 11:53:37.504 | INFO     | uvicorn.server:serve:94 - Finished server process [698]
-2022-04-09 22:04:35.781 | INFO     | uvicorn.server:serve:84 - Started server process [1126]
-2022-04-09 22:04:35.782 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
-2022-04-09 22:04:35.783 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
-2022-04-09 22:04:35.783 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
-2022-04-09 22:04:42.405 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ5NTE4NDgyfQ.5G-X7jyuA3VL0e8u8cOn7-fxCh0zz3oCnG5WDOZbUdY
-2022-04-09 22:04:42.406 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:40978 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-09 22:42:23.351 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:41112 - "OPTIONS /api/v1/user/list HTTP/1.1" 200
-2022-04-09 22:42:23.357 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:41112 - "GET /api/v1/user/list HTTP/1.1" 401
-2022-04-09 22:46:07.177 | INFO     | api.login:login_for_access_token:51 - username: nta ; token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJudGEiLCJwZXJtaXNzaW9ucyI6ImFkbWluIiwiZXhwIjoxNjQ5NTIwOTY3fQ.O4kamDGfIrPqQ2KVP5U6zZNjogwa91-CL5-nC0vl-4Q
-2022-04-09 22:46:07.178 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:41130 - "POST /api/v1/token HTTP/1.1" 200
-2022-04-09 22:46:10.723 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:41130 - "GET /api/v1/user/list HTTP/1.1" 200
+2022-04-12 16:49:27.706 | INFO     | uvicorn.server:serve:84 - Started server process [54139]
+2022-04-12 16:49:27.712 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
+2022-04-12 16:49:27.712 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
+2022-04-12 16:49:27.714 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
+2022-04-12 16:49:31.526 | INFO     | uvicorn.server:shutdown:263 - Shutting down
+2022-04-12 16:49:31.628 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
+2022-04-12 16:49:31.629 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
+2022-04-12 16:49:31.629 | INFO     | uvicorn.server:serve:94 - Finished server process [54139]

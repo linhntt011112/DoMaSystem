@@ -83,24 +83,24 @@ def create_sample_nguoi_dung():
     
 def create_sample_loai_cong_van():
     session = get_session()
-    nguoi_dung_s = common_queries.query_all(session, NguoiDung)
-    nguoi_dung_s = {nguoi_dung.ten_tai_khoan: nguoi_dung for nguoi_dung in nguoi_dung_s}
+    # nguoi_dung_s = common_queries.query_all(session, NguoiDung)
+    # nguoi_dung_s = {nguoi_dung.ten_tai_khoan: nguoi_dung for nguoi_dung in nguoi_dung_s}
     
-    loai_cong_van_s = [
-        LoaiCongVan(
-            loai_cong_van = 'loai 1',
-            trang_thai = TrangThaiLoaiCongVan.hoat_dong,
-            ngay_cap_nhat = datetime.datetime(2022, 2, 24),
-            ma_nguoi_cap_nhat = nguoi_dung_s['nta'].ma_nguoi_dung,
-            mo_ta = 'chua co gi',
-            ),
-    ]
+    # loai_cong_van_s = [
+    #     LoaiCongVan(
+    #         loai_cong_van = 'loai 1',
+    #         trang_thai = TrangThaiLoaiCongVan.hoat_dong,
+    #         ngay_cap_nhat = datetime.datetime(2022, 2, 24),
+    #         ma_nguoi_cap_nhat = nguoi_dung_s['nta'].ma_nguoi_dung,
+    #         mo_ta = 'chua co gi',
+    #         ),
+    # ]
     
-    ass_nguoi_dung_cong_van1 = AssociationNguoiKiCongVan()
-    ass_nguoi_dung_cong_van1.nguoi_ki = nguoi_dung_s['nta']
-    loai_cong_van_s[0].nguoi_ki_s.append(ass_nguoi_dung_cong_van1)
-
-    [common_queries.add_and_commit(session, obj) for obj in [loai_cong_van_s[0], ass_nguoi_dung_cong_van1]]
+    # ass_nguoi_dung_cong_van1 = AssociationNguoiKiCongVan()
+    # ass_nguoi_dung_cong_van1.nguoi_ki = nguoi_dung_s['nta']
+    # loai_cong_van_s[0].nguoi_ki_s.append(ass_nguoi_dung_cong_van1)
+    #
+    # [common_queries.add_and_commit(session, obj) for obj in [loai_cong_van_s[0], ass_nguoi_dung_cong_van1]]
 
 
 def run_all():
