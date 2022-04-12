@@ -609,3 +609,11 @@ AttributeError: 'NguoiDung' object has no attribute 'username'
 2022-03-28 23:57:50.900 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54232 - "GET /users/id/1 HTTP/1.1" 404
 2022-03-29 00:01:20.626 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54248 - "GET /users/id/1 HTTP/1.1" 404
 2022-03-29 00:01:20.945 | INFO     | uvicorn.protocols.http.h11_impl:send:438 - 127.0.0.1:54252 - "GET /api/v1/user/id/1 HTTP/1.1" 200
+2022-04-12 16:49:27.706 | INFO     | uvicorn.server:serve:84 - Started server process [54139]
+2022-04-12 16:49:27.712 | INFO     | uvicorn.lifespan.on:startup:45 - Waiting for application startup.
+2022-04-12 16:49:27.712 | INFO     | uvicorn.lifespan.on:startup:59 - Application startup complete.
+2022-04-12 16:49:27.714 | INFO     | uvicorn.server:_log_started_message:217 - Uvicorn running on http://0.0.0.0:3009 (Press CTRL+C to quit)
+2022-04-12 16:49:31.526 | INFO     | uvicorn.server:shutdown:263 - Shutting down
+2022-04-12 16:49:31.628 | INFO     | uvicorn.lifespan.on:shutdown:64 - Waiting for application shutdown.
+2022-04-12 16:49:31.629 | INFO     | uvicorn.lifespan.on:shutdown:75 - Application shutdown complete.
+2022-04-12 16:49:31.629 | INFO     | uvicorn.server:serve:94 - Finished server process [54139]
