@@ -12,6 +12,8 @@ import LoaicongvanList from "./components/pages/loaicongvanList/LoaicongvanList"
 import CongvandiList from './components/pages/congvandiList/CongvandiList';
 import CongVanDiChiTiet from './components/pages/congvandiChitiet/CongVanDiChiTiet';
 import CongVanDenList from './components/pages/congvandenList/CongVanDenList';
+import CongVanDenChiTiet from './components/pages/congvandenChitiet/CongVanDenChiTiet';
+import DMSCalendar from './components/pages/calendar/DMSCalendar';
 
 const App = () => {
 
@@ -29,6 +31,8 @@ const App = () => {
             <AdminRoute exact path="/dashboard/cong-van-di/" component={CongvandiList}/>
             <AdminRoute exact path="/dashboard/cong-van-di/:soCongVanDi" component={CongVanDiChiTiet}/>
             <AdminRoute exact path="/dashboard/cong-van-den/" component={CongVanDenList}/>
+            <AdminRoute exact path="/dashboard/cong-van-den/:socongvan" component={CongVanDenChiTiet}/>
+            <AdminRoute exact path="/dashboard/calendar" component={DMSCalendar}/>
           </Switch>
         </BrowserRouter>        
       </div>

@@ -139,7 +139,7 @@ export default function CongvandiList() {
                     <button className="dropdown-button">Loc</button>
                 </div>
                 
-                <div style={{ height: 'calc(100vh - 110px)' }}>
+                <div style={{ height: 'calc(100vh - 200px)' }}>
                     <DataGrid
                         rows={data}
                         disableSelectionOnClick

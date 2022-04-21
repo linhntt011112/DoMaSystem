@@ -24,8 +24,8 @@ export default function CongVanDenList() {
     };
 
     const columns = [
-        {field: 'so_cong_van', headerName: 'Số công văn đi', width: 100},
-        {field: 'ten_cong_van', headerName: 'Tên công văn đi', flex: 1},
+        {field: 'so_cong_van', headerName: 'Số công văn', width: 110},
+        {field: 'ten_cong_van', headerName: 'Tên công văn', flex: 1},
         {
             field: 'nguoi_nhan',
             headerName: 'Người nhan',
@@ -139,7 +139,7 @@ export default function CongVanDenList() {
                     <button className="dropdown-button">Loc</button>
                 </div>
                 
-                <div style={{ height: 'calc(100vh - 110px)' }}>
+                <div style={{ height: 'calc(100vh - 200px)' }}>
                     <DataGrid
                         rows={data}
                         disableSelectionOnClick

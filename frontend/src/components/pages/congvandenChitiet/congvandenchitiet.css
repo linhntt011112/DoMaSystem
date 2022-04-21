@@ -1,0 +1,132 @@
+.page-chi-tiet-cong-van-den{
+    flex: 5;
+    padding: 20px;
+}
+
+.cong-van-den-title-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.cong-van-den-title-container-icon{
+    cursor: pointer;
+}
+
+.cong-van-di-edit{
+    margin-right: 30px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color: white;
+    cursor: pointer;
+}
+
+.thong-tin-chung-container{
+    display: flex;
+}
+
+.thong-tin-chung-column-1{
+    float: left;
+    width: 80%;
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+
+.column-1-title{
+    color: #1f1f1f;
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+}
+
+.column-children-1{
+    float: left;
+    width: 75%;
+}
+
+.column-children-1-title{
+    color: #4f4f4f;
+    font-weight: bold;
+    margin: 20px 0px 0px 0px;
+    float: left;
+    width: 25%;
+}
+
+.column-children-1-info{
+    margin: 20px 0px 0px 0px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    float: left;
+    width: 60%;
+}
+
+.column-children-2{
+    float: left;
+    width: 25%;
+}
+
+.column-children-2-title{
+    float: left;
+    width: 65%;
+    color: #4f4f4f;
+    font-weight: bold;
+    margin: 20px 0px 0px 0px;
+}
+
+.column-children-2-info{
+    margin: 20px 0px 0px 0px;
+    float: left;
+    width: 35%;
+}
+
+.thong-tin-chung-column-2{
+    float: left;
+    width: 30%;
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+
+.column-2-title{
+    color: #4f4f4f;
+    font-weight: bold;
+    margin: 0px 0px 20px 0px;
+    float: left;
+    width: 40%;
+}
+
+.column-2-info{
+    margin: 0px 0px 20px 0px;
+}
+
+.trich-dan-container{
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+
+.trich-dan-title{
+    color: #1f1f1f;
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+}
+
+.trich-dan-info{
+    margin: 10px 0px 10px 10px;
+}
+
+.comments-container{
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+
+.comments-title{
+    color: #1f1f1f;
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+}

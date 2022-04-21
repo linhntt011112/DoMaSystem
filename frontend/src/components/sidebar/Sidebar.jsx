@@ -1,6 +1,6 @@
 import React from 'react'
 import './sidebar.css'
-import { TrendingUp, Group, Assignment, CallMade, ChromeReaderMode, PriorityHigh, Security } from '@material-ui/icons'
+import { TrendingUp, Group, Assignment, CallMade, CalendarToday } from '@material-ui/icons'
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -30,28 +30,6 @@ export default function Sidebar() {
                             Công văn đi
                         </h3>
                     </Link>
-                    <ul className='sidebarList'>
-                        <li className='sidebarListItem'>
-                            <ChromeReaderMode className='sidebarIcon'/>
-                            Tất cả công văn
-                        </li>
-                        <li className='sidebarListItem'>
-                            <Assignment className='sidebarIcon'/>
-                            Loại công văn
-                        </li>
-                        <li className='sidebarListItem'>
-                            <PriorityHigh className='sidebarIcon'/>
-                            Mức độ khẩn cấp
-                        </li>
-                        <li className='sidebarListItem'>
-                            <Security className='sidebarIcon'/>
-                            Mức độ bảo mật
-                        </li>
-                        <li className='sidebarListItem'>
-                            <TrendingUp className='sidebarIcon'/>
-                            Tình trạng xử lý
-                        </li>
-                    </ul>
                 </div>
                 <div className='sidebarMenu'>
                     <Link to={"/dashboard/cong-van-den/"} className='link'> 
@@ -60,28 +38,14 @@ export default function Sidebar() {
                             Công văn đến
                         </h3>
                     </Link>
-                    <ul className='sidebarList'>
-                        <li className='sidebarListItem'>
-                            <ChromeReaderMode className='sidebarIcon'/>
-                            Tất cả công văn
-                        </li>
-                        <li className='sidebarListItem'>
-                            <Assignment className='sidebarIcon'/>
-                            Loại công văn
-                        </li>
-                        <li className='sidebarListItem'>
-                            <PriorityHigh className='sidebarIcon'/>
-                            Mức độ khẩn cấp
-                        </li>
-                        <li className='sidebarListItem'>
-                            <Security className='sidebarIcon'/>
-                            Mức độ bảo mật
-                        </li>
-                        <li className='sidebarListItem'>
-                            <TrendingUp className='sidebarIcon'/>
-                            Tình trạng xử lý
-                        </li>
-                    </ul>
+                </div>
+                <div className='sidebarMenu'>
+                    <Link to={"/dashboard/calendar/"} className='link'> 
+                        <h3 className='sidebarTitle'>
+                            <CalendarToday className='sidebarIcon'/>    
+                            Lịch
+                        </h3>
+                    </Link>
                 </div>
             </div>
         </div>
