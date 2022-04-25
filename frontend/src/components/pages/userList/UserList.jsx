@@ -72,7 +72,7 @@ export default function UserList(props) {
         <div className='userList'>
             <main>
                 <div className='userListTop'>
-                    <h2 className='userListTitle'>Danh sách nhân viên</h2>
+                    <h1 className='userListTitle'>Danh sách nhân viên</h1>
                     <Button
                         className='userAddButton'
                         style={{

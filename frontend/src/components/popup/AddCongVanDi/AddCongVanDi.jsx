@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Close } from '@material-ui/icons';
 import "./addCongVanDi.css";
-import BasicDatePicker from "../DatePicker/DatePicker";
+import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
