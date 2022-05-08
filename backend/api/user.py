@@ -17,7 +17,7 @@ from database.crud import user as crud_user
 from database.schemas import nguoi_dung as user_schemas
 
 from .utils import Hasher
-from .exceptions import PERMISSION_EXCEPTION_HTTP, RESOURCE_NOT_FOUND_EXCEPTION_HTTP
+from .import exceptions
 from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from .core.user import (
     get_current_user, get_current_active_user,
@@ -43,7 +43,7 @@ async def get_list_users(current_user:db_models.NguoiDung = Depends(get_current_
         users = crud_user.select_list_user(db, limit=limit, offset=offset)
         return [user_schemas.UserBase.from_orm(user) for user in users]
     else:
-        raise PERMISSION_EXCEPTION_HTTP
+        raise exceptions.PERMISSION_EXCEPTION()
 
 
 @router.get("/id/{user_id}")
@@ -53,9 +53,9 @@ async def get_user_by_id(user_id: int, current_user = Depends(get_current_active
         if user is not None:
             return user_schemas.UserBase.from_orm(user)
         else:
-            raise RESOURCE_NOT_FOUND_EXCEPTION_HTTP
+            raise exceptions.NOT_FOUND_EXCEPTION()
     else:
-        raise PERMISSION_EXCEPTION_HTTP
+        raise exceptions.PERMISSION_EXCEPTION()
 
 
 # @router.post("/register")

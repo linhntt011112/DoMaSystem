@@ -11,7 +11,7 @@ from . import exceptions
 
 
 def get_user_by_ten_tai_khoan(db, ten_tai_khoan):
-    user = common_queries.query_filter(db, db_models.NguoiDung, db_models.NguoiDung.ten_tai_khoan==ten_tai_khoan)
+    user = common_queries.query_filter(db, db_models.NguoiDung, (db_models.NguoiDung.ten_tai_khoan==ten_tai_khoan))
     if len(user) >= 1:
         return user[0]
     else:
@@ -23,7 +23,7 @@ def get_user(db, ten_tai_khoan: str=None):
 
 
 def get_user_by_id(db, user_id):
-    user = common_queries.query_filter(db, db_models.NguoiDung, condition=(db_models.NguoiDung.ma_nguoi_dung == user_id))
+    user = common_queries.query_filter(db, db_models.NguoiDung, condition=(db_models.NguoiDung.id == user_id))
     if len(user) >= 1:
         return user[0]
     else:
@@ -67,7 +67,7 @@ def select_list_user(db, **kwargs):
 
 
 def delete_user_by_id(db, user_id: int):
-    user = common_queries.query_filter(db, db_models.NguoiDung, condition=(db_models.NguoiDung==user_id))
+    user = common_queries.query_filter(db, db_models.NguoiDung, condition=(db_models.NguoiDung.id==user_id))
     if len(user) == 0:
         return False
     
