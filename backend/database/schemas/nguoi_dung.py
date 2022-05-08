@@ -7,7 +7,7 @@ from database.db_models import PhanQuyen, GioiTinh
 
 
 class UserBase(BaseModel):
-    ma_nguoi_dung: int
+    id: int
     ho_ten: str
     ten_tai_khoan: str
     password: Optional[str] = None

@@ -19,7 +19,7 @@ from .base import Base
     
 class NguoiDung(Base):
     __tablename__ = 'nguoi_dung'
-    ma_nguoi_dung = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
+    id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
     ho_ten = Column(String(50), nullable=False)
     ten_tai_khoan = Column(String(50), nullable=False)
     password = Column(String(64), nullable=False)
