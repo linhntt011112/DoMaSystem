@@ -75,7 +75,6 @@
     position: absolute; 
     bottom: 0; 
     width: 100%;
-    background-color: antiquewhite;
 }
 
 .navigation-logout-button{
@@ -85,10 +84,11 @@
     margin: 5px;
     color: white;
     width: 25px;
-    background-color: antiquewhite;
     transition: width .35s;
     -webkit-transition: width .35s;
     overflow: hidden;
+    margin-left: 20px;
+    margin-bottom: 15px;
 }
 
 .navigation-logout-button:hover{

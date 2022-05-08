@@ -13,11 +13,11 @@ export default function UserList(props) {
     const [buttonPopup, setButtonPopup] = useState(false);
 
     const handleDelete = (id)=>{
-        setTableData(tableData.filter(item=>item.ma_nguoi_dung !== id));
+        setTableData(tableData.filter(item=>item.id !== id));
     };
 
     const columns = [
-        { field: 'ma_nguoi_dung', headerName: 'ID', width: 100 },
+        { field: 'id', headerName: 'ID', width: 100 },
         { field: 'ho_ten', headerName: 'Họ và tên', flex: 1, renderCell: (params)=>{
             return (
                 <div className="userListUser">
@@ -49,10 +49,10 @@ export default function UserList(props) {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Link to={"/dashboard/user/"+params.row.ma_nguoi_dung} params={{id: params.row.ma_nguoi_dung}}>
+                        <Link to={"/dashboard/user/"+params.row.id} params={{id: params.row.id}}>
                             <button className='userListEdit'>Chi tiết</button>
                         </Link>       
-                        <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.ma_nguoi_dung)}/>
+                        <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.id)}/>
                     </>
                     
                 )
@@ -94,7 +94,7 @@ export default function UserList(props) {
                 </div>
                 <div style={{ height: 'calc(100vh - 170px)' }}>
                     <DataGrid
-                        getRowId={(r) => r.ma_nguoi_dung}
+                        getRowId={(r) => r.id}
                         rows={tableData}
                         disableSelectionOnClick
                         columns={columns}

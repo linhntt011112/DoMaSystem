@@ -7,19 +7,9 @@ import { Close } from '@material-ui/icons';
 import * as backend_config from "../../../config/backend"
 
 export default function EditUserPopup(props) {
-    const token = props.token;
-
-    const { userId } = useParams();
-
-    const [userData, setUserData] = useState("");
+    const {userData} = props
 
     const [phan_quyen, setPhanQuyen] = React.useState(false);
-
-    useEffect(() => {
-        backend_config.makeRequest("GET", backend_config.USER_GET_BY_ID_API.replace('{id}', userId), token)
-          .then((data) => data.json())
-          .then((data) => setUserData(data))
-    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();

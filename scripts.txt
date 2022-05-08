@@ -1,3 +1,8 @@
  source backend/venv/bin/activate # run python venv
 
 . node_venv/bin/activate  # run node venv (in frontend)
+
+
+docker exec -it DMS-mysql-container /bin/bash
+mysql -uadmin -p123456
+use DMS;

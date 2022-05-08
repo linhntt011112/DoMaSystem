@@ -1,11 +1,9 @@
 import React from 'react'
 import "./topbar.css"
-import { NotificationsNone, Language, Settings, Search } from '@material-ui/icons';
+import { NotificationsNone} from '@material-ui/icons';
 import Logo from '../../img/logo_4.png';
-import { useHistory } from 'react-router-dom';
 
 export default function Topbar({user, setToken}) {
-    let history = useHistory();
     console.log(user);
 
     return (
@@ -21,26 +19,11 @@ export default function Topbar({user, setToken}) {
                 </div>
                 
                 <ul className="topRight">
-                    <li className='top-nav-search'>
-                        <form>
-                            <input className='form-control' type="text" placeholder='Search here'></input>
-                            <button className='btn' type='Submit'>
-                                <Search />
-                            </button>
-                        </form>
-                    </li>
                     <li className='topbarIconContainer'>
                         <div class="dropdown-toggle nav-link">
                             <NotificationsNone/>
                             <span className='topIconBadge'>2</span>
                         </div>
-                    </li>
-                    <li className='topbarIconContainer'>
-                        <Language />
-                        <span className='topIconBadge'>2</span>
-                    </li>
-                    <li className='topbarIconContainer'>
-                        <Settings />
                     </li>
                     <li>
                         <div className='user-current'>

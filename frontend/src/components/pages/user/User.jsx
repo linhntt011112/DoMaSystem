@@ -26,7 +26,14 @@ export default function User(props) {
                 <div className='userTitleContainer'>
                     <ArrowBack className='userTitleContainerIcon' onClick={() => history.goBack()} ></ArrowBack>
                     <h1 className='userTitle'>Thông tin chi tiết</h1>
-                    <button className='profileEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
+                    {userData !== "" &&
+                    <div>
+                        <button className='profileEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
+                        <EditUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData}>
+                        </EditUserPopup>
+                        </div>
+                    }
+                    
                 </div>
                 <div className='userContainer'>
                     <div className='userShow'>
@@ -124,8 +131,7 @@ export default function User(props) {
                     </div>
                 </div>
             </main>
-            <EditUserPopup trigger={buttonPopup} setTrigger={setButtonPopup}>
-            </EditUserPopup>
+            
         </div>
     )
 }
