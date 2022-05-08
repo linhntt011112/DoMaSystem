@@ -8,13 +8,6 @@ export default function Topbar({user, setToken}) {
     let history = useHistory();
     console.log(user);
 
-    const handleLogoutClick = () => {
-    
-        setToken(null);
-        history.push("/login");
-      };
-
-
     return (
         <div className='topbar'>  
             <div className="topbarWrapper">
@@ -25,7 +18,6 @@ export default function Topbar({user, setToken}) {
                     <div className='page-title-box'>
                         <h3>Documentary Management System</h3>
                     </div>
-                    <button onClick={handleLogoutClick}> Logout</button>
                 </div>
                 
                 <ul className="topRight">

@@ -62,6 +62,7 @@ export default function EditLoaiCongVan(props) {
                                         id="demo-simple-select"
                                         defaultValue={1}
                                         onChange={handleChangeLoaiTrangThai}
+                                        style={{height: '36px'}}
                                     >
                                         <MenuItem value={1}>Hoạt động 1</MenuItem>
                                         <MenuItem value={2}>Hoạt động 2</MenuItem>

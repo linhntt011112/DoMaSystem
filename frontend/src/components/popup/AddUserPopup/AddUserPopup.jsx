@@ -2,21 +2,20 @@ import React, { useState } from 'react'
 import "./addUserPopup.css";
 import {Col, Container, Row} from "react-bootstrap";
 import {Checkbox, FormControlLabel, Box, FormControl, Select, MenuItem} from "@mui/material";
-import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
 import { Close } from '@material-ui/icons';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default function AddUserPopup(props) {
-    const [loaiChucVu, setLoaiChucVu] = React.useState('');
-    const [loaiPhongBan, setLoaiPhongBan] = React.useState('');
-    const [loaiHocVan, setLoaiHocVan] = React.useState('');
-    const [loaiDanToc, setLoaiDanToc] = React.useState('');
-    const [loaiQuocTich, setLoaiQuocTich] = React.useState('');
-    const [loaiTonGiao, setLoaiTonGiao] = React.useState('');
+    const [chuc_vu, setLoaiChucVu] = React.useState('');
+    const [phong_ban, setLoaiPhongBan] = React.useState('');
+    const [hoc_van, setLoaiHocVan] = React.useState('');
+    const [dan_toc, setLoaiDanToc] = React.useState('');
+    const [quoc_tich, setLoaiQuocTich] = React.useState('');
+    const [ton_giao, setLoaiTonGiao] = React.useState('');
     const [ho_va_ten, setHoVaTen] = useState("");
     const [ten_tai_khoan, setTenTaiKhoan] = useState("");
-    const [gioi_tinh, setGioiTinh] = useState("");
+    const [gioi_tinh, setGioiTinh] = useState(false);
     const [phan_quyen, setPhanQuyen] = useState(false);
     const [dien_thoai, setDienThoai] = useState("");
     const [email, setEmail] = useState("");
@@ -66,14 +65,28 @@ export default function AddUserPopup(props) {
     }
 
     const submitAddUser = async() => {
-        console.log(ho_va_ten);
-        console.log(ten_tai_khoan);
-        console.log(loaiPhongBan);
-        console.log(phan_quyen);
-        console.log(ngay_sinh);
-        console.log(ngay_vao_lam);
-        console.log(loaiChucVu);
-        console.log(tk_ngan_hang);
+        let form = new FormData();
+        form.append("ho_va_ten", ho_va_ten);
+        form.append("ten_tai_khoan", ten_tai_khoan);
+        form.append("gioi_tinh", gioi_tinh);
+        form.append("phan_quyen", phan_quyen);
+        form.append("dien_thoai", dien_thoai);
+        form.append("email", email);
+        form.append("ngay_sinh", ngay_sinh);
+        form.append("cccd", cccd);
+        form.append("ngay_cap", ngay_cap);
+        form.append("noi_cap", noi_cap);
+        form.append("dia_chi", dia_chi);
+        form.append("que_quan", que_quan);
+        form.append("ngay_vao_lam", ngay_vao_lam);
+        form.append("phong_ban", phong_ban);
+        form.append("chuc_vu", chuc_vu);
+        form.append("tk_ngan_hang", tk_ngan_hang);
+        form.append("ngan_hang", ngan_hang);
+        form.append("hoc_van", hoc_van);
+        form.append("dan_toc", dan_toc);
+        form.append("quoc_tich", quoc_tich);
+        form.append("ton_giao", ton_giao);
     }
    
     return (props.trigger) ? (
@@ -272,7 +285,7 @@ export default function AddUserPopup(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={loaiPhongBan}
+                                            value={phong_ban}
                                             onChange={handleChangeLoaiPhongBan}
                                             style={{height: '35px'}}
                                         >
@@ -294,7 +307,7 @@ export default function AddUserPopup(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={loaiChucVu}
+                                            value={chuc_vu}
                                             onChange={handleChangeLoaiChucVu}
                                             style={{height: '35px'}}
                                         >
@@ -342,7 +355,7 @@ export default function AddUserPopup(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={loaiHocVan}
+                                            value={hoc_van}
                                             onChange={handleChangeLoaiHocVan}
                                             style={{height: '35px'}}
                                         >
@@ -366,7 +379,7 @@ export default function AddUserPopup(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={loaiDanToc}
+                                            value={dan_toc}
                                             onChange={handleChangeLoaiDanToc}
                                             style={{height: '35px'}}
                                         >
@@ -388,7 +401,7 @@ export default function AddUserPopup(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={loaiQuocTich}
+                                            value={quoc_tich}
                                             onChange={handleChangeLoaiQuocTich}
                                             style={{height: '35px'}}
                                         >
@@ -410,7 +423,7 @@ export default function AddUserPopup(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={loaiTonGiao}
+                                            value={ton_giao}
                                             onChange={handleChangeLoaiTonGiao}
                                             style={{height: '35px'}}
                                         >

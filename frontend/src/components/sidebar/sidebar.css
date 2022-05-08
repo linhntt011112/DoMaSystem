@@ -70,3 +70,50 @@
         flex: 1;
     }
 }
+
+.navigation-logout{
+    position: absolute; 
+    bottom: 0; 
+    width: 100%;
+    background-color: antiquewhite;
+}
+
+.navigation-logout-button{
+    text-decoration: none;
+    float: left;
+    padding: 10px;
+    margin: 5px;
+    color: white;
+    width: 25px;
+    background-color: antiquewhite;
+    transition: width .35s;
+    -webkit-transition: width .35s;
+    overflow: hidden;
+}
+
+.navigation-logout-button:hover{
+    width: 100px;
+}
+
+.navigation-logout-button:hover .navigation-logout-text{
+    opacity: .9;
+}
+
+.navigation-logout-img{
+    width: 30px;
+    border-radius: 50px;
+    float: left;
+}
+
+.navigation-logout-text{
+    font-size: .8em;
+    font-family: 'Oswald', sans-serif;
+    position: relative;
+    left: 10px;
+    bottom: -8px;
+    overflow: hidden;
+    letter-spacing: 3px;
+    opacity: 0;
+    transition: opacity .45s;
+    -webkit-transition: opacity .35s;
+}

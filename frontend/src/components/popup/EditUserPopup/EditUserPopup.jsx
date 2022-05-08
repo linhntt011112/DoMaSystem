@@ -1,40 +1,42 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import './editUserPopup.css'
 import {Row, Col, Container} from "react-bootstrap";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
-import { UserContext } from "../../../context/UserContext";
 import { useParams } from "react-router-dom";
 import { Close } from '@material-ui/icons';
+import * as backend_config from "../../../config/backend"
 
 export default function EditUserPopup(props) {
-    const [token,] = useContext(UserContext);
+    const token = props.token;
 
     const { userId } = useParams();
 
     const [userData, setUserData] = useState("");
 
-    const [phan_quyen, setPhanQuyen] = React.useState('');
-
-    const handleChangePhanQuyen = (event) => {
-        setPhanQuyen(event.target.value);
-    };
+    const [phan_quyen, setPhanQuyen] = React.useState(false);
 
     useEffect(() => {
-        const requestOptions = {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + token,
-            },
-          };
-        fetch(`http://127.0.0.1:3009/users/id/${userId}`, requestOptions)
+        backend_config.makeRequest("GET", backend_config.USER_GET_BY_ID_API.replace('{id}', userId), token)
           .then((data) => data.json())
           .then((data) => setUserData(data))
     }, [])
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        submitEditUser();
+        setPhanQuyen(false);
+        props.setTrigger(false);
+    }
+
+    const submitEditUser = async() => {
+        // let form = new FormData();
+        // form.append("phan_quyen", phan_quyen);
+        console.log(phan_quyen);
+    }
+
     return (props.trigger) ? (
         <div className="popup-main">
-            <form className="popup-inner">
+            <form className="popup-inner" onSubmit={handleSubmit}>
                 <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                 <div className='userUpdate'>
                     <div className='userUpdateHeader'>
@@ -99,7 +101,7 @@ export default function EditUserPopup(props) {
                                         Phân quyền
                                     </label>
                                     <div style={{margin: '10px 10px 10px 0'}}>
-                                        <input type="checkbox" id='admin' name='admin' value='admin' defaultChecked={userData.phan_quyen} onClick={handleChangePhanQuyen}/>
+                                        <input type="checkbox" id='admin' name='admin' value={userData.phan_quyen} onChange={(e) => setPhanQuyen(e.target.checked)} />
                                         <label for="admin">Admin</label>
                                     </div>   
                                 </div>
@@ -216,6 +218,7 @@ export default function EditUserPopup(props) {
                                                 // value={loaiPhongBan}
                                                 // onChange={handleChangeLoaiPhongBan}
                                                 defaultValue={3}
+                                                style={{height: '36px'}}
                                             >
                                                 <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                                 <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -238,6 +241,7 @@ export default function EditUserPopup(props) {
                                                 // value={loaiChucVu}
                                                 // onChange={handleChangeLoaiChucVu}
                                                 defaultValue={3}
+                                                style={{height: '36px'}}
                                             >
                                                 <MenuItem value={1}>Giam doc1</MenuItem>
                                                 <MenuItem value={2}>Giam doc2</MenuItem>

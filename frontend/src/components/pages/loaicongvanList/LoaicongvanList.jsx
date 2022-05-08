@@ -109,9 +109,8 @@ export default function LoaicongvanList() {
             </main>
             <AddLoaiCongVan trigger={addButtonPopup} setTrigger={setAddButtonPopup}>
             </AddLoaiCongVan>
-            <Popup trigger={detailButtonPopup} setTrigger={setDetailButtonPopup}>
-                <DetailLoaiCongVan />
-            </Popup>
+            <DetailLoaiCongVan trigger={detailButtonPopup} setTrigger={setDetailButtonPopup}>
+            </DetailLoaiCongVan>
             <EditLoaiCongVan trigger={editButtonPopup} setTrigger={setEditButtonPopup}></EditLoaiCongVan>
         </div>
     )

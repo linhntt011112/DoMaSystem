@@ -1,9 +1,20 @@
 import React from 'react'
 import './sidebar.css'
-import { TrendingUp, Group, Assignment, CallMade, CalendarToday } from '@material-ui/icons'
+import { Group, Assignment, CallMade, CalendarToday } from '@material-ui/icons'
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
-export default function Sidebar() {
+export default function Sidebar({user, setToken}) {
+
+    let history = useHistory();
+    console.log(user);
+
+    const handleLogoutClick = () => {
+    
+        setToken(null);
+        history.push("/login");
+      };
+
     return (
         <div className='sidebar'>
             <div className='sidebarWrapper'>
@@ -47,6 +58,12 @@ export default function Sidebar() {
                         </h3>
                     </Link>
                 </div>
+            </div>
+            <div className="navigation-logout" onClick={handleLogoutClick}>
+                <a className="navigation-logout-button" href="">
+                    <img className="navigation-logout-img" src="https://pbs.twimg.com/profile_images/378800000639740507/fc0aaad744734cd1dbc8aeb3d51f8729_400x400.jpeg"/>
+                    <div className="navigation-logout-text">LOGOUT</div>
+                </a>
             </div>
         </div>
     )

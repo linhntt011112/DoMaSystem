@@ -1,10 +1,8 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import './user.css';
-import Popup from "../../popup/Popup/Popup";
 import EditUserPopup from "../../popup/EditUserPopup/EditUserPopup";
 import { useHistory, useParams } from "react-router-dom";
 import { ArrowBack } from '@material-ui/icons';
-import { UserContext } from "../../../context/UserContext";
 import * as backend_config from "../../../config/backend"
 
 export default function User(props) {
@@ -23,7 +21,6 @@ export default function User(props) {
     }, [])
 
     return (
-        
         <div className='user'>
             <main>
                 <div className='userTitleContainer'>

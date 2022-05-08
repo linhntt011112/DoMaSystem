@@ -4,15 +4,32 @@ import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import { Close } from '@material-ui/icons';
 
 export default function AddLoaiCongVan(props) {
-    const [loaiTrangThai, setLoaiTrangThai] = React.useState('');
+    const [trang_thai, setTrangThai] = React.useState('');
+    const [ma_loai, setMaLoai] = React.useState('');
+    const [loai_cong_van, setLoaiCongVan] = React.useState('');
+    const [mo_ta, setMoTa] = React.useState('');
 
-    const handleChangeLoaiTrangThai = (event) => {
-        setLoaiTrangThai(event.target.value);
+    const handleChangeTrangThai = (event) => {
+        setTrangThai(event.target.value);
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        submitAddLoaiCongVan();
+        props.setTrigger(false);
+    }
+
+    const submitAddLoaiCongVan = async() => {
+        let form = new FormData();
+        form.append("ma_loai", ma_loai);
+        form.append("loai_cong_van", loai_cong_van);
+        form.append("mo_ta", mo_ta);
+        form.append("trang_thai", trang_thai);
+    }
+
     return (props.trigger) ? (
-        <div className="add-loai-cong-van-popup-main">
-            <form className="popup-inner">
+        <div className="add-loai-cong-van-popup-main" style={{top: '15px'}}>
+            <form className="popup-inner" onSubmit={handleSubmit}>
                 <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                 <div className='addLoaiCongVan'>
                     <h5 className='modal-title'>Thêm mới loại công văn</h5>
@@ -26,6 +43,7 @@ export default function AddLoaiCongVan(props) {
                                 type="text"
                                 className='loaiCongVanAddInput'
                                 required
+                                onChange={(e) => setMaLoai(e.target.value)}
                             />
                         </div>
                         <div className='loaiCongVanAddItem'>
@@ -37,6 +55,7 @@ export default function AddLoaiCongVan(props) {
                                 type="text"
                                 className='loaiCongVanAddInput'
                                 required
+                                onChange={(e) => setLoaiCongVan(e.target.value)}
                             />
                         </div>
                         <div className='loaiCongVanAddItem'>
@@ -46,6 +65,7 @@ export default function AddLoaiCongVan(props) {
                             <input
                                 type="text"
                                 className='loaiCongVanAddInput'
+                                onChange={(e) => setMoTa(e.target.value)}
                             />
                         </div>
                         <div className='loaiCongVanAddItem'>
@@ -57,8 +77,9 @@ export default function AddLoaiCongVan(props) {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={loaiTrangThai}
-                                        onChange={handleChangeLoaiTrangThai}
+                                        value={trang_thai}
+                                        onChange={handleChangeTrangThai}
+                                        style={{height: '36px'}}
                                     >
                                         <MenuItem value={1}>Hoạt động 1</MenuItem>
                                         <MenuItem value={2}>Hoạt động 2</MenuItem>
