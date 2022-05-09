@@ -9,19 +9,29 @@ import * as backend_config from "../../../config/backend"
 export default function EditUserPopup(props) {
     const {userData} = props
 
-    const [phan_quyen, setPhanQuyen] = React.useState(false);
+    const [phan_quyen, setPhanQuyen] = React.useState(userData.phan_quyen === "admin" ? true : false);
+    const [chuc_vu, setChucVu] = React.useState(userData.chuc_vu);
+    const [phong_ban, setPhongBan] = React.useState(userData.phong_ban);
+
+    const handleChangePhongBan = (event) => {
+        setPhongBan(event.target.value);
+    }
+
+    const handleChangeChucVu = (event) => {
+        setChucVu(event.target.value);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         submitEditUser();
-        setPhanQuyen(false);
         props.setTrigger(false);
     }
 
     const submitEditUser = async() => {
-        // let form = new FormData();
-        // form.append("phan_quyen", phan_quyen);
-        console.log(phan_quyen);
+        let form = new FormData();
+        form.append("phan_quyen", phan_quyen === true ? "admin" : "user");
+        form.append("phong_ban", phong_ban);
+        form.append("chuc_vu", chuc_vu);
     }
 
     return (props.trigger) ? (
@@ -79,7 +89,7 @@ export default function EditUserPopup(props) {
                                     </label>
                                     <input
                                         type="text"
-                                        value={userData.gioi_tinh ? 'Nam' : 'Nu'}
+                                        value={userData.gioi_tinh === "Nam" ? 'Nam' : 'Nữ'}
                                         className='userUpdateInput'
                                         disabled
                                     />
@@ -91,7 +101,7 @@ export default function EditUserPopup(props) {
                                         Phân quyền
                                     </label>
                                     <div style={{margin: '10px 10px 10px 0'}}>
-                                        <input type="checkbox" id='admin' name='admin' value={userData.phan_quyen} onChange={(e) => setPhanQuyen(e.target.checked)} />
+                                        <input type="checkbox" id='admin' name='admin' defaultChecked={userData.phan_quyen === "admin"} onChange={(e) => setPhanQuyen(e.target.checked)} />
                                         <label for="admin">Admin</label>
                                     </div>   
                                 </div>
@@ -205,14 +215,13 @@ export default function EditUserPopup(props) {
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                // value={loaiPhongBan}
-                                                // onChange={handleChangeLoaiPhongBan}
-                                                defaultValue={3}
+                                                onChange={handleChangePhongBan}
+                                                defaultValue={userData.phong_ban}
                                                 style={{height: '36px'}}
                                             >
-                                                <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                                <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                                <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                                <MenuItem value={1}>Phòng kế toán</MenuItem>
+                                                <MenuItem value={2}>Phòng hành chính</MenuItem>
+                                                <MenuItem value={3}>Phòng kiểm toán</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </Box>
@@ -228,14 +237,13 @@ export default function EditUserPopup(props) {
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
-                                                // value={loaiChucVu}
-                                                // onChange={handleChangeLoaiChucVu}
-                                                defaultValue={3}
+                                                onChange={handleChangeChucVu}
+                                                defaultValue={userData.chuc_vu}
                                                 style={{height: '36px'}}
                                             >
-                                                <MenuItem value={1}>Giam doc1</MenuItem>
-                                                <MenuItem value={2}>Giam doc2</MenuItem>
-                                                <MenuItem value={3}>Giam doc3</MenuItem>
+                                                <MenuItem value={1}>Giám đốc điều hành</MenuItem>
+                                                <MenuItem value={2}>Giám đốc tài chính</MenuItem>
+                                                <MenuItem value={3}>Giám đốc Marketing</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </Box>

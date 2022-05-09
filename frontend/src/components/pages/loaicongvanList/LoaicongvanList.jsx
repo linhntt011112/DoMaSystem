@@ -23,15 +23,15 @@ export default function LoaicongvanList() {
     };
 
     const columns = [
-        { field: 'maloai', headerName: 'Mã loại', width: 100},
-        { field: 'ten', headerName: 'Loại công văn', flex: 1 },
+        { field: 'id', headerName: 'Mã loại', width: 100},
+        { field: 'loai_cong_van', headerName: 'Loại công văn', flex: 1 },
         {
-            field: 'trangthai',
+            field: 'trang_thai',
             headerName: 'Trạng thái',
             width: 150,
         },
         {
-            field: 'nguoicapnhat',
+            field: 'nguoi_cap_nhat',
             headerName: 'Người cập nhật',
             flex: 1,
         },

@@ -53,8 +53,8 @@ def create_sample_nguoi_dung():
             tk_ngan_hang = '12345678',
             ngan_hang = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             
-            phong_ban = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
-            chuc_vu = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            phong_ban = 1,
+            chuc_vu = 2,
             hoc_van = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             dan_toc = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             quoc_tich = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
@@ -141,8 +141,26 @@ def create_sample_static_table():
         db_models.DanToc(dan_toc="Kinh"),
         db_models.DanToc(dan_toc="Tày"),
         db_models.DanToc(dan_toc="Thái"),
+        db_models.DanToc(dan_toc="Khác"),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in dan_toc_s]
+
+    quoc_tich_s = [
+        db_models.QuocTich(quoc_tich="Việt Nam"),
+        db_models.QuocTich(quoc_tich="Khác"),
+    ]
+    [common_queries.add_and_commit(get_session(), obj) for obj in quoc_tich_s]
+
+    ton_giao_s = [
+        db_models.TonGiao(ton_giao="Không"),
+        db_models.TonGiao(ton_giao="Phật Giáo"),
+        db_models.TonGiao(ton_giao="Công Giáo"),
+        db_models.TonGiao(ton_giao="Tin Lành"),
+        db_models.TonGiao(ton_giao="Hồi Giáo"),
+        db_models.TonGiao(ton_giao="Cao Đài"),
+        db_models.TonGiao(ton_giao="Hòa Hảo"),
+    ]
+    [common_queries.add_and_commit(get_session(), obj) for obj in ton_giao_s]
 
 
 def run_all():

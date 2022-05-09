@@ -68,8 +68,8 @@ export default function AddUserPopup(props) {
         let form = new FormData();
         form.append("ho_va_ten", ho_va_ten);
         form.append("ten_tai_khoan", ten_tai_khoan);
-        form.append("gioi_tinh", gioi_tinh);
-        form.append("phan_quyen", phan_quyen);
+        form.append("gioi_tinh", gioi_tinh === true ? "Nu" : "Nam");
+        form.append("phan_quyen", phan_quyen === true ? "admin" : "user");
         form.append("dien_thoai", dien_thoai);
         form.append("email", email);
         form.append("ngay_sinh", ngay_sinh);

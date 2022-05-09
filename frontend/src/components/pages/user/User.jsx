@@ -61,7 +61,7 @@ export default function User(props) {
                                     <div className='userShowInfoTitle'>{userData.ten_tai_khoan}</div>
                                     <div className='userShowInfoTitle'>{userData.dien_thoai}</div>
                                     <div className='userShowInfoTitle'>{userData.email}</div>
-                                    <div className='userShowInfoTitle'>{userData.phan_quyen ? 'Admin' : 'Nhan Vien'}</div>
+                                    <div className='userShowInfoTitle'>{userData.phan_quyen === "admin" ? 'Admin' : 'Nhân Viên'}</div>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@ export default function User(props) {
                                     <div className='title'>Quê quán: </div>
                                 </div>
                                 <div className="column2">
-                                    <div className='userShowInfoTitle'>{userData.gioi_tinh ? 'Nam' : 'Nu'}</div>
+                                    <div className='userShowInfoTitle'>{userData.gioi_tinh === "Nam" ? 'Nam' : 'Nữ'}</div>
                                     <div className='userShowInfoTitle'>{userData.ngay_sinh}</div>
                                     <div className='userShowInfoTitle'>{userData.dia_chi}</div>
                                     <div className='userShowInfoTitle'>{userData.cccd}</div>
