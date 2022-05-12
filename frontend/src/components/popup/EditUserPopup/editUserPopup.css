@@ -85,3 +85,12 @@
     text-align: center;
     margin-top: 40px;
 }
+
+.edit-popup-inner{
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    /* max-width: fit-content; */
+    background-color: #FFF;
+    overflow: scroll;
+}

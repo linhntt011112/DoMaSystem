@@ -52,6 +52,12 @@ def create_sample_nguoi_dung():
             
             tk_ngan_hang = '12345678',
             ngan_hang = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            id_phong_ban = 1,
+            id_chuc_vu = 2,
+            id_hoc_van = 1,
+            id_dan_toc = 3,
+            id_quoc_tich = 2,
+            id_ton_giao = 1
             
             # name = 1,
             # name = 2,

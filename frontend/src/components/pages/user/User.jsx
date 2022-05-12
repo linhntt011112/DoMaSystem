@@ -4,6 +4,7 @@ import EditUserPopup from "../../popup/EditUserPopup/EditUserPopup";
 import { useHistory, useParams } from "react-router-dom";
 import { ArrowBack } from '@material-ui/icons';
 import * as backend_config from "../../../config/backend"
+import OutsideAlerter from '../../popup/Common/OutsideClick';
 
 export default function User(props) {
     const token = props.token;
@@ -29,8 +30,10 @@ export default function User(props) {
                     {userData !== "" &&
                     <div>
                         <button className='profileEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
-                        <EditUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData}>
-                        </EditUserPopup>
+                        
+                            <EditUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token}>
+                            </EditUserPopup>
+                        
                         </div>
                     }
                     
@@ -108,8 +111,8 @@ export default function User(props) {
 
                             </div>
                             <div className="userShowJobColumn12">
-                                <div className='userShowInfoTitle'>{userData.phong_ban}</div>
-                                <div className='userShowInfoTitle'>{userData.chuc_vu}</div>
+                                <div className='userShowInfoTitle'>{userData.phong_ban?.name}</div>
+                                <div className='userShowInfoTitle'>{userData.chuc_vu?.name}</div>
                                 <div className='userShowInfoTitle'>{userData.tk_ngan_hang}</div>
                                 <div className='userShowInfoTitle'>{userData.ngan_hang}</div>
                             </div>
@@ -122,10 +125,10 @@ export default function User(props) {
                                 <div className='title'>Tôn giáo: </div>
                             </div>
                             <div className="userShowJobColumn12">
-                                <div className='userShowInfoTitle'>{userData.hoc_van}</div>
-                                <div className='userShowInfoTitle'>{userData.dan_toc}</div>
-                                <div className='userShowInfoTitle'>{userData.quoc_tich}</div>
-                                <div className='userShowInfoTitle'>{userData.ton_giao}</div>
+                                <div className='userShowInfoTitle'>{userData.hoc_van?.name}</div>
+                                <div className='userShowInfoTitle'>{userData.dan_toc?.name}</div>
+                                <div className='userShowInfoTitle'>{userData.quoc_tich?.name}</div>
+                                <div className='userShowInfoTitle'>{userData.ton_giao?.name}</div>
                             </div>
                         </div>
                     </div>

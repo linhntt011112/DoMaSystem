@@ -110,14 +110,14 @@ export default function AddUserPopup(props) {
         form.append("dia_chi", dia_chi);
         form.append("que_quan", que_quan);
         form.append("ngay_vao_lam", ngay_vao_lam);
-        form.append("phong_ban", phong_ban);
-        form.append("chuc_vu", chuc_vu);
+        form.append("id_phong_ban", phong_ban);
+        form.append("id_chuc_vu", chuc_vu);
         form.append("tk_ngan_hang", tk_ngan_hang);
         form.append("ngan_hang", ngan_hang);
-        form.append("hoc_van", hoc_van);
-        form.append("dan_toc", dan_toc);
-        form.append("quoc_tich", quoc_tich);
-        form.append("ton_giao", ton_giao);
+        form.append("id_hoc_van", hoc_van);
+        form.append("id_dan_toc", dan_toc);
+        form.append("id_quoc_tich", quoc_tich);
+        form.append("id_ton_giao", ton_giao);
     }
    
     return (props.trigger) ? (
@@ -347,9 +347,10 @@ export default function AddUserPopup(props) {
                                             onChange={handleChangeLoaiChucVu}
                                             style={{height: '35px'}}
                                         >
-                                            <MenuItem value={1}>Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Giam doc3</MenuItem>
+                                            {chuc_vu_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -395,9 +396,10 @@ export default function AddUserPopup(props) {
                                             onChange={handleChangeLoaiHocVan}
                                             style={{height: '35px'}}
                                         >
-                                            <MenuItem value={1}>Dai hoc</MenuItem>
-                                            <MenuItem value={2}>Tieng Anh</MenuItem>
-                                            <MenuItem value={3}>Tieng Phap</MenuItem>
+                                            {hoc_van_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -419,9 +421,10 @@ export default function AddUserPopup(props) {
                                             onChange={handleChangeLoaiDanToc}
                                             style={{height: '35px'}}
                                         >
-                                            <MenuItem value={1}>Kinh</MenuItem>
-                                            <MenuItem value={2}>Tieng Anh</MenuItem>
-                                            <MenuItem value={3}>Tieng Phap</MenuItem>
+                                            {dan_toc_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -441,9 +444,10 @@ export default function AddUserPopup(props) {
                                             onChange={handleChangeLoaiQuocTich}
                                             style={{height: '35px'}}
                                         >
-                                            <MenuItem value={1}>Viet Nam</MenuItem>
-                                            <MenuItem value={2}>Tieng Anh</MenuItem>
-                                            <MenuItem value={3}>Tieng Phap</MenuItem>
+                                            {quoc_tich_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -463,9 +467,10 @@ export default function AddUserPopup(props) {
                                             onChange={handleChangeLoaiTonGiao}
                                             style={{height: '35px'}}
                                         >
-                                            <MenuItem value={1}>Khong</MenuItem>
-                                            <MenuItem value={2}>Tieng Anh</MenuItem>
-                                            <MenuItem value={3}>Tieng Phap</MenuItem>
+                                            {ton_giao_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
