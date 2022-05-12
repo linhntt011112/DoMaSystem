@@ -183,8 +183,12 @@ export default function AddUserPopup(props) {
                                     onChange={(date) => setNgaySinh(date)}
                                     dateFormat='dd/MM/yyyy'
                                     isClearable
+                                    yearDropdownItemNumber={100}
+                                    scrollableYearDropdown={true}
                                     showYearDropdown
-                                    scrollableMonthYearDropdown
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                     }}
                                 />
                             </div>
                         </Col>

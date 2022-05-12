@@ -31,7 +31,7 @@ const Comment = ({
     return (
         <div key={comment.id} className="comment">
             <div className="comment-image-container">
-                <img className="comment-image" src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" />
+                <img className="comment-image" src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" alt=""/>
             </div>
             <div className="comment-right-part">
                 <div className="comment-content">
@@ -41,7 +41,7 @@ const Comment = ({
                 {!isEditing && <div className="comment-text">{comment.body}</div>}
                 {isEditing && (
                     <CommentForm 
-                        submitLabel="Update" 
+                        submitLabel="Cập nhật" 
                         hasCancelButton 
                         initialText={comment.body} 
                         handleSubmit={(text) => updateComment(text, comment.id)} 
@@ -56,7 +56,7 @@ const Comment = ({
                                 setActiveComment({id: comment.id, type: "replying"})
                             }
                         >
-                          Reply
+                          Trả lời
                         </div>)}
                     {canEdit && (
                         <div 
@@ -65,19 +65,19 @@ const Comment = ({
                                 setActiveComment({id: comment.id, type: "editing"})
                             }
                         >
-                          Edit
+                          Chỉnh sửa
                         </div>)}
                     {canDelete && (
                         <div 
                             className="comment-action" 
                             onClick={() => deleteComment(comment.id)}
                         >
-                          Delete
+                          Xóa
                         </div>)}
                 </div>
                 {isReplying && (
                     <CommentForm 
-                        submitLabel="Reply" 
+                        submitLabel="Trả lời" 
                         handleSubmit={(text) => addComment(text, replyId)}
                     />
                 )}

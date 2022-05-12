@@ -46,7 +46,7 @@ const Comments = ({commentsUrl, currentUserId}) => {
     }
 
     const deleteComment = (commentId) => {
-        if (window.confirm('Are you sure that you want to remove comment?')) {
+        if (window.confirm('Bạn có chắc chắn muốn xóa trao đổi này không?')) {
             deleteCommentApi(commentId).then(() => {
                 const updatedBackendComments = backendComments.filter(
                     (backendComment) => backendComment.id !== commentId
@@ -63,8 +63,8 @@ const Comments = ({commentsUrl, currentUserId}) => {
     }, [])
     return (
         <div className="comments">
-            <div className="comment-form-title">Nhap noi dung</div>
-            <CommentForm submitLabel="Gui" handleSubmit={addComment}/>
+            <div className="comment-form-title">Nhập nội dung</div>
+            <CommentForm submitLabel="Gửi" handleSubmit={addComment}/>
             <div className="comments-container">
                 {rootComments.map((rootComment) => (
                     <Comment 

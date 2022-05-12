@@ -22,76 +22,76 @@ export default function CongVanDiChiTiet() {
                     <div className="thongTinChungColumn1">
                         <div className="column1Title">
                             <ErrorOutlineRounded style={{margin: '2px 5px 0 0'}}/> 
-                            <h5>Thong tin chung</h5>
+                            <h5>Thông tin chung</h5>
                         </div>
                         <div className="columnChildren1">
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren1Title">So cong van:</div>
+                                <div className="columnChildren1Title">Số công văn:</div>
                                 <div className="columnChildren1Info">3969</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren1Title">Ten cong van:</div>
+                                <div className="columnChildren1Title">Tên công văn:</div>
                                 <div className="columnChildren1Info">Hướng dẫn thực hiện CT GD Phổ thông cấp tiểu học</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren1Title">Noi nhan:</div>
+                                <div className="columnChildren1Title">Nơi nhận:</div>
                                 <div className="columnChildren1Info">Phong HR</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren1Title">Nguoi ky:</div>
+                                <div className="columnChildren1Title">Người ký:</div>
                                 <div className="columnChildren1Info">Nguyen Thi Thuy Linh</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren1Title">Ngay ky:</div>
+                                <div className="columnChildren1Title">Ngày ký:</div>
                                 <div className="columnChildren1Info">14/03/2022</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren1Title">Bo phan phat hanh:</div>
+                                <div className="columnChildren1Title">Bộ phận phát hành:</div>
                                 <div className="columnChildren1Info">Phong Giam doc</div>
                             </div>
                         </div>
                         <div className="columnChildren2">
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Ngay hieu luc:</div>
+                                <div className="columnChildren2Title">Ngày hiệu lực:</div>
                                 <div className="columnChildren2Info">14/03/2022</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Ngay het hieu luc:</div>
+                                <div className="columnChildren2Title">Ngày hết hiệu lực:</div>
                                 <div className="columnChildren2Info">15/03/3030</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">So luong van ban:</div>
+                                <div className="columnChildren2Title">Số lượng văn bản:</div>
                                 <div className="columnChildren2Info">02</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Muc do bao mat:</div>
+                                <div className="columnChildren2Title">Mức độ bảo mật:</div>
                                 <div className="columnChildren2Info">Cao</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Muc do khan cap:</div>
+                                <div className="columnChildren2Title">Mức độ khẩn cấp:</div>
                                 <div className="columnChildren2Info">Trung binh</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Ngay phat hanh:</div>
+                                <div className="columnChildren2Title">Ngày phát hành:</div>
                                 <div className="columnChildren2Info">14/03/3033</div>
                             </div>
                         </div>
                     </div>
                     <div className="thongTinChungColumn2">
                         <div style={{display:'flex'}}>
-                            <div className="column2Title">Loai cong van:</div>
+                            <div className="column2Title">Loại công văn:</div>
                             <div className="column2Info">Trung binh</div>
                         </div>
                         <div style={{display:'flex'}}>
-                            <div className="column2Title">Nguoi xu ly:</div>
+                            <div className="column2Title">Người xử lý:</div>
                             <div className="column2Info">Nguyen Thi Thuy Linh</div>
                         </div>
                         <div style={{display:'flex'}}>
-                            <div className="column2Title">Nguoi theo doi:</div>
+                            <div className="column2Title">Người theo dõi:</div>
                             <div className="column2Info">Nguyen Thi Thuy Linh</div>
                         </div>
                         <div style={{display:'flex'}}>
-                            <div className="column2Title">Tinh trang xu ly:</div>
+                            <div className="column2Title">Tình trạng xử lý:</div>
                             <div className="column2Info">Nguyen Thi Thuy Linh</div>
                         </div>
                         <div style={{display:'flex'}}>
@@ -115,12 +115,12 @@ export default function CongVanDiChiTiet() {
                 <div className="trichDanContainer">
                     <div className="trichDanTitle">
                         <Create style={{margin: '2px 5px 0 0'}}/> 
-                        <h5>Ly Do</h5>
+                        <h5>Lý do</h5>
                     </div>
                     <div className="trichDanInfo">Để có cơ sở góp phần đảm bảo quyền lợi cho khách hàng, giúp khách hàng soạn thảo được các văn bản pháp lý, các công văn chính xác theo quy định của pháp luật, có đầy đủ căn cứ pháp lý liên quan đến vụ việc của mình, công ty luật Minh Khuê cung cấp một số mẫu công văn thông dụng để khách hàng tham khảo và sử dụng khi cần thiết.</div>
                     <div className="trichDanTitle">
                         <ContentPaste style={{margin: '2px 5px 0 0'}}/> 
-                        <h5>Noi dung</h5>
+                        <h5>Nội dung</h5>
                     </div>
                     <div className="trichDanInfo">
                         <table>
@@ -154,16 +154,16 @@ export default function CongVanDiChiTiet() {
                     </div>
                     <div className="trichDanTitle">
                         <AttachFile style={{margin: '2px 5px 0 0'}}/> 
-                        <h5>Tep dinh kem</h5>
+                        <h5>Tệp đính kèm</h5>
                     </div>
                     <div className="trichDanInfo">
-                        <a href="">https://luatminhkhue.vn/mau-mot-so-cong-van-thong-dung-hien-hanh---cach-huong-dan-viet-cong-van.aspx</a>
+                        <a href="https://luatminhkhue.vn/mau-mot-so-cong-van-thong-dung-hien-hanh---cach-huong-dan-viet-cong-van.aspx">https://luatminhkhue.vn/mau-mot-so-cong-van-thong-dung-hien-hanh---cach-huong-dan-viet-cong-van.aspx</a>
                     </div>
                 </div>
                 <div className="commentsContainer">
                     <div className="commentsTitle">
                         <People style={{margin: '2px 5px 0 0'}}/> 
-                        <h5>Trao doi</h5>
+                        <h5>Trao đổi</h5>
                     </div>
                     <Comments currentUserId="1"/>
                 </div>

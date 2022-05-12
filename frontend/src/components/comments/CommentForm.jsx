@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./commentForm.css";
-import { Send } from '@mui/icons-material';
 import Button from '@material-ui/core/Button';
 
 const CommentForm = ({
@@ -36,17 +35,17 @@ const CommentForm = ({
                 />
                 <label htmlFor="contained-button-file">
                     <Button className="comment-form-button" variant="contained" color="primary" component="span">
-                        Dinh kem
+                        Đính kèm
                     </Button>
                 </label>
                 {hasCancelButton && (
-                    <button 
+                    <Button 
                         type="button" 
                         className="comment-form-button comment-form-cancel-button" 
                         onClick={handleCancel}
                     >
-                      Cancel
-                    </button>
+                      Hủy
+                    </Button>
                 )}
             </div>
         </form>

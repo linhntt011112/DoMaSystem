@@ -22,23 +22,23 @@ export default function CongVanDenChiTiet() {
                     <div className="thong-tin-chung-column-1">
                         <div className="column-1-title">
                             <ErrorOutlineRounded style={{margin: '2px 5px 0 0'}}/> 
-                            <h5>Thong tin chung</h5>
+                            <h5>Thông tin chung</h5>
                         </div>
                         <div className="column-children-1">
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-1-title">So cong van:</div>
+                                <div className="column-children-1-title">Số công văn:</div>
                                 <div className="column-children-1-info">3969</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-1-title">Ten cong van:</div>
+                                <div className="column-children-1-title">Tên công văn:</div>
                                 <div className="column-children-1-info">Hướng dẫn thực hiện CT GD Phổ thông cấp tiểu học</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-1-title">Noi nhan:</div>
+                                <div className="column-children-1-title">Nơi nhận:</div>
                                 <div className="column-children-1-info">Phong HR</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-1-title">Nguoi ky:</div>
+                                <div className="column-children-1-title">Người ký:</div>
                                 <div className="column-children-1-info">Nguyen Thi Thuy Linh</div>
                             </div>
                             <div style={{display: 'flex'}}>

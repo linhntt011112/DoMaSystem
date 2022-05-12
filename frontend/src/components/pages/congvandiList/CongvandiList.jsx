@@ -24,7 +24,7 @@ export default function CongvandiList() {
     };
 
     const columns = [
-        {field: 'so_cong_van_di', headerName: 'Số công văn đi', width: 100},
+        {field: 'so_cong_van_di', headerName: 'Số công văn', width: 115},
         {field: 'ten_cong_van_di', headerName: 'Tên công văn đi', flex: 1},
         {
             field: 'nguoi_ky',
@@ -97,46 +97,46 @@ export default function CongvandiList() {
                 </div>
                 <div className="dowpdown-filter">
                     <div style={{ width: 200 }}>
-                        <span className="dropdown-title">Loai cong van</span>
+                        <span className="dropdown-title">Loại công văn</span>
                         <Dropdown 
                         datas={loaicongvanRows} 
-                        prompt='Chon loai cong van ...'
+                        prompt='Chọn loại công văn ...'
                         id='id'
                         label='loai_cong_van'
                         value={value_loaicongvan}
                         onChange={val => setValue_LoaiCongVan(val)}/>
                     </div>
                     <div style={{ width: 200 }}>
-                        <span className="dropdown-title">Muc do khan cap</span>
+                        <span className="dropdown-title">Mức độ khẩn cấp</span>
                         <Dropdown 
                         datas={muc_do_khan_cap_Rows} 
-                        prompt='Chon muc do khan cap ...'
+                        prompt='Chọn mức độ khẩn cấp ...'
                         id='id'
                         label='muc_do_khan_cap'
                         value={value_mucdokhancap}
                         onChange={val => setValue_MucDoKhanCap(val)}/>
                     </div>
                     <div style={{ width: 200 }}>
-                        <span className="dropdown-title">Muc do bao mat</span>
+                        <span className="dropdown-title">Mức độ bảo mật</span>
                         <Dropdown 
                         datas={muc_do_bao_mat_Rows} 
-                        prompt='Chon muc do bao mat ...'
+                        prompt='Chọn mức độ bảo mật ...'
                         id='id'
                         label='muc_do_bao_mat'
                         value={value_mucdobaomat}
                         onChange={val => setValue_MucDoBaoMat(val)}/>
                     </div>
                     <div style={{ width: 200 }}>
-                        <span className="dropdown-title">Tinh trang xu ly</span>
+                        <span className="dropdown-title">Tình trạng xử lý</span>
                         <Dropdown 
                         datas={tinh_trang_xu_ly_Rows} 
-                        prompt='Chon tinh trang xu ly ...'
+                        prompt='Chọn tình trạng xử lý ...'
                         id='id'
                         label='tinh_trang_xu_ly'
                         value={value_tinhtrangxuly}
                         onChange={val => setValue_TinhTrangXuLy(val)}/>
                     </div>
-                    <button className="dropdown-button">Loc</button>
+                    <button className="dropdown-button">Lọc</button>
                 </div>
                 
                 <div style={{ height: 'calc(100vh - 200px)' }}>
