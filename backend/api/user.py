@@ -9,7 +9,7 @@ import typing as t
 
 from typing import Optional, Union
 from pydantic import BaseModel
-from database.db_models.static_table import PhanQuyen
+from database.db_models.static_tables import PhanQuyen
 
 from database import db_models, common_queries
 from database.db import get_db

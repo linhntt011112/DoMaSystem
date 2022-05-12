@@ -53,12 +53,12 @@ def create_sample_nguoi_dung():
             tk_ngan_hang = '12345678',
             ngan_hang = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             
-            phong_ban = 1,
-            chuc_vu = 2,
-            hoc_van = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
-            dan_toc = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
-            quoc_tich = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
-            ton_giao = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            # name = 1,
+            # name = 2,
+            # name = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            # name = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            # name = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
+            # name = 'So 4 ngach 42 Dai hoc Bach Khoa Ha Noi',
             ),
         NguoiDung(
             ho_ten = 'Nguyen Van B',
@@ -105,60 +105,60 @@ def create_sample_loai_cong_van():
 
 def create_sample_static_table():
     phong_ban_s = [
-        db_models.PhongBan(phong_ban="Phòng kế toán"),
-        db_models.PhongBan(phong_ban="Phòng hành chính"),
-        db_models.PhongBan(phong_ban="Phòng kiểm toán"),
-        db_models.PhongBan(phong_ban="Phòng chăm sóc khách hàng"),
-        db_models.PhongBan(phong_ban="Phòng nhân sự"),
-        db_models.PhongBan(phong_ban="Phòng Công nghệ thông tin"),
-        db_models.PhongBan(phong_ban="Phòng Quan hệ quốc tế"),
-        db_models.PhongBan(phong_ban="Phòng Marketing"),
-        db_models.PhongBan(phong_ban="Phòng Nghiên cứu và phát triển sản phẩm"),
-        db_models.PhongBan(phong_ban="Phòng kinh doanh"),
-        db_models.PhongBan(phong_ban="Phòng thu mua"),
+        db_models.PhongBan(name="Phòng kế toán"),
+        db_models.PhongBan(name="Phòng hành chính"),
+        db_models.PhongBan(name="Phòng kiểm toán"),
+        db_models.PhongBan(name="Phòng chăm sóc khách hàng"),
+        db_models.PhongBan(name="Phòng nhân sự"),
+        db_models.PhongBan(name="Phòng Công nghệ thông tin"),
+        db_models.PhongBan(name="Phòng Quan hệ quốc tế"),
+        db_models.PhongBan(name="Phòng Marketing"),
+        db_models.PhongBan(name="Phòng Nghiên cứu và phát triển sản phẩm"),
+        db_models.PhongBan(name="Phòng kinh doanh"),
+        db_models.PhongBan(name="Phòng thu mua"),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in phong_ban_s]
 
     chuc_vu_s = [
-        db_models.ChucVu(chuc_vu="Giám đốc điều hành"),
-        db_models.ChucVu(chuc_vu="Giám đốc tài chính"),
-        db_models.ChucVu(chuc_vu="Giám đốc Marketing"),
-        db_models.ChucVu(chuc_vu="Giám đốc pháp lý"),
-        db_models.ChucVu(chuc_vu="Giám đốc thương mại"),
-        db_models.ChucVu(chuc_vu="Giám đốc vận hành"),
+        db_models.ChucVu(name="Giám đốc điều hành"),
+        db_models.ChucVu(name="Giám đốc tài chính"),
+        db_models.ChucVu(name="Giám đốc Marketing"),
+        db_models.ChucVu(name="Giám đốc pháp lý"),
+        db_models.ChucVu(name="Giám đốc thương mại"),
+        db_models.ChucVu(name="Giám đốc vận hành"),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in chuc_vu_s]
 
     hoc_van_s = [
-        db_models.HocVan(hoc_van="Thạc sĩ"),
-        db_models.HocVan(hoc_van="Tiến sĩ"),
-        db_models.HocVan(hoc_van="Cao đẳng"),
-        db_models.HocVan(hoc_van="Cử nhân"),
+        db_models.HocVan(name="Thạc sĩ"),
+        db_models.HocVan(name="Tiến sĩ"),
+        db_models.HocVan(name="Cao đẳng"),
+        db_models.HocVan(name="Cử nhân"),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in hoc_van_s]
 
     dan_toc_s = [
-        db_models.DanToc(dan_toc="Kinh"),
-        db_models.DanToc(dan_toc="Tày"),
-        db_models.DanToc(dan_toc="Thái"),
-        db_models.DanToc(dan_toc="Khác"),
+        db_models.DanToc(name="Kinh"),
+        db_models.DanToc(name="Tày"),
+        db_models.DanToc(name="Thái"),
+        db_models.DanToc(name="Khác"),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in dan_toc_s]
 
     quoc_tich_s = [
-        db_models.QuocTich(quoc_tich="Việt Nam"),
-        db_models.QuocTich(quoc_tich="Khác"),
+        db_models.QuocTich(name="Việt Nam"),
+        db_models.QuocTich(name="Khác"),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in quoc_tich_s]
 
     ton_giao_s = [
-        db_models.TonGiao(ton_giao="Không"),
-        db_models.TonGiao(ton_giao="Phật Giáo"),
-        db_models.TonGiao(ton_giao="Công Giáo"),
-        db_models.TonGiao(ton_giao="Tin Lành"),
-        db_models.TonGiao(ton_giao="Hồi Giáo"),
-        db_models.TonGiao(ton_giao="Cao Đài"),
-        db_models.TonGiao(ton_giao="Hòa Hảo"),
+        db_models.TonGiao(name="Không"),
+        db_models.TonGiao(name="Phật Giáo"),
+        db_models.TonGiao(name="Công Giáo"),
+        db_models.TonGiao(name="Tin Lành"),
+        db_models.TonGiao(name="Hồi Giáo"),
+        db_models.TonGiao(name="Cao Đài"),
+        db_models.TonGiao(name="Hòa Hảo"),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in ton_giao_s]
 
@@ -166,9 +166,9 @@ def create_sample_static_table():
 def run_all():
     print(timeit.timeit(lambda : drop_all_tables(), number=1))
     print(timeit.timeit(lambda : create_tables(), number=1))
+    print(timeit.timeit(lambda : create_sample_static_table(), number=1))
     print(timeit.timeit(lambda : create_sample_nguoi_dung(), number=1))
     print(timeit.timeit(lambda : create_sample_loai_cong_van(), number=1))
-    print(timeit.timeit(lambda : create_sample_static_table(), number=1))
     # drop_all_tables()
     # create_tables()
     # create_sample_nguoi_dung()

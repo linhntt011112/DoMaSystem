@@ -3,8 +3,6 @@ from datetime import datetime
 from .. import common_queries, db_models
 from ..schemas import nguoi_dung as user_schemas
 
-from sqlalchemy import select, insert
-from sqlalchemy.orm import Session
 import typing 
 from . import exceptions
 

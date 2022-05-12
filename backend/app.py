@@ -7,7 +7,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from config import frontend_config
-from api import user, login
+from api import user, login, static_tables
 
 
 origins = [
@@ -26,6 +26,7 @@ app.add_middleware(
 router = APIRouter(prefix='/api/v1')
 router.include_router(user.router)
 router.include_router(login.router)
+router.include_router(static_tables.router)
 # router.include_router(company.router)
 app.include_router(router)
 

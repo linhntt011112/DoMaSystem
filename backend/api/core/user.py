@@ -56,20 +56,13 @@ def authenticate_user(db, username: str=None, password: str=None):
 
 
 
-# def authorize_user_by_role_name(db, user: db_models.User, role_name: str):
-#     role: db_models.UserRole = crud_user.get_user_role_by_name(db, role_name)
-#     if role is None:
-#         raise HTTPException(
-#                 status_code=status.HTTP_404_NOT_FOUND,
-#                 detail=f"Can not find role with name = {role_name}",
-#                 headers={"WWW-Authenticate": "Bearer"},
-#             ) 
-#     # logger.debug(role.id)
-#     # logger.debug(user.as_dict())
-#     if user.role_id == role.id:
-#         return True
-#     else:
-#         return False
+def authorize_user_by_role_name(db, user: db_models.NguoiDung, role_name: str):
+    # logger.debug(role.id)
+    # logger.debug(user.as_dict())
+    if user.phan_quyen == role_name:
+        return True
+    else:
+        return False
 
 
 async def get_current_user(token: str = Depends(oauth2_scheme), db=Depends(get_db)):

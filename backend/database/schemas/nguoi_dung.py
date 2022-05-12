@@ -10,10 +10,12 @@ class UserBase(BaseModel):
     id: int
     ho_ten: str
     ten_tai_khoan: str
-    password: Optional[str] = None
-    ngay_sinh: Union[datetime.datetime, datetime.date] = None
-    ngay_cap_nhat: Union[datetime.datetime, datetime.date]
-    ngay_vao_lam: Union[datetime.datetime, datetime.date] = None
+    password: str
+    password_salt: str
+    ngay_sinh: datetime.datetime = None
+    dia_chi: str = None
+    ngay_cap_nhat: datetime.datetime
+    ngay_vao_lam: datetime.datetime = None
     dien_thoai: str = None
     email: str = None
 
@@ -21,7 +23,7 @@ class UserBase(BaseModel):
     gioi_tinh: GioiTinh.type = None
 
     cccd: str
-    ngay_cap: Union[datetime.datetime, datetime.date] = None
+    ngay_cap: datetime.datetime = None
     noi_cap: str = None
     que_quan: str = None
 
