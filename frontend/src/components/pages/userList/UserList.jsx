@@ -65,7 +65,8 @@ export default function UserList(props) {
     useEffect(() => {
         backend_config.makeRequest("GET", backend_config.USER_GET_LIST_API, token)
           .then((data) => data.json())
-          .then((data) => setTableData(data))
+          .then((data) => {setTableData(data)})
+        
     }, [])
       
     return (
@@ -104,7 +105,7 @@ export default function UserList(props) {
                     />
                 </div>
             </main>
-            <AddUserPopup trigger={buttonPopup} setTrigger={setButtonPopup}>
+            <AddUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} token={token}>
             </AddUserPopup>
         </div>
     )

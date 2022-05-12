@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./addUserPopup.css";
 import {Col, Container, Row} from "react-bootstrap";
 import {Checkbox, FormControlLabel, Box, FormControl, Select, MenuItem} from "@mui/material";
@@ -6,7 +6,18 @@ import { Close } from '@material-ui/icons';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 
+import * as backend_config from "../../../config/backend"
+
 export default function AddUserPopup(props) {
+    const {token} = props;
+
+    const [chuc_vu_table, setChucVuTable] = React.useState([]);
+    const [phong_ban_table, setPhongBanTable] = React.useState([]);
+    const [hoc_van_table, setHocVanTable] = React.useState([]);
+    const [dan_toc_table, setDanTocTable] = React.useState([]);
+    const [quoc_tich_table, setQuocTichTable] = React.useState([]);
+    const [ton_giao_table, setTonGiaoTable] = React.useState([]);
+
     const [chuc_vu, setLoaiChucVu] = React.useState('');
     const [phong_ban, setLoaiPhongBan] = React.useState('');
     const [hoc_van, setLoaiHocVan] = React.useState('');
@@ -52,6 +63,26 @@ export default function AddUserPopup(props) {
     const handleChangeLoaiTonGiao = (event) => {
         setLoaiTonGiao(event.target.value);
     }
+
+    const fetchOneStaticTableData = (name, setData) => {
+        return backend_config.makeRequest("GET", backend_config.STATIC_TABLE_GET_LIST.replace('{static_table_name}', name), token)
+        .then((response) => response.json())
+        .then((data) => {
+            setData(data);
+        })
+
+    }
+
+
+    useEffect(() => {
+        fetchOneStaticTableData('chuc_vu', setChucVuTable);
+        fetchOneStaticTableData('phong_ban', setPhongBanTable);
+        fetchOneStaticTableData('hoc_van', setHocVanTable);
+        fetchOneStaticTableData('dan_toc', setDanTocTable);
+        fetchOneStaticTableData('quoc_tich', setQuocTichTable);
+        fetchOneStaticTableData('ton_giao', setTonGiaoTable);
+    }, [])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -289,9 +320,10 @@ export default function AddUserPopup(props) {
                                             onChange={handleChangeLoaiPhongBan}
                                             style={{height: '35px'}}
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {phong_ban_table.map((item) => {
+                                                
+                                                    return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
