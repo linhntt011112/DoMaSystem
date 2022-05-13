@@ -93,11 +93,12 @@ export default function AddUserPopup(props) {
         setNgayVaoLam(null);
         setNgayCap(null);
         props.setTrigger(false);
+        console.log(ngay_sinh);
     }
 
     const submitAddUser = async() => {
         let form = new FormData();
-        form.append("ho_va_ten", ho_va_ten);
+        form.append("ho_ten", ho_va_ten);
         form.append("ten_tai_khoan", ten_tai_khoan);
         form.append("gioi_tinh", gioi_tinh === true ? "Nu" : "Nam");
         form.append("phan_quyen", phan_quyen === true ? "admin" : "user");
@@ -213,7 +214,7 @@ export default function AddUserPopup(props) {
                                         className='datepicker'
                                         selected={ngay_sinh} 
                                         onChange={(date) => setNgaySinh(date)}
-                                        dateFormat='dd/MM/yyyy'
+                                        format='dd/MM/yyyy'
                                         isClearable
                                         yearDropdownItemNumber={100}
                                         scrollableYearDropdown={true}
