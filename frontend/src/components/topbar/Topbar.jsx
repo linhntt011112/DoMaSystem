@@ -5,7 +5,7 @@ import Logo from '../../img/logo_4.png';
 import { Link } from "react-router-dom";
 
 export default function Topbar({user, setToken}) {
-    console.log(user);
+    // console.log(user);
 
     return (
         <div className='topbar'>  

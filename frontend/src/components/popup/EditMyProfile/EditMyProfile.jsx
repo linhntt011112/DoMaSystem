@@ -6,10 +6,11 @@ import { useParams } from "react-router-dom";
 import { Close } from '@material-ui/icons';
 import * as backend_config from "../../../config/backend"
 import OutsideAlerter from '../Common/OutsideClick';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import IconButton from '@material-ui/core/IconButton';
 
 export default function EditMyProfile(props) {
-    const [images, setImages] = useState([]);
-    const [imageURLs, setImageURLs] = useState([]);
+    const [image, setImage] = useState("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg");
     const {userData, token} = props
 
     const [phan_quyen, setPhanQuyen] = React.useState(userData.phan_quyen === "admin" ? true : false);
@@ -39,7 +40,17 @@ export default function EditMyProfile(props) {
     useEffect(() => {
         fetchOneStaticTableData('chuc_vu', setChucVuTable);
         fetchOneStaticTableData('phong_ban', setPhongBanTable);
-    }, [])
+    }, []);
+
+    const onImageChange = (e) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setImage(reader.result);
+            }
+        }
+        reader.readAsDataURL(e.target.files[0])
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -66,10 +77,22 @@ export default function EditMyProfile(props) {
                             <div className='edit-my-profile-Upload'>
                                 <img
                                     className='edit-my-profile-Img'
-                                    src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg"
+                                    src={image}
                                     alt=''
                                 />
-                                <input type="file" style={{display: "none"}}/>
+                                <input 
+                                    type="file" 
+                                    accept="image/*"
+                                    onChange={onImageChange}
+                                    id="icon-button-file"
+                                    style={{ display: 'none' }}
+                                />
+                                <label htmlFor="icon-button-file">
+                                    <IconButton color="primary" aria-label="upload picture"
+                                    component="span">
+                                    <PhotoCamera />
+                                    </IconButton>
+                                </label>
                             </div>
                         </div>
                         <Container className='modal-body'>

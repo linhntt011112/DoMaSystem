@@ -61,14 +61,28 @@ export function useUserInfo() {
     return userToken === undefined ? null: userToken
   };
 
+  const checkToken = (decodedToken) => {
+    const exp = (decodedToken === null) ? (new Date()).getTime()/1000 - 10000 : decodedToken.exp;
+    // console.log(exp, (new Date()).getTime()/1000, decodedToken)
+    // console.log(token, decodedToken, exp < (new Date()).getTime(), !allUserPermissions.has(userPermission));
+    if (exp < (new Date()).getTime()/1000 || !allUserPermissions.has(userPermission)) {
+      return false
+    }
+    return true
+      // console.log(userPermission);
+  }; 
 
   const decodeToken = () => {
     const token = getToken();
+    let decodedToken = null;
     try{
-      if (token !== null || token !== undefined) return  decodeJwt(token);
-      return null
+      if (token !== null || token !== undefined) decodedToken = decodeJwt(token);
+      if (!checkToken(decodedToken)) decodedToken = null;
+      console.log(checkToken(decodeToken), decodedToken);
     } catch(e) {}
-    return null
+    
+    
+    return decodedToken;
   };
 
 
@@ -78,29 +92,6 @@ export function useUserInfo() {
   const [userPermission, setUserPermission] = useState(decodedToken === null ? null: decodedToken.permissions);
   const [user, setUser] = useState({name: decodedToken === null ? null: decodedToken.sub});
 
-
-  useEffect(() => {
-    const checkToken = () => {
-        const exp = (decodedToken === null) ? (new Date()).getTime()/1000 - 10000 : decodedToken.exp;
-        // console.log(exp, (new Date()).getTime()/1000, decodedToken)
-        // console.log(token, decodedToken, exp < (new Date()).getTime(), !allUserPermissions.has(userPermission));
-        if (exp < (new Date()).getTime()/1000 || !allUserPermissions.has(userPermission)) {
-          return false
-        }
-        return true
-        // console.log(userPermission);
-    };
-    // console.log(token);
-    const is_valid = checkToken();
-    // console.log(userPermission, is_valid, decodeToken());
-    if (!is_valid){
-        decodedToken = null;
-        setUserPermission(null);
-        setUser(null);
-    }
-    // console.log(decodedToken);
-    // console.log(is_valid);
-  }, []);
 
   return {
     userPermission: userPermission,

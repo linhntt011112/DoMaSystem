@@ -8,15 +8,13 @@ export default function MyProfile(props) {
     const token = props.token;
     const [buttonPopup, setButtonPopup] = useState(false);
 
-    // const { userId } = useParams();
-
     const [userData, setUserData] = useState("");
 
-    // useEffect(() => {
-    //     backend_config.makeRequest("GET", backend_config.USER_GET_BY_ID_API.replace('{id}', userId), token)
-    //       .then((data) => data.json())
-    //       .then((data) => setUserData(data))
-    // }, [])
+    useEffect(() => {
+        backend_config.makeRequest("GET", backend_config.USER_GET_CURRENT_API, token)
+          .then((data) => data.json())
+          .then((data) => setUserData(data))
+    }, [])
 
     return (
         <div className='my-profile'>
@@ -39,13 +37,13 @@ export default function MyProfile(props) {
                             />
                             <div className='my-profile-ShowTopTitle'>
                                 <span className='my-profile-ShowUsername'>
-                                    Nguyễn Văn A
+                                    {userData.ho_ten}
                                 </span>
                                 <span className='my-profile-ShowUserCode'><b>Mã nhân viên: </b>
-                                    1001
+                                    {userData.ma_nguoi_dung}
                                 </span>
                                 <span className='my-profile-ShowUserDateOfJoined'><b>Ngày vào làm: </b>
-                                    13/05/2022
+                                    {userData.ngay_vao_lam}
                                 </span>
                             </div>
                         </div>
@@ -59,16 +57,16 @@ export default function MyProfile(props) {
                                 </div>
                                 <div className="my-profile-column2">
                                     <div className='my-profile-ShowInfoTitle'>
-                                        nta
+                                        {userData.ten_tai_khoan}
                                     </div>
                                     <div className='my-profile-ShowInfoTitle'>
-                                        0919301681
+                                        {userData.dien_thoai}
                                     </div>
                                     <div className='my-profile-ShowInfoTitle'>
-                                        nta@gmail.com
+                                        {userData.email}
                                     </div>
                                     <div className='my-profile-ShowInfoTitle'>
-                                        Admin
+                                        {userData.phan_quyen === "admin" ? 'Admin' : 'Nhân Viên'}
                                     </div>
                                 </div>
                             </div>
@@ -91,25 +89,25 @@ export default function MyProfile(props) {
                                 </div>
                                 <div className="my-profile-column2">
                                     <div className='my-profile-ShowInfoTitle'>
-                                        Nữ
+                                        {userData.gioi_tinh === "Nam" ? 'Nam' : 'Nữ'}
                                     </div>
                                     <div className='my-profile-ShowInfoTitle'>
-                                        01/11/1999
+                                        {userData.ngay_sinh}
                                     </div>
                                     <div className='my-profile-ShowInfoTitle'>
-                                        Số 7 Tạ Quang Bửu
+                                        {userData.dia_chi}
                                     </div>
                                     <div className='my-profile-ShowInfoTitle'>
-                                        0123456789
+                                        {userData.cccd}
                                     </div>
                                     <div className='my-profile-ShowInfoTitle'>
-                                        17/06/2018
+                                        {userData.ngay_cap}
                                     </div>
                                     <div className='my-profile-ShowInfoTitle'>
-                                        Hà Nam
+                                        {userData.noi_cap}
                                     </div>
                                     <div className='my-profile-ShowInfoTitle'>
-                                        à Nam
+                                        {userData.que_quan}
                                     </div>
                                 </div>
                             </div>
@@ -131,16 +129,16 @@ export default function MyProfile(props) {
                             </div>
                             <div className="my-profile-ShowJobColumn12">
                                 <div className='my-profile-ShowInfoTitle'>
-                                    Phòng kế toán
+                                    {userData.phong_ban?.name}
                                 </div>
                                 <div className='my-profile-ShowInfoTitle'>
-                                    Giám đốc
+                                    {userData.chuc_vu?.name}
                                 </div>
                                 <div className='my-profile-ShowInfoTitle'>
-                                    132346790
+                                    {userData.tk_ngan_hang}
                                 </div>
                                 <div className='my-profile-ShowInfoTitle'>
-                                    Vietcombank
+                                    {userData.ngan_hang}
                                 </div>
                             </div>
                         </div>
@@ -153,16 +151,16 @@ export default function MyProfile(props) {
                             </div>
                             <div className="my-profile-ShowJobColumn12">
                                 <div className='my-profile-ShowInfoTitle'>
-                                    Địa học
+                                    {userData.hoc_van?.name}
                                 </div>
                                 <div className='my-profile-ShowInfoTitle'>
-                                    Kinh
+                                    {userData.dan_toc?.name}
                                 </div>
                                 <div className='my-profile-ShowInfoTitle'>
-                                    Việt Nam
+                                    {userData.quoc_tich?.name}
                                 </div>
                                 <div className='my-profile-ShowInfoTitle'>
-                                    Không
+                                    {userData.ton_giao?.name}
                                 </div>
                             </div>
                         </div>
