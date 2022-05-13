@@ -92,6 +92,32 @@ export default function AddUserPopup(props) {
         setGioiTinh(false);
         setNgayVaoLam(null);
         setNgayCap(null);
+
+        // const body = JSON.stringify({
+        //     name: name,
+        //     description: description
+        // });
+
+        // backend_config.makeRequest("POST", 
+        //     backend_config.COMPANY_POST_CREATE, 
+        //     props.token,
+        //     body
+        // )
+        // .then((response) => {
+        //     if (response.ok){
+        //         response.json().then((response_json) => {
+        //             props.setTrigger(false);
+        //             props.fetchDataToTable();
+        //         })
+        //     }
+        //     else {
+        //         response.text().then((text) => {
+        //             // console.log(`Duplicate ${name}!`);
+        //             alert(langPack["Duplicate company name: \"{name}\" !"].replace("{name}", name));
+        //         })
+        //     }
+        // })
+
         props.setTrigger(false);
         console.log(ngay_sinh);
     }

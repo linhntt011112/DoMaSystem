@@ -9,11 +9,23 @@ class GioiTinh:
     nam = "Nam"
     nu = "Nu"
     
+    def verify(gioi_tinh):
+        if gioi_tinh in {"Nam", "Nu"}:
+            return True
+        
+        return False
+    
 
 class PhanQuyen:
     type = str
     admin = "admin"
     user = "user"
+    
+    def verify(phan_quyen):
+        if phan_quyen in {"admin", "user"}:
+            return True
+        
+        return False
     
 
 class TrangThaiLoaiCongVan:

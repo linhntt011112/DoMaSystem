@@ -39,7 +39,7 @@ class NguoiDung(Base):
     noi_cap = Column(String(100), nullable=True)
     que_quan = Column(String(100), nullable=True)
     
-    tk_ngan_hang = Column(String(100), nullable=False)
+    tk_ngan_hang = Column(String(100), nullable=True)
     ngan_hang = Column(String(100), nullable=True)
     
     id_phong_ban = Column(Integer, ForeignKey('phong_ban.id'))
