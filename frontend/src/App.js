@@ -14,6 +14,7 @@ import CongVanDiChiTiet from './components/pages/congvandiChitiet/CongVanDiChiTi
 import CongVanDenList from './components/pages/congvandenList/CongVanDenList';
 import CongVanDenChiTiet from './components/pages/congvandenChitiet/CongVanDenChiTiet';
 import DMSCalendar from './components/pages/calendar/DMSCalendar';
+import MyProfile from './components/pages/MyProfile/MyProfile';
 
 const App = () => {
 
@@ -33,6 +34,7 @@ const App = () => {
             <AdminRoute exact path="/dashboard/cong-van-den/" component={CongVanDenList}/>
             <AdminRoute exact path="/dashboard/cong-van-den/:socongvan" component={CongVanDenChiTiet}/>
             <AdminRoute exact path="/dashboard/calendar" component={DMSCalendar}/>
+            <AdminRoute exact path="/dashboard/my-profile" component={MyProfile}/>
           </Switch>
         </BrowserRouter>        
       </div>

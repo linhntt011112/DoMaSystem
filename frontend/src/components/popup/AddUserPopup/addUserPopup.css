@@ -62,3 +62,12 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
+
+.add-user-popup-inner{
+    position: relative;
+    padding: 32px;
+    width: fit-content;
+    background-color: #FFF;
+    overflow: scroll;
+}
+

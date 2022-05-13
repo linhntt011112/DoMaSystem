@@ -1,0 +1,132 @@
+.my-profile{
+    flex: 5;
+    padding: 20px;
+}
+
+.my-profile-TitleContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.my-profile-Title{
+    margin: auto;
+}
+
+.my-profile-Edit{
+    margin-right: 30px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color: white;
+    cursor: pointer;
+}
+
+.my-profile-Container{
+    display: flex;
+}
+
+.my-profile-Show{
+    flex: 1;
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    margin: 30px;
+}
+
+.my-profile-ShowTop{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.my-profile-ShowImg{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.my-profile-ShowTopTitle{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.my-profile-ShowUsername{
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.my-profile-ShowUserCode{
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.my-profile-ShowUserDateOfJoined{
+    color: #8e8e8e;
+    font-size: 12px;
+}
+
+.my-profile-ShowBottom{
+    margin-left: 20px
+}
+
+.my-profile-ShowInfo{
+    display: flex;
+    align-items: center;
+    color: #444;
+}
+
+.my-profile-column1{
+    float: left;
+    width: 20%;
+}
+
+.my-profile-title{
+    color: #4f4f4f;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+
+.my-profile-column2{
+    float: left;
+    width: 80%;
+}
+
+.my-profile-ShowInfoTitle{
+    margin: 20px 0px;
+}
+
+.my-profile-ShowInfoTitle:empty{
+    height: 20px;
+}
+
+.my-profile-card-title{
+    color: #1f1f1f;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.my-profile-JobTitle{
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.my-profile-ShowJobColumn1{
+    width: 50%;
+}
+
+.my-profile-ShowJobColumn11{
+    float: left;
+    width: 20%;
+}
+
+.my-profile-ShowJobColumn12{
+    float: left;
+    width: 80%;
+}

@@ -5,8 +5,8 @@ import {Checkbox, FormControlLabel, Box, FormControl, Select, MenuItem} from "@m
 import { Close } from '@material-ui/icons';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-
 import * as backend_config from "../../../config/backend"
+import OutsideAlerter from '../Common/OutsideClick';
 
 export default function AddUserPopup(props) {
     const {token} = props;
@@ -122,366 +122,368 @@ export default function AddUserPopup(props) {
    
     return (props.trigger) ? (
         <div className="popup-main">
-            <form className="popup-inner" onSubmit={handleSubmit}>
-                <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
-                <h5 className='modal-title'>Thêm mới nhân viên</h5>
-                <Container className='modal-body'>
-                    <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin cá nhân</h6>
-                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
+            <OutsideAlerter setTrigger={props.setTrigger}>
+                <form className="add-user-popup-inner" onSubmit={handleSubmit}>
+                    <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
+                    <h5 className='modal-title'>Thêm mới nhân viên</h5>
+                    <Container className='modal-body'>
+                        <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin cá nhân</h6>
+                        <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Họ và tên
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className='userAddInput'
+                                        onChange={(e) => setHoVaTen(e.target.value)}
+                                        required
+                                        pattern='^[a-zA-Z]{1,}(?: [a-zA-Z]+){0,5}$'
+                                    />
+                                    <span className='errorMessage'>Chứa ít nhất 4 kí tự</span>
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Tên tài khoản
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                    </label>
+                                    <input
+                                        name='ten_tai_khoan'
+                                        type="text"
+                                        className='userAddInput'
+                                        onChange={(e) => setTenTaiKhoan(e.target.value)}
+                                        required
+                                        pattern='^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$'
+                                    />
+                                    <span className='errorMessage'>Tên người dùng không hợp lệ</span>
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Giới tính
+                                    </label>
+                                    <FormControlLabel control={<Checkbox checked={gioi_tinh} onChange={(e) => setGioiTinh(e.target.checked)}/>} label="Nữ" />
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Phân quyền
+                                    </label>
+                                    <FormControlLabel control={<Checkbox checked={phan_quyen} onChange={(e) => setPhanQuyen(e.target.checked)}/>} label="Admin" />
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Điện thoại
+                                    </label>
+                                    <input
+                                        type="number"
+                                        className='userAddInput'
+                                        onChange={(e) => setDienThoai(e.target.value)}
+                                    />
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Email
+                                    </label>
+                                    <input
+                                        type="email"
+                                        className='userAddInput'
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Ngày sinh
+                                    </label>
+                                    <DatePicker 
+                                        className='datepicker'
+                                        selected={ngay_sinh} 
+                                        onChange={(date) => setNgaySinh(date)}
+                                        dateFormat='dd/MM/yyyy'
+                                        isClearable
+                                        yearDropdownItemNumber={100}
+                                        scrollableYearDropdown={true}
+                                        showYearDropdown
+                                        onKeyDown={(e) => {
+                                            e.preventDefault();
+                                        }}
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        CCCD
+                                    </label>
+                                    <input
+                                        onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+                                        className='userAddInput'
+                                        onChange={(e) => setCCCD(e.target.value)}
+                                    />
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Ngày cấp
+                                    </label>
+                                    <DatePicker 
+                                        className='datepicker'
+                                        selected={ngay_cap} 
+                                        onChange={(date) => setNgayCap(date)}
+                                        dateFormat='dd/MM/yyyy'
+                                        isClearable
+                                        showYearDropdown
+                                        scrollableMonthYearDropdown
+                                    />
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Nơi cấp
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className='userAddInput'
+                                        onChange={(e) => setNoiCap(e.target.value)}
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                            <div className='userAddItem' style={{padding: '15px 0px 0px 15px'}}>
                                 <label>
-                                    Họ và tên
-                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                    Địa chỉ
                                 </label>
                                 <input
                                     type="text"
                                     className='userAddInput'
-                                    onChange={(e) => setHoVaTen(e.target.value)}
-                                    required
-                                    pattern='^[a-zA-Z]{1,}(?: [a-zA-Z]+){0,5}$'
-                                />
-                                <span className='errorMessage'>Chứa ít nhất 4 kí tự</span>
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Tên tài khoản
-                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
-                                </label>
-                                <input
-                                    name='ten_tai_khoan'
-                                    type="text"
-                                    className='userAddInput'
-                                    onChange={(e) => setTenTaiKhoan(e.target.value)}
-                                    required
-                                    pattern='^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$'
-                                />
-                                <span className='errorMessage'>Tên người dùng không hợp lệ</span>
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Giới tính
-                                </label>
-                                <FormControlLabel control={<Checkbox checked={gioi_tinh} onChange={(e) => setGioiTinh(e.target.checked)}/>} label="Nữ" />
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Phân quyền
-                                </label>
-                                <FormControlLabel control={<Checkbox checked={phan_quyen} onChange={(e) => setPhanQuyen(e.target.checked)}/>} label="Admin" />
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Điện thoại
-                                </label>
-                                <input
-                                    type="number"
-                                    className='userAddInput'
-                                    onChange={(e) => setDienThoai(e.target.value)}
+                                    style={{width: '830px'}}
+                                    onChange={(e) => setDiaChi(e.target.value)}
                                 />
                             </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
+                        </Row>
+                        <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                            <div className='userAddItem' style={{padding: '15px 0px 0px 15px'}}>
                                 <label>
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    className='userAddInput'
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Ngày sinh
-                                </label>
-                                <DatePicker 
-                                    className='datepicker'
-                                    selected={ngay_sinh} 
-                                    onChange={(date) => setNgaySinh(date)}
-                                    dateFormat='dd/MM/yyyy'
-                                    isClearable
-                                    yearDropdownItemNumber={100}
-                                    scrollableYearDropdown={true}
-                                    showYearDropdown
-                                    onKeyDown={(e) => {
-                                        e.preventDefault();
-                                     }}
-                                />
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    CCCD
-                                </label>
-                                <input
-                                    onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-                                    className='userAddInput'
-                                    onChange={(e) => setCCCD(e.target.value)}
-                                />
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Ngày cấp
-                                </label>
-                                <DatePicker 
-                                    className='datepicker'
-                                    selected={ngay_cap} 
-                                    onChange={(date) => setNgayCap(date)}
-                                    dateFormat='dd/MM/yyyy'
-                                    isClearable
-                                    showYearDropdown
-                                    scrollableMonthYearDropdown
-                                />
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Nơi cấp
+                                    Quê quán
                                 </label>
                                 <input
                                     type="text"
                                     className='userAddInput'
-                                    onChange={(e) => setNoiCap(e.target.value)}
+                                    style={{width: '830px'}}
+                                    onChange={(e) => setQueQuan(e.target.value)}
                                 />
                             </div>
-                        </Col>
-                    </Row>
-                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
-                        <div className='userAddItem' style={{padding: '15px 0px 0px 15px'}}>
-                            <label>
-                                Địa chỉ
-                            </label>
-                            <input
-                                type="text"
-                                className='userAddInput'
-                                style={{width: '830px'}}
-                                onChange={(e) => setDiaChi(e.target.value)}
-                            />
-                        </div>
-                    </Row>
-                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
-                        <div className='userAddItem' style={{padding: '15px 0px 0px 15px'}}>
-                            <label>
-                                Quê quán
-                            </label>
-                            <input
-                                type="text"
-                                className='userAddInput'
-                                style={{width: '830px'}}
-                                onChange={(e) => setQueQuan(e.target.value)}
-                            />
-                        </div>
-                    </Row>
-                    <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin công việc</h6>
-                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Ngày vào làm
-                                </label>
-                                <DatePicker 
-                                    className='datepicker'
-                                    selected={ngay_vao_lam} 
-                                    onChange={(date) => setNgayVaoLam(date)}
-                                    dateFormat='dd/MM/yyyy'
-                                    isClearable
-                                    showYearDropdown
-                                    scrollableMonthYearDropdown
-                                />
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Phòng ban
-                                </label>
-                                <Box sx={{ minWidth: 259 }}>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={phong_ban}
-                                            onChange={handleChangeLoaiPhongBan}
-                                            style={{height: '35px'}}
-                                        >
-                                            {phong_ban_table.map((item) => {
-                                                
+                        </Row>
+                        <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin công việc</h6>
+                        <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Ngày vào làm
+                                    </label>
+                                    <DatePicker 
+                                        className='datepicker'
+                                        selected={ngay_vao_lam} 
+                                        onChange={(date) => setNgayVaoLam(date)}
+                                        dateFormat='dd/MM/yyyy'
+                                        isClearable
+                                        showYearDropdown
+                                        scrollableMonthYearDropdown
+                                    />
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Phòng ban
+                                    </label>
+                                    <Box sx={{ minWidth: 259 }}>
+                                        <FormControl fullWidth>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={phong_ban}
+                                                onChange={handleChangeLoaiPhongBan}
+                                                style={{height: '35px'}}
+                                            >
+                                                {phong_ban_table.map((item) => {
+                                                    
+                                                        return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                })}
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Chức vụ
+                                    </label>
+                                    <Box sx={{ minWidth: 259 }}>
+                                        <FormControl fullWidth>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={chuc_vu}
+                                                onChange={handleChangeLoaiChucVu}
+                                                style={{height: '35px'}}
+                                            >
+                                                {chuc_vu_table.map((item) => {
+                                                        
                                                     return (<MenuItem value={item.name}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Chức vụ
-                                </label>
-                                <Box sx={{ minWidth: 259 }}>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={chuc_vu}
-                                            onChange={handleChangeLoaiChucVu}
-                                            style={{height: '35px'}}
-                                        >
-                                            {chuc_vu_table.map((item) => {
-                                                    
-                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Tài khoản ngân hàng
-                                </label>
-                                <input
-                                    onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
-                                    className='userAddInput'
-                                    onChange={(e) => setTKNganHang(e.target.value)}
-                                />
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Ngân hàng
-                                </label>
-                                <input
-                                    type="text"
-                                    className='userAddInput'
-                                    onChange={(e) => setNganHang(e.target.value)}
-                                />
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Học vấn
-                                </label>
-                                <Box sx={{ minWidth: 252 }}>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={hoc_van}
-                                            onChange={handleChangeLoaiHocVan}
-                                            style={{height: '35px'}}
-                                        >
-                                            {hoc_van_table.map((item) => {
-                                                    
-                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Dân tộc
-                                </label>
-                                <Box sx={{ minWidth: 259 }}>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={dan_toc}
-                                            onChange={handleChangeLoaiDanToc}
-                                            style={{height: '35px'}}
-                                        >
-                                            {dan_toc_table.map((item) => {
-                                                    
-                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Quốc tịch
-                                </label>
-                                <Box sx={{ minWidth: 259 }}>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={quoc_tich}
-                                            onChange={handleChangeLoaiQuocTich}
-                                            style={{height: '35px'}}
-                                        >
-                                            {quoc_tich_table.map((item) => {
-                                                    
-                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                        </Col>
-                        <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
-                            <div className='userAddItem'>
-                                <label>
-                                    Tôn giáo
-                                </label>
-                                <Box sx={{ minWidth: 259 }}>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={ton_giao}
-                                            onChange={handleChangeLoaiTonGiao}
-                                            style={{height: '35px'}}
-                                        >
-                                            {ton_giao_table.map((item) => {
-                                                    
-                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-                <div className='modal-footer'>
-                    <button className='userAddButtonSubmit'>Thêm</button>
-                </div>
-            </form>
+                                                })}
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Tài khoản ngân hàng
+                                    </label>
+                                    <input
+                                        onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+                                        className='userAddInput'
+                                        onChange={(e) => setTKNganHang(e.target.value)}
+                                    />
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Ngân hàng
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className='userAddInput'
+                                        onChange={(e) => setNganHang(e.target.value)}
+                                    />
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Học vấn
+                                    </label>
+                                    <Box sx={{ minWidth: 252 }}>
+                                        <FormControl fullWidth>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={hoc_van}
+                                                onChange={handleChangeLoaiHocVan}
+                                                style={{height: '35px'}}
+                                            >
+                                                {hoc_van_table.map((item) => {
+                                                        
+                                                    return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                })}
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Dân tộc
+                                    </label>
+                                    <Box sx={{ minWidth: 259 }}>
+                                        <FormControl fullWidth>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={dan_toc}
+                                                onChange={handleChangeLoaiDanToc}
+                                                style={{height: '35px'}}
+                                            >
+                                                {dan_toc_table.map((item) => {
+                                                        
+                                                    return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                })}
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Quốc tịch
+                                    </label>
+                                    <Box sx={{ minWidth: 259 }}>
+                                        <FormControl fullWidth>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={quoc_tich}
+                                                onChange={handleChangeLoaiQuocTich}
+                                                style={{height: '35px'}}
+                                            >
+                                                {quoc_tich_table.map((item) => {
+                                                        
+                                                    return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                })}
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                </div>
+                            </Col>
+                            <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
+                                <div className='userAddItem'>
+                                    <label>
+                                        Tôn giáo
+                                    </label>
+                                    <Box sx={{ minWidth: 259 }}>
+                                        <FormControl fullWidth>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                                value={ton_giao}
+                                                onChange={handleChangeLoaiTonGiao}
+                                                style={{height: '35px'}}
+                                            >
+                                                {ton_giao_table.map((item) => {
+                                                        
+                                                    return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                })}
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
+                    <div className='modal-footer'>
+                        <button className='userAddButtonSubmit'>Thêm</button>
+                    </div>
+                </form>
+            </OutsideAlerter>
         </div>
     ) : "";
 };

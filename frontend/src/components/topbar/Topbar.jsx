@@ -2,6 +2,7 @@ import React from 'react'
 import "./topbar.css"
 import { NotificationsNone} from '@material-ui/icons';
 import Logo from '../../img/logo_4.png';
+import { Link } from "react-router-dom";
 
 export default function Topbar({user, setToken}) {
     console.log(user);
@@ -26,14 +27,15 @@ export default function Topbar({user, setToken}) {
                         </div>
                     </li>
                     <li>
-                        <div className='user-current'>
-                            <span className='user-img'>
-                                <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="" className="topAvatar" />
-                                <span className="status online"></span>
-                            </span>    
-                            <span className='username'>{user?.name}</span>
-                        </div>
-                        
+                        <Link to={"/dashboard/my-profile/"} className='link'>
+                            <div className='user-current'>
+                                <span className='user-img'>
+                                    <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="" className="topAvatar" />
+                                    <span className="status online"></span>
+                                </span>    
+                                <span className='username'>{user?.name}</span>
+                            </div>
+                        </Link>
                     </li>
                     
                 </ul>
