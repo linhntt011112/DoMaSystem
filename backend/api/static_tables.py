@@ -1,3 +1,4 @@
+from os import name
 import traceback
 from loguru import logger
 from fastapi import Depends, FastAPI, APIRouter, HTTPException, status, Query
@@ -19,9 +20,10 @@ from database.schemas import static_tables as schema_static_tables
 from .utils import Hasher
 from .import exceptions
 from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
-from .core.user import (
-    get_current_user, get_current_active_user,
-)
+from .core import user as user_core
+
+get_current_active_user = user_core.get_current_active_user
+
 
 
 router = APIRouter()
@@ -34,6 +36,8 @@ name_to_db_model = {
     'quoc_tich': db_models.QuocTich,
     'ton_giao': db_models.TonGiao
 }
+
+id_name_to_db_model = {'id_' + k: name_to_db_model[k] for k in name_to_db_model}
 
 name_to_schema = {
     'phong_ban': schema_static_tables.PhongBanFull,

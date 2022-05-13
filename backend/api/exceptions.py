@@ -1,5 +1,7 @@
 from http.client import BAD_REQUEST
 from fastapi import status, HTTPException
+import sqlalchemy
+import traceback
 
 
 def make_exceptions(status_code, msg=''):
@@ -45,5 +47,18 @@ UNPROCESSABLE_ENTITY = lambda msg='Unprocessable entity!': HTTPException(
 
 
 
-class ResourceNotFoundException(Exception):
-    pass
+def filter_duplicate_entry_error(e: Exception):
+    if isinstance(e, sqlalchemy.exc.IntegrityError) and str(e.args[0]).startswith("(mysql.connector.errors.IntegrityError) 1062 (23000)"):
+        return True
+    
+    return False
+
+
+def handle_simple_exception(e: Exception, logger):
+    error_message = str(e)
+    
+    if not isinstance(e, HTTPException):
+        logger.error(f'{error_message}: {traceback.format_exc()}')
+        raise INTERNAL_SERVER_ERROR(error_message)
+    else:    
+        raise e

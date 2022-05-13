@@ -9,7 +9,6 @@ import typing as t
 
 from typing import Optional, Union
 from pydantic import BaseModel
-from database.db_models.static_tables import PhanQuyen
 
 from database import db_models, common_queries
 from database.db import get_db
@@ -19,8 +18,9 @@ from database.schemas import nguoi_dung as user_schemas
 from .utils import Hasher
 from .import exceptions
 from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from .core import user as user_core
 from .core.user import (
-    get_current_user, get_current_active_user,
+    get_current_user, get_current_active_user, create_user as create_user_core
 )
 
 
@@ -36,10 +36,10 @@ async def read_users_me(current_user = Depends(get_current_active_user)):
 
 
 @router.get("/list")
-async def get_list_users(current_user:db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db),
+async def get_list_users(current_user = Depends(get_current_active_user), db=Depends(get_db),
                         limit: int=10, offset: int=0,
                         order_by=None):    
-    if current_user.phan_quyen == PhanQuyen.admin:
+    if current_user.phan_quyen == db_models.PhanQuyen.admin:
         users = crud_user.select_list_user(db, limit=limit, offset=offset)
         return [user_schemas.UserBase.from_orm(user) for user in users]
     else:
@@ -48,7 +48,7 @@ async def get_list_users(current_user:db_models.NguoiDung = Depends(get_current_
 
 @router.get("/id/{user_id}")
 async def get_user_by_id(user_id: int, current_user = Depends(get_current_active_user), db=Depends(get_db)):
-    if current_user.phan_quyen == PhanQuyen.admin:
+    if current_user.phan_quyen == db_models.PhanQuyen.admin:
         user = crud_user.get_user_by_id(db, user_id)
         if user is not None:
             return user_schemas.UserBase.from_orm(user)
@@ -58,42 +58,56 @@ async def get_user_by_id(user_id: int, current_user = Depends(get_current_active
         raise exceptions.PERMISSION_EXCEPTION()
 
 
-# @router.post("/register")
-# async def create_user(user_register: user_schemas.UserRegister, db=Depends(get_db)):
-#     try:
-#         user = await create_user_core(db, user_register)
-#         if user is None:
-#             raise Exception()
-#         return user_schemas.UserBase.from_orm(user)
-#     except Exception as e:
-#         logger.error(str(e))
-#         # traceback.print_stack()
-#         full_error =  ''
-#         # logger.error(full_error)
-
-#         return {'error': full_error}
+@router.post("/create")
+async def create_user(user_register: user_schemas.UserCreate, db=Depends(get_db), 
+                      current_user=Depends(get_current_active_user)):
+    if current_user.phan_quyen != db_models.PhanQuyen.admin:
+        raise exceptions.PERMISSION_EXCEPTION()
+    
+    try:
+        user, plain_password = await create_user_core(db, user_register, create_password=True)
+        user_schema = user_schemas.UserBaseFirstTime.from_orm(user)
+        user_schema.plain_password = plain_password
+        return user_schema
+        
+    except Exception as e:
+        error_message = str(e)
+        # logger.info(type(e))
+        if exceptions.filter_duplicate_entry_error(e):
+            error_message = 'Duplicate ten_tai_khoan!'
+            
+        if not isinstance(e, HTTPException):
+            logger.error(f'{error_message}: {traceback.format_exc()}')
+            raise exceptions.INTERNAL_SERVER_ERROR(error_message)
+        else:
+            raise e
     
 
-# @router.put("/update_info")
-# async def update_info_user(user_edit: user_schemas.UserEdit, current_user = Depends(get_current_active_user), db=Depends(get_db)):
-#     pass
-#     # role_name = "admin"
-#     # is_authorized = authorize_user_by_role_name(db, current_user, role_name)
-#     # if is_authorized:
-#     #     user = crud_user.get_user_by_id(db, user_id)
-#     #     if user is not None:
-#     #         return user_schemas.UserBase.from_orm(user)
-#     #     else:
-#     #         raise HTTPException(
-#     #             status_code=status.HTTP_404_NOT_FOUND,
-#     #             detail=f"Can not find user with id = {user_id}",
-#     #             headers={"WWW-Authenticate": "Bearer"},
-#     #         ) 
-#     # else:
-#     #     raise PERMISSION_EXCEPTION
+
+@router.put("/update_password")
+async def update_info_user(user_update_password: user_schemas.UserUpdatePassword,
+    current_user=Depends(get_current_active_user), db=Depends(get_db)):
+    if current_user.id != user_update_password.id:
+        raise exceptions.PERMISSION_EXCEPTION()
+    try:
+        current_user = user_core.update_password(db, current_user, user_update_password)
+        return current_user
+    
+    except Exception as e:
+        return exceptions.handle_simple_exception(e, logger)
+    
 
 
 
-# @router.delete("/delete_user/{user_id}")
-# async def delete_user_by_id(current_user = Depends(get_current_active_user), db=Depends(get_db)):
-#     pass
+@router.delete("/delete_user/{user_id}")
+async def delete_user_by_id(user_id: int, current_user = Depends(get_current_active_user), db=Depends(get_db)):
+    if current_user.phan_quyen == db_models.PhanQuyen.admin:
+        try:
+            is_success = crud_user.delete_user_by_id(db, user_id)
+            if not is_success:
+                raise exceptions.INTERNAL_SERVER_ERROR(f"Can not delete user with id={user_id}")
+            return True
+        except Exception as e:
+            return exceptions.handle_simple_exception(e, logger)
+    else:
+        raise exceptions.PERMISSION_EXCEPTION()

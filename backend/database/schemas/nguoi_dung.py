@@ -28,7 +28,7 @@ class UserBase(BaseModel):
     noi_cap: str = None
     que_quan: str = None
 
-    tk_ngan_hang: str
+    tk_ngan_hang: str = None
     ngan_hang: str = None
 
     phong_ban: static_tables.PhongBanFull = None
@@ -40,32 +40,70 @@ class UserBase(BaseModel):
     
     class Config:
         orm_mode = True
+        
+
+class UserBaseFirstTime(UserBase):
+    plain_password: str = None
 
 
 class UserCreate(BaseModel):
     ho_ten: str
     ten_tai_khoan: str
-    password: Optional[str] = None
-    ngay_sinh: Union[datetime.datetime, datetime.date] = None
-    ngay_cap_nhat: Union[datetime.datetime, datetime.date]
-    ngay_vao_lam: Union[datetime.datetime, datetime.date] = None
+    password: str = None
+    # password_salt: str
+    ngay_sinh: Union[datetime.datetime, datetime.date]
+    dia_chi: str = None
+    # ngay_cap_nhat: Union[datetime.datetime, datetime.date]
+    ngay_vao_lam: Union[datetime.datetime, datetime.date]
     dien_thoai: str = None
     email: str = None
 
     phan_quyen: PhanQuyen.type 
-    gioi_tinh: GioiTinh.type = None
+    gioi_tinh: GioiTinh.type
 
     cccd: str
     ngay_cap: Union[datetime.datetime, datetime.date] = None
     noi_cap: str = None
     que_quan: str = None
 
-    tk_ngan_hang: str
+    tk_ngan_hang: str = None
     ngan_hang: str = None
 
-    phong_ban: str = None
-    chuc_vu: str = None
-    hoc_van: str = None
-    dan_toc: str = None
-    quoc_tich: str = None
-    ton_giao: str = None
+    id_phong_ban: int = None
+    id_chuc_vu: int = None
+    id_hoc_van: int = None
+    id_dan_toc: int = None
+    id_quoc_tich: int = None
+    id_ton_giao: int = None
+    
+    
+class UserUpdateInfo(BaseModel):
+    id: int
+    dia_chi: str = None
+    ngay_vao_lam: Union[datetime.datetime, datetime.date] = None
+    dien_thoai: str = None
+    email: str = None
+
+    phan_quyen: PhanQuyen.type 
+    # gioi_tinh: GioiTinh.type
+
+
+    ngay_cap: Union[datetime.datetime, datetime.date] = None
+    noi_cap: str = None
+    que_quan: str = None
+
+    tk_ngan_hang: str = None
+    ngan_hang: str = None
+
+
+    id_hoc_van: int = None
+    id_dan_toc: int = None
+    id_quoc_tich: int = None
+    id_ton_giao: int = None
+
+
+class UserUpdatePassword(BaseModel):
+    id: int
+    current_plain_password: str 
+    new_plain_password: str
+    
