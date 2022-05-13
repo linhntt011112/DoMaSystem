@@ -61,36 +61,36 @@ const Login = () => {
 
   return (
     <section id="login-page"> 
-      <form id="loginForm" name='loginForm' onSubmit={handleSubmit}>
+      <form id="loginForm" className='loginForm' onSubmit={handleSubmit}>
         <img src={Logo} alt='' className='logo'/>
         <h2>
           Welcome!
         </h2>
         <fieldset>
-          <legend>Log In</legend>
+          <legend>Đăng nhập</legend>
           <ul>
             <li>
-              <label for="username">Username:</label>
+              <label for="username">Tên tài khoản</label>
               <input 
                 type="text" 
                 id="username" 
-                name="username"
+                className="username"
                 onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </li>
             <li>
-              <label for="password">Password:</label>
+              <label for="password">Mật khẩu</label>
               <input 
                 type="password" 
                 id="password" 
-                name="password"
+                className="password"
                 onChange={(e) => setPassword(e.target.value)}
               required/>
             </li>
           </ul>
         </fieldset>
-        <button type="submit">Login</button>
+        <button type="submit">Đăng nhập</button>
       </form>
     </section>
   );

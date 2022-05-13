@@ -63,6 +63,7 @@ section#login-page {
           label {
             text-align: left;
             padding-bottom: 2px;
+            width: 95px;
           }
           input {
             padding: 5px;
@@ -100,7 +101,7 @@ section#login-page {
           label {
             padding-right: 10px;
             padding-bottom: 0;
-            text-align: right !important;
+            text-align: left !important;
           }
         }
       }

@@ -1,0 +1,82 @@
+.edit-my-profile-popup-inner{
+    position: relative;
+    padding: 32px;
+    /* width: 100%; */
+    background-color: #FFF;
+    overflow: scroll;
+}
+
+.edit-my-profile-Update{
+    flex: 2;
+}
+
+.edit-my-profile-Header{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+
+.edit-my-profile-Title{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.edit-my-profile-Right{
+    display: flex;
+    justify-content: center;
+}
+
+.edit-my-profile-Upload{
+    display: flex;
+    align-items: center;
+}
+
+.edit-my-profile-Img{
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    cursor: pointer;
+}
+
+.edit-my-profile-Item{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+::placeholder{
+    margin-left: 5px;
+}
+
+.edit-my-profile-Item>label{
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.edit-my-profile-Input{
+    width: 250px;
+    height: 30px;
+    box-shadow: none;
+    font-size: 15px;
+}
+
+.edit-my-profile-Footer{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.edit-my-profile-Button{
+    cursor: pointer;
+    background-color: #ff9b44;
+    border: 1px solid #ff9b44;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    min-width: 200px;
+    padding: 10px 20px;
+    color: white;
+}
