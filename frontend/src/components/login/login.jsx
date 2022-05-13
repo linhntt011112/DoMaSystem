@@ -50,7 +50,7 @@ const Login = () => {
       history.push("/");
     }
     else{
-      alert("Wrong username or password!")
+      alert("Tên người dùng hoặc mật khẩu sai!")
     }
   };
 

@@ -107,6 +107,7 @@ export default function EditMyProfile(props) {
         console.log(gioi_tinh);
         console.log(ngay_cap);
         console.log(hoc_van);
+        console.log(dien_thoai);
     }
 
     return (props.trigger) ? (
@@ -175,6 +176,7 @@ export default function EditMyProfile(props) {
                                             pattern='^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$'
                                             onChange={(e) => setTenTaiKhoan(e.target.value)}
                                         />
+                                        <span className='edit-my-profile-errorMessage'>Tên người dùng không hợp lệ</span>
                                     </div>
                                 </Col>
                                 <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
@@ -240,7 +242,7 @@ export default function EditMyProfile(props) {
                                                 e.preventDefault();
                                             }}
                                             defaultValue={userData.ngay_sinh}
-                                            onChange={(date) => setNgaySinh(date)}
+                                            onChange={(e) => setNgaySinh(e.target.value)}
                                         />
                                     </div>
                                 </Col>
@@ -258,6 +260,7 @@ export default function EditMyProfile(props) {
                                             className='edit-my-profile-Input'
                                             required
                                             onChange={(e) => setCCCD(e.target.value)}
+                                            onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
                                         />
                                     </div>
                                 </Col>
@@ -333,7 +336,7 @@ export default function EditMyProfile(props) {
                                                 e.preventDefault();
                                             }}
                                             defaultValue={userData.ngay_vao_lam}
-                                            onChange={(date) => setNgayVaoLam(date)}
+                                            onChange={(e) => setNgayVaoLam(e.target.value)}
                                         />
                                     </div>
                                 </Col>

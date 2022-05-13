@@ -86,10 +86,9 @@
     margin-top: 40px;
 }
 
-.edit-popup-inner{
+.edit-user-popup-inner{
     position: relative;
     padding: 32px;
-    width: 100%;
     /* max-width: fit-content; */
     background-color: #FFF;
     overflow: scroll;
