@@ -87,64 +87,59 @@ export default function AddUserPopup(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         submitAddUser();
-        setNgaySinh(null);
-        setPhanQuyen(false);
-        setGioiTinh(false);
-        setNgayVaoLam(null);
-        setNgayCap(null);
-
-        // const body = JSON.stringify({
-        //     name: name,
-        //     description: description
-        // });
-
-        // backend_config.makeRequest("POST", 
-        //     backend_config.COMPANY_POST_CREATE, 
-        //     props.token,
-        //     body
-        // )
-        // .then((response) => {
-        //     if (response.ok){
-        //         response.json().then((response_json) => {
-        //             props.setTrigger(false);
-        //             props.fetchDataToTable();
-        //         })
-        //     }
-        //     else {
-        //         response.text().then((text) => {
-        //             // console.log(`Duplicate ${name}!`);
-        //             alert(langPack["Duplicate company name: \"{name}\" !"].replace("{name}", name));
-        //         })
-        //     }
-        // })
-
-        props.setTrigger(false);
-        console.log(ngay_sinh);
+        // setNgaySinh(null);
+        // setPhanQuyen(false);
+        // setGioiTinh(false);
+        // setNgayVaoLam(null);
+        // setNgayCap(null);
     }
 
-    const submitAddUser = async() => {
-        let form = new FormData();
-        form.append("ho_ten", ho_va_ten);
-        form.append("ten_tai_khoan", ten_tai_khoan);
-        form.append("gioi_tinh", gioi_tinh === true ? "Nu" : "Nam");
-        form.append("phan_quyen", phan_quyen === true ? "admin" : "user");
-        form.append("dien_thoai", dien_thoai);
-        form.append("email", email);
-        form.append("ngay_sinh", ngay_sinh);
-        form.append("cccd", cccd);
-        form.append("ngay_cap", ngay_cap);
-        form.append("noi_cap", noi_cap);
-        form.append("dia_chi", dia_chi);
-        form.append("que_quan", que_quan);
-        form.append("ngay_vao_lam", ngay_vao_lam);
-        form.append("id_phong_ban", phong_ban);
-        form.append("id_chuc_vu", chuc_vu);
-        form.append("tk_ngan_hang", tk_ngan_hang);
-        form.append("ngan_hang", ngan_hang);
-        form.append("id_hoc_van", hoc_van);
-        form.append("id_dan_toc", dan_toc);
-        form.append("id_quoc_tich", quoc_tich);
-        form.append("id_ton_giao", ton_giao);
+    const submitAddUser = () => {
+        const body = JSON.stringify({
+            ho_ten: ho_va_ten,
+            ten_tai_khoan: ten_tai_khoan,
+            ngay_sinh: ngay_sinh,
+            dia_chi: dia_chi,
+            ngay_vao_lam: ngay_vao_lam,
+            dien_thoai: dien_thoai,
+            email: email,
+            phan_quyen: phan_quyen === true ? "admin" : "user",
+            gioi_tinh: gioi_tinh === true ? "Nu" : "Nam",
+            cccd: cccd,
+            ngay_cap: ngay_cap,
+            noi_cap: noi_cap,
+            que_quan: que_quan,
+            tk_ngan_hang: tk_ngan_hang,
+            ngan_hang: ngan_hang,
+            id_phong_ban: phong_ban,
+            id_chuc_vu: chuc_vu,
+            id_hoc_van: hoc_van,
+            id_dan_toc: dan_toc,
+            id_quoc_tich: quoc_tich,
+            id_ton_giao: ton_giao
+        });
+
+        backend_config.makeRequest("POST", 
+            backend_config.USER_POST_CREATE, 
+            props.token,
+            body
+        )
+        .then((response) => {
+            if (response.ok){
+                response.json().then((response_json) => {
+                    console.log(response_json);
+                    props.setTrigger(false);
+                })
+            }
+            else {
+                response.text().then((text) => {
+                    // console.log(`Duplicate ${name}!`);
+                    alert(text);
+                })
+            }
+        })
+
+        // props.setTrigger(false);
     }
    
     return (props.trigger) ? (
