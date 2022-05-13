@@ -14,7 +14,7 @@ const AdminRoute = ({component: Component, ...rest}) => {
     // console.log(userPermission, 'in user route');
 
     const allUserPermissions = new Set(['user', 'admin']);
-    // console.log(location, !userPermission, !allUserPermissions.has(userPermission))
+    // console.log(userPermission, !allUserPermissions.has(userPermission), user);
     if(!userPermission || !allUserPermissions.has(userPermission)) {
         // history.push('/login');
         return <Redirect to='/login' state ={{from : location}}/>;

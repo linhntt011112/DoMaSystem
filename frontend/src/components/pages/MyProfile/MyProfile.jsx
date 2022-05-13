@@ -16,7 +16,7 @@ export default function MyProfile(props) {
     const [userData, setUserData] = useState("");
 
     useEffect(() => {
-        backend_config.makeRequest("GET", backend_config.USER_GET_BY_ID_API.replace('{id}', userId), token)
+        backend_config.makeRequest("GET", backend_config.USER_GET_CURRENT_API, token)
           .then((data) => data.json())
           .then((data) => setUserData(data))
     }, [])

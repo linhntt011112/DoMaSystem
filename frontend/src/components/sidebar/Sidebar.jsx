@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 export default function Sidebar({user, setToken}) {
 
     let history = useHistory();
-    console.log(user);
+    // console.log(user);
 
     const handleLogoutClick = () => {
     
