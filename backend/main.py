@@ -9,7 +9,7 @@ from config import server_config
 
 LOG_LEVEL = logging.getLevelName(os.environ.get("LOG_LEVEL", "DEBUG"))
 JSON_LOGS = True if os.environ.get("JSON_LOGS", "0") == "1" else False
-
+pid = str(os.getpid())
 
 class InterceptHandler(logging.Handler):
     def emit(self, record):
