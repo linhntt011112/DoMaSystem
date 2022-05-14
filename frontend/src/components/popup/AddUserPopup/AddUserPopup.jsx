@@ -147,7 +147,6 @@ export default function AddUserPopup(props) {
    
     return (props.trigger) ? (
         <div className="popup-main">
-            {/* <OutsideAlerter setTrigger={props.setTrigger}> */}
                 <form className="add-user-popup-inner" onSubmit={handleSubmit}>
                     <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                     <h5 className='modal-title'>Thêm mới nhân viên</h5>
@@ -234,18 +233,13 @@ export default function AddUserPopup(props) {
                                     <label>
                                         Ngày sinh
                                     </label>
-                                    <DatePicker 
-                                        className='datepicker'
-                                        selected={ngay_sinh} 
-                                        onChange={(date) => setNgaySinh(date)}
-                                        format='dd/MM/yyyy'
-                                        isClearable
-                                        yearDropdownItemNumber={100}
-                                        scrollableYearDropdown={true}
-                                        showYearDropdown
+                                    <input 
+                                        type="date" 
+                                        className='datepicker' 
                                         onKeyDown={(e) => {
                                             e.preventDefault();
                                         }}
+                                        onChange={(e) => setNgaySinh(e.target.value)}
                                     />
                                 </div>
                             </Col>
@@ -268,14 +262,13 @@ export default function AddUserPopup(props) {
                                     <label>
                                         Ngày cấp
                                     </label>
-                                    <DatePicker 
-                                        className='datepicker'
-                                        selected={ngay_cap} 
-                                        onChange={(date) => setNgayCap(date)}
-                                        dateFormat='dd/MM/yyyy'
-                                        isClearable
-                                        showYearDropdown
-                                        scrollableMonthYearDropdown
+                                    <input 
+                                        type="date" 
+                                        className='datepicker' 
+                                        onKeyDown={(e) => {
+                                            e.preventDefault();
+                                        }}
+                                        onChange={(e) => setNgayCap(e.target.value)}
                                     />
                                 </div>
                             </Col>
@@ -325,14 +318,13 @@ export default function AddUserPopup(props) {
                                     <label>
                                         Ngày vào làm
                                     </label>
-                                    <DatePicker 
-                                        className='datepicker'
-                                        selected={ngay_vao_lam} 
-                                        onChange={(date) => setNgayVaoLam(date)}
-                                        dateFormat='dd/MM/yyyy'
-                                        isClearable
-                                        showYearDropdown
-                                        scrollableMonthYearDropdown
+                                    <input 
+                                        type="date" 
+                                        className='datepicker' 
+                                        onKeyDown={(e) => {
+                                            e.preventDefault();
+                                        }}
+                                        onChange={(e) => setNgayVaoLam(e.target.value)}
                                     />
                                 </div>
                             </Col>
@@ -508,7 +500,7 @@ export default function AddUserPopup(props) {
                         <button className='userAddButtonSubmit' >Thêm</button>
                     </div>
                 </form>
-            {/* </OutsideAlerter> */}
+            
         </div>
     ) : "";
 };

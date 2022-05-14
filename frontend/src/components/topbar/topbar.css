@@ -155,3 +155,30 @@
     cursor: pointer;
 }
 
+.change-password-icon-Container{
+    position: relative;
+    cursor: pointer;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.change-password-text{
+    visibility: hidden;
+    width: 120px;
+    background-color: rgb(57, 57, 48);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    position: absolute;
+    z-index: 1;
+}
+
+.change-password-icon-Container:hover .change-password-text{
+    visibility: visible;
+    display: table-column;
+    left: -45px;
+}
+
+

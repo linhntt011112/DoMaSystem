@@ -1,6 +1,6 @@
 import React from 'react'
 import "./topbar.css"
-import { NotificationsNone} from '@material-ui/icons';
+import { NotificationsNone, Settings} from '@material-ui/icons';
 import Logo from '../../img/logo_4.png';
 import { Link } from "react-router-dom";
 
@@ -25,6 +25,11 @@ export default function Topbar({user, setToken}) {
                             <NotificationsNone/>
                             <span className='topIconBadge'>2</span>
                         </div>
+                    </li>
+                    <li className='change-password-icon-Container'>
+                        <Settings>
+                        </Settings>
+                        <span class="change-password-text">Change password</span>
                     </li>
                     <li>
                         <Link to={"/dashboard/my-profile/"} className='link'>

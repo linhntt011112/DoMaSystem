@@ -80,3 +80,14 @@
     padding: 10px 20px;
     color: white;
 }
+
+.edit-my-profile-errorMessage{
+    font-size: 12px;
+    padding: 3px;
+    color: red;
+    display: none;
+}
+
+.edit-my-profile-Input:invalid ~ .edit-my-profile-errorMessage{
+    display: block;
+}

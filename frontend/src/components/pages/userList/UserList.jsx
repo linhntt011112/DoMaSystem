@@ -6,11 +6,14 @@ import { Link } from "react-router-dom";
 import AddUserPopup from "../../popup/AddUserPopup/AddUserPopup";
 import { Button } from '@mui/material';
 import * as backend_config from "../../../config/backend"
+import { DeletePopup } from '../../popup/Dialog/dialog';
 
 export default function UserList(props) {
     const token = props.token;
 
     const [buttonPopup, setButtonPopup] = useState(false);
+    const [mark, setMark] = useState(null);
+    const [buttonDeletePopup, setButtonDeletePopup] = useState(false);
 
     const handleDelete = (id)=>{
         setTableData(tableData.filter(item=>item.id !== id));
@@ -52,7 +55,9 @@ export default function UserList(props) {
                         <Link to={"/dashboard/user/"+params.row.id} params={{id: params.row.id}}>
                             <button className='userListEdit'>Chi tiết</button>
                         </Link>       
-                        <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.id)}/>
+                        <DeleteOutline className='userListDelete' onClick={()=>{setMark(params.row.id); setButtonDeletePopup(true)}}/>
+                        <DeletePopup trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} token={token} mark={mark} handleDelete={handleDelete} id={params.row.id}>
+                        </DeletePopup>
                     </>
                     
                 )

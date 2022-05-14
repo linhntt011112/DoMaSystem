@@ -16,16 +16,17 @@ export default function MyProfile(props) {
           .then((data) => setUserData(data))
     }, [])
 
-    return (
+    return  (
         <div className='my-profile'>
             <main>
                 <div className='my-profile-TitleContainer'>
                     <h1 className='my-profile-Title'>Thông tin cá nhân</h1>   
+                    {userData !== "" &&
                     <div>
                         <button className='my-profile-Edit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
                             <EditMyProfile trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token}>
                             </EditMyProfile>
-                        </div>     
+                    </div>   }
                 </div>
                 <div className='my-profile-Container'>
                     <div className='my-profile-Show'>

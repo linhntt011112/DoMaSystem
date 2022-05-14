@@ -54,8 +54,8 @@ export default function EditUserPopup(props) {
 
     return (props.trigger) ? (
         <div className="popup-main">
-            <OutsideAlerter setTrigger={props.setTrigger}>
-                <form className="edit-popup-inner" onSubmit={handleSubmit}>
+            
+                <form className="edit-user-popup-inner" onSubmit={handleSubmit}>
                     <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                     <div className='userUpdate'>
                         <div className='userUpdateHeader'>
@@ -359,7 +359,7 @@ export default function EditUserPopup(props) {
                         </div>
                     </div>
                 </form>
-            </OutsideAlerter>
+            
         </div>
     ) : "";
 }
