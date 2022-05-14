@@ -12,6 +12,10 @@ db_config = DBConfig()
 
 class FrontEndConfig:
     URL = 'http://localhost:3008'
+    
+    possible_urls = [
+        "*"
+    ]
 
 frontend_config = FrontEndConfig()
 

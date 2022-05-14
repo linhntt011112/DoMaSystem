@@ -118,14 +118,17 @@ export default function AddUserPopup(props) {
             id_quoc_tich: quoc_tich,
             id_ton_giao: ton_giao
         });
+        // console.log(body);
 
         backend_config.makeRequest("POST", 
             backend_config.USER_POST_CREATE, 
-            props.token,
+            token,
             body
         )
         .then((response) => {
+            console.log(body);
             if (response.ok){
+                console.log(body);
                 response.json().then((response_json) => {
                     console.log(response_json);
                     props.setTrigger(false);
@@ -144,7 +147,7 @@ export default function AddUserPopup(props) {
    
     return (props.trigger) ? (
         <div className="popup-main">
-            <OutsideAlerter setTrigger={props.setTrigger}>
+            {/* <OutsideAlerter setTrigger={props.setTrigger}> */}
                 <form className="add-user-popup-inner" onSubmit={handleSubmit}>
                     <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                     <h5 className='modal-title'>Thêm mới nhân viên</h5>
@@ -502,10 +505,10 @@ export default function AddUserPopup(props) {
                         </Row>
                     </Container>
                     <div className='modal-footer'>
-                        <button className='userAddButtonSubmit'>Thêm</button>
+                        <button className='userAddButtonSubmit' >Thêm</button>
                     </div>
                 </form>
-            </OutsideAlerter>
+            {/* </OutsideAlerter> */}
         </div>
     ) : "";
 };

@@ -113,7 +113,7 @@ def verify_static_attr(class_, attr_):
 
 
 
-async def create_user(db, user_schema_model: user_schemas.UserCreate, create_password=True):
+def create_user(db, user_schema_model: user_schemas.UserCreate, create_password=True):
     random_number = random.randint(0, 10000)
     password_salt = hashlib.md5((user_schema_model.email + str(datetime.datetime.now()) + str(random_number)).encode()).hexdigest()
     

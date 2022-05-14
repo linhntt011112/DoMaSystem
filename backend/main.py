@@ -43,22 +43,25 @@ def setup_logging(log_file='log/app_log.log'):
     # configure loguru
     sys.stdout.reconfigure(encoding='utf-8') 
     logger.configure(handlers=[{"sink": sys.stdout, "serialize": JSON_LOGS}])
-    logger.add(log_file, rotation="50 MB", level=logging.INFO, encoding="utf8")
-    
+    format = "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <yellow>" + pid+"</yellow> |<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>"
+    logger.add(log_file, rotation="5 GB", level=logging.INFO, encoding="utf8", format=format)    
 
 
-if __name__ == '__main__':
-    server = Server(
-        Config(
-            "app:app",
-            host=server_config.host,
-            port=server_config.port,
-            log_level=LOG_LEVEL,
-        ),
-    )
+# if __name__ == '__main__':
+#     server = Server(
+#         Config(
+#             "app:app",
+#             host=server_config.host,
+#             port=server_config.port,
+#             log_level=LOG_LEVEL,
+#         ),
+#     )
 
-    # setup logging last, to make sure no library overwrites it
-    # (they shouldn't, but it happens)
-    setup_logging()
+#     # setup logging last, to make sure no library overwrites it
+#     # (they shouldn't, but it happens)
+#     setup_logging()
 
-    server.run()
+#     server.run()
+
+setup_logging(server_config.log_file)
+from app import app

@@ -65,12 +65,13 @@ async def create_user(user_register: user_schemas.UserCreate, db=Depends(get_db)
         raise exceptions.PERMISSION_EXCEPTION()
     
     try:
-        user, plain_password = await create_user_core(db, user_register, create_password=True)
+        user, plain_password = create_user_core(db, user_register, create_password=True)
         user_schema = user_schemas.UserBaseFirstTime.from_orm(user)
         user_schema.plain_password = plain_password
         return user_schema
         
     except Exception as e:
+        # db.rollback()
         error_message = str(e)
         # logger.info(type(e))
         if exceptions.filter_duplicate_entry_error(e):
@@ -94,6 +95,7 @@ async def update_info_user(user_update_password: user_schemas.UserUpdatePassword
         return current_user
     
     except Exception as e:
+        # db.rollback()
         return exceptions.handle_simple_exception(e, logger)
     
 
@@ -108,6 +110,7 @@ async def delete_user_by_id(user_id: int, current_user = Depends(get_current_act
                 raise exceptions.INTERNAL_SERVER_ERROR(f"Can not delete user with id={user_id}")
             return True
         except Exception as e:
+            # db.rollback()
             return exceptions.handle_simple_exception(e, logger)
     else:
         raise exceptions.PERMISSION_EXCEPTION()

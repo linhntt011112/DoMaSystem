@@ -14,7 +14,9 @@ export const STATIC_TABLE_GET_LIST = BACKEND_URL + '/{static_table_name}/list';
 export const makeRequest = async (method, url, token, body=null, contentType="application/json", delete_contentType=false) => {
   let requestOptions = {
     method: method,
+    // mode: 'no-cors',
     headers: {
+      // "Access-Control-Request-Private-Network": true,
       "Content-Type": contentType,
       Authorization: "Bearer " + token,
     },
