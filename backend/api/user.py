@@ -59,18 +59,20 @@ async def get_user_by_id(user_id: int, current_user = Depends(get_current_active
 
 
 @router.post("/create")
-async def create_user(user_register: user_schemas.UserCreate, db=Depends(get_db), 
+async def create_user(user_register: user_schemas.UserCreate, 
                       current_user=Depends(get_current_active_user)):
+    logger.info(user_register)
     if current_user.phan_quyen != db_models.PhanQuyen.admin:
         raise exceptions.PERMISSION_EXCEPTION()
     
     try:
-        user, plain_password = await create_user_core(db, user_register, create_password=True)
+        user, plain_password = create_user_core(db, user_register, create_password=True)
         user_schema = user_schemas.UserBaseFirstTime.from_orm(user)
         user_schema.plain_password = plain_password
         return user_schema
         
     except Exception as e:
+        # db.rollback()
         error_message = str(e)
         # logger.info(type(e))
         if exceptions.filter_duplicate_entry_error(e):
@@ -81,6 +83,37 @@ async def create_user(user_register: user_schemas.UserCreate, db=Depends(get_db)
             raise exceptions.INTERNAL_SERVER_ERROR(error_message)
         else:
             raise e
+        
+        
+@router.post("/test")
+async def create_user(user_register: user_schemas.UserCreate, 
+                    #   current_user=Depends(get_current_active_user), db=Depends(get_db)
+                      ):
+    logger.info(user_register)
+    return user_register
+    # db=Depends(get_db)
+    # db = get_db()
+    # if current_user.phan_quyen != db_models.PhanQuyen.admin:
+    #     raise exceptions.PERMISSION_EXCEPTION()
+    
+    # try:
+    #     user, plain_password = create_user_core(db, user_register, create_password=True)
+    #     user_schema = user_schemas.UserBaseFirstTime.from_orm(user)
+    #     user_schema.plain_password = plain_password
+    #     return user_schema
+        
+    # except Exception as e:
+    #     # db.rollback()
+    #     error_message = str(e)
+    #     # logger.info(type(e))
+    #     if exceptions.filter_duplicate_entry_error(e):
+    #         error_message = 'Duplicate ten_tai_khoan!'
+            
+    #     if not isinstance(e, HTTPException):
+    #         logger.error(f'{error_message}: {traceback.format_exc()}')
+    #         raise exceptions.INTERNAL_SERVER_ERROR(error_message)
+    #     else:
+    #         raise e
     
 
 
@@ -94,6 +127,7 @@ async def update_info_user(user_update_password: user_schemas.UserUpdatePassword
         return current_user
     
     except Exception as e:
+        # db.rollback()
         return exceptions.handle_simple_exception(e, logger)
     
 
@@ -108,6 +142,7 @@ async def delete_user_by_id(user_id: int, current_user = Depends(get_current_act
                 raise exceptions.INTERNAL_SERVER_ERROR(f"Can not delete user with id={user_id}")
             return True
         except Exception as e:
+            # db.rollback()
             return exceptions.handle_simple_exception(e, logger)
     else:
         raise exceptions.PERMISSION_EXCEPTION()

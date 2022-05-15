@@ -16,6 +16,7 @@ engine = create_engine(db_config.DB_URL,
 Session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 
 def get_db():
+    # print("get_db")
     try:
         db = Session()
         yield db

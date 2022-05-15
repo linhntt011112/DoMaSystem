@@ -3,7 +3,7 @@ backend/__pycache__/
 backend/database/db-data/
 backend/database/__pycache__/
 backend/database/models/__pycache__/
-backend/log/app_log.log
+backend/log
 backend/test.ipynb
 **/__pycache__/
 

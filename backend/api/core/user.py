@@ -97,6 +97,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db=Depends(get_d
     user = crud_user.get_user(db, ten_tai_khoan=token_data.username)
     if user is None:
         raise credentials_exception
+    # logger.debug(user)
     return user
 
 
@@ -113,7 +114,7 @@ def verify_static_attr(class_, attr_):
 
 
 
-async def create_user(db, user_schema_model: user_schemas.UserCreate, create_password=True):
+def create_user(db, user_schema_model: user_schemas.UserCreate, create_password=True):
     random_number = random.randint(0, 10000)
     password_salt = hashlib.md5((user_schema_model.email + str(datetime.datetime.now()) + str(random_number)).encode()).hexdigest()
     

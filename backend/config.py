@@ -12,6 +12,10 @@ db_config = DBConfig()
 
 class FrontEndConfig:
     URL = 'http://localhost:3008'
+    
+    possible_urls = [
+        "*"
+    ]
 
 frontend_config = FrontEndConfig()
 
@@ -19,5 +23,6 @@ frontend_config = FrontEndConfig()
 class ServerConfig:
     host = '0.0.0.0'
     port = 3009
+    log_file = 'log/app_log.log'
 
 server_config = ServerConfig()

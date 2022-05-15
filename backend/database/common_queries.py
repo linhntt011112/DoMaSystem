@@ -1,20 +1,19 @@
 from collections import Iterable
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, scoped_session
 
 
 from database import db_models
-from database.db import get_session
 
 
-def query_all(session: Session, class_name):
+def query_all(session: scoped_session, class_name):
     res = session.query(class_name).all()
     # Session.remove()
     
     return res
 
 
-def query_filter(session: Session, class_name, condition):
+def query_filter(session: scoped_session, class_name, condition):
     res = session.query(class_name).filter(condition).all()
     # Session.remove()
     
@@ -25,7 +24,7 @@ def query_filter(session: Session, class_name, condition):
 #     res = session.query(class_name).update()
   
 
-def add_and_commit(session: Session, data):
+def add_and_commit(session: scoped_session, data):
     try:
         session.add(data)
         session.commit()
