@@ -97,6 +97,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db=Depends(get_d
     user = crud_user.get_user(db, ten_tai_khoan=token_data.username)
     if user is None:
         raise credentials_exception
+    # logger.debug(user)
     return user
 
 
