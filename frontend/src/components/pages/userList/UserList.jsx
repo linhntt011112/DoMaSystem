@@ -7,6 +7,8 @@ import AddUserPopup from "../../popup/AddUserPopup/AddUserPopup";
 import { Button } from '@mui/material';
 import * as backend_config from "../../../config/backend"
 import { DeletePopup } from '../../popup/Dialog/dialog';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function UserList(props) {
     const token = props.token;
@@ -112,6 +114,7 @@ export default function UserList(props) {
             </main>
             <AddUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} token={token}>
             </AddUserPopup>
+            <ToastContainer />
         </div>
     )
 }

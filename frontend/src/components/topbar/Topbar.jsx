@@ -27,9 +27,11 @@ export default function Topbar({user, setToken}) {
                         </div>
                     </li>
                     <li className='change-password-icon-Container'>
-                        <Settings>
-                        </Settings>
-                        <span class="change-password-text">Change password</span>
+                        <Link to={"/dashboard/change-password/"} className='top-bar-link'>
+                            <Settings>
+                            </Settings>
+                            <span class="change-password-text">Change password</span>
+                        </Link>
                     </li>
                     <li>
                         <Link to={"/dashboard/my-profile/"} className='link'>

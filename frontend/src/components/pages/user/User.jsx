@@ -5,6 +5,8 @@ import { useHistory, useParams } from "react-router-dom";
 import { ArrowBack } from '@material-ui/icons';
 import * as backend_config from "../../../config/backend"
 import OutsideAlerter from '../../popup/Common/OutsideClick';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function User(props) {
     const token = props.token;
@@ -134,7 +136,7 @@ export default function User(props) {
                     </div>
                 </div>
             </main>
-            
+            <ToastContainer />
         </div>
     )
 }

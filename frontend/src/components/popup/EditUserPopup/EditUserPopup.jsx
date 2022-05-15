@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import { Close } from '@material-ui/icons';
 import * as backend_config from "../../../config/backend"
 import OutsideAlerter from '../Common/OutsideClick';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function EditUserPopup(props) {
     const {userData, token} = props
@@ -39,10 +41,18 @@ export default function EditUserPopup(props) {
         fetchOneStaticTableData('phong_ban', setPhongBanTable);
     }, [])
 
+    const editUserNotify = () => {
+        toast.success('Lưu thông tin thành công!', {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true
+        })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         submitEditUser();
         props.setTrigger(false);
+        editUserNotify();
     }
 
     const submitEditUser = async() => {

@@ -7,6 +7,8 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import * as backend_config from "../../../config/backend"
 import OutsideAlerter from '../Common/OutsideClick';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function AddUserPopup(props) {
     const {token} = props;
@@ -83,6 +85,12 @@ export default function AddUserPopup(props) {
         fetchOneStaticTableData('ton_giao', setTonGiaoTable);
     }, [])
 
+    const addUserNotify = () => {
+        toast.success('Thêm người dùng thành công!\n Mật khẩu là: admin@123', {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: false
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -92,6 +100,8 @@ export default function AddUserPopup(props) {
         // setGioiTinh(false);
         // setNgayVaoLam(null);
         // setNgayCap(null);
+        addUserNotify();
+        props.setTrigger(false);
     }
 
     const submitAddUser = () => {

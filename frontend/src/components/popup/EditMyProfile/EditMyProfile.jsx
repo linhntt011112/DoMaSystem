@@ -9,6 +9,8 @@ import OutsideAlerter from '../Common/OutsideClick';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import IconButton from '@material-ui/core/IconButton';
 import DatePicker from "react-datepicker";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function EditMyProfile(props) {
     const [image, setImage] = useState("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg");
@@ -95,10 +97,18 @@ export default function EditMyProfile(props) {
         reader.readAsDataURL(e.target.files[0])
     }
 
+    const editMyProfileNotify = () => {
+        toast.success('Lưu thông tin thành công!', {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true
+        })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         submitEditMyProfile();
         props.setTrigger(false);
+        editMyProfileNotify();
     }
 
     const submitEditMyProfile = async() => {

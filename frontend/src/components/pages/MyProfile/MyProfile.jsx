@@ -3,6 +3,8 @@ import './myprofile.css';
 import EditMyProfile from "../../popup/EditMyProfile/EditMyProfile";
 import { useHistory, useParams } from "react-router-dom";
 import * as backend_config from "../../../config/backend"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyProfile(props) {
     const token = props.token;
@@ -22,11 +24,12 @@ export default function MyProfile(props) {
                 <div className='my-profile-TitleContainer'>
                     <h1 className='my-profile-Title'>Thông tin cá nhân</h1>   
                     {userData !== "" &&
-                    <div>
-                        <button className='my-profile-Edit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
-                            <EditMyProfile trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token}>
-                            </EditMyProfile>
-                    </div>   }
+                        <div>
+                            <button className='my-profile-Edit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
+                                <EditMyProfile trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token}>
+                                </EditMyProfile>
+                        </div>   
+                    }
                 </div>
                 <div className='my-profile-Container'>
                     <div className='my-profile-Show'>
@@ -168,7 +171,8 @@ export default function MyProfile(props) {
                     </div>
                 </div>
             </main>
-            
+            <ToastContainer />
         </div>
+        
     )
 }

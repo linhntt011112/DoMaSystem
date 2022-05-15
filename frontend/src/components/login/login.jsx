@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 // import ErrorMessage from "./ErrorMessage";
-import { UserContext } from "../../context/UserContext";
+// import { UserContext } from "../../context/UserContext";
 import { useToken } from "../../context/TokenContext";
 import * as backend_config from "../../config/backend"
 
@@ -19,7 +19,7 @@ const Login = () => {
   // const {context} = useContext(UserContext);
   // const {token, setToken} = context.userToken;
 
-  const [responseData, setResponseData] = useState({});
+  // const [responseData, setResponseData] = useState({});
   // const {token, saveToken} = useContext(UserTokenContext);
   // const setToken = saveToken;
 
@@ -86,7 +86,7 @@ const Login = () => {
                 id="password" 
                 className="password"
                 onChange={(e) => setPassword(e.target.value)}
-              required/>
+                required/>
             </li>
           </ul>
         </fieldset>

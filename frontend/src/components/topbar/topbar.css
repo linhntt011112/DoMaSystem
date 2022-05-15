@@ -181,4 +181,8 @@
     left: -45px;
 }
 
+.top-bar-link{
+    text-decoration: none;
+    color: inherit;
+}
 
