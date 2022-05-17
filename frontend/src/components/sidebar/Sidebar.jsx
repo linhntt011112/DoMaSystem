@@ -4,7 +4,7 @@ import { Group, Assignment, CallMade, CalendarToday } from '@material-ui/icons'
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 
-export default function Sidebar({user, setToken}) {
+export default function Sidebar({userPermission, setToken}) {
 
     let history = useHistory();
     // console.log(user);
@@ -18,22 +18,27 @@ export default function Sidebar({user, setToken}) {
     return (
         <div className='sidebar'>
             <div className='sidebarWrapper'>
-                <div className='sidebarMenu'>
-                    <Link to={"/dashboard/users/"} className='link'>
-                        <h3 className='sidebarTitle'>
-                            <Group className='sidebarIcon'/>
-                            Nhân viên
-                        </h3>
-                    </Link> 
-                </div>
-                <div className='sidebarMenu'>
-                    <Link to={"/dashboard/loai-cong-van/"} className='link'>
-                        <h3 className='sidebarTitle'>
-                            <Assignment className='sidebarIcon'/>
-                            Loại công văn
-                        </h3>
-                    </Link>
-                </div>
+                {
+                    userPermission === "admin" && 
+                    <div>
+                        <div className='sidebarMenu'>
+                            <Link to={"/dashboard/users/"} className='link'>
+                                <h3 className='sidebarTitle'>
+                                    <Group className='sidebarIcon'/>
+                                    Nhân viên
+                                </h3>
+                            </Link> 
+                        </div>
+                        <div className='sidebarMenu'>
+                        <Link to={"/dashboard/loai-cong-van/"} className='link'>
+                            <h3 className='sidebarTitle'>
+                                <Assignment className='sidebarIcon'/>
+                                Loại công văn
+                            </h3>
+                        </Link>
+                        </div>
+                    </div>
+                }
                 <div className='sidebarMenu'>
                     <Link to={"/dashboard/cong-van-di/"} className='link'> 
                         <h3 className='sidebarTitle'>

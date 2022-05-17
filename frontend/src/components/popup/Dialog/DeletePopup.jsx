@@ -3,6 +3,7 @@ import "./dialog.css";
 import { useHistory } from "react-router-dom";
 import { Box, FormControl, MenuItem, Select, Button } from "@mui/material";
 import { Close } from "@material-ui/icons";
+import * as backend_config from "../../../config/backend"
 
 export function DeletePopup(props) {
     const { id, url, token, refreshFunc, message, handleDelete } = props;
@@ -11,21 +12,20 @@ export function DeletePopup(props) {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      handleDelete(id)
   
-    //   backend_config.makeRequest("DELETE", url, token).then((response) => {
-    //     if (response.ok) {
-    //       response.json().then((response_json) => {
-    //         props.setTrigger(false);
-    //         refreshFunc();
-    //       });
-    //     } else {
-    //       response.text().then((text) => {
-    //         // console.log(`Duplicate ${name}!`);
-    //         alert(`Can not delete ! \n Reason: ${text}`);
-    //       });
-    //     }
-    //   });
+      backend_config.makeRequest("DELETE", url, token).then((response) => {
+        if (response.ok) {
+          response.json().then((response_json) => {
+            props.setTrigger(false);
+            refreshFunc();
+          });
+        } else {
+          response.text().then((text) => {
+            // console.log(`Duplicate ${name}!`);
+            alert(`Can not delete ! \n Reason: ${text}`);
+          });
+        }
+      });
     };
   
     return props.trigger && props.mark === id ? (

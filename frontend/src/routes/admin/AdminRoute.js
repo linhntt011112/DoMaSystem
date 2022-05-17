@@ -13,11 +13,11 @@ const AdminRoute = ({component: Component, ...rest}) => {
     const {userPermission, user} = useUserInfo();
     // console.log(userPermission, 'in user route');
 
-    const allUserPermissions = new Set(['user', 'admin']);
+    const allUserPermissions = new Set(['admin']);
     // console.log(userPermission, !allUserPermissions.has(userPermission), user, token);
     if(!userPermission || !allUserPermissions.has(userPermission)) {
         // history.push('/login');
-        return <Redirect to='/login' state ={{from : location}}/>;
+        return <Redirect to='/dashboard' state ={{from : location}}/>;
     }
 
     return (
@@ -27,7 +27,7 @@ const AdminRoute = ({component: Component, ...rest}) => {
                 <div>
                     <Topbar user={user} setToken={setToken} />
                     <div className="adminContainer">
-                        <Sidebar user={user} setToken={setToken}/>
+                        <Sidebar user={user} setToken={setToken} userPermission={userPermission}/>
                         <Component {...props} token={token} />
                     </div>
                 </div>

@@ -60,7 +60,8 @@ async def get_user_by_id(user_id: int, current_user = Depends(get_current_active
 
 @router.post("/create")
 async def create_user(user_register: user_schemas.UserCreate, 
-                      current_user=Depends(get_current_active_user)):
+                      current_user=Depends(get_current_active_user),
+                      db=Depends(get_db)):
     logger.info(user_register)
     if current_user.phan_quyen != db_models.PhanQuyen.admin:
         raise exceptions.PERMISSION_EXCEPTION()
@@ -133,7 +134,7 @@ async def update_info_user(user_update_password: user_schemas.UserUpdatePassword
 
 
 
-@router.delete("/delete_user/{user_id}")
+@router.delete("/delete/{user_id}")
 async def delete_user_by_id(user_id: int, current_user = Depends(get_current_active_user), db=Depends(get_db)):
     if current_user.phan_quyen == db_models.PhanQuyen.admin:
         try:

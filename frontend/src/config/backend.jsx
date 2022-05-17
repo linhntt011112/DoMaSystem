@@ -6,6 +6,7 @@ export const USER_GET_LIST_API = BACKEND_URL + '/user/list';
 export const USER_GET_CURRENT_API = BACKEND_URL + '/user/me';
 export const USER_GET_BY_ID_API = BACKEND_URL + '/user/id/{id}';
 export const USER_POST_CREATE = BACKEND_URL + '/user/create';
+export const USER_DELETE_BY_ID = BACKEND_URL + '/user/delete/{user_id}'
 
 
 export const STATIC_TABLE_GET_LIST = BACKEND_URL + '/{static_table_name}/list';

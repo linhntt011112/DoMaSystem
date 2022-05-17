@@ -11,8 +11,8 @@ class UserBase(BaseModel):
     id: int
     ho_ten: str
     ten_tai_khoan: str
-    password: str
-    password_salt: str
+    # password: str
+    # password_salt: str
     ngay_sinh: Union[datetime.datetime, datetime.date] = None
     dia_chi: str = None
     ngay_cap_nhat: Union[datetime.datetime, datetime.date]

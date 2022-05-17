@@ -53,8 +53,8 @@
 }
 
 .datepicker{
-    width: 250px;
-    height: 30px;
+    width: 256px;
+    height: 33px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 

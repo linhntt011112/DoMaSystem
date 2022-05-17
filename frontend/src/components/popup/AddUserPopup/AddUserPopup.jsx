@@ -9,9 +9,10 @@ import * as backend_config from "../../../config/backend"
 import OutsideAlerter from '../Common/OutsideClick';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { width } from '@mui/system';
 
 export default function AddUserPopup(props) {
-    const {token} = props;
+    const {token, refreshFunc} = props;
 
     const [chuc_vu_table, setChucVuTable] = React.useState([]);
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
@@ -20,50 +21,50 @@ export default function AddUserPopup(props) {
     const [quoc_tich_table, setQuocTichTable] = React.useState([]);
     const [ton_giao_table, setTonGiaoTable] = React.useState([]);
 
-    const [chuc_vu, setLoaiChucVu] = React.useState('');
-    const [phong_ban, setLoaiPhongBan] = React.useState('');
-    const [hoc_van, setLoaiHocVan] = React.useState('');
-    const [dan_toc, setLoaiDanToc] = React.useState('');
-    const [quoc_tich, setLoaiQuocTich] = React.useState('');
-    const [ton_giao, setLoaiTonGiao] = React.useState('');
-    const [ho_va_ten, setHoVaTen] = useState("");
-    const [ten_tai_khoan, setTenTaiKhoan] = useState("");
+    const [chuc_vu, setChucVu] = React.useState(null);
+    const [phong_ban, setPhongBan] = React.useState(null);
+    const [hoc_van, setHocVan] = React.useState(null);
+    const [dan_toc, setDanToc] = React.useState(null);
+    const [quoc_tich, setQuocTich] = React.useState(null);
+    const [ton_giao, setTonGiao] = React.useState(null);
+    const [ho_va_ten, setHoVaTen] = useState(null);
+    const [ten_tai_khoan, setTenTaiKhoan] = useState(null);
     const [gioi_tinh, setGioiTinh] = useState(false);
     const [phan_quyen, setPhanQuyen] = useState(false);
-    const [dien_thoai, setDienThoai] = useState("");
-    const [email, setEmail] = useState("");
-    const [cccd, setCCCD] = useState("");
+    const [dien_thoai, setDienThoai] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [cccd, setCCCD] = useState(null);
     const [ngay_cap, setNgayCap] = useState(null);
     const [ngay_sinh, setNgaySinh] = useState(null);
-    const [noi_cap, setNoiCap] = useState("");
-    const [dia_chi, setDiaChi] = useState("");
-    const [que_quan, setQueQuan] = useState("");
+    const [noi_cap, setNoiCap] = useState(null);
+    const [dia_chi, setDiaChi] = useState(null);
+    const [que_quan, setQueQuan] = useState(null);
     const [ngay_vao_lam, setNgayVaoLam] = useState(null);
-    const [tk_ngan_hang, setTKNganHang] = useState("");
-    const [ngan_hang, setNganHang] = useState("");
+    const [tk_ngan_hang, setTKNganHang] = useState(null);
+    const [ngan_hang, setNganHang] = useState(null);
 
-    const handleChangeLoaiChucVu = (event) => {
-        setLoaiChucVu(event.target.value);
+    const handleChangeChucVu = (event) => {
+        setChucVu(event.target.value);
     };
 
-    const handleChangeLoaiPhongBan = (event) => {
-        setLoaiPhongBan(event.target.value);
+    const handleChangePhongBan = (event) => {
+        setPhongBan(event.target.value);
     }
 
-    const handleChangeLoaiHocVan = (event) => {
-        setLoaiHocVan(event.target.value);
+    const handleChangeHocVan = (event) => {
+        setHocVan(event.target.value);
     }
 
-    const handleChangeLoaiDanToc = (event) => {
-        setLoaiDanToc(event.target.value);
+    const handleChangeDanToc = (event) => {
+        setDanToc(event.target.value);
     }
 
-    const handleChangeLoaiQuocTich = (event) => {
-        setLoaiQuocTich(event.target.value);
+    const handleChangeQuocTich = (event) => {
+        setQuocTich(event.target.value);
     }
 
-    const handleChangeLoaiTonGiao = (event) => {
-        setLoaiTonGiao(event.target.value);
+    const handleChangeTonGiao = (event) => {
+        setTonGiao(event.target.value);
     }
 
     const fetchOneStaticTableData = (name, setData) => {
@@ -85,8 +86,8 @@ export default function AddUserPopup(props) {
         fetchOneStaticTableData('ton_giao', setTonGiaoTable);
     }, [])
 
-    const addUserNotify = () => {
-        toast.success('Thêm người dùng thành công!\n Mật khẩu là: admin@123', {
+    const addUserNotify = (response_json) => {
+        toast.success(`Thêm người dùng thành công!\n Mật khẩu là: ${response_json.plain_password}`, {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: false
         })
@@ -95,13 +96,6 @@ export default function AddUserPopup(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         submitAddUser();
-        // setNgaySinh(null);
-        // setPhanQuyen(false);
-        // setGioiTinh(false);
-        // setNgayVaoLam(null);
-        // setNgayCap(null);
-        addUserNotify();
-        props.setTrigger(false);
     }
 
     const submitAddUser = () => {
@@ -128,7 +122,7 @@ export default function AddUserPopup(props) {
             id_quoc_tich: quoc_tich,
             id_ton_giao: ton_giao
         });
-        // console.log(body);
+        console.log(body);
 
         backend_config.makeRequest("POST", 
             backend_config.USER_POST_CREATE, 
@@ -141,7 +135,17 @@ export default function AddUserPopup(props) {
                 console.log(body);
                 response.json().then((response_json) => {
                     console.log(response_json);
+                    addUserNotify(response_json);
                     props.setTrigger(false);
+                    refreshFunc();
+                    setPhanQuyen(false);
+                    setGioiTinh(false);
+                    setPhongBan(null);
+                    setChucVu(null);
+                    setHocVan(null);
+                    setDanToc(null);
+                    setQuocTich(null);
+                    setTonGiao(null);
                 })
             }
             else {
@@ -154,11 +158,23 @@ export default function AddUserPopup(props) {
 
         // props.setTrigger(false);
     }
+
+    const handleClosePopUp = () => {
+        props.setTrigger(false)
+        setPhanQuyen(false);
+        setGioiTinh(false);
+        setPhongBan(null);
+        setChucVu(null);
+        setHocVan(null);
+        setDanToc(null);
+        setQuocTich(null);
+        setTonGiao(null);
+    }
    
     return (props.trigger) ? (
         <div className="popup-main">
                 <form className="add-user-popup-inner" onSubmit={handleSubmit}>
-                    <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
+                    <Close className="close-btn" onClick={handleClosePopUp}/>
                     <h5 className='modal-title'>Thêm mới nhân viên</h5>
                     <Container className='modal-body'>
                         <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin cá nhân</h6>
@@ -200,16 +216,18 @@ export default function AddUserPopup(props) {
                                 <div className='userAddItem'>
                                     <label>
                                         Giới tính
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
                                     </label>
-                                    <FormControlLabel control={<Checkbox checked={gioi_tinh} onChange={(e) => setGioiTinh(e.target.checked)}/>} label="Nữ" />
+                                    <FormControlLabel control={<Checkbox checked={gioi_tinh} onChange={(e) => setGioiTinh(e.target.checked)}/>} label="Nữ" required/>
                                 </div>
                             </Col>
                             <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                                 <div className='userAddItem'>
                                     <label>
                                         Phân quyền
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
                                     </label>
-                                    <FormControlLabel control={<Checkbox checked={phan_quyen} onChange={(e) => setPhanQuyen(e.target.checked)}/>} label="Admin" />
+                                    <FormControlLabel control={<Checkbox checked={phan_quyen} onChange={(e) => setPhanQuyen(e.target.checked)}/>} label="Admin" required/>
                                 </div>
                             </Col>
                         </Row>
@@ -242,6 +260,7 @@ export default function AddUserPopup(props) {
                                 <div className='userAddItem'>
                                     <label>
                                         Ngày sinh
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
                                     </label>
                                     <input 
                                         type="date" 
@@ -250,6 +269,7 @@ export default function AddUserPopup(props) {
                                             e.preventDefault();
                                         }}
                                         onChange={(e) => setNgaySinh(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </Col>
@@ -259,11 +279,13 @@ export default function AddUserPopup(props) {
                                 <div className='userAddItem'>
                                     <label>
                                         CCCD
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
                                     </label>
                                     <input
                                         onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
                                         className='userAddInput'
                                         onChange={(e) => setCCCD(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </Col>
@@ -327,6 +349,7 @@ export default function AddUserPopup(props) {
                                 <div className='userAddItem'>
                                     <label>
                                         Ngày vào làm
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
                                     </label>
                                     <input 
                                         type="date" 
@@ -335,6 +358,7 @@ export default function AddUserPopup(props) {
                                             e.preventDefault();
                                         }}
                                         onChange={(e) => setNgayVaoLam(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </Col>
@@ -343,18 +367,20 @@ export default function AddUserPopup(props) {
                                     <label>
                                         Phòng ban
                                     </label>
-                                    <Box sx={{ minWidth: 259 }}>
+                                    <Box sx={{ width: 261 }}>
                                         <FormControl fullWidth>
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
                                                 value={phong_ban}
-                                                onChange={handleChangeLoaiPhongBan}
-                                                style={{height: '35px'}}
+                                                onChange={handleChangePhongBan}
+                                                style={{
+                                                    height: '35px'
+                                                }}
                                             >
                                                 {phong_ban_table.map((item) => {
                                                     
-                                                        return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                        return (<MenuItem value={item.id}>{item.name}</MenuItem> )
                                                 })}
                                             </Select>
                                         </FormControl>
@@ -366,18 +392,18 @@ export default function AddUserPopup(props) {
                                     <label>
                                         Chức vụ
                                     </label>
-                                    <Box sx={{ minWidth: 259 }}>
+                                    <Box sx={{ width: 261 }}>
                                         <FormControl fullWidth>
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
                                                 value={chuc_vu}
-                                                onChange={handleChangeLoaiChucVu}
+                                                onChange={handleChangeChucVu}
                                                 style={{height: '35px'}}
                                             >
                                                 {chuc_vu_table.map((item) => {
                                                         
-                                                    return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                    return (<MenuItem value={item.id}>{item.name}</MenuItem> )
                                                 })}
                                             </Select>
                                         </FormControl>
@@ -415,18 +441,18 @@ export default function AddUserPopup(props) {
                                     <label>
                                         Học vấn
                                     </label>
-                                    <Box sx={{ minWidth: 252 }}>
+                                    <Box sx={{ width: 261 }}>
                                         <FormControl fullWidth>
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
                                                 value={hoc_van}
-                                                onChange={handleChangeLoaiHocVan}
+                                                onChange={handleChangeHocVan}
                                                 style={{height: '35px'}}
                                             >
                                                 {hoc_van_table.map((item) => {
                                                         
-                                                    return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                    return (<MenuItem value={item.id}>{item.name}</MenuItem> )
                                                 })}
                                             </Select>
                                         </FormControl>
@@ -440,18 +466,18 @@ export default function AddUserPopup(props) {
                                     <label>
                                         Dân tộc
                                     </label>
-                                    <Box sx={{ minWidth: 259 }}>
+                                    <Box sx={{ width: 261 }}>
                                         <FormControl fullWidth>
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
                                                 value={dan_toc}
-                                                onChange={handleChangeLoaiDanToc}
+                                                onChange={handleChangeDanToc}
                                                 style={{height: '35px'}}
                                             >
                                                 {dan_toc_table.map((item) => {
                                                         
-                                                    return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                    return (<MenuItem value={item.id}>{item.name}</MenuItem> )
                                                 })}
                                             </Select>
                                         </FormControl>
@@ -463,18 +489,18 @@ export default function AddUserPopup(props) {
                                     <label>
                                         Quốc tịch
                                     </label>
-                                    <Box sx={{ minWidth: 259 }}>
+                                    <Box sx={{ width: 261 }}>
                                         <FormControl fullWidth>
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
                                                 value={quoc_tich}
-                                                onChange={handleChangeLoaiQuocTich}
+                                                onChange={handleChangeQuocTich}
                                                 style={{height: '35px'}}
                                             >
                                                 {quoc_tich_table.map((item) => {
                                                         
-                                                    return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                    return (<MenuItem value={item.id}>{item.name}</MenuItem> )
                                                 })}
                                             </Select>
                                         </FormControl>
@@ -486,18 +512,21 @@ export default function AddUserPopup(props) {
                                     <label>
                                         Tôn giáo
                                     </label>
-                                    <Box sx={{ minWidth: 259 }}>
+                                    <Box sx={{ width: 261 }}>
                                         <FormControl fullWidth>
                                             <Select
                                                 labelId="demo-simple-select-label"
                                                 id="demo-simple-select"
                                                 value={ton_giao}
-                                                onChange={handleChangeLoaiTonGiao}
-                                                style={{height: '35px'}}
+                                                onChange={handleChangeTonGiao}
+                                                style={{
+                                                    height: '35px',
+                                                    whiteSpace: 'nowrap'
+                                                }}
                                             >
                                                 {ton_giao_table.map((item) => {
                                                         
-                                                    return (<MenuItem value={item.name}>{item.name}</MenuItem> )
+                                                    return (<MenuItem value={item.id}>{item.name}</MenuItem> )
                                                 })}
                                             </Select>
                                         </FormControl>
