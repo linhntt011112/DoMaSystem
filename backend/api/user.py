@@ -1,3 +1,4 @@
+from struct import pack
 import traceback
 from loguru import logger
 from fastapi import Depends, FastAPI, APIRouter, HTTPException, status, Query
@@ -138,12 +139,17 @@ async def update_info_user(user_update_password: user_schemas.UserUpdatePassword
 async def delete_user_by_id(user_id: int, current_user = Depends(get_current_active_user), db=Depends(get_db)):
     if current_user.phan_quyen == db_models.PhanQuyen.admin:
         try:
-            is_success = crud_user.delete_user_by_id(db, user_id)
+            user_to_delete = crud_user.get_user_by_id(db, user_id)
+            if user_to_delete is None:
+                raise exceptions.NOT_FOUND_EXCEPTION(f"Can not find user with id {user_id}")
+            if user_to_delete.phan_quyen == db_models.PhanQuyen.admin:
+                raise exceptions.PERMISSION_EXCEPTION("Can not delete admin user!")
+            
+            is_success = crud_user.delete_user(db, user_to_delete)
             if not is_success:
                 raise exceptions.INTERNAL_SERVER_ERROR(f"Can not delete user with id={user_id}")
             return True
         except Exception as e:
-            # db.rollback()
             return exceptions.handle_simple_exception(e, logger)
     else:
         raise exceptions.PERMISSION_EXCEPTION()
