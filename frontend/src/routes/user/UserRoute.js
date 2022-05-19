@@ -1,13 +1,13 @@
 import {React} from 'react';
-import { Route, useHistory, Redirect } from 'react-router-dom';
-import Sidebar from '../components/sidebar/Sidebar';
-import Topbar from '../components/topbar/Topbar';
-import { useToken, useUserInfo } from '../context/TokenContext';
+import { Route, useLocation, Redirect } from 'react-router-dom';
+import Sidebar from '../../components/sidebar/Sidebar';
+import Topbar from '../../components/topbar/Topbar';
+import { useToken, useUserInfo } from '../../context/TokenContext';
 import './AdminRoute.css'
 
 
 
-const AdminRoute = ({component: Component, ...rest}) => {
+const UserRoute = ({component: Component, ...rest}) => {
     const {token, setToken} = useToken();
     let location = useLocation();
     const {userPermission, user} = useUserInfo();
@@ -27,7 +27,7 @@ const AdminRoute = ({component: Component, ...rest}) => {
                 <div>
                     <Topbar user={user} setToken={setToken} />
                     <div className="adminContainer">
-                        <Sidebar />
+                        <Sidebar userPermission={userPermission} setToken={setToken}/>
                         <Component {...props} token={token} />
                     </div>
                 </div>
@@ -37,4 +37,4 @@ const AdminRoute = ({component: Component, ...rest}) => {
     );
 };
 
-export default AdminRoute;
+export default UserRoute;

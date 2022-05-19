@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import AddUserPopup from "../../popup/AddUserPopup/AddUserPopup";
 import { Button } from '@mui/material';
 import * as backend_config from "../../../config/backend"
-import { DeletePopup } from '../../popup/Dialog/dialog';
+import { DeletePopup } from '../../popup/Dialog/DeletePopup';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,7 +18,10 @@ export default function UserList(props) {
     const [buttonDeletePopup, setButtonDeletePopup] = useState(false);
 
     const handleDelete = (id)=>{
-        setTableData(tableData.filter(item=>item.id !== id));
+        backend_config.makeRequest("DELETE", 
+            backend_config.USER_DELETE_BY_ID.replace("{user_id}", id), 
+            token,
+        )
     };
 
     const columns = [
@@ -58,7 +61,15 @@ export default function UserList(props) {
                             <button className='userListEdit'>Chi tiết</button>
                         </Link>       
                         <DeleteOutline className='userListDelete' onClick={()=>{setMark(params.row.id); setButtonDeletePopup(true)}}/>
-                        <DeletePopup trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} token={token} mark={mark} handleDelete={handleDelete} id={params.row.id}>
+                        <DeletePopup 
+                            trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} 
+                            token={token} 
+                            mark={mark} 
+                            id={params.row.id} 
+                            message={"Ban co chac chan xoa cai nay khum?"}
+                            url={backend_config.USER_DELETE_BY_ID.replace("{user_id}", params.row.id)}
+                            refreshFunc={refreshTable}
+                        >
                         </DeletePopup>
                     </>
                     
@@ -69,11 +80,14 @@ export default function UserList(props) {
 
     const [tableData, setTableData] = useState([]);
 
-    useEffect(() => {
+    const refreshTable = () => {
         backend_config.makeRequest("GET", backend_config.USER_GET_LIST_API, token)
           .then((data) => data.json())
           .then((data) => {setTableData(data)})
-        
+    }
+
+    useEffect(() => {
+        refreshTable();
     }, [])
       
     return (
@@ -112,9 +126,12 @@ export default function UserList(props) {
                     />
                 </div>
             </main>
-            <AddUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} token={token}>
+            <AddUserPopup 
+                trigger={buttonPopup} setTrigger={setButtonPopup} 
+                token={token} refreshFunc={refreshTable}
+            >
             </AddUserPopup>
-            <ToastContainer />
+            <ToastContainer className="add-user-notify" />
         </div>
     )
 }

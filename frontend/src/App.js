@@ -16,7 +16,7 @@ import CongVanDenChiTiet from './components/pages/congvandenChitiet/CongVanDenCh
 import DMSCalendar from './components/pages/calendar/DMSCalendar';
 import MyProfile from './components/pages/MyProfile/MyProfile';
 import ChangePassword from './components/pages/ChangePassword/ChangePassword';
-
+import UserRoute from './routes/user/UserRoute';
 const App = () => {
 
   return (
@@ -25,8 +25,8 @@ const App = () => {
         <BrowserRouter>
           <Switch>
             <Route exact path="/login" component={Login} />
-            <AdminRoute exact path="/" component={Dashboard} />
-            <AdminRoute exact path="/dashboard" component={Dashboard} />
+            <UserRoute exact path="/" component={Dashboard} />
+            <UserRoute exact path="/dashboard" component={Dashboard} />
             <AdminRoute exact path="/dashboard/users" component={UserList} />
             <AdminRoute path="/dashboard/user/:userId" component={User} />
             <AdminRoute exact path="/dashboard/loai-cong-van/" component={LoaicongvanList}/>
