@@ -56,3 +56,7 @@ def delete_user_by_id(db, user_id: int):
         return False
     
     return common_queries.delete(db, user)
+
+
+def delete_user(db, user):
+    return common_queries.delete(db, user)

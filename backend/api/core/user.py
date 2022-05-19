@@ -116,7 +116,7 @@ def verify_static_attr(class_, attr_):
 
 def create_user(db, user_schema_model: user_schemas.UserCreate, create_password=True):
     random_number = random.randint(0, 10000)
-    password_salt = hashlib.md5((user_schema_model.email + str(datetime.datetime.now()) + str(random_number)).encode()).hexdigest()
+    password_salt = hashlib.md5((user_schema_model.ten_tai_khoan + str(datetime.datetime.now()) + str(random_number)).encode()).hexdigest()
     
     if create_password:
         plain_password = password_salt[:8]
