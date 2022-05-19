@@ -66,7 +66,7 @@ export default function UserList(props) {
                             token={token} 
                             mark={mark} 
                             id={params.row.id} 
-                            message={"Ban co chac chan xoa cai nay khum?"}
+                            message={"Bạn có chắc muốn xóa người dùng này không?"}
                             url={backend_config.USER_DELETE_BY_ID.replace("{user_id}", params.row.id)}
                             refreshFunc={refreshTable}
                         >

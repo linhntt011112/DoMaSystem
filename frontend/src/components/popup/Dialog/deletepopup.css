@@ -1,0 +1,79 @@
+.delete-popup-main {
+    position: absolute;
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: fit-content; /* Could be more or less, depending on screen size */
+    top: 10%;
+    left: 35%;
+    transform: translate(0, -50%);
+  }
+
+  .delete-close{
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+  }
+
+  .delete-close:hover,
+  .delete-close:focus {
+    color: #f44336;
+    cursor: pointer;
+  }
+
+  .delete-container{
+    padding: 35px 16px 16px 16px;
+    text-align: center;
+  }
+
+  .delete-title{
+    padding: 16px;
+    text-align: center;
+  }
+
+  .delete-buttons{
+    display: flex;
+  }
+
+  .delete-buttons::after{
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .delete-button-yes{
+    color: white !important;
+    padding: 14px 20px !important;
+    margin: 8px 0 !important;
+    border: none !important;
+    cursor: pointer !important;
+    opacity: 0.9;
+    float: left;
+    width: 50%;
+    background-color: #f44336 !important;
+  }
+
+  .delete-button-yes:hover {
+    opacity:0.5;
+  }
+
+  .delete-button-no{
+    color: white !important;
+    padding: 14px 20px !important;
+    margin: 8px 0 !important;
+    border: none !important;
+    cursor: pointer !important;
+    width: 100%;
+    opacity: 0.9;
+    float: left;
+    width: 50%;
+    background-color: #ccc !important;
+    color: black;
+  }
+
+  .delete-button-no:hover {
+    opacity:1;
+  }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./dialog.css";
+import "./deletepopup.css";
 import { useHistory } from "react-router-dom";
 import { Box, FormControl, MenuItem, Select, Button } from "@mui/material";
 import { Close } from "@material-ui/icons";
@@ -31,36 +31,28 @@ export function DeletePopup(props) {
     return props.trigger && props.mark === id ? (
       <form className="delete-popup-main" onSubmit={handleSubmit}>
         <Close
+          className="delete-close"
           style={{ cursor: "pointer" }}
           onClick={() => props.setTrigger(false)}
         />
-        <h3 className="delete-title">{message}</h3>
-        <Button
-          style={{
-            backgroundColor: "red",
-            cursor: "pointer",
-            color: "white",
-            fontSize: "16px",
-            textTransform: "inherit",
-            marginRight: "20px"
-          }}
-          type="submit"
-        >
-          Yes
-        </Button>
-        <Button
-          style={{
-            backgroundColor: "blue",
-            cursor: "pointer",
-            color: "white",
-            fontSize: "16px",
-            textTransform: "inherit",
-            marginLeft: "20px"
-          }}
-          onClick={() => props.setTrigger(false)}
-        >
-          No
-        </Button>
+        <div className="delete-container">
+          <h3 className="delete-title">{message}</h3>
+          <div className="delete-buttons">
+            <Button
+              type="submit"
+              className="delete-button-yes"
+            >
+              Xóa
+            </Button>
+            <Button
+              className="delete-button-no"
+              onClick={() => props.setTrigger(false)}
+            >
+              Hủy
+            </Button>
+          </div>
+        </div>
+        
       </form>
     ) : (
       ""

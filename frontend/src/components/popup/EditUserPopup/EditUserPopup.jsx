@@ -239,7 +239,7 @@ export default function EditUserPopup(props) {
                                         <label>
                                             Phòng ban
                                         </label>
-                                        <Box sx={{ minWidth: 260 }}>
+                                        <Box sx={{ width: 261 }}>
                                             <FormControl fullWidth>
                                                 <Select
                                                     labelId="demo-simple-select-label"
@@ -262,7 +262,7 @@ export default function EditUserPopup(props) {
                                         <label>
                                             Chức vụ
                                         </label>
-                                        <Box sx={{ minWidth: 260 }}>
+                                        <Box sx={{ width: 261 }}>
                                             <FormControl fullWidth>
                                                 <Select
                                                     labelId="demo-simple-select-label"
