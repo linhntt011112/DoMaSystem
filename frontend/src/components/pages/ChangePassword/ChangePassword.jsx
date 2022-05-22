@@ -3,12 +3,14 @@ import './changepassword.css';
 
 export default function ChangePassword() {
 
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [currentPassword, setCurrentPassword] = useState(null)
+    const [newPassword, setNewPassword] = useState(null);
+    const [confirmPassword, setConfirmPassword] = useState(null);
     
     const handleSubmit = (e) => {
         e.preventDefault();
         validatePassword();
+        submitChangePassword();
     }
 
     function validatePassword() {
@@ -21,6 +23,12 @@ export default function ChangePassword() {
         }
     }
 
+    const submitChangePassword = () => {
+        const body = JSON.stringify({
+            
+        })
+    }
+
     return (
         <div className="change-password-main">
             <div className="change-password-cardStyle">
@@ -31,12 +39,23 @@ export default function ChangePassword() {
 
                     <div className="change-password-inputDiv">
                         <label className="change-password-inputLabel" for="password">Mật khẩu hiện tại</label>
-                        <input type="password" id="currentPassword" className="change-password-input" required />
+                        <input 
+                            type="password" 
+                            id="currentPassword" 
+                            className="change-password-input" 
+                            required 
+                            onChange={(e) => setCurrentPassword(e.target.value)}
+                        />
                     </div>
             
                     <div className="change-password-inputDiv">
                         <label className="change-password-inputLabel" for="password">Mật khẩu mới</label>
-                        <input type="password" id="newPassword" className="change-password-input" onChange={(e) => setNewPassword(e.target.value)} required />
+                        <input 
+                            type="password" 
+                            id="newPassword" 
+                            className="change-password-input" 
+                            onChange={(e) => setNewPassword(e.target.value)} 
+                            required />
                     </div>
             
                     <div className="change-password-inputDiv">

@@ -87,9 +87,16 @@ export default function AddUserPopup(props) {
     }, [])
 
     const addUserNotify = (response_json) => {
-        toast.success(`Thêm người dùng thành công!\n Mật khẩu là: ${response_json.plain_password}`, {
+        toast.success(<div>Thêm người dùng thành công! <br /> Mật khẩu là: {response_json.plain_password}</div>, {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: false
+        })
+    }
+
+    const addUserNotifyDuplicateUsername = (response_json) => {
+        toast.error("Tên tài khoản bị trùng", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true
         })
     }
 
@@ -151,8 +158,15 @@ export default function AddUserPopup(props) {
             }
             else {
                 response.text().then((text) => {
-                    
-                    alert(text);
+                    let error = JSON.parse(text).detail;
+                    switch (error) {
+                        case "Duplicate ten_tai_khoan!": 
+                            addUserNotifyDuplicateUsername();
+                            return;
+                        default:
+                            alert(text);
+                            return;
+                    }
                 })
             }
         })
