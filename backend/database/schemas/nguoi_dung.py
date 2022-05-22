@@ -103,7 +103,6 @@ class UserUpdateInfo(BaseModel):
 
 
 class UserUpdatePassword(BaseModel):
-    id: int
     current_plain_password: str 
     new_plain_password: str
     
