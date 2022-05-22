@@ -4,11 +4,26 @@ import { useHistory } from "react-router-dom";
 import { Box, FormControl, MenuItem, Select, Button } from "@mui/material";
 import { Close } from "@material-ui/icons";
 import * as backend_config from "../../../config/backend"
+import { toast } from 'react-toastify';
 
 export function DeletePopup(props) {
     const { id, url, token, refreshFunc, message, handleDelete } = props;
     // backend_config.AI_MODEL_VERSION_DELETE_BY_ID.replace('{ai_model_version_id}', id),
     // Are you sure to delete version "{name}" ?
+
+    const noDeleteUserNotify = () => {
+      toast.error("Không thể xóa quản trị viên", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: true
+      })
+    }
+
+    const deleteUserNotify = () => {
+      toast.success("Xóa người dùng thành công", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: true
+      })
+    }
   
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -18,11 +33,13 @@ export function DeletePopup(props) {
           response.json().then((response_json) => {
             props.setTrigger(false);
             refreshFunc();
+            deleteUserNotify();
           });
         } else {
           response.text().then((text) => {
             // console.log(`Duplicate ${name}!`);
-            alert(`Can not delete ! \n Reason: ${text}`);
+            // alert(`Can not delete ! \n Reason: ${text}`);
+            noDeleteUserNotify();
           });
         }
       });

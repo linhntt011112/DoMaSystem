@@ -13,10 +13,13 @@ export default function EditUserPopup(props) {
     const {userData, token} = props
 
     const [phan_quyen, setPhanQuyen] = React.useState(userData.phan_quyen === "admin" ? true : false);
-    const [chuc_vu, setChucVu] = React.useState(userData.chuc_vu?.name);
-    const [phong_ban, setPhongBan] = React.useState(userData.phong_ban?.name);
+    const [gioi_tinh, setGioiTinh] = React.useState(userData.gioi_tinh === "Nu" ? true : false);
+    const [chuc_vu, setChucVu] = React.useState(userData.chuc_vu?.id);
+    const [phong_ban, setPhongBan] = React.useState(userData.phong_ban?.id);
     const [chuc_vu_table, setChucVuTable] = React.useState([]);
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
+    const [ngay_sinh, setNgaySinh] = useState(userData.ngay_sinh);
+    const [ngay_vao_lam, setNgayVaoLam] = useState(userData.ngay_vao_lam);
 
     const handleChangePhongBan = (event) => {
         setPhongBan(event.target.value);
@@ -55,11 +58,13 @@ export default function EditUserPopup(props) {
         editUserNotify();
     }
 
-    const submitEditUser = async() => {
-        let form = new FormData();
-        form.append("phan_quyen", phan_quyen === true ? "admin" : "user");
-        form.append("phong_ban", phong_ban);
-        form.append("chuc_vu", chuc_vu);
+    const submitEditUser = () => {
+        const body = JSON.stringify({
+            phan_quyen: phan_quyen === true ? "admin" : "user",
+            phong_ban: phong_ban,
+            chuc_vu: chuc_vu
+        })
+        console.log(body);
     }
 
     return (props.trigger) ? (
@@ -116,12 +121,10 @@ export default function EditUserPopup(props) {
                                         <label>
                                             Giới tính
                                         </label>
-                                        <input
-                                            type="text"
-                                            value={userData.gioi_tinh === "Nam" ? 'Nam' : 'Nữ'}
-                                            className='userUpdateInput'
-                                            disabled
-                                        />
+                                        <div style={{margin: '10px 10px 10px 0'}}>
+                                            <input type="checkbox" id='gioi_tinh' name='gioi_tinh' defaultChecked={userData.gioi_tinh === "Nu"} onChange={(e) => setGioiTinh(e.target.checked)} disabled/>
+                                            <label for="admin">Nữ</label>
+                                        </div>   
                                     </div>
                                 </Col>
                                 <Col xs lg="2" style={{padding: '15px 15px 0 15px'}}>
@@ -168,10 +171,14 @@ export default function EditUserPopup(props) {
                                         <label>
                                             Ngày sinh
                                         </label>
-                                        <input
-                                            type="text"
-                                            value={userData.ngay_sinh}
-                                            className='userUpdateInput'
+                                        <input 
+                                            type="date" 
+                                            className='datepicker' 
+                                            onKeyDown={(e) => {
+                                                e.preventDefault();
+                                            }}
+                                            defaultValue={userData.ngay_sinh}
+                                            onChange={(e) => setNgaySinh(e.target.value)}
                                             disabled
                                         />
                                     </div>
@@ -226,10 +233,14 @@ export default function EditUserPopup(props) {
                                         <label>
                                             Ngày vào làm
                                         </label>
-                                        <input
-                                            type="text"
-                                            value={userData.ngay_vao_lam}
-                                            className='userUpdateInput'
+                                        <input 
+                                            type="date" 
+                                            className='datepicker' 
+                                            onKeyDown={(e) => {
+                                                e.preventDefault();
+                                            }}
+                                            defaultValue={userData.ngay_vao_lam}
+                                            onChange={(e) => setNgayVaoLam(e.target.value)}
                                             disabled
                                         />
                                     </div>

@@ -146,11 +146,12 @@ export default function AddUserPopup(props) {
                     setDanToc(null);
                     setQuocTich(null);
                     setTonGiao(null);
+                    setEmail(null)
                 })
             }
             else {
                 response.text().then((text) => {
-                    // console.log(`Duplicate ${name}!`);
+                    
                     alert(text);
                 })
             }

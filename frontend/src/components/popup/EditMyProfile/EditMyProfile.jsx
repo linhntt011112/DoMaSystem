@@ -41,9 +41,9 @@ export default function EditMyProfile(props) {
     const [tk_ngan_hang, setTKNganHang] = useState(userData.tk_ngan_hang);
     const [ngan_hang, setNganHang] = useState(userData.ngan_hang);
     const [hoc_van, setHocVan] = React.useState(userData.hoc_van?.id);
-    const [dan_toc, setDanToc] = React.useState(userData.dan_toc?.name);
-    const [quoc_tich, setQuocTich] = React.useState(userData.quoc_tich?.name);
-    const [ton_giao, setTonGiao] = React.useState(userData.ton_giao?.name);
+    const [dan_toc, setDanToc] = React.useState(userData.dan_toc?.id);
+    const [quoc_tich, setQuocTich] = React.useState(userData.quoc_tich?.id);
+    const [ton_giao, setTonGiao] = React.useState(userData.ton_giao?.id);
 
     const handleChangePhongBan = (event) => {
         setPhongBan(event.target.value);
@@ -111,13 +111,22 @@ export default function EditMyProfile(props) {
         editMyProfileNotify();
     }
 
-    const submitEditMyProfile = async() => {
-        let form = new FormData();
-        console.log(ten_tai_khoan);
-        console.log(gioi_tinh);
-        console.log(ngay_cap);
-        console.log(hoc_van);
-        console.log(dien_thoai);
+    const submitEditMyProfile = () => {
+        const body = JSON.stringify({
+            dien_thoai: dien_thoai,
+            email: email,
+            ngay_cap: ngay_cap,
+            noi_cap: noi_cap,
+            dia_chi: dia_chi,
+            que_quan: que_quan,
+            tk_ngan_hang: tk_ngan_hang,
+            ngan_hang: ngan_hang,
+            hoc_van: hoc_van,
+            dan_toc: dan_toc,
+            quoc_tich: quoc_tich,
+            ton_giao: ton_giao
+        })
+        console.log(body)
     }
 
     return (props.trigger) ? (
@@ -185,6 +194,7 @@ export default function EditMyProfile(props) {
                                             required
                                             pattern='^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$'
                                             onChange={(e) => setTenTaiKhoan(e.target.value)}
+                                            disabled
                                         />
                                         <span className='edit-my-profile-errorMessage'>Tên người dùng không hợp lệ</span>
                                     </div>
@@ -195,7 +205,7 @@ export default function EditMyProfile(props) {
                                             Giới tính
                                         </label>
                                         <div style={{margin: '10px 10px 10px 0'}}>
-                                            <input type="checkbox" id='gioi_tinh' className='gioi_tinh' defaultChecked={userData.gioi_tinh === "Nu"} onChange={(e) => setGioiTinh(e.target.checked)}/>
+                                            <input type="checkbox" id='gioi_tinh' className='gioi_tinh' defaultChecked={userData.gioi_tinh === "Nu"} onChange={(e) => setGioiTinh(e.target.checked)} disabled/>
                                             <label for="admin">Nữ</label>
                                         </div>   
                                     </div>
@@ -253,6 +263,7 @@ export default function EditMyProfile(props) {
                                             }}
                                             defaultValue={userData.ngay_sinh}
                                             onChange={(e) => setNgaySinh(e.target.value)}
+                                            disabled
                                         />
                                     </div>
                                 </Col>
@@ -271,6 +282,7 @@ export default function EditMyProfile(props) {
                                             required
                                             onChange={(e) => setCCCD(e.target.value)}
                                             onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
+                                            disabled
                                         />
                                     </div>
                                 </Col>
@@ -347,6 +359,7 @@ export default function EditMyProfile(props) {
                                             }}
                                             defaultValue={userData.ngay_vao_lam}
                                             onChange={(e) => setNgayVaoLam(e.target.value)}
+                                            disabled
                                         />
                                     </div>
                                 </Col>
