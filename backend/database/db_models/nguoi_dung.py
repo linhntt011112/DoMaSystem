@@ -9,7 +9,7 @@ from .base import Base
 # class Position(Base):
 #     __tablename__ = 'position'
 #     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-#     name = Column(String(50), nullable=False)
+#     name = Column(String(128), nullable=False)
 #     # people = relationship("Person", back_populates="position")
     
 #     def as_dict(self):
@@ -20,21 +20,21 @@ from .base import Base
 class NguoiDung(Base):
     __tablename__ = 'nguoi_dung'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    ho_ten = Column(String(50), nullable=False)
-    ten_tai_khoan = Column(String(50), nullable=False)
+    ho_ten = Column(String(128), nullable=False)
+    ten_tai_khoan = Column(String(128), nullable=False)
     password = Column(String(64), nullable=False)
     password_salt = Column(String(64), nullable=False)
     ngay_sinh = Column(Date, nullable=True)
     dia_chi = Column(String(100), nullable=True)
     ngay_cap_nhat = Column(Date, nullable=False)
     ngay_vao_lam = Column(Date, nullable=True)
-    dien_thoai = Column(String(15), nullable=True)
-    email = Column(String(15), nullable=True)
+    dien_thoai = Column(String(128), nullable=True)
+    email = Column(String(128), nullable=True)
     
     phan_quyen = Column(String(10), nullable=False)
     gioi_tinh = Column(String(10), nullable=True)
     
-    cccd = Column(String(15), nullable=False)
+    cccd = Column(String(128), nullable=False)
     ngay_cap = Column(Date, nullable=True)
     noi_cap = Column(String(100), nullable=True)
     que_quan = Column(String(100), nullable=True)
