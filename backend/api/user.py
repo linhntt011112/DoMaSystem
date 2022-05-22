@@ -122,8 +122,8 @@ async def create_user(user_register: user_schemas.UserCreate,
 @router.put("/update_password")
 async def update_info_user(user_update_password: user_schemas.UserUpdatePassword,
     current_user=Depends(get_current_active_user), db=Depends(get_db)):
-    if current_user.id != user_update_password.id:
-        raise exceptions.PERMISSION_EXCEPTION()
+    # if current_user.id != user_update_password.id:
+    #     raise exceptions.PERMISSION_EXCEPTION()
     try:
         current_user = user_core.update_password(db, current_user, user_update_password)
         return current_user

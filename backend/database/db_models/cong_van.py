@@ -5,6 +5,7 @@ from sqlalchemy.orm import relationship
 
 from .base import Base, SaveFile
 from .nguoi_dung import NguoiDung
+from .static_tables import TrangThaiLoaiCongVan
 
 
 # class AssociationNguoiKiCongVan(Base):
@@ -40,13 +41,13 @@ from .nguoi_dung import NguoiDung
 class LoaiCongVan(Base):
     __tablename__ = 'loai_cong_van'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    loai_cong_van = Column(String(100), nullable=False)
-    trang_thai = Column(Boolean, nullable=False)
+    name = Column(String(100), nullable=False)
+    trang_thai = Column(String(100), nullable=False)
     
     id_nguoi_cap_nhat = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     nguoi_cap_nhat = relationship('NguoiDung', backref="ki_loai_cong_van")
     
-    mo_ta = Column(String(100), nullable=False)
+    mo_ta = Column(String(512), nullable=True)
     
 
 class TinhTrangXuLy(Base):
