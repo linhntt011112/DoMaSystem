@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 // import ErrorMessage from "./ErrorMessage";
 // import { UserContext } from "../../context/UserContext";
@@ -92,6 +93,7 @@ const Login = () => {
         </fieldset>
         <button type="submit">Đăng nhập</button>
       </form>
+      <ToastContainer/>
     </section>
   );
 };

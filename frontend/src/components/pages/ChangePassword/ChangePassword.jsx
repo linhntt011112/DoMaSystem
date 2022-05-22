@@ -1,7 +1,15 @@
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import './changepassword.css';
+import { ToastContainer, toast } from 'react-toastify';
+import * as backend_config from "../../../config/backend"
+import { useToken } from '../../../context/TokenContext';
 
-export default function ChangePassword() {
+    
+
+export default function ChangePassword(props) {
+    const {token, setToken} = useToken();
+    let history = useHistory();
 
     const [currentPassword, setCurrentPassword] = useState(null)
     const [newPassword, setNewPassword] = useState(null);
@@ -9,23 +17,75 @@ export default function ChangePassword() {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        validatePassword();
-        submitChangePassword();
+        if (validatePassword()) submitChangePassword();
     }
 
     function validatePassword() {
-        console.log(newPassword, confirmPassword);
         if(newPassword !== confirmPassword) {
-            alert("Mật khẩu không khớp!")
-          return false;
+            validatePasswordFail();
+            return false;
         } else {
-          return true;
+            return true;
         }
+    }
+
+    const changePasswordSuccess = () => {
+        toast.success(<div>Thay đổi mật khẩu thành công</div>, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true
+        })
+    }
+
+    const changePasswordFail = () => {
+        toast.error(<div>Sai mật khẩu hiện tại!</div>, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true
+        })
+    }
+
+    const validatePasswordFail = () => {
+        toast.error(<div>Mật khẩu không khớp!</div>, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true
+        })
     }
 
     const submitChangePassword = () => {
         const body = JSON.stringify({
-            
+            current_plain_password: currentPassword,
+            new_plain_password: newPassword
+        })
+        console.log(body)
+
+        backend_config.makeRequest("PUT", 
+            backend_config.USER_PUT_CHANGE_PASSWORD, 
+            token,
+            body
+        )
+        .then((response) => {
+            console.log(body);
+            if (response.ok){
+                console.log(body);
+                response.json().then((response_json) => {
+                    console.log(response_json);
+                    setToken(null);
+                    changePasswordSuccess();
+                    history.push('/login');
+                })
+            }
+            else {
+                response.text().then((text) => {
+                    let error = JSON.parse(text).detail;
+                    switch (error) {
+                        case "Wrong password!": 
+                            changePasswordFail();
+                            return;
+                        default:
+                            alert(text);
+                            return;
+                    }
+                })
+            }
         })
     }
 
@@ -70,6 +130,7 @@ export default function ChangePassword() {
                     </div>
                 </form>
             </div>
+            <ToastContainer/>
         </div>
     );
 }
