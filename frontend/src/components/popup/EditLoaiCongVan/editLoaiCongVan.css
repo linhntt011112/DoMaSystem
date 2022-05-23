@@ -1,13 +1,8 @@
-.edit-loai-cong-van-popup-main{
-    position: fixed;
-    top: 30px;
-    left: 100px;
-    width: 100%;
-    height: 100vh;
-    background-color: rgb(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
+.edit-loai-cong-van-popup-inner{
+    position: relative;
+    padding: 32px;
+    width: fit-content;
+    background-color: #FFF;
     overflow: scroll;
-    padding-top: 5vw;
+    top: 45px;
 }

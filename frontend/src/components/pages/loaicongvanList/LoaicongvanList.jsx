@@ -10,6 +10,8 @@ import { UserContext } from "../../../context/UserContext";
 import {loaicongvanRows} from "../../../dummyLoaiCongVanData";
 import { Visibility, Edit } from '@mui/icons-material';
 import EditLoaiCongVan from "../../popup/EditLoaiCongVan/EditLoaiCongVan";
+import { ToastContainer} from 'react-toastify';
+import { DeletePopup } from '../../popup/Dialog/DeletePopup';
 
 export default function LoaicongvanList() {
     const [token,] = useContext(UserContext);
@@ -17,14 +19,23 @@ export default function LoaicongvanList() {
     const [addButtonPopup, setAddButtonPopup] = useState(false);
     const [detailButtonPopup, setDetailButtonPopup] = useState(false);
     const [editButtonPopup, setEditButtonPopup] = useState(false);
+    const [buttonDeletePopup, setButtonDeletePopup] = useState(false);
+    const [mark, setMark] = useState(null);
+
+    const refreshTable = () => {
+        // backend_config.makeRequest("GET", backend_config.USER_GET_LIST_API, token)
+        //   .then((data) => data.json())
+        //   .then((data) => {setTableData(data)})
+    }
+    
 
     const handleDelete = (id)=>{
         setData(data.filter(item=>item.id !== id));
     };
 
     const columns = [
-        { field: 'id', headerName: 'Mã loại', width: 100},
-        { field: 'loai_cong_van', headerName: 'Loại công văn', flex: 1 },
+        { field: 'id', headerName: 'Mã loại công văn', width: 130},
+        { field: 'loai_cong_van', headerName: 'Tên loại công văn', flex: 1 },
         {
             field: 'trang_thai',
             headerName: 'Trạng thái',
@@ -47,11 +58,20 @@ export default function LoaicongvanList() {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Visibility className='userListView' onClick={() => setDetailButtonPopup(true)}></Visibility>
-                        <Edit className='userListEditIcon' onClick={() => setEditButtonPopup(true)}></Edit>
-                        <DeleteOutline className='userListDelete' onClick={()=>handleDelete(params.row.id)}/>
+                        <Visibility className='loai-cong-van-list-View' onClick={() => setDetailButtonPopup(true)}></Visibility>
+                        <Edit className='loai-cong-van-list-EditIcon' onClick={() => setEditButtonPopup(true)}></Edit>
+                        <DeleteOutline className='loai-cong-van-list-Delete' onClick={()=>{setMark(params.row.id); setButtonDeletePopup(true)}}/>
+                        <DeletePopup 
+                            trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} 
+                            token={token} 
+                            mark={mark} 
+                            id={params.row.id} 
+                            message={"Bạn có chắc muốn xóa loại công văn này không?"}
+                            // url={backend_config.USER_DELETE_BY_ID.replace("{user_id}", params.row.id)}
+                            refreshFunc={refreshTable}
+                        >
+                        </DeletePopup>
                     </>
-
                 )
             }
         }
@@ -73,11 +93,12 @@ export default function LoaicongvanList() {
     }, [])
 
     return (
-        <div className='loaicongvanList'>
+        <div className='loai-cong-van-List'>
             <main>
-                <div className='userListTop'>
+                <div className='loai-cong-van-ListTop'>
+                    <h1 className='loai-cong-van-ListTitle'>Danh sách loại công văn</h1>
                     <Button
-                        className='userAddCongVan'
+                        className='loai-cong-van-add-button'
                         style={{
                             margin: '10px 10px 10px auto',
                             display: 'flex',
@@ -112,6 +133,7 @@ export default function LoaicongvanList() {
             <DetailLoaiCongVan trigger={detailButtonPopup} setTrigger={setDetailButtonPopup}>
             </DetailLoaiCongVan>
             <EditLoaiCongVan trigger={editButtonPopup} setTrigger={setEditButtonPopup}></EditLoaiCongVan>
+            <ToastContainer className="loai-cong-van-notify"/>
         </div>
     )
 }

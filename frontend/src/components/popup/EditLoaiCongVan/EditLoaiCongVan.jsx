@@ -2,17 +2,46 @@ import React from "react";
 import "./editLoaiCongVan.css";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import { Close } from '@material-ui/icons';
+import { toast } from 'react-toastify';
 
 export default function EditLoaiCongVan(props) {
-    const [loaiTrangThai, setLoaiTrangThai] = React.useState('');
+    const [trang_thai, setTrangThai] = React.useState(null);
+    const [ma_loai, setMaLoai] = React.useState(null);
+    const [ten_loai, setTenLoai] = React.useState(null);
+    const [mo_ta, setMoTa] = React.useState(null);
 
-    const handleChangeLoaiTrangThai = (event) => {
-        setLoaiTrangThai(event.target.value);
+    const handleChangeTrangThai = (event) => {
+        setTrangThai(event.target.value);
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        submitEditLoaiCongVan();
+        props.setTrigger(false);
+        editLoaiCongVanSuccessNotify();
+    }
+
+    const editLoaiCongVanSuccessNotify = (response_json) => {
+        toast.success(<div>Lưu dữ liệu thành công!</div>, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true
+        })
+    }
+
+    const submitEditLoaiCongVan = () => {
+        const body = JSON.stringify({
+            id: ma_loai,
+            name: ten_loai,
+            trang_thai: trang_thai === 1 ? "hoat_dong" : "khong_hoat_dong",
+            mo_ta: mo_ta
+        })
+        console.log(body)
+        setTrangThai(null);
+    }
+
     return (props.trigger) ? (
-        <div className="edit-loai-cong-van-popup-main">
-            <form className="popup-inner">
+        <div className="popup-main">
+            <form className="edit-loai-cong-van-popup-inner" onSubmit={handleSubmit}>
                 <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                 <div className='addLoaiCongVan'>
                     <h5 className='modal-title'>Chỉnh sửa loại công văn</h5>
@@ -27,11 +56,12 @@ export default function EditLoaiCongVan(props) {
                                 className='loaiCongVanAddInput'
                                 defaultValue="PD"
                                 required
+                                onChange={(e) => setMaLoai(e.target.value)}
                             />
                         </div>
                         <div className='loaiCongVanAddItem'>
                             <label>
-                                Loại công văn
+                                Tên loại công văn
                                 <span className='text-danger' style={{color: 'red'}}>  *</span>
                             </label>
                             <input
@@ -39,6 +69,7 @@ export default function EditLoaiCongVan(props) {
                                 className='loaiCongVanAddInput'
                                 required
                                 defaultValue="Phúc đáp"
+                                onChange={(e) => setTenLoai(e.target.value)}
                             />
                         </div>
                         <div className='loaiCongVanAddItem'>
@@ -49,11 +80,13 @@ export default function EditLoaiCongVan(props) {
                                 type="text"
                                 className='loaiCongVanAddInput'
                                 defaultValue="Phúc đáp"
+                                onChange={(e) => setMoTa(e.target.value)}
                             />
                         </div>
                         <div className='loaiCongVanAddItem'>
                             <label>
                                 Trạng thái
+                                <span className='text-danger' style={{color: 'red'}}>  *</span>
                             </label>
                             <Box sx={{ }} style={{width: '100%'}}>
                                 <FormControl fullWidth>
@@ -61,12 +94,11 @@ export default function EditLoaiCongVan(props) {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         defaultValue={1}
-                                        onChange={handleChangeLoaiTrangThai}
+                                        onChange={handleChangeTrangThai}
                                         style={{height: '36px'}}
                                     >
-                                        <MenuItem value={1}>Hoạt động 1</MenuItem>
-                                        <MenuItem value={2}>Hoạt động 2</MenuItem>
-                                        <MenuItem value={3}>Hoạt động 3</MenuItem>
+                                        <MenuItem value={1}>Hoạt động</MenuItem>
+                                        <MenuItem value={2}>Không hoạt động</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Box>

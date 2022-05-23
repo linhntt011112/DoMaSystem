@@ -12,7 +12,8 @@ import { muc_do_khan_cap_Rows } from "../../../dummyMucDoKhanCapData";
 import { muc_do_bao_mat_Rows } from "../../../dummyMucDoBaoMatData";
 import { tinh_trang_xu_ly_Rows } from "../../../dummyTinhTrangXuLyData";
 
-export default function CongvandiList() {
+export default function CongvandiList(props) {
+    const token = props.token;
     const [buttonPopup, setButtonPopup] = useState(false);
     const [value_loaicongvan, setValue_LoaiCongVan] = useState(null);
     const [value_mucdokhancap, setValue_MucDoKhanCap] = useState(null);
@@ -74,6 +75,7 @@ export default function CongvandiList() {
     return (
         <div className='congVanDiList'>
             <main>
+                <h1 className='cong-van-di-ListTitle'>Danh sách công văn đi</h1>
                 <div className='congVanDiListTop'>
                     <Button
                         className='buttonAddCongVan'
@@ -139,7 +141,7 @@ export default function CongvandiList() {
                     <button className="dropdown-button">Lọc</button>
                 </div>
                 
-                <div style={{ height: 'calc(100vh - 200px)' }}>
+                <div style={{ height: 'calc(90vh - 200px)' }}>
                     <DataGrid
                         rows={data}
                         disableSelectionOnClick
@@ -150,7 +152,7 @@ export default function CongvandiList() {
                     />
                 </div>
             </main>
-            <AddCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup}>
+            <AddCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token}>
             </AddCongVanDi>
         </div>
     )
