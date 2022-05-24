@@ -12,13 +12,70 @@ export default function AddCongVanDi(props) {
     const {token, refreshFunc} = props;
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
 
-    const [phong_ban, setPhongBan] = React.useState(null);
+    const [so_cong_van, setSoCongVan] = React.useState(null);
+    const [ten_cong_van, setTenCongVan] = React.useState(null);
+    const [noi_nhan, setNoiNhan] = React.useState(null);
+    const [nguoi_ky, setNguoiKy] = React.useState(null);
+    const [ngay_ky, setNgayKy] = React.useState(null);
+    const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(null);
+    const [loai_cong_van, setLoaiCongVan] = React.useState(null);
+    const [nguoi_theo_doi, setNguoiTheoDoi] = React.useState(null);
+    const [nguoi_tao, setNguoiTao] = React.useState(null);
+    const [nguoi_duyet, setNguoiDuyet] = React.useState(null);
+    const [ngay_hieu_luc, setNgayHieuLuc] = React.useState(null);
+    const [ngay_het_hieu_luc, setNgayHetHieuLuc] = React.useState(null);
+    const [so_luong_van_ban, setSoLuongVanBan] = React.useState(null);
+    const [muc_do_bao_mat, setMucDoBaoMat] = React.useState(null);
+    const [muc_do_khan_cap, setMucDoKhanCap] = React.useState(null);
+    const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
+    const [nguoi_xu_ly, setNguoiXuLy] = React.useState(null);
+    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(null);
+    const [ngay_tao, setNgayTao] = React.useState(null);
+    const [ngay_duyet, setNgayDuyet] = React.useState(null);
+    const [ly_do, setLyDo] = React.useState(null);
+    const [noi_dung, setNoiDung] = React.useState(null);
     const [editorState, setEditorState] = useState(() =>
         EditorState.createEmpty()
     );
 
-    const handleChangePhongBan = (event) => {
-        setPhongBan(event.target.value);
+    const handleChangeNoiNhan = (event) => {
+        setNoiNhan(event.target.value);
+    }
+
+    const handleChangeNguoiKy = (event) => {
+        setNguoiKy(event.target.value);
+    }
+
+    const handleChangeBoPhanPhatHanh = (event) => {
+        setBoPhanPhatHanh(event.target.value);
+    }
+
+    const handleChangeLoaiCongVan = (event) => {
+        setLoaiCongVan(event.target.value);
+    }
+
+    const handleChangeNguoiTheoDoi = (event) => {
+        setNguoiTheoDoi(event.target.value);
+    }
+
+    const handleChangeNguoiDuyet = (event) => {
+        setNguoiDuyet(event.target.value);
+    }
+
+    const handleChangeMucDoBaoMat = (event) => {
+        setMucDoBaoMat(event.target.value);
+    }
+
+    const handleChangeMucDoKhanCap = (event) => {
+        setMucDoKhanCap(event.target.value);
+    }
+
+    const handleChangeNguoiXuLy = (event) => {
+        setNguoiXuLy(event.target.value);
+    }
+
+    const handleChangeTinhTrangXuLy = (event) => {
+        setTinhTrangXuLy(event.target.value);
     }
 
     const fetchOneStaticTableData = (name, setData) => {
@@ -58,6 +115,7 @@ export default function AddCongVanDi(props) {
                                 <input
                                     type="text"
                                     className='cong-van-di-add-input'
+                                    onChange={(e) => setSoCongVan(e.target.value)}
                                 />
                             </div>
                             <div className="cong-van-di-add-item">
@@ -68,6 +126,7 @@ export default function AddCongVanDi(props) {
                                 <input
                                     type="text"
                                     className='cong-van-di-add-input'
+                                    onChange={(e) => setTenCongVan(e.target.value)}
                                 />
                             </div>
                             <div className="cong-van-di-add-item">
@@ -80,8 +139,7 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={phong_ban}
-                                            onChange={handleChangePhongBan}
+                                            onChange={handleChangeNoiNhan}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -104,8 +162,7 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
+                                            onChange={handleChangeNguoiKy}
                                             defaultValue={3}
                                             style={{
                                                 height: '36px'
@@ -129,7 +186,7 @@ export default function AddCongVanDi(props) {
                                     onKeyDown={(e) => {
                                         e.preventDefault();
                                     }}
-                                    // onChange={(e) => setNgayKy(e.target.value)}
+                                    onChange={(e) => setNgayKy(e.target.value)}
                                     required
                                     style={{
                                         width: '253px',
@@ -146,8 +203,7 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={phong_ban}
-                                            onChange={handleChangePhongBan}
+                                            onChange={handleChangeBoPhanPhatHanh}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -170,8 +226,7 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
+                                            onChange={handleChangeLoaiCongVan}
                                             defaultValue={3}
                                             style={{
                                                 height: '36px'
@@ -194,8 +249,7 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
+                                            onChange={handleChangeNguoiTheoDoi}
                                             defaultValue={3}
                                             style={{
                                                 height: '36px'
@@ -230,8 +284,7 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
+                                            onChange={handleChangeNguoiDuyet}
                                             defaultValue={3}
                                             style={{
                                                 height: '36px'
@@ -257,7 +310,7 @@ export default function AddCongVanDi(props) {
                                     onKeyDown={(e) => {
                                         e.preventDefault();
                                     }}
-                                    // onChange={(e) => setNgayKy(e.target.value)}
+                                    onChange={(e) => setNgayHieuLuc(e.target.value)}
                                     required
                                     style={{
                                         width: '253px',
@@ -274,7 +327,7 @@ export default function AddCongVanDi(props) {
                                     onKeyDown={(e) => {
                                         e.preventDefault();
                                     }}
-                                    // onChange={(e) => setNgayKy(e.target.value)}
+                                    onChange={(e) => setNgayHetHieuLuc(e.target.value)}
                                     required
                                     style={{
                                         width: '253px',
@@ -290,6 +343,7 @@ export default function AddCongVanDi(props) {
                                     type="text"
                                     value="3969"
                                     className='cong-van-di-add-input'
+                                    onChange={(e) => setSoLuongVanBan(e.target.value)}
                                 />
                             </div>
                             <div className='cong-van-di-add-item'>
@@ -302,8 +356,7 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
+                                            onChange={handleChangeMucDoBaoMat}
                                             defaultValue={3}
                                             style={{
                                                 height: '36px'
@@ -326,8 +379,7 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
+                                            onChange={handleChangeMucDoKhanCap}
                                             defaultValue={3}
                                             style={{
                                                 height: '36px'
@@ -350,7 +402,7 @@ export default function AddCongVanDi(props) {
                                     onKeyDown={(e) => {
                                         e.preventDefault();
                                     }}
-                                    // onChange={(e) => setNgayKy(e.target.value)}
+                                    onChange={(e) => setNgayPhatHanh(e.target.value)}
                                     required
                                     style={{
                                         width: '253px',
@@ -367,8 +419,7 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
+                                            onChange={handleChangeNguoiXuLy}
                                             defaultValue={3}
                                             style={{
                                                 height: '36px'
@@ -391,8 +442,7 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
+                                            onChange={handleChangeTinhTrangXuLy}
                                             defaultValue={3}
                                             style={{
                                                 height: '36px'
@@ -416,7 +466,7 @@ export default function AddCongVanDi(props) {
                                     onKeyDown={(e) => {
                                         e.preventDefault();
                                     }}
-                                    // onChange={(e) => setNgayKy(e.target.value)}
+                                    onChange={(e) => setNgayTao(e.target.value)}
                                     required
                                     style={{
                                         width: '253px',
@@ -435,7 +485,7 @@ export default function AddCongVanDi(props) {
                                     onKeyDown={(e) => {
                                         e.preventDefault();
                                     }}
-                                    // onChange={(e) => setNgayKy(e.target.value)}
+                                    onChange={(e) => setNgayDuyet(e.target.value)}
                                     required
                                     style={{
                                         width: '253px',
@@ -452,9 +502,13 @@ export default function AddCongVanDi(props) {
                             type="text"
                             value="3969"
                             className='cong-van-di-add-input-reason'
+                            onChange={(e) => setLyDo(e.target.value)}
                         />
                     </div>
-                    <div className="cong-van-di-add-item-content">Nội dung</div>
+                    <div className="cong-van-di-add-item-content">
+                        Nội dung
+                        <span className='text-danger' style={{color: 'red'}}> *</span>
+                    </div>
                     <div style={{ border: "1px solid black", padding: '2px', minHeight: '400px' }}>
                         <Editor
                             editorState={editorState}
