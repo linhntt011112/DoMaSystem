@@ -75,14 +75,13 @@ class TraoDoi(Base):
     noi_dung = Column(String(100), nullable=False)
     
     id_nguoi_tao =  Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
-    
     nguoi_tao = relationship('NguoiDung', backref='trao_doi')
     
 
 
 class CongVanDi(Base):
     __tablename__ = 'cong_van_di'
-    so_cong_van = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
+    id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
     ten_cong_van = Column(String(100), nullable=False)
     id_phong_ban_nhan = Column(Integer, nullable=False)
     
@@ -94,7 +93,7 @@ class CongVanDi(Base):
     id_phong_ban_phat_hanh = Column(Integer, nullable=False)
     ngay_phat_hanh = Column(Date, nullable=False)
     
-    mid_loai_cong_van = Column(Integer, ForeignKey('loai_cong_van.id'), nullable=False)
+    id_loai_cong_van = Column(Integer, ForeignKey('loai_cong_van.id'), nullable=False)
     loai_cong_van = relationship('LoaiCongVan', backref="cong_van")
     
     trich_yeu_noi_dung = Column(String(100), nullable=True)

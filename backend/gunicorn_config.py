@@ -1,10 +1,11 @@
+from concurrent.futures import thread
 from config import server_config
 
 
 loglevel = 'debug'
 
 preload = False
-workers = 1
+workers = 2
 bind = f'{server_config.host}:{server_config.port}'
 worker_class = 'uvicorn.workers.UvicornWorker'
 worker_connections = 2000
