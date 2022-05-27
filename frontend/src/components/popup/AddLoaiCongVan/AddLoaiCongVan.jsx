@@ -2,34 +2,45 @@ import React from "react";
 import "./addLoaiCongVan.css";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import { Close } from '@material-ui/icons';
+import { toast } from 'react-toastify';
 
 export default function AddLoaiCongVan(props) {
-    const [trang_thai, setTrangThai] = React.useState('');
-    const [ma_loai, setMaLoai] = React.useState('');
-    const [loai_cong_van, setLoaiCongVan] = React.useState('');
-    const [mo_ta, setMoTa] = React.useState('');
+    const [trang_thai, setTrangThai] = React.useState(null);
+    const [ma_loai, setMaLoai] = React.useState(null);
+    const [ten_loai, setTenLoai] = React.useState(null);
+    const [mo_ta, setMoTa] = React.useState(null);
 
     const handleChangeTrangThai = (event) => {
         setTrangThai(event.target.value);
     };
 
+    const addLoaiCongVanSuccessNotify = (response_json) => {
+        toast.success(<div>Thêm dữ liệu thành công!</div>, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true
+        })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         submitAddLoaiCongVan();
         props.setTrigger(false);
+        addLoaiCongVanSuccessNotify();
     }
 
-    const submitAddLoaiCongVan = async() => {
-        let form = new FormData();
-        form.append("ma_loai", ma_loai);
-        form.append("loai_cong_van", loai_cong_van);
-        form.append("mo_ta", mo_ta);
-        form.append("trang_thai", trang_thai);
+    const submitAddLoaiCongVan = () => {
+        const body = JSON.stringify({
+            id: ma_loai,
+            name: ten_loai,
+            trang_thai: trang_thai === 1 ? "hoat_dong" : "khong_hoat_dong",
+            mo_ta: mo_ta
+        })
+        console.log(body);
     }
 
     return (props.trigger) ? (
-        <div className="add-loai-cong-van-popup-main" style={{top: '15px'}}>
-            <form className="popup-inner" onSubmit={handleSubmit}>
+        <div className="popup-main">
+            <form className="add-loai-cong-van-popup-inner" onSubmit={handleSubmit}>
                 <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                 <div className='addLoaiCongVan'>
                     <h5 className='modal-title'>Thêm mới loại công văn</h5>
@@ -48,14 +59,14 @@ export default function AddLoaiCongVan(props) {
                         </div>
                         <div className='loaiCongVanAddItem'>
                             <label>
-                                Loại công văn
+                                Tên loại công văn
                                 <span className='text-danger' style={{color: 'red'}}>  *</span>
                             </label>
                             <input
                                 type="text"
                                 className='loaiCongVanAddInput'
                                 required
-                                onChange={(e) => setLoaiCongVan(e.target.value)}
+                                onChange={(e) => setTenLoai(e.target.value)}
                             />
                         </div>
                         <div className='loaiCongVanAddItem'>
@@ -71,6 +82,7 @@ export default function AddLoaiCongVan(props) {
                         <div className='loaiCongVanAddItem'>
                             <label>
                                 Trạng thái
+                                <span className='text-danger' style={{color: 'red'}}>  *</span>
                             </label>
                             <Box sx={{ }} style={{width: '100%'}}>
                                 <FormControl fullWidth>
@@ -80,10 +92,10 @@ export default function AddLoaiCongVan(props) {
                                         value={trang_thai}
                                         onChange={handleChangeTrangThai}
                                         style={{height: '36px'}}
+                                        required
                                     >
-                                        <MenuItem value={1}>Hoạt động 1</MenuItem>
-                                        <MenuItem value={2}>Hoạt động 2</MenuItem>
-                                        <MenuItem value={3}>Hoạt động 3</MenuItem>
+                                        <MenuItem value={1}>Hoạt động</MenuItem>
+                                        <MenuItem value={2}>Không hoạt động</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Box>

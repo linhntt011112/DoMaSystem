@@ -1,15 +1,30 @@
-.loaicongvanList{
+.loai-cong-van-List{
     flex: 5;
     position: sticky;
     top: 60px;
 }
-.userListView{
+.loai-cong-van-list-View{
     color: #3bb077;
     padding-right: 5px;
     cursor: pointer;
 }
 
-.userListEditIcon{
+.loai-cong-van-list-EditIcon{
     padding-right: 5px;
     cursor: pointer;
+    color: #3bb077;
+}
+
+.loai-cong-van-list-Delete{
+    color: red;
+    cursor: pointer;
+}
+
+.loai-cong-van-notify{
+    top: 4em !important;
+}
+
+.loai-cong-van-ListTitle{
+    padding: 10px;
+    text-align: center;
 }

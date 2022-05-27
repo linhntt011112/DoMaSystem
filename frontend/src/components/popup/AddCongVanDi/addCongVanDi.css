@@ -9,7 +9,6 @@
 .cong-van-di-add-header{
     display: flex;
     justify-content: center;
-    padding-bottom: 30px;
 }
 
 .cong-van-di-add-title{
@@ -51,8 +50,7 @@
 }
 
 .cong-van-di-add-select{
-    width: 257px;
-    height: 35px;
+    width: 258px;
     box-shadow: none;
     font-size: 15px;
 }
@@ -74,7 +72,7 @@
     font-size: 14px;
     margin-right: 5px;
     float: left;
-    width: 20.5%;
+    width: 20%;
 }
 
 .cong-van-di-add-input-reason{

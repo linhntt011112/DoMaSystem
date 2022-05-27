@@ -11,15 +11,15 @@ export function DeletePopup(props) {
     // backend_config.AI_MODEL_VERSION_DELETE_BY_ID.replace('{ai_model_version_id}', id),
     // Are you sure to delete version "{name}" ?
 
-    const noDeleteUserNotify = () => {
+    const deleteUserFailNotify = () => {
       toast.error("Không thể xóa quản trị viên", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: true
       })
     }
 
-    const deleteUserNotify = () => {
-      toast.success("Xóa người dùng thành công", {
+    const deleteSuccessNotify = () => {
+      toast.success("Xóa thành công", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: true
       })
@@ -33,13 +33,20 @@ export function DeletePopup(props) {
           response.json().then((response_json) => {
             props.setTrigger(false);
             refreshFunc();
-            deleteUserNotify();
+            deleteSuccessNotify();
           });
         } else {
           response.text().then((text) => {
-            // console.log(`Duplicate ${name}!`);
-            // alert(`Can not delete ! \n Reason: ${text}`);
-            noDeleteUserNotify();
+            let error = JSON.parse(text).detail;
+            console.log(error)
+            switch (error) {
+                case "Can not delete admin user!": 
+                  deleteUserFailNotify();
+                  return;
+                default:
+                  alert(text);
+                  return;
+            }
           });
         }
       });

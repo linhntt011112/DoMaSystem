@@ -37,3 +37,8 @@
     cursor: pointer;
     width: 50px;
 }
+
+.cong-van-di-ListTitle{
+    padding: 10px;
+    text-align: center;
+}
