@@ -3,7 +3,6 @@ import datetime
 from typing import Optional, Union
 from pydantic import BaseModel
 
-from backend.database.db_models.cong_van import CongVanDi
 from . import nguoi_dung
 
 
@@ -15,8 +14,23 @@ class LoaiCongVanFull(BaseModel):
     
     id_nguoi_cap_nhat: int
     nguoi_cap_nhat: nguoi_dung.UserBase
+    thoi_gian_cap_nhat: datetime.datetime
     
-    mo_ta: str
+    mo_ta: str = None
+    
+    class Config:
+        orm_mode=True
+    
+    
+
+class LoaiCongVanCreate(BaseModel):
+    name: str
+    trang_thai: str
+    
+    id_nguoi_cap_nhat: int
+    mo_ta: str = None
+    class Config:
+        orm_mode=True
     
     
 
