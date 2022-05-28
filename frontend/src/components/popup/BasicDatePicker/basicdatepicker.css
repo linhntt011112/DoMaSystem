@@ -4,6 +4,8 @@
 }
 
 .datepicker{
-    width: 250px;
+    width: 247px;
     height: 30px;
+    padding-left: 10.5px;
+    font-size: 15px;
 }

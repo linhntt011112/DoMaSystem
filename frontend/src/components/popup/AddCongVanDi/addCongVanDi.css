@@ -36,17 +36,18 @@
 
 .cong-van-di-add-item>label{
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 15px;
     margin-right: 5px;
     float: left;
     width: 35%;
 }
 
 .cong-van-di-add-input{
-    width: 250px;
+    width: 242px;
     height: 30px;
     box-shadow: none;
     font-size: 15px;
+    padding-left: 10.5px;
 }
 
 .cong-van-di-add-select{
@@ -76,10 +77,11 @@
 }
 
 .cong-van-di-add-input-reason{
-    width: 100%;
+    width: 98%;
     height: 30px;
     box-shadow: none;
     font-size: 15px;
+    padding-left: 10.5px;
 }
 
 .cong-van-di-add-item-content{

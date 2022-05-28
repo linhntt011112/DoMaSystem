@@ -18,10 +18,11 @@
 }
 
 .userAddInput{
-    width: 252px;
+    width: 244px;
     height: 30px;
     box-shadow: none;
     font-size: 15px;
+    padding-left: 10.5px;
 }
 
 .modal-footer{

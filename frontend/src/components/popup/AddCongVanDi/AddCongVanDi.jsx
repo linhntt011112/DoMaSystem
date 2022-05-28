@@ -7,8 +7,13 @@ import { Editor } from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
 import Button from '@material-ui/core/Button';
 import * as backend_config from "../../../config/backend"
+import { format } from 'date-fns'
 
 export default function AddCongVanDi(props) {
+    let today = new Date(),
+    today_month = today.getMonth() + 1,
+    today_date = today.getFullYear() + '-' + (today_month < 10 ? '0' + today_month : today_month) + '-' + today.getDate();
+
     const {token, refreshFunc} = props;
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
 
@@ -30,13 +35,12 @@ export default function AddCongVanDi(props) {
     const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
     const [nguoi_xu_ly, setNguoiXuLy] = React.useState(null);
     const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(null);
-    const [ngay_tao, setNgayTao] = React.useState(null);
+    const [ngay_tao, setNgayTao] = React.useState(today_date);
     const [ngay_duyet, setNgayDuyet] = React.useState(null);
     const [ly_do, setLyDo] = React.useState(null);
-    const [noi_dung, setNoiDung] = React.useState(null);
-    const [editorState, setEditorState] = useState(() =>
-        EditorState.createEmpty()
-    );
+    const [editorState, setEditorState] = React.useState(
+        () => EditorState.createEmpty(),
+      );
 
     const handleChangeNoiNhan = (event) => {
         setNoiNhan(event.target.value);
@@ -78,12 +82,17 @@ export default function AddCongVanDi(props) {
         setTinhTrangXuLy(event.target.value);
     }
 
+    // const handleChangeNoiDung = () => {
+    //     setEditorState(editorState)
+    //     console.log(editorState);
+    // }
+
     const fetchOneStaticTableData = (name, setData) => {
         return backend_config.makeRequest("GET", backend_config.STATIC_TABLE_GET_LIST.replace('{static_table_name}', name), token)
         .then((response) => response.json())
         .then((data) => {
             setData(data);
-            console.log(data);
+            // console.log(data);
         })
     }
 
@@ -91,9 +100,37 @@ export default function AddCongVanDi(props) {
         fetchOneStaticTableData('phong_ban', setPhongBanTable);
     }, [])
 
+    const addCongVanDi = () => {
+        const body = JSON.stringify({
+            so_cong_van: so_cong_van,
+            ten_cong_van: ten_cong_van,
+            id_phong_ban_nhan: noi_nhan,
+            id_nguoi_ky: nguoi_ky,
+            ngay_ky: ngay_ky,
+            id_phong_ban_phat_hanh: bo_phan_phat_hanh,
+            loai_cong_van: loai_cong_van,
+            nguoi_theo_doi: nguoi_theo_doi,
+            nguoi_tao: nguoi_tao,
+            nguoi_duyet: nguoi_duyet,
+            ngay_hieu_luc: ngay_hieu_luc,
+            ngay_het_hieu_luc: ngay_het_hieu_luc,
+            so_luong_van_ban: so_luong_van_ban,
+            muc_do_bao_mat: muc_do_bao_mat,
+            muc_do_khan_cap: muc_do_khan_cap,
+            ngay_phat_hanh: ngay_phat_hanh,
+            nguoi_xu_ly: nguoi_xu_ly,
+            tinh_trang_xu_ly: tinh_trang_xu_ly,
+            ngay_tao: ngay_tao,
+            ngay_duyet: ngay_duyet,
+            ly_do: ly_do,
+            noi_dung: editorState.getCurrentContent().getPlainText(),
+        })
+        console.log(body);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // submitAddUser();
+        addCongVanDi();
         props.setTrigger(false);
     }
 
@@ -116,6 +153,7 @@ export default function AddCongVanDi(props) {
                                     type="text"
                                     className='cong-van-di-add-input'
                                     onChange={(e) => setSoCongVan(e.target.value)}
+                                    required
                                 />
                             </div>
                             <div className="cong-van-di-add-item">
@@ -127,6 +165,7 @@ export default function AddCongVanDi(props) {
                                     type="text"
                                     className='cong-van-di-add-input'
                                     onChange={(e) => setTenCongVan(e.target.value)}
+                                    required
                                 />
                             </div>
                             <div className="cong-van-di-add-item">
@@ -143,6 +182,7 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
+                                            required
                                         >
                                             {phong_ban_table.map((item) => {
                                                 
@@ -163,10 +203,10 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeNguoiKy}
-                                            defaultValue={3}
                                             style={{
                                                 height: '36px'
                                             }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -189,7 +229,9 @@ export default function AddCongVanDi(props) {
                                     onChange={(e) => setNgayKy(e.target.value)}
                                     required
                                     style={{
-                                        width: '253px',
+                                        width: '244px',
+                                        fontSize: '15px',
+                                        paddingLeft: '10.5px'
                                     }}
                                 />
                             </div>
@@ -207,6 +249,7 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
+                                            required
                                         >
                                             {phong_ban_table.map((item) => {
                                                 
@@ -227,10 +270,11 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeLoaiCongVan}
-                                            defaultValue={3}
+                                            // defaultValue={3}
                                             style={{
                                                 height: '36px'
                                             }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -242,7 +286,6 @@ export default function AddCongVanDi(props) {
                             <div className='cong-van-di-add-item'>
                                 <label>
                                     Người theo dõi
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-di-add-select'>
                                     <FormControl fullWidth>
@@ -250,7 +293,7 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeNguoiTheoDoi}
-                                            defaultValue={3}
+                                            // defaultValue={3}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -285,10 +328,11 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeNguoiDuyet}
-                                            defaultValue={3}
+                                            // defaultValue={3}
                                             style={{
                                                 height: '36px'
                                             }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -313,7 +357,9 @@ export default function AddCongVanDi(props) {
                                     onChange={(e) => setNgayHieuLuc(e.target.value)}
                                     required
                                     style={{
-                                        width: '253px',
+                                        width: '244px',
+                                        fontSize: '15px',
+                                        paddingLeft: '10.5px'
                                     }}
                                 />
                             </div>
@@ -328,9 +374,10 @@ export default function AddCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     onChange={(e) => setNgayHetHieuLuc(e.target.value)}
-                                    required
                                     style={{
-                                        width: '253px',
+                                        width: '244px',
+                                        fontSize: '15px',
+                                        paddingLeft: '10.5px'
                                     }}
                                 />
                             </div>
@@ -341,9 +388,10 @@ export default function AddCongVanDi(props) {
                                 </label>
                                 <input
                                     type="text"
-                                    value="3969"
+                                    // value="3969"
                                     className='cong-van-di-add-input'
                                     onChange={(e) => setSoLuongVanBan(e.target.value)}
+                                    required
                                 />
                             </div>
                             <div className='cong-van-di-add-item'>
@@ -357,10 +405,11 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeMucDoBaoMat}
-                                            defaultValue={3}
+                                            // defaultValue={3}
                                             style={{
                                                 height: '36px'
                                             }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -380,10 +429,11 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeMucDoKhanCap}
-                                            defaultValue={3}
+                                            // defaultValue={3}
                                             style={{
                                                 height: '36px'
                                             }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -395,6 +445,7 @@ export default function AddCongVanDi(props) {
                             <div className='cong-van-di-add-item'>
                                 <label>
                                     Ngày phát hành
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input 
                                     type="date" 
@@ -405,7 +456,9 @@ export default function AddCongVanDi(props) {
                                     onChange={(e) => setNgayPhatHanh(e.target.value)}
                                     required
                                     style={{
-                                        width: '253px',
+                                        width: '244px',
+                                        fontSize: '15px',
+                                        paddingLeft: '10.5px'
                                     }}
                                 />
                             </div>
@@ -420,10 +473,11 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeNguoiXuLy}
-                                            defaultValue={3}
+                                            // defaultValue={3}
                                             style={{
                                                 height: '36px'
                                             }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -443,10 +497,11 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeTinhTrangXuLy}
-                                            defaultValue={3}
+                                            // defaultValue={3}
                                             style={{
                                                 height: '36px'
                                             }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -467,9 +522,12 @@ export default function AddCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     onChange={(e) => setNgayTao(e.target.value)}
+                                    value={today_date}
                                     required
                                     style={{
-                                        width: '253px',
+                                        width: '244px',
+                                        fontSize: '15px',
+                                        paddingLeft: '10.5px'
                                     }}
                                     disabled
                                 />
@@ -477,7 +535,6 @@ export default function AddCongVanDi(props) {
                             <div className='cong-van-di-add-item'>
                                 <label>
                                     Ngày duyệt
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input 
                                     type="date" 
@@ -486,9 +543,10 @@ export default function AddCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     onChange={(e) => setNgayDuyet(e.target.value)}
-                                    required
                                     style={{
-                                        width: '253px',
+                                        width: '244px',
+                                        fontSize: '15px',
+                                        paddingLeft: '10.5px'
                                     }}
                                 />
                             </div>
@@ -500,7 +558,7 @@ export default function AddCongVanDi(props) {
                         </label>
                         <input
                             type="text"
-                            value="3969"
+                            // value="3969"
                             className='cong-van-di-add-input-reason'
                             onChange={(e) => setLyDo(e.target.value)}
                         />
@@ -509,10 +567,11 @@ export default function AddCongVanDi(props) {
                         Nội dung
                         <span className='text-danger' style={{color: 'red'}}> *</span>
                     </div>
-                    <div style={{ border: "1px solid black", padding: '2px', minHeight: '400px' }}>
+                    <div style={{ border: "1px solid black", padding: '2px', minHeight: '400px' }} >
                         <Editor
                             editorState={editorState}
                             onEditorStateChange={setEditorState}
+                            required
                         />
                     </div>
                     <input

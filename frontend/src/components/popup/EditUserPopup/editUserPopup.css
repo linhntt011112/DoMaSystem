@@ -33,14 +33,15 @@
 
 .userUpdateItem>label{
     margin-bottom: 5px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .userUpdateInput{
-    width: 250px;
+    width: 246px;
     height: 30px;
     box-shadow: none;
     font-size: 15px;
+    padding-left: 10.5px;
 }
 
 ::placeholder{

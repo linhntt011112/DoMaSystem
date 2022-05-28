@@ -340,7 +340,7 @@ export default function AddUserPopup(props) {
                                 <input
                                     type="text"
                                     className='userAddInput'
-                                    style={{width: '830px'}}
+                                    style={{width: '826px'}}
                                     onChange={(e) => setDiaChi(e.target.value)}
                                 />
                             </div>
@@ -353,7 +353,7 @@ export default function AddUserPopup(props) {
                                 <input
                                     type="text"
                                     className='userAddInput'
-                                    style={{width: '830px'}}
+                                    style={{width: '826px'}}
                                     onChange={(e) => setQueQuan(e.target.value)}
                                 />
                             </div>
