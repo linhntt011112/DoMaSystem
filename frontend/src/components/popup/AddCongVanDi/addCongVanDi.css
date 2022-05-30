@@ -70,7 +70,7 @@
 
 .cong-van-di-add-item-reason>label{
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 15px;
     margin-right: 5px;
     float: left;
     width: 20%;
@@ -85,7 +85,7 @@
 }
 
 .cong-van-di-add-item-content{
-    font-size: 14px;
+    font-size: 15px;
     padding: 0px 0px 20px 20px;
 }
 
@@ -95,7 +95,7 @@
     background-color: #ff9b44;
     border: 1px solid #ff9b44;
     border-radius: 50px;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
     min-width: 200px;
     padding: 10px 20px;
@@ -105,4 +105,24 @@
 .cong-van-di-add-footer{
     text-align: center;
     margin-top: 40px;
+}
+
+.cong-van-di-add-item-file{
+    display: flex;
+    margin-top: 10px;
+    padding: 0px 0px 20px 20px;
+}
+
+.cong-van-di-add-item-file>label{
+    margin-top: 10px;
+    font-size: 15px;
+    margin-right: 5px;
+    float: left;
+    width: 20%;
+}
+
+.cong-van-di-add-input-file{
+    width: 98%;
+    font-size: 15px;
+    margin-top: 10px;
 }

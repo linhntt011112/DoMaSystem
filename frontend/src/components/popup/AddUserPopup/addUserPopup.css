@@ -12,7 +12,7 @@
 
 .userAddItem>label{
     margin-right: 5px;
-    font-size: 15px;
+    font-size: 16px;
     padding: 1px 0px;
     color: #1f1f1f;
 }
@@ -43,7 +43,7 @@
 }
 
 .errorMessage{
-    font-size: 12px;
+    font-size: 13px;
     padding: 3px;
     color: red;
     display: none;
@@ -58,8 +58,8 @@
     height: 33px;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+.userAddInput[type=number]::-webkit-inner-spin-button, 
+.userAddInput[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
 }

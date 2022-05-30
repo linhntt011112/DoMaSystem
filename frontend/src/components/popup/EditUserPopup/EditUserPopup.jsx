@@ -74,7 +74,7 @@ export default function EditUserPopup(props) {
                     <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                     <div className='userUpdate'>
                         <div className='userUpdateHeader'>
-                            <span className='userUpdateTitle'>Cập nhật thông tin</span>
+                            <h5 className='userUpdateTitle'>Cập nhật thông tin</h5>
                         </div>
                         <div className='userUpdateRight'>
                             <div className='userUpdateUpload'>
@@ -86,7 +86,7 @@ export default function EditUserPopup(props) {
                             </div>
                         </div>
                         <Container className='modal-body'>
-                            <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin cá nhân</h6>
+                            <h6 style={{fontSize: '22px', paddingTop: '20px'}}>Thông tin cá nhân</h6>
                             <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                                 <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                                     <div className='userUpdateItem'>
@@ -226,7 +226,7 @@ export default function EditUserPopup(props) {
                                     </div>
                                 </Col>
                             </Row>
-                            <h6 style={{fontSize: '20px', paddingTop: '20px'}}>Thông tin công việc</h6>
+                            <h6 style={{fontSize: '22px', paddingTop: '20px'}}>Thông tin công việc</h6>
                             <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                                 <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
                                     <div className='userUpdateItem'>

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Close } from '@material-ui/icons';
 import "./addCongVanDi.css";
-import BasicDatePicker from "../BasicDatePicker/BasicDatePicker";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState } from "draft-js";
+import { EditorState, convertToRaw } from "draft-js";
 import Button from '@material-ui/core/Button';
 import * as backend_config from "../../../config/backend"
-import { format } from 'date-fns'
+import draftToHtml from 'draftjs-to-html';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function AddCongVanDi(props) {
     let today = new Date(),
@@ -82,11 +83,6 @@ export default function AddCongVanDi(props) {
         setTinhTrangXuLy(event.target.value);
     }
 
-    // const handleChangeNoiDung = () => {
-    //     setEditorState(editorState)
-    //     console.log(editorState);
-    // }
-
     const fetchOneStaticTableData = (name, setData) => {
         return backend_config.makeRequest("GET", backend_config.STATIC_TABLE_GET_LIST.replace('{static_table_name}', name), token)
         .then((response) => response.json())
@@ -99,6 +95,13 @@ export default function AddCongVanDi(props) {
     useEffect(() => {
         fetchOneStaticTableData('phong_ban', setPhongBanTable);
     }, [])
+
+    const addCongVanDiSuccessNotify = (response_json) => {
+        toast.success(<div>Tạo mới công văn đi thành công!</div>, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true
+        })
+    }
 
     const addCongVanDi = () => {
         const body = JSON.stringify({
@@ -123,15 +126,17 @@ export default function AddCongVanDi(props) {
             ngay_tao: ngay_tao,
             ngay_duyet: ngay_duyet,
             ly_do: ly_do,
-            noi_dung: editorState.getCurrentContent().getPlainText(),
+            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())),
         })
         console.log(body);
+        setEditorState(() => EditorState.createEmpty())
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         addCongVanDi();
         props.setTrigger(false);
+        addCongVanDiSuccessNotify();
     }
 
     return (props.trigger) ? (
@@ -387,8 +392,13 @@ export default function AddCongVanDi(props) {
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     // value="3969"
+                                    onKeyPress={(event) => {
+                                        if (!/[0-9]/.test(event.key)) {
+                                          event.preventDefault();
+                                        }
+                                    }}
                                     className='cong-van-di-add-input'
                                     onChange={(e) => setSoLuongVanBan(e.target.value)}
                                     required
@@ -574,17 +584,18 @@ export default function AddCongVanDi(props) {
                             required
                         />
                     </div>
-                    <input
-                        type="file"
-                        accept="*"
-                        style={{ display: 'none' }}
-                        id="contained-button-file"
-                    />
-                    <label htmlFor="contained-button-file">
-                        <Button className="cong-van-di-add-button" variant="contained" color="primary" component="span">
+                    <div className="cong-van-di-add-item-file">
+                        <label>
                             Tệp đính kèm
-                        </Button>
-                    </label>
+                        </label>
+                        <input
+                            type="file"
+                            accept="*"
+                            // style={{ display: 'none' }}
+                            id="contained-button-file"
+                            className="cong-van-di-add-input-file"
+                        />
+                    </div>
                     <div className='cong-van-di-add-footer'>
                         <button className='cong-van-di-add-button'>Thêm</button>
                     </div>

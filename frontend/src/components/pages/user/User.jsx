@@ -50,7 +50,7 @@ export default function User(props) {
                             />
                             <div className='userShowTopTitle'>
                                 <span className='userShowUsername'>{userData.ho_ten}</span>
-                                <span className='userShowUserCode'><b>Mã nhân viên: </b>{userData.ma_nguoi_dung}</span>
+                                <span className='userShowUserCode'><b>Mã nhân viên: </b>{userData.id}</span>
                                 <span className='userShowUserDateOfJoined'><b>Ngày vào làm: </b>{userData.ngay_vao_lam}</span>
                             </div>
                         </div>

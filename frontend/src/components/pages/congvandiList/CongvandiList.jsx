@@ -11,6 +11,7 @@ import { loaicongvanRows } from "../../../dummyLoaiCongVanData";
 import { muc_do_khan_cap_Rows } from "../../../dummyMucDoKhanCapData";
 import { muc_do_bao_mat_Rows } from "../../../dummyMucDoBaoMatData";
 import { tinh_trang_xu_ly_Rows } from "../../../dummyTinhTrangXuLyData";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function CongvandiList(props) {
     const token = props.token;
@@ -154,6 +155,7 @@ export default function CongvandiList(props) {
             </main>
             <AddCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token}>
             </AddCongVanDi>
+            <ToastContainer className="cong-van-di-notify" />
         </div>
     )
 }
