@@ -67,8 +67,12 @@ async def delete_loai_cong_van(id: int,
         raise exceptions.PERMISSION_EXCEPTION()
     
     try:
-        new_loai_cong_van = crud_cong_van.create_loai_cong_van(db, loai_cong_van)
-        return cong_van_schemas.LoaiCongVanFull.from_orm(new_loai_cong_van)
+        is_success =  crud_cong_van.delete_loai_cong_van_by_id(db, id)
+        if is_success:
+            return True
+        else:
+            raise exceptions.INTERNAL_SERVER_ERROR(f"Can not delete loai_cong_van with id={id}")
+        
     except Exception as e:
         # db.rollback()
         return exceptions.handle_simple_exception(e, logger)

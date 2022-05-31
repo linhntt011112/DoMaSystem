@@ -16,7 +16,7 @@ def select_list_loai_cong_van(db, **kwargs):
 
 
 def get_loai_cong_van_by_id(db, loai_cong_van_id):
-    loai_cong_van = common_queries.query_filter(db, db_models.LoaiCongVan, condition=(db_models.NguoiDung.id == loai_cong_van_id))
+    loai_cong_van = common_queries.query_filter(db, db_models.LoaiCongVan, condition=(db_models.LoaiCongVan.id == loai_cong_van_id))
     if len(loai_cong_van) >= 1:
         return loai_cong_van[0]
     else:
