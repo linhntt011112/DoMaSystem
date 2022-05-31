@@ -9,6 +9,11 @@ export const USER_POST_CREATE = BACKEND_URL + '/user/create';
 export const USER_DELETE_BY_ID = BACKEND_URL + '/user/delete/{user_id}'
 export const USER_PUT_CHANGE_PASSWORD = BACKEND_URL + '/user/update_password'
 
+
+export const LOAI_CONG_VAN_PREFIX = BACKEND_URL + '/cong_van/loai_cong_van'
+export const LOAI_CONG_VAN_GET_LIST = LOAI_CONG_VAN_PREFIX + '/list'
+export const LOAI_CONG_VAN_POST_CREATE = LOAI_CONG_VAN_PREFIX + '/create'
+
 export const STATIC_TABLE_GET_LIST = BACKEND_URL + '/{static_table_name}/list';
 
 

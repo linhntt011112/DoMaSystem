@@ -13,6 +13,16 @@ def select_list_loai_cong_van(db, **kwargs):
     return list_of_objs
 
 
+
+
+def get_loai_cong_van_by_id(db, loai_cong_van_id):
+    loai_cong_van = common_queries.query_filter(db, db_models.LoaiCongVan, condition=(db_models.NguoiDung.id == loai_cong_van_id))
+    if len(loai_cong_van) >= 1:
+        return loai_cong_van[0]
+    else:
+        return None
+
+
 def create_loai_cong_van(db, loai_cong_van: cong_van_schemas.LoaiCongVanCreate):
     now = datetime.now()
     
@@ -25,3 +35,15 @@ def create_loai_cong_van(db, loai_cong_van: cong_van_schemas.LoaiCongVanCreate):
     )
     
     return common_queries.add_and_commit(db, new_loai_cong_van)
+
+
+def delete_loai_cong_van_by_id(db, loai_cong_van_id: int):
+    loai_cong_van = get_loai_cong_van_by_id(db, loai_cong_van_id)
+    if loai_cong_van is None:
+        return False
+    
+    return common_queries.delete(db, loai_cong_van)
+
+
+def delete_loai_cong_van(db, loai_cong_van):
+    return common_queries.delete(db, loai_cong_van)

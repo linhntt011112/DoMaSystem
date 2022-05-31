@@ -13,8 +13,10 @@ import EditLoaiCongVan from "../../popup/EditLoaiCongVan/EditLoaiCongVan";
 import { ToastContainer} from 'react-toastify';
 import { DeletePopup } from '../../popup/Dialog/DeletePopup';
 
-export default function LoaicongvanList() {
-    const [token,] = useContext(UserContext);
+import * as backend_config from '../../../config/backend'
+
+export default function LoaicongvanList(props) {
+    const {token} = props;
     
     const [addButtonPopup, setAddButtonPopup] = useState(false);
     const [detailButtonPopup, setDetailButtonPopup] = useState(false);
@@ -23,9 +25,9 @@ export default function LoaicongvanList() {
     const [mark, setMark] = useState(null);
 
     const refreshTable = () => {
-        // backend_config.makeRequest("GET", backend_config.USER_GET_LIST_API, token)
-        //   .then((data) => data.json())
-        //   .then((data) => {setTableData(data)})
+        backend_config.makeRequest("GET", backend_config.LOAI_CONG_VAN_GET_LIST, token)
+          .then((data) => data.json())
+          .then((data) => {setTableData(data)})
     }
     
 
@@ -35,7 +37,7 @@ export default function LoaicongvanList() {
 
     const columns = [
         { field: 'id', headerName: 'Mã loại công văn', width: 130},
-        { field: 'loai_cong_van', headerName: 'Tên loại công văn', flex: 1 },
+        { field: 'name', headerName: 'Tên loại công văn', flex: 1 },
         {
             field: 'trang_thai',
             headerName: 'Trạng thái',
@@ -45,9 +47,10 @@ export default function LoaicongvanList() {
             field: 'nguoi_cap_nhat',
             headerName: 'Người cập nhật',
             flex: 1,
+            valueGetter: (params) => params.row?.nguoi_cap_nhat?.ho_ten,
         },
         {
-            field: 'update_date',
+            field: 'thoi_gian_cap_nhat',
             headerName: 'Ngày cập nhật',
             width: 200,
         },

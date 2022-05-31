@@ -60,3 +60,17 @@ async def get_list_users(loai_cong_van: cong_van_schemas.LoaiCongVanCreate,
 
 
 
+@router.delete("/loai_cong_van/delete/{id}")
+async def delete_loai_cong_van(id: int,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+    if current_user.phan_quyen != db_models.PhanQuyen.admin:
+        raise exceptions.PERMISSION_EXCEPTION()
+    
+    try:
+        new_loai_cong_van = crud_cong_van.create_loai_cong_van(db, loai_cong_van)
+        return cong_van_schemas.LoaiCongVanFull.from_orm(new_loai_cong_van)
+    except Exception as e:
+        # db.rollback()
+        return exceptions.handle_simple_exception(e, logger)
+
+
