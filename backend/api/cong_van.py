@@ -52,6 +52,7 @@ async def get_list_users(loai_cong_van: cong_van_schemas.LoaiCongVanCreate,
         raise exceptions.PERMISSION_EXCEPTION()
     
     try:
+        loai_cong_van.id_nguoi_cap_nhat = current_user.id
         new_loai_cong_van = crud_cong_van.create_loai_cong_van(db, loai_cong_van)
         return cong_van_schemas.LoaiCongVanFull.from_orm(new_loai_cong_van)
     except Exception as e:

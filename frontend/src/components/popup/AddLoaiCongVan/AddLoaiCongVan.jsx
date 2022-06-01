@@ -3,8 +3,11 @@ import "./addLoaiCongVan.css";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import { Close } from '@material-ui/icons';
 import { toast } from 'react-toastify';
+import * as backend_config from '../../../config/backend'
 
 export default function AddLoaiCongVan(props) {
+    const {token, refreshFunc} = props;
+
     const [trang_thai, setTrangThai] = React.useState(null);
     const [ma_loai, setMaLoai] = React.useState(null);
     const [ten_loai, setTenLoai] = React.useState(null);
@@ -25,17 +28,49 @@ export default function AddLoaiCongVan(props) {
         e.preventDefault();
         submitAddLoaiCongVan();
         props.setTrigger(false);
-        addLoaiCongVanSuccessNotify();
     }
 
     const submitAddLoaiCongVan = () => {
         const body = JSON.stringify({
-            id: ma_loai,
+            // id: ma_loai,
             name: ten_loai,
             trang_thai: trang_thai === 1 ? "hoat_dong" : "khong_hoat_dong",
             mo_ta: mo_ta
         })
         console.log(body);
+
+        backend_config.makeRequest("POST", 
+            backend_config.LOAI_CONG_VAN_POST_CREATE, 
+            token,
+            body
+        )
+        .then((response) => {
+            if (response.ok){
+                response.json().then((response_json) => {
+                    addLoaiCongVanSuccessNotify(response_json);
+                    props.setTrigger(false);
+
+                    refreshFunc();
+                    setTenLoai(null);
+                    setMoTa(null);
+                    setTrangThai(null);
+                })
+            }
+            else {
+                response.text().then((text) => {
+                    let error = JSON.parse(text).detail;
+                    switch (error) {
+                        // case "Duplicate ten_tai_khoan!": 
+                        //     addUserNotifyDuplicateUsername();
+                        //     return;
+                        default:
+                            alert(text);
+                            return;
+                    }
+                })
+            }
+        })
+
     }
 
     return (props.trigger) ? (
@@ -45,7 +80,7 @@ export default function AddLoaiCongVan(props) {
                 <div className='addLoaiCongVan'>
                     <h5 className='modal-title'>Thêm mới loại công văn</h5>
                     <div className='modal-body'>
-                        <div className='loaiCongVanAddItem'>
+                        {/* <div className='loaiCongVanAddItem'>
                             <label>
                                 Mã loại
                                 <span className='text-danger' style={{color: 'red'}}>  *</span>
@@ -56,7 +91,7 @@ export default function AddLoaiCongVan(props) {
                                 required
                                 onChange={(e) => setMaLoai(e.target.value)}
                             />
-                        </div>
+                        </div> */}
                         <div className='loaiCongVanAddItem'>
                             <label>
                                 Tên loại công văn

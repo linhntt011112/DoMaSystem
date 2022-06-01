@@ -27,8 +27,9 @@ class LoaiCongVanCreate(BaseModel):
     name: str
     trang_thai: str
     
-    id_nguoi_cap_nhat: int
+    id_nguoi_cap_nhat: int = None
     mo_ta: str = None
+    
     class Config:
         orm_mode=True
     

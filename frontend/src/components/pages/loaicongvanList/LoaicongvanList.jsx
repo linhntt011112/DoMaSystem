@@ -24,6 +24,8 @@ export default function LoaicongvanList(props) {
     const [buttonDeletePopup, setButtonDeletePopup] = useState(false);
     const [mark, setMark] = useState(null);
 
+    const [tableData, setTableData] = useState(loaicongvanRows);
+
     const refreshTable = () => {
         backend_config.makeRequest("GET", backend_config.LOAI_CONG_VAN_GET_LIST, token)
           .then((data) => data.json())
@@ -32,7 +34,7 @@ export default function LoaicongvanList(props) {
     
 
     const handleDelete = (id)=>{
-        setData(data.filter(item=>item.id !== id));
+        // setData(tableData.filter(item=>item.id !== id));
     };
 
     const columns = [
@@ -67,6 +69,7 @@ export default function LoaicongvanList(props) {
                         <DeletePopup 
                             trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} 
                             token={token} 
+                            url={backend_config.LOAI_CONG_VAN_DELETE_BY_ID.replace('{id}', params.row.id)}
                             mark={mark} 
                             id={params.row.id} 
                             message={"Bạn có chắc muốn xóa loại công văn này không?"}
@@ -80,19 +83,10 @@ export default function LoaicongvanList(props) {
         }
     ];
 
-    const [data, setData] = useState(loaicongvanRows);
+    
 
     useEffect(() => {
-        const requestOptions = {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + token,
-            },
-          };
-        fetch("", requestOptions)
-          .then((data) => data.json())
-          .then((data) => setData(data))
+        refreshTable();
     }, [])
 
     return (
@@ -122,7 +116,7 @@ export default function LoaicongvanList(props) {
                 </div>
                 <div style={{ height: 'calc(100vh - 110px)' }}>
                     <DataGrid
-                        rows={data}
+                        rows={tableData}
                         disableSelectionOnClick
                         columns={columns}
                         pageSize={8}
@@ -131,7 +125,8 @@ export default function LoaicongvanList(props) {
                     />
                 </div>
             </main>
-            <AddLoaiCongVan trigger={addButtonPopup} setTrigger={setAddButtonPopup}>
+            <AddLoaiCongVan trigger={addButtonPopup} setTrigger={setAddButtonPopup}
+                token={token} refreshFunc={refreshTable}>
             </AddLoaiCongVan>
             <DetailLoaiCongVan trigger={detailButtonPopup} setTrigger={setDetailButtonPopup}>
             </DetailLoaiCongVan>
