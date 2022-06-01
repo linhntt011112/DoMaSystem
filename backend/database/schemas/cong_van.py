@@ -9,6 +9,8 @@ from . import nguoi_dung
 
 class LoaiCongVanFull(BaseModel):
     id: int
+    ma_loai: str
+    
     name: str
     trang_thai: str
     
@@ -24,6 +26,7 @@ class LoaiCongVanFull(BaseModel):
     
 
 class LoaiCongVanCreate(BaseModel):
+    ma_loai: str
     name: str
     trang_thai: str
     

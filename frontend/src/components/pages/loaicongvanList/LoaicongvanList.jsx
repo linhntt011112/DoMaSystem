@@ -38,7 +38,7 @@ export default function LoaicongvanList(props) {
     };
 
     const columns = [
-        { field: 'id', headerName: 'Mã loại công văn', width: 130},
+        { field: 'ma_loai', headerName: 'Mã loại công văn', width: 130},
         { field: 'name', headerName: 'Tên loại công văn', flex: 1 },
         {
             field: 'trang_thai',

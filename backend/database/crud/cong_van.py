@@ -27,6 +27,7 @@ def create_loai_cong_van(db, loai_cong_van: cong_van_schemas.LoaiCongVanCreate):
     now = datetime.now()
     
     new_loai_cong_van = db_models.LoaiCongVan(
+        ma_loai=loai_cong_van.ma_loai,
         name=loai_cong_van.name,
         trang_thai=loai_cong_van.trang_thai,
         id_nguoi_cap_nhat=loai_cong_van.id_nguoi_cap_nhat,

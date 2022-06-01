@@ -32,7 +32,7 @@ export default function AddLoaiCongVan(props) {
 
     const submitAddLoaiCongVan = () => {
         const body = JSON.stringify({
-            // id: ma_loai,
+            ma_loai: ma_loai,
             name: ten_loai,
             trang_thai: trang_thai === 1 ? "hoat_dong" : "khong_hoat_dong",
             mo_ta: mo_ta
@@ -52,6 +52,7 @@ export default function AddLoaiCongVan(props) {
 
                     refreshFunc();
                     setTenLoai(null);
+                    setMaLoai(null);
                     setMoTa(null);
                     setTrangThai(null);
                 })
@@ -80,7 +81,7 @@ export default function AddLoaiCongVan(props) {
                 <div className='addLoaiCongVan'>
                     <h5 className='modal-title'>Thêm mới loại công văn</h5>
                     <div className='modal-body'>
-                        {/* <div className='loaiCongVanAddItem'>
+                        <div className='loaiCongVanAddItem'>
                             <label>
                                 Mã loại
                                 <span className='text-danger' style={{color: 'red'}}>  *</span>
@@ -91,7 +92,7 @@ export default function AddLoaiCongVan(props) {
                                 required
                                 onChange={(e) => setMaLoai(e.target.value)}
                             />
-                        </div> */}
+                        </div>
                         <div className='loaiCongVanAddItem'>
                             <label>
                                 Tên loại công văn

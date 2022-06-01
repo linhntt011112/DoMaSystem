@@ -41,6 +41,7 @@ from .static_tables import PhongBan, TrangThaiLoaiCongVan
 class LoaiCongVan(Base):
     __tablename__ = 'loai_cong_van'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
+    ma_loai = Column(String(256), nullable=False)
     name = Column(String(256), nullable=False)
     trang_thai = Column(String(256), nullable=False)
     
