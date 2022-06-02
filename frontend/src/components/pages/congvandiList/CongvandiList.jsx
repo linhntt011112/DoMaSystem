@@ -12,6 +12,9 @@ import { muc_do_khan_cap_Rows } from "../../../dummyMucDoKhanCapData";
 import { muc_do_bao_mat_Rows } from "../../../dummyMucDoBaoMatData";
 import { tinh_trang_xu_ly_Rows } from "../../../dummyTinhTrangXuLyData";
 import { ToastContainer, toast } from 'react-toastify';
+import { DeletePopup } from '../../popup/Dialog/DeletePopup';
+
+import * as backend_config from '../../../config/backend'
 
 export default function CongvandiList(props) {
     const token = props.token;
@@ -20,6 +23,14 @@ export default function CongvandiList(props) {
     const [value_mucdokhancap, setValue_MucDoKhanCap] = useState(null);
     const [value_mucdobaomat, setValue_MucDoBaoMat] = useState(null);
     const [value_tinhtrangxuly, setValue_TinhTrangXuLy] = useState(null);
+    const [buttonDeletePopup, setButtonDeletePopup] = useState(false);
+    const [mark, setMark] = useState(null);
+
+    const refreshTable = () => {
+        // backend_config.makeRequest("GET", backend_config.LOAI_CONG_VAN_GET_LIST, token)
+        //   .then((data) => data.json())
+        //   .then((data) => {setTableData(data)})
+    }
 
     const handleDelete = (id)=>{
         setData(data.filter(item=>item.id !== id));
@@ -63,7 +74,19 @@ export default function CongvandiList(props) {
                         <Link to={"/dashboard/cong-van-di/"+params.row.so_cong_van_di} params={{id: params.row.so_cong_van_di}}>
                             <button className='congVanDiListEdit'>Chi tiết</button>
                         </Link>
-                        <DeleteOutline className='congVanDiListDelete' onClick={()=>handleDelete(params.row.id)}/>
+                        <DeleteOutline className='congVanDiListDelete' onClick={()=>{setMark(params.row.id); setButtonDeletePopup(true)}}/>
+                        <DeletePopup 
+                            className='cong-van-di-delete-popup'
+                            trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} 
+                            token={token} 
+                            // url={backend_config.LOAI_CONG_VAN_DELETE_BY_ID.replace('{id}', params.row.id)}
+                            mark={mark} 
+                            id={params.row.id} 
+                            message={"Bạn có chắc muốn xóa công văn này không?"}
+                            // url={backend_config.USER_DELETE_BY_ID.replace("{user_id}", params.row.id)}
+                            refreshFunc={refreshTable}
+                        >
+                        </DeletePopup>
                     </>
 
                 )

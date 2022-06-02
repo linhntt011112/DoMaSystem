@@ -91,13 +91,13 @@ class CongVanDi(Base):
     phong_ban_phat_hanh = relationship("PhongBan", foreign_keys=id_phong_ban_phat_hanh, uselist=False, post_update=True, 
                                        primaryjoin=(id_phong_ban_phat_hanh==PhongBan.id))
     
-    ngay_ky = Column(Date, nullable=False)
+    # ngay_ky = Column(Date, nullable=False)
     ngay_phat_hanh = Column(Date, nullable=False)
     
     id_loai_cong_van = Column(Integer, ForeignKey('loai_cong_van.id'), nullable=False)
     loai_cong_van = relationship('LoaiCongVan', backref="cong_van", uselist=False)
     
-    trich_yeu_noi_dung = Column(String(256), nullable=True)
+    # trich_yeu_noi_dung = Column(String(256), nullable=True)
     noi_dung = Column(String(1024), nullable=False)
     
     id_nguoi_xu_ly = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)

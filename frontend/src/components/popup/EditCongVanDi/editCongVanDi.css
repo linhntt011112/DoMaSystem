@@ -50,11 +50,11 @@
     height: 30px;
     box-shadow: none;
     font-size: 15px;
+    padding-left: 10.5px;
 }
 
 .cong-van-di-update-select{
     width: 257px;
-    height: 35px;
     box-shadow: none;
     font-size: 15px;
 }
