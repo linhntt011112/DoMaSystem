@@ -169,7 +169,7 @@ export default function EditCongVanDi(props) {
                                     required
                                     style={{
                                         width: '244px',
-                                        fontSize: '15px',
+                                        fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
                                 />
@@ -300,7 +300,7 @@ export default function EditCongVanDi(props) {
                                     required
                                     style={{
                                         width: '244px',
-                                        fontSize: '15px',
+                                        fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
                                 />
@@ -318,7 +318,7 @@ export default function EditCongVanDi(props) {
                                     // onChange={(e) => setNgayHetHieuLuc(e.target.value)}
                                     style={{
                                         width: '244px',
-                                        fontSize: '15px',
+                                        fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
                                 />
@@ -405,7 +405,7 @@ export default function EditCongVanDi(props) {
                                     required
                                     style={{
                                         width: '244px',
-                                        fontSize: '15px',
+                                        fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
                                 />
@@ -476,7 +476,7 @@ export default function EditCongVanDi(props) {
                                     required
                                     style={{
                                         width: '244px',
-                                        fontSize: '15px',
+                                        fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
                                     disabled
@@ -496,7 +496,7 @@ export default function EditCongVanDi(props) {
                                     // onChange={(e) => setNgayDuyet(e.target.value)}
                                     style={{
                                         width: '244px',
-                                        fontSize: '15px',
+                                        fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
                                 />

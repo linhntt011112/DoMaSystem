@@ -37,21 +37,22 @@
 
 .cong-van-den-add-item>label{
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 15px;
     margin-right: 5px;
     float: left;
     width: 35%;
 }
 
 .cong-van-den-add-input{
-    width: 250px;
+    width: 242px;
     height: 30px;
     box-shadow: none;
-    font-size: 15px;
+    font-size: 16px;
+    padding-left: 10.5px;
 }
 
 .cong-van-den-add-select{
-    width: 257px;
+    width: 258px;
     height: 35px;
     box-shadow: none;
     font-size: 15px;
@@ -71,21 +72,22 @@
 
 .cong-van-den-add-item-reason>label{
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 15px;
     margin-right: 5px;
     float: left;
-    width: 20.5%;
+    width: 20%;
 }
 
 .cong-van-den-add-input-reason{
-    width: 100%;
+    width: 98%;
     height: 30px;
     box-shadow: none;
     font-size: 15px;
+    padding-left: 10.5px;
 }
 
 .cong-van-den-add-item-content{
-    font-size: 14px;
+    font-size: 15px;
     padding: 0px 0px 20px 20px;
 }
 
@@ -105,4 +107,17 @@
 .cong-van-den-add-footer{
     text-align: center;
     margin-top: 40px;
+}
+
+.cong-van-den-add-item-file{
+    display: flex;
+    margin-top: 10px;
+    padding: 0px 0px 20px 20px;
+}
+
+.cong-van-den-add-item-file>label{
+    font-size: 15px;
+    margin-right: 5px;
+    float: left;
+    width: 20%;
 }

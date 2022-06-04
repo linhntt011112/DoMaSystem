@@ -74,6 +74,7 @@ export default function CongVanDenList() {
     return (
         <div className='congVanDenList'>
             <main>
+                <h1 className='cong-van-di-ListTitle'>Danh sách công văn đến</h1>
                 <div className='congVanDenListTop'>
                     <Button
                         className='buttonAddCongVan'
