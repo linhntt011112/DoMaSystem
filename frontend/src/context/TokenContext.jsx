@@ -79,7 +79,7 @@ export function useUserInfo() {
     try{
       if (token !== null || token !== undefined) decodedToken = decodeJwt(token);
       if (!checkToken(decodedToken)) decodedToken = null;
-      console.log(checkToken(decodeToken), decodedToken);
+      // console.log(checkToken(decodeToken), decodedToken);
     } catch(e) {}
     
     

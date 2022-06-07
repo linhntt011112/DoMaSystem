@@ -129,6 +129,33 @@ export default function AddCongVanDi(props) {
             noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())),
         })
         console.log(body);
+        let formData = new FormData();
+        for (const [key, value] of Object.entries(body)) {
+            formData.append(key, value);
+        }
+
+        backend_config.makeRequest("POST", 
+            backend_config.CONG_VAN_DI_POST_CREATE, 
+            token,
+            body,
+            null,
+            true
+        )
+        .then((response) => {
+            if (response.ok){
+                response.json().then((response_json) => {
+                    // setTrigger(false);
+                    // refreshFunc();
+                    console.log(response_json);
+                })
+            }
+            else {
+                response.text().then((text) => {
+                    alert(`Error with message: ${text}`);
+                })
+            }
+        })
+
         setEditorState(() => EditorState.createEmpty())
     }
 

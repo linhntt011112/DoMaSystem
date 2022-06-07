@@ -1,4 +1,4 @@
-from fastapi import Depends, FastAPI, APIRouter, HTTPException, status
+from fastapi import Depends, FastAPI, APIRouter, HTTPException, status, Form
 from pydantic import BaseModel
 from jose import JWTError, jwt
 from loguru import logger
@@ -78,4 +78,12 @@ async def delete_loai_cong_van(id: int,
         # db.rollback()
         return exceptions.handle_simple_exception(e, logger)
 
+
+
+@router.post('/create')
+async def create_cong_van(
+    cong_van: cong_van_schemas.CongVanDiCreate,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
+):
+    pass
 
