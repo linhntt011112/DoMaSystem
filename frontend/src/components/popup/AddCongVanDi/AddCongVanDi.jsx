@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function AddCongVanDi(props) {
     let today = new Date(),
     today_month = today.getMonth() + 1,
-    today_date = today.getFullYear() + '-' + (today_month < 10 ? '0' + today_month : today_month) + '-' + today.getDate();
+    today_date = today.getFullYear() + '-' + (today_month < 10 ? '0' + today_month : today_month) + '-' + (today.getDate() < 10 ? '0' + today.getDate() : today.getDate());
 
     const {token, refreshFunc} = props;
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
@@ -63,6 +63,10 @@ export default function AddCongVanDi(props) {
         setNguoiTheoDoi(event.target.value);
     }
 
+    const handleChangeNguoiTao = (event) => {
+        setNguoiTao(event.target.value);
+    }
+
     const handleChangeNguoiDuyet = (event) => {
         setNguoiDuyet(event.target.value);
     }
@@ -105,24 +109,24 @@ export default function AddCongVanDi(props) {
 
     const addCongVanDi = () => {
         const body = JSON.stringify({
-            so_cong_van: so_cong_van,
+            // id: so_cong_van,
             ten_cong_van: ten_cong_van,
             id_phong_ban_nhan: noi_nhan,
             id_nguoi_ky: nguoi_ky,
             ngay_ky: ngay_ky,
             id_phong_ban_phat_hanh: bo_phan_phat_hanh,
-            loai_cong_van: loai_cong_van,
-            nguoi_theo_doi: nguoi_theo_doi,
-            nguoi_tao: nguoi_tao,
-            nguoi_duyet: nguoi_duyet,
+            id_loai_cong_van: loai_cong_van,
+            id_nguoi_theo_doi: nguoi_theo_doi,
+            id_nguoi_tao: nguoi_tao,
+            id_nguoi_duyet: nguoi_duyet,
             ngay_hieu_luc: ngay_hieu_luc,
             ngay_het_hieu_luc: ngay_het_hieu_luc,
             so_luong_van_ban: so_luong_van_ban,
-            muc_do_bao_mat: muc_do_bao_mat,
-            muc_do_khan_cap: muc_do_khan_cap,
+            id_muc_do_bao_mat: muc_do_bao_mat,
+            id_muc_do_khan_cap: muc_do_khan_cap,
             ngay_phat_hanh: ngay_phat_hanh,
-            nguoi_xu_ly: nguoi_xu_ly,
-            tinh_trang_xu_ly: tinh_trang_xu_ly,
+            id_nguoi_xu_ly: nguoi_xu_ly,
+            id_tinh_trang_xu_ly: tinh_trang_xu_ly,
             ngay_tao: ngay_tao,
             ngay_duyet: ngay_duyet,
             ly_do: ly_do,
@@ -156,13 +160,13 @@ export default function AddCongVanDi(props) {
             }
         })
 
-        setEditorState(() => EditorState.createEmpty())
+        // setEditorState(() => EditorState.createEmpty())
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         addCongVanDi();
-        props.setTrigger(false);
+        // props.setTrigger(false);
         addCongVanDiSuccessNotify();
     }
 
@@ -185,7 +189,7 @@ export default function AddCongVanDi(props) {
                                     type="text"
                                     className='cong-van-di-add-input'
                                     onChange={(e) => setSoCongVan(e.target.value)}
-                                    required
+                                    //required
                                 />
                             </div>
                             <div className="cong-van-di-add-item">
@@ -197,7 +201,7 @@ export default function AddCongVanDi(props) {
                                     type="text"
                                     className='cong-van-di-add-input'
                                     onChange={(e) => setTenCongVan(e.target.value)}
-                                    required
+                                    //required
                                 />
                             </div>
                             <div className="cong-van-di-add-item">
@@ -214,7 +218,7 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
-                                            required
+                                            //required
                                         >
                                             {phong_ban_table.map((item) => {
                                                 
@@ -238,11 +242,12 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
-                                            required
+                                            //required
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {phong_ban_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -259,7 +264,7 @@ export default function AddCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     onChange={(e) => setNgayKy(e.target.value)}
-                                    required
+                                    //required
                                     style={{
                                         width: '244px',
                                         fontSize: '15px',
@@ -281,7 +286,7 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
-                                            required
+                                            //required
                                         >
                                             {phong_ban_table.map((item) => {
                                                 
@@ -306,11 +311,12 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
-                                            required
+                                            //required
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {phong_ban_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -330,9 +336,10 @@ export default function AddCongVanDi(props) {
                                                 height: '36px'
                                             }}
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {phong_ban_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -342,12 +349,24 @@ export default function AddCongVanDi(props) {
                                     Người tạo
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <input
-                                    type="text"
-                                    value="3969"
-                                    className='cong-van-di-add-input'
-                                    disabled
-                                />
+                                <Box className='cong-van-di-add-select'>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            onChange={handleChangeNguoiTao}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                        >
+                                            {phong_ban_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
+                                        </Select>
+                                    </FormControl>
+                                </Box>
                             </div>
                             <div className='cong-van-di-add-item'>
                                 <label>
@@ -364,11 +383,12 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
-                                            required
+                                            //required
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {phong_ban_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -387,7 +407,7 @@ export default function AddCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     onChange={(e) => setNgayHieuLuc(e.target.value)}
-                                    required
+                                    //required
                                     style={{
                                         width: '244px',
                                         fontSize: '15px',
@@ -428,7 +448,7 @@ export default function AddCongVanDi(props) {
                                     }}
                                     className='cong-van-di-add-input'
                                     onChange={(e) => setSoLuongVanBan(e.target.value)}
-                                    required
+                                    //required
                                 />
                             </div>
                             <div className='cong-van-di-add-item'>
@@ -446,11 +466,12 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
-                                            required
+                                            //required
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {phong_ban_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -470,11 +491,11 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
-                                            required
+                                            //required
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {phong_ban_table.map((item) => {
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -491,7 +512,7 @@ export default function AddCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     onChange={(e) => setNgayPhatHanh(e.target.value)}
-                                    required
+                                    //required
                                     style={{
                                         width: '244px',
                                         fontSize: '15px',
@@ -514,11 +535,11 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
-                                            required
+                                            //required
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {phong_ban_table.map((item) => { 
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -538,11 +559,12 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
-                                            required
+                                            //required
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {phong_ban_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -560,7 +582,7 @@ export default function AddCongVanDi(props) {
                                     }}
                                     onChange={(e) => setNgayTao(e.target.value)}
                                     value={today_date}
-                                    required
+                                    //required
                                     style={{
                                         width: '244px',
                                         fontSize: '15px',
@@ -608,7 +630,7 @@ export default function AddCongVanDi(props) {
                         <Editor
                             editorState={editorState}
                             onEditorStateChange={setEditorState}
-                            required
+                            //required
                         />
                     </div>
                     <div className="cong-van-di-add-item-file">

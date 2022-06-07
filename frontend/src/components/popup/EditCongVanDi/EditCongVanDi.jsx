@@ -109,7 +109,7 @@ export default function EditCongVanDi(props) {
                                     Nơi nhận
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <Box sx={{ width: 258 }}>
+                                <Box sx={{ width: 267 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -168,7 +168,7 @@ export default function EditCongVanDi(props) {
                                     defaultValue="2022-06-02"
                                     required
                                     style={{
-                                        width: '244px',
+                                        width: '253px',
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
@@ -299,7 +299,7 @@ export default function EditCongVanDi(props) {
                                     // onChange={(e) => setNgayHieuLuc(e.target.value)}
                                     required
                                     style={{
-                                        width: '244px',
+                                        width: '253px',
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
@@ -317,7 +317,7 @@ export default function EditCongVanDi(props) {
                                     }}
                                     // onChange={(e) => setNgayHetHieuLuc(e.target.value)}
                                     style={{
-                                        width: '244px',
+                                        width: '253px',
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
@@ -404,7 +404,7 @@ export default function EditCongVanDi(props) {
                                     // onChange={(e) => setNgayPhatHanh(e.target.value)}
                                     required
                                     style={{
-                                        width: '244px',
+                                        width: '253px',
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
@@ -475,7 +475,7 @@ export default function EditCongVanDi(props) {
                                     defaultValue="2022-06-02"
                                     required
                                     style={{
-                                        width: '244px',
+                                        width: '253px',
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
@@ -495,7 +495,7 @@ export default function EditCongVanDi(props) {
                                     }}
                                     // onChange={(e) => setNgayDuyet(e.target.value)}
                                     style={{
-                                        width: '244px',
+                                        width: '253px',
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
@@ -523,17 +523,18 @@ export default function EditCongVanDi(props) {
                             onEditorStateChange={setEditorState}
                         />
                     </div>
-                    <input
-                        type="file"
-                        accept="*"
-                        style={{ display: 'none' }}
-                        id="contained-button-file"
-                    />
-                    <label htmlFor="contained-button-file">
-                        <Button className="cong-van-di-update-button" variant="contained" color="primary" component="span">
+                    <div className="cong-van-di-edit-item-file">
+                        <label>
                             Tệp đính kèm
-                        </Button>
-                    </label>
+                        </label>
+                        <input
+                            type="file"
+                            accept="*"
+                            // style={{ display: 'none' }}
+                            id="contained-button-file"
+                            className="cong-van-di-edit-input-file"
+                        />
+                    </div>
                     <div className='cong-van-di-update-footer'>
                         <button className='cong-van-di-update-button'>Cập nhật</button>
                     </div>

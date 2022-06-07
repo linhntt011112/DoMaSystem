@@ -46,7 +46,7 @@ export default function AddCongVanDen(props) {
                                 </label>
                                 <input
                                     type="text"
-                                    value="3969"
+                                    // value="3969"
                                     className='cong-van-den-add-input'
                                     // disabled
                                     required
@@ -464,7 +464,7 @@ export default function AddCongVanDen(props) {
                         />
                     </div>
                     <div className='cong-van-den-add-footer'>
-                        <button className='cong-van-di-add-button'>Luu</button>
+                        <button className='cong-van-di-add-button'>Thêm</button>
                     </div>
                 </div>
             </form>
