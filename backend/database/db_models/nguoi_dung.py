@@ -42,10 +42,10 @@ class NguoiDung(Base):
     tk_ngan_hang = Column(String(100), nullable=True)
     ngan_hang = Column(String(100), nullable=True)
     
-    id_phong_ban = Column(Integer, ForeignKey('phong_ban.id'))
+    id_phong_ban = Column(Integer, ForeignKey('phong_ban.id'), nullable=False)
     phong_ban = relationship("PhongBan", backref="nguoi_dung_s", uselist=False)
     
-    id_chuc_vu = Column(Integer, ForeignKey('chuc_vu.id'))
+    id_chuc_vu = Column(Integer, ForeignKey('chuc_vu.id'), nullable=False)
     chuc_vu = relationship("ChucVu", backref="nguoi_dung_s", uselist=False)
     
     id_hoc_van = Column(Integer, ForeignKey('hoc_van.id'))

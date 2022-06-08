@@ -17,6 +17,9 @@ export default function AddCongVanDi(props) {
 
     const {token, refreshFunc} = props;
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
+    const [usersData, setUsersData] = useState([]);
+    const [usersData_PhongBan, setUsersData_PhongBan] = useState([]);
+    const [usersData_NoiNhan, setUsersData_NoiNhan] = useState([]);
 
     const [so_cong_van, setSoCongVan] = React.useState(null);
     const [ten_cong_van, setTenCongVan] = React.useState(null);
@@ -43,8 +46,13 @@ export default function AddCongVanDi(props) {
         () => EditorState.createEmpty(),
       );
 
+    
+
     const handleChangeNoiNhan = (event) => {
+        const value = event.target.value;
         setNoiNhan(event.target.value);
+        if (value in usersData) setUsersData_NoiNhan(usersData[value])
+        else setUsersData_NoiNhan([]);
     }
 
     const handleChangeNguoiKy = (event) => {
@@ -52,7 +60,10 @@ export default function AddCongVanDi(props) {
     }
 
     const handleChangeBoPhanPhatHanh = (event) => {
+        const value = event.target.value;
         setBoPhanPhatHanh(event.target.value);
+        if (value in usersData) setUsersData_PhongBan(usersData[value])
+        else setUsersData_PhongBan([]);
     }
 
     const handleChangeLoaiCongVan = (event) => {
@@ -92,12 +103,31 @@ export default function AddCongVanDi(props) {
         .then((response) => response.json())
         .then((data) => {
             setData(data);
-            // console.log(data);
+            console.log(data);
         })
+    }
+
+    const fetchUsersTableData = () => {
+        backend_config.makeRequest("GET", backend_config.USER_GET_LIST_API, token)
+          .then((data) => data.json())
+          .then((data) => {
+            //   console.log(data)
+                var usersData_ = {}
+                var phongBanId ;
+                for (let i = 0; i < data.length; i++) {
+                    // console.log(data[i]["phong_ban"])
+                    phongBanId = data[i]["phong_ban"]["id"];
+                    if (!(phongBanId in usersData_)) usersData_[phongBanId] = []
+                    usersData_[phongBanId].push(data[i])
+                }
+                console.log(usersData_)
+                setUsersData(usersData_);
+            })
     }
 
     useEffect(() => {
         fetchOneStaticTableData('phong_ban', setPhongBanTable);
+        fetchUsersTableData();
     }, [])
 
     const addCongVanDiSuccessNotify = (response_json) => {
@@ -230,6 +260,30 @@ export default function AddCongVanDi(props) {
                             </div>
                             <div className='cong-van-di-add-item'>
                                 <label>
+                                    Bộ phận phát hành
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <Box sx={{ width: 258 }}>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            onChange={handleChangeBoPhanPhatHanh}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            //required
+                                        >
+                                            {phong_ban_table.map((item) => {
+                                                
+                                                    return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </div>
+                            <div className='cong-van-di-add-item'>
+                                <label>
                                     Người ký
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
@@ -244,9 +298,9 @@ export default function AddCongVanDi(props) {
                                             }}
                                             //required
                                         >
-                                            {phong_ban_table.map((item) => {
+                                            {usersData_PhongBan.map((item) => {
                                                     
-                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                                return (<MenuItem value={item.id}>{item.ho_ten}</MenuItem> )
                                             })}
                                         </Select>
                                     </FormControl>
@@ -271,30 +325,6 @@ export default function AddCongVanDi(props) {
                                         paddingLeft: '10.5px'
                                     }}
                                 />
-                            </div>
-                            <div className='cong-van-di-add-item'>
-                                <label>
-                                    Bộ phận phát hành
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <Box sx={{ width: 258 }}>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            onChange={handleChangeBoPhanPhatHanh}
-                                            style={{
-                                                height: '36px'
-                                            }}
-                                            //required
-                                        >
-                                            {phong_ban_table.map((item) => {
-                                                
-                                                    return (<MenuItem value={item.id}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
                             </div>
                             <div className='cong-van-di-add-item'>
                                 <label>
@@ -433,24 +463,31 @@ export default function AddCongVanDi(props) {
                                     }}
                                 />
                             </div>
-                            <div className="cong-van-di-add-item">
+                            <div className='cong-van-di-add-item'>
                                 <label>
-                                    Số lượng văn bản
+                                    Người nhận
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <input
-                                    type="number"
-                                    // value="3969"
-                                    onKeyPress={(event) => {
-                                        if (!/[0-9]/.test(event.key)) {
-                                          event.preventDefault();
-                                        }
-                                    }}
-                                    className='cong-van-di-add-input'
-                                    onChange={(e) => setSoLuongVanBan(e.target.value)}
-                                    //required
-                                />
+                                <Box className='cong-van-di-add-select'>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            onChange={handleChangeNguoiXuLy}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            //required
+                                        >
+                                            {usersData_NoiNhan.map((item) => { 
+                                                return (<MenuItem value={item.id}>{item.ho_ten}</MenuItem> )
+                                            })}
+                                        </Select>
+                                    </FormControl>
+                                </Box>
                             </div>
+                            
                             <div className='cong-van-di-add-item'>
                                 <label>
                                     Mức độ bảo mật
@@ -520,29 +557,23 @@ export default function AddCongVanDi(props) {
                                     }}
                                 />
                             </div>
-                            <div className='cong-van-di-add-item'>
+                            <div className="cong-van-di-add-item">
                                 <label>
-                                    Người xử lý
+                                    Số lượng văn bản
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <Box className='cong-van-di-add-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            onChange={handleChangeNguoiXuLy}
-                                            // defaultValue={3}
-                                            style={{
-                                                height: '36px'
-                                            }}
-                                            //required
-                                        >
-                                            {phong_ban_table.map((item) => { 
-                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
+                                <input
+                                    type="number"
+                                    // value="3969"
+                                    onKeyPress={(event) => {
+                                        if (!/[0-9]/.test(event.key)) {
+                                          event.preventDefault();
+                                        }
+                                    }}
+                                    className='cong-van-di-add-input'
+                                    onChange={(e) => setSoLuongVanBan(e.target.value)}
+                                    //required
+                                />
                             </div>
                             <div className='cong-van-di-add-item'>
                                 <label>
