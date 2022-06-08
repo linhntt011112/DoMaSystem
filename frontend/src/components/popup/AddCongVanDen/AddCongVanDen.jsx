@@ -24,23 +24,157 @@ export default function AddCongVanDen(props) {
                 <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                 <div className="cong-van-den-add">
                     <div className="cong-van-den-add-header">
-                        <span className="cong-van-den-add-title">Them moi cong van den</span>
+                        <span className="cong-van-den-add-title">Thêm mới công văn đến</span>
                     </div>
                     <div className="cong-van-den-add-body">
                         <div className="cong-van-den-add-body-column-1">
                             <div className="cong-van-den-add-item">
                                 <label>
-                                    So cong van
+                                    Số công văn
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input
                                     type="text"
                                     className='cong-van-den-add-input'
+                                    required
                                 />
                             </div>
                             <div className="cong-van-den-add-item">
                                 <label>
-                                    Ten cong van
+                                    Tên công văn
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    // value="3969"
+                                    className='cong-van-den-add-input'
+                                    // disabled
+                                    required
+                                />
+                            </div>
+                            <div className='cong-van-den-add-item'>
+                                <label>
+                                    Người nhận
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <Box className='cong-van-den-add-select'>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            // value={loaiPhongBan}
+                                            // onChange={handleChangeLoaiPhongBan}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
+                                        >
+                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
+                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
+                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </div>
+                            <div className='cong-van-den-add-item'>
+                                <label>
+                                    Ngày nhận
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    // onKeyDown={(e) => {
+                                    //     e.preventDefault();
+                                    // }}
+                                    // onChange={(e) => setNgayKy(e.target.value)}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
+                                />
+                            </div>
+                            <div className='cong-van-den-add-item'>
+                                <label>
+                                    Bộ phận phát hành
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <Box className='cong-van-den-add-select'>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            // value={loaiPhongBan}
+                                            // onChange={handleChangeLoaiPhongBan}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
+                                        >
+                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
+                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
+                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </div>
+                            <div className='cong-van-den-add-item'>
+                                <label>
+                                    Loại công văn
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <Box className='cong-van-den-add-select'>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            // value={loaiPhongBan}
+                                            // onChange={handleChangeLoaiPhongBan}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
+                                        >
+                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
+                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
+                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </div>
+                            <div className='cong-van-den-add-item'>
+                                <label>
+                                    Người theo dõi
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <Box className='cong-van-den-add-select'>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            // value={loaiPhongBan}
+                                            // onChange={handleChangeLoaiPhongBan}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
+                                        >
+                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
+                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
+                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </div>
+                            <div className='cong-van-den-add-item'>
+                                <label>
+                                    Người tạo
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input
@@ -52,7 +186,7 @@ export default function AddCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-add-item'>
                                 <label>
-                                    Nguoi nhan
+                                    Người duyệt
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-add-select'>
@@ -62,7 +196,11 @@ export default function AddCongVanDen(props) {
                                             id="demo-simple-select"
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -73,144 +211,85 @@ export default function AddCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-add-item'>
                                 <label>
-                                    Ngay nhan
+                                    Ngày duyệt
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <BasicDatePicker />
-                            </div>
-                            <div className='cong-van-den-add-item'>
-                                <label>
-                                    Bo phan phat hanh
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <Box className='cong-van-den-add-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
-                                        >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                            <div className='cong-van-den-add-item'>
-                                <label>
-                                    Loai cong van
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <Box className='cong-van-den-add-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
-                                        >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                            <div className='cong-van-den-add-item'>
-                                <label>
-                                    Nguoi theo doi
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <Box className='cong-van-den-add-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
-                                        >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                            <div className='cong-van-den-add-item'>
-                                <label>
-                                    Nguoi tao
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    value="3969"
-                                    className='cong-van-den-add-input'
-                                    disabled
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayHieuLuc(e.target.value)}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
                                 />
-                            </div>
-                            <div className='cong-van-den-add-item'>
-                                <label>
-                                    Nguoi duyet
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <Box className='cong-van-den-add-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
-                                        >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                            <div className='cong-van-den-add-item'>
-                                <label>
-                                    Ngay duyet
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <BasicDatePicker />
                             </div>
                         </div>
                         <div className="cong-van-den-add-body-column-2">
                             <div className="cong-van-den-add-item">
                                 <label>
-                                    Ngay hieu luc
+                                    Ngày hiệu lực
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <BasicDatePicker />
-                            </div>
-                            <div className='cong-van-den-add-item'>
-                                <label>
-                                    Ngay het hieu luc
-                                </label>
-                                <BasicDatePicker />
-                            </div>
-                            <div className="cong-van-den-add-item">
-                                <label>
-                                    So luong van ban
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <input
-                                        type="text"
-                                        value="3969"
-                                        className='cong-van-den-add-input'
-                                        disabled
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayHieuLuc(e.target.value)}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
                                 />
                             </div>
                             <div className='cong-van-den-add-item'>
                                 <label>
-                                    Muc do bao mat
+                                    Ngày hết hiệu lực
+                                </label>
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayHieuLuc(e.target.value)}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
+                                />
+                            </div>
+                            <div className="cong-van-den-add-item">
+                                <label>
+                                    Số lượng văn bản
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <input
+                                        type="number"
+                                        // value="3969"
+                                        onKeyPress={(event) => {
+                                            if (!/[0-9]/.test(event.key)) {
+                                              event.preventDefault();
+                                            }
+                                        }}
+                                        className='cong-van-den-add-input'
+                                        // disabled
+                                />
+                            </div>
+                            <div className='cong-van-den-add-item'>
+                                <label>
+                                    Mức độ bảo mật
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-add-select'>
@@ -220,7 +299,11 @@ export default function AddCongVanDen(props) {
                                             id="demo-simple-select"
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -231,7 +314,7 @@ export default function AddCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-add-item'>
                                 <label>
-                                    Muc do khan cap
+                                    Mức độ khẩn cấp
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-add-select'>
@@ -241,7 +324,11 @@ export default function AddCongVanDen(props) {
                                             id="demo-simple-select"
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -252,13 +339,26 @@ export default function AddCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-add-item'>
                                 <label>
-                                    Ngay phat hanh
+                                    Ngày phát hành
                                 </label>
-                                <BasicDatePicker />
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayPhatHanh(e.target.value)}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
+                                />
                             </div>
                             <div className='cong-van-den-add-item'>
                                 <label>
-                                    Nguoi xu ly
+                                    Người xử lý
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-add-select'>
@@ -268,7 +368,11 @@ export default function AddCongVanDen(props) {
                                             id="demo-simple-select"
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -279,7 +383,7 @@ export default function AddCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-add-item'>
                                 <label>
-                                    Tinh trang xu ly
+                                    Tình trạng xử lý
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-add-select'>
@@ -289,7 +393,11 @@ export default function AddCongVanDen(props) {
                                             id="demo-simple-select"
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -300,44 +408,63 @@ export default function AddCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-add-item'>
                                 <label>
-                                    Ngay tao
+                                    Ngày tạo
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <BasicDatePicker />
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayTao(e.target.value)}
+                                    // value={today_date}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
+                                    disabled
+                                />
                             </div>
                         </div>
                     </div>
                     <div className="cong-van-den-add-item-reason">
                         <label>
-                            Ly Do
+                            Lý do
                         </label>
                         <input
                             type="text"
-                            value="3969"
+                            // value="3969"
                             className='cong-van-den-add-input-reason'
-                            disabled
+                            // disabled
                         />
                     </div>
-                    <div className="cong-van-den-add-item-content">Noi dung</div>
+                    <div className="cong-van-den-add-item-content">
+                        Nội dung
+                        <span className='text-danger' style={{color: 'red'}}> *</span>
+                    </div>
                     <div style={{ border: "1px solid black", padding: '2px', minHeight: '400px' }}>
                         <Editor
                             editorState={editorState}
                             onEditorStateChange={setEditorState}
                         />
                     </div>
-                    <input
-                        type="file"
-                        accept="*"
-                        style={{ display: 'none' }}
-                        id="contained-button-file"
-                    />
-                    <label htmlFor="contained-button-file">
-                        <Button className="cong-van-di-add-button" variant="contained" color="primary" component="span">
-                            Tep dinh kem
-                        </Button>
-                    </label>
+                    <div className="cong-van-den-add-item-file">
+                        <label>
+                            Tệp đính kèm
+                        </label>
+                        <input
+                            type="file"
+                            accept="*"
+                            // style={{ display: 'none' }}
+                            id="contained-button-file"
+                            className="cong-van-den-add-input-file"
+                        />
+                    </div>
                     <div className='cong-van-den-add-footer'>
-                        <button className='cong-van-di-add-button'>Luu</button>
+                        <button className='cong-van-di-add-button'>Thêm</button>
                     </div>
                 </div>
             </form>

@@ -29,37 +29,37 @@ export default function EditCongVanDen(props) {
                 <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
                 <div className="cong-van-den-update">
                     <div className="cong-van-den-update-header">
-                        <span className="cong-van-den-update-title">Chinh sua cong van den</span>
+                        <span className="cong-van-den-update-title">Chỉnh sửa công văn đến</span>
                     </div>
                     <div className="cong-van-den-update-body">
                         <div className="cong-van-den-update-body-column-1">
                             <div className="cong-van-den-update-item">
                                 <label>
-                                    So cong van
+                                    Số công văn
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input
                                         type="text"
                                         value="3969"
                                         className='cong-van-den-update-input'
-                                        disabled
+                                        // disabled
                                     />
                             </div>
                             <div className="cong-van-den-update-item">
                                 <label>
-                                    Ten cong van
+                                    Tên công văn
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input
                                         type="text"
                                         value="3969"
                                         className='cong-van-den-update-input'
-                                        disabled
+                                        // disabled
                                     />
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Nguoi ky
+                                    Người nhận
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-update-select'>
@@ -70,6 +70,10 @@ export default function EditCongVanDen(props) {
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
                                             defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -80,35 +84,28 @@ export default function EditCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Ngay ky
+                                    Ngày nhận
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <BasicDatePicker />
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayKy(e.target.value)}
+                                    defaultValue="2022-06-02"
+                                    required
+                                    style={{
+                                        width: '253px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
+                                />
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Bo phan phat hanh
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <Box className='cong-van-den-update-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={3}
-                                        >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                            <div className='cong-van-den-update-item'>
-                                <label>
-                                    Loai cong van
+                                    Bộ phận phát hành
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-update-select'>
@@ -119,6 +116,10 @@ export default function EditCongVanDen(props) {
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
                                             defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -129,7 +130,7 @@ export default function EditCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Nguoi theo doi
+                                    Loại công văn
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-update-select'>
@@ -140,6 +141,10 @@ export default function EditCongVanDen(props) {
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
                                             defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -150,7 +155,32 @@ export default function EditCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Nguoi tao
+                                    Người theo dõi
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <Box className='cong-van-den-update-select'>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            // value={loaiPhongBan}
+                                            // onChange={handleChangeLoaiPhongBan}
+                                            defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
+                                        >
+                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
+                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
+                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </div>
+                            <div className='cong-van-den-update-item'>
+                                <label>
+                                    Người tạo
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input
@@ -162,7 +192,7 @@ export default function EditCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Nguoi duyet
+                                    Người duyệt
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-update-select'>
@@ -173,6 +203,10 @@ export default function EditCongVanDen(props) {
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
                                             defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -183,41 +217,85 @@ export default function EditCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Ngay duyet
+                                    Ngày duyệt
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <BasicDatePicker />
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayHieuLuc(e.target.value)}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
+                                />
                             </div>
                         </div>
                         <div className="cong-van-den-update-body-column-2">
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Ngay hieu luc
+                                    Ngày hiệu lực
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <BasicDatePicker />
-                            </div>
-                            <div className='cong-van-den-update-item'>
-                                <label>
-                                    Ngay het hieu luc
-                                </label>
-                                <BasicDatePicker />
-                            </div>
-                            <div className="cong-van-den-update-item">
-                                <label>
-                                    So luong van ban
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <input
-                                        type="text"
-                                        value="3969"
-                                        className='cong-van-den-update-input'
-                                        disabled
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayHieuLuc(e.target.value)}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
                                 />
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Muc do bao mat
+                                    Ngày hết hiệu lực
+                                </label>
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayHieuLuc(e.target.value)}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
+                                />
+                            </div>
+                            <div className="cong-van-den-update-item">
+                                <label>
+                                    Số lượng văn bản
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <input
+                                        type="number"
+                                        value="3969"
+                                        className='cong-van-den-update-input'
+                                        onKeyPress={(event) => {
+                                            if (!/[0-9]/.test(event.key)) {
+                                              event.preventDefault();
+                                            }
+                                        }}
+                                        // disabled
+                                />
+                            </div>
+                            <div className='cong-van-den-update-item'>
+                                <label>
+                                    Mức độ bảo mật
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-update-select'>
@@ -228,6 +306,10 @@ export default function EditCongVanDen(props) {
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
                                             defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -238,7 +320,7 @@ export default function EditCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Muc do khan cap
+                                    Mức độ khẩn cấp
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-update-select'>
@@ -249,6 +331,10 @@ export default function EditCongVanDen(props) {
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
                                             defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -259,13 +345,26 @@ export default function EditCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Ngay phat hanh
+                                    Ngày phát hành
                                 </label>
-                                <BasicDatePicker />
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayPhatHanh(e.target.value)}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
+                                />
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Nguoi xu ly
+                                    Người xử lý
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-update-select'>
@@ -276,6 +375,10 @@ export default function EditCongVanDen(props) {
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
                                             defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -286,7 +389,7 @@ export default function EditCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Tinh trang xu ly
+                                    Tình trạng xử lý
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-den-update-select'>
@@ -297,6 +400,10 @@ export default function EditCongVanDen(props) {
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
                                             defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
@@ -307,25 +414,40 @@ export default function EditCongVanDen(props) {
                             </div>
                             <div className='cong-van-den-update-item'>
                                 <label>
-                                    Ngay tao
+                                    Ngày tạo
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <BasicDatePicker />
+                                <input 
+                                    type="date" 
+                                    className='datepicker' 
+                                    onKeyDown={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    // onChange={(e) => setNgayTao(e.target.value)}
+                                    // value={today_date}
+                                    required
+                                    style={{
+                                        width: '244px',
+                                        fontSize: '16px',
+                                        paddingLeft: '10.5px'
+                                    }}
+                                    disabled
+                                />
                             </div>
                         </div>
                     </div>
                     <div className="cong-van-den-update-item-reason">
                         <label>
-                            Ly Do
+                            Lý do
                         </label>
                         <input
                             type="text"
                             value="3969"
                             className='cong-van-den-update-input-reason'
-                            disabled
+                            // disabled
                         />
                     </div>
-                    <div className="cong-van-den-update-item-content">Noi dung</div>
+                    <div className="cong-van-den-update-item-content">Nội dung</div>
                     <div style={{ border: "1px solid black", padding: '2px', minHeight: '400px' }}>
                         <Editor
                             editorState={editorState}

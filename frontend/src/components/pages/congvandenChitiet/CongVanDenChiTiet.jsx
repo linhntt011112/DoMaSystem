@@ -42,56 +42,56 @@ export default function CongVanDenChiTiet() {
                                 <div className="column-children-1-info">Nguyen Thi Thuy Linh</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-1-title">Ngay ky:</div>
+                                <div className="column-children-1-title">Ngày ký:</div>
                                 <div className="column-children-1-info">14/03/2022</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-1-title">Bo phan phat hanh:</div>
+                                <div className="column-children-1-title">Bộ phận phát hành:</div>
                                 <div className="column-children-1-info">Phong Giam doc</div>
                             </div>
                         </div>
                         <div className="column-children-2">
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-2-title">Ngay hieu luc:</div>
+                                <div className="column-children-2-title">Ngày hiệu lực:</div>
                                 <div className="column-children-2-info">14/03/2022</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-2-title">Ngay het hieu luc:</div>
+                                <div className="column-children-2-title">Ngày hết hiệu lực:</div>
                                 <div className="column-children-2-info">15/03/3030</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-2-title">So luong van ban:</div>
+                                <div className="column-children-2-title">Số lượng văn bản:</div>
                                 <div className="column-children-2-info">02</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-2-title">Muc do bao mat:</div>
+                                <div className="column-children-2-title">Mức độ bảo mật:</div>
                                 <div className="column-children-2-info">Cao</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-2-title">Muc do khan cap:</div>
+                                <div className="column-children-2-title">Mức độ khẩn cấp:</div>
                                 <div className="column-children-2-info">Trung binh</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-2-title">Ngay phat hanh:</div>
+                                <div className="column-children-2-title">Ngày phát hành:</div>
                                 <div className="column-children-2-info">14/03/3033</div>
                             </div>
                         </div>
                     </div>
                     <div className="thong-tin-chung-column-2">
                         <div style={{display:'flex'}}>
-                            <div className="column-2-title">Loai cong van:</div>
+                            <div className="column-2-title">Loại công văn:</div>
                             <div className="column-2-info">Trung binh</div>
                         </div>
                         <div style={{display:'flex'}}>
-                            <div className="column-2-title">Nguoi xu ly:</div>
+                            <div className="column-2-title">Người xử lý:</div>
                             <div className="column-2-info">Nguyen Thi Thuy Linh</div>
                         </div>
                         <div style={{display:'flex'}}>
-                            <div className="column-2-title">Nguoi theo doi:</div>
+                            <div className="column-2-title">Người theo dõi:</div>
                             <div className="column-2-info">Nguyen Thi Thuy Linh</div>
                         </div>
                         <div style={{display:'flex'}}>
-                            <div className="column-2-title">Tinh trang xu ly:</div>
+                            <div className="column-2-title">Tình trạng xử lý:</div>
                             <div className="column-2-info">Nguyen Thi Thuy Linh</div>
                         </div>
                         <div style={{display:'flex'}}>
@@ -115,12 +115,12 @@ export default function CongVanDenChiTiet() {
                 <div className="trich-dan-container">
                     <div className="trich-dan-title">
                         <Create style={{margin: '2px 5px 0 0'}}/> 
-                        <h5>Ly Do</h5>
+                        <h5>Lý do</h5>
                     </div>
                     <div className="trich-dan-info">Để có cơ sở góp phần đảm bảo quyền lợi cho khách hàng, giúp khách hàng soạn thảo được các văn bản pháp lý, các công văn chính xác theo quy định của pháp luật, có đầy đủ căn cứ pháp lý liên quan đến vụ việc của mình, công ty luật Minh Khuê cung cấp một số mẫu công văn thông dụng để khách hàng tham khảo và sử dụng khi cần thiết.</div>
                     <div className="trich-dan-title">
                         <ContentPaste style={{margin: '2px 5px 0 0'}}/> 
-                        <h5>Noi dung</h5>
+                        <h5>Nội dung</h5>
                     </div>
                     <div className="trich-dan-info">
                         <table>
@@ -154,7 +154,7 @@ export default function CongVanDenChiTiet() {
                     </div>
                     <div className="trich-dan-title">
                         <AttachFile style={{margin: '2px 5px 0 0'}}/> 
-                        <h5>Tep dinh kem</h5>
+                        <h5>Tệp đính kèm</h5>
                     </div>
                     <div className="trich-dan-info">
                         <a href="">https://luatminhkhue.vn/mau-mot-so-cong-van-thong-dung-hien-hanh---cach-huong-dan-viet-cong-van.aspx</a>
@@ -163,7 +163,7 @@ export default function CongVanDenChiTiet() {
                 <div className="comments-container">
                     <div className="comments-title">
                         <People style={{margin: '2px 5px 0 0'}}/> 
-                        <h5>Trao doi</h5>
+                        <h5>Trao dổi</h5>
                     </div>
                     <Comments currentUserId="1"/>
                 </div>

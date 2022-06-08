@@ -52,25 +52,6 @@ class LoaiCongVan(Base):
     mo_ta = Column(String(512), nullable=True)
     
 
-class TinhTrangXuLy(Base):
-    __tablename__ = 'tinh_trang_xu_ly'
-    id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    tinh_trang_xu_ly = Column(String(256), nullable=False)
-    
-    
-class MucDoBaoMat(Base):
-    __tablename__ = 'muc_do_bao_mat'
-    id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    muc_do_bao_mat = Column(String(256), nullable=False)
-    
-
-class MucDoKhanCap(Base):
-    __tablename__ = 'muc_do_khan_cap'
-    id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    muc_do_khan_cap  = Column(String(256), nullable=False)
-    
-    
-
 
 class CongVanDi(Base):
     __tablename__ = 'cong_van_di'
@@ -92,14 +73,14 @@ class CongVanDi(Base):
     phong_ban_phat_hanh = relationship("PhongBan", foreign_keys=id_phong_ban_phat_hanh, uselist=False, post_update=True, 
                                        primaryjoin=(id_phong_ban_phat_hanh==PhongBan.id))
     
-    ngay_ky = Column(Date, nullable=False)
+    # ngay_ky = Column(Date, nullable=False)
     ngay_phat_hanh = Column(Date, nullable=False)
     
     id_loai_cong_van = Column(Integer, ForeignKey('loai_cong_van.id'), nullable=False)
     loai_cong_van = relationship('LoaiCongVan', backref="cong_van", uselist=False)
     
-    trich_yeu_noi_dung = Column(String(256), nullable=True)
-    noi_dung = Column(String(2**15-1), nullable=False)
+    # trich_yeu_noi_dung = Column(String(256), nullable=True)
+    noi_dung = Column(String(1024), nullable=False)
     
     id_nguoi_xu_ly = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     nguoi_xu_ly = relationship("NguoiDung", foreign_keys=id_nguoi_xu_ly, uselist=False, post_update=True,

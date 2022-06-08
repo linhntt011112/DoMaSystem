@@ -68,3 +68,19 @@ class QuocTich(Base, StaticTable):
 class TonGiao(Base, StaticTable):
     __tablename__ = 'ton_giao'
     pass
+
+
+class TinhTrangXuLy(Base, StaticTable):
+    __tablename__ = 'tinh_trang_xu_ly'
+    pass
+    
+    
+class MucDoBaoMat(Base, StaticTable):
+    __tablename__ = 'muc_do_bao_mat'
+    pass
+    
+
+class MucDoKhanCap(Base, StaticTable):
+    __tablename__ = 'muc_do_khan_cap'
+    pass
+    

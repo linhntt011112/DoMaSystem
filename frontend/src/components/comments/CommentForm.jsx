@@ -27,17 +27,6 @@ const CommentForm = ({
                 <Button className="comment-form-button" variant="contained" color="primary" component="span" disabled={isTextareaDisabled} onClick={onSubmit}>
                     {submitLabel}
                 </Button>
-                <input
-                    type="file"
-                    accept="*"
-                    style={{ display: 'none' }}
-                    id="contained-button-file"
-                />
-                <label htmlFor="contained-button-file">
-                    <Button className="comment-form-button" variant="contained" color="primary" component="span">
-                        Đính kèm
-                    </Button>
-                </label>
                 {hasCancelButton && (
                     <Button 
                         type="button" 

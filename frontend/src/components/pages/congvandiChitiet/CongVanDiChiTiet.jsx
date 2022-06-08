@@ -6,7 +6,8 @@ import { ErrorOutlineRounded, Create, ContentPaste, AttachFile, People } from '@
 import Comments from "../../comments/Comments";
 import EditCongVanDi from "../../popup/EditCongVanDi/EditCongVanDi";
 
-export default function CongVanDiChiTiet() {
+export default function CongVanDiChiTiet(props) {
+    const token = props.token;
     let history = useHistory();
     const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -168,7 +169,7 @@ export default function CongVanDiChiTiet() {
                     <Comments currentUserId="1"/>
                 </div>
             </main>
-            <EditCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup}></EditCongVanDi>
+            <EditCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token}></EditCongVanDi>
         </div>
     )
 }

@@ -12,6 +12,7 @@ services:
     DMS-mysql:
         image: "mysql:8.0.26"
         container_name: DMS-mysql-container
+        restart: always
         environment:
             MYSQL_ROOT_PASSWORD: 123456
             MYSQL_DATABASE: DMS
@@ -50,7 +51,3 @@ services:
         command: redis-server --appendonly yes
         ports:
             - "3012:80"
-        # networks:
-        #     - webnet
-        # extra_hosts:
-        #     host.docker.internal: host-gateway

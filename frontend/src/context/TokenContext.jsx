@@ -25,7 +25,7 @@ export function useToken() {
 
   const saveToken = userToken => {
     
-    if (!userToken) removeCookie(cookieToken);
+    if (!userToken) removeCookie(cookieToken, { path: '/' });
     else setCookie(cookieToken, userToken, { path: '/' });
     // console.log(userToken)
     setToken(userToken);
@@ -54,6 +54,7 @@ export function useToken() {
 
 export function useUserInfo() {
   const [cookies, setCookie, removeCookie] = useCookies([cookieToken]);
+  const allUserPermissions = new Set(['not_active', 'user', 'admin']);
   const getToken = () => {
     // const tokenString = localStorage.getItem(localStorageToken);
     const tokenString = cookies[cookieToken];
@@ -65,7 +66,7 @@ export function useUserInfo() {
     const exp = (decodedToken === null) ? (new Date()).getTime()/1000 - 10000 : decodedToken.exp;
     // console.log(exp, (new Date()).getTime()/1000, decodedToken)
     // console.log(token, decodedToken, exp < (new Date()).getTime(), !allUserPermissions.has(userPermission));
-    if (exp < (new Date()).getTime()/1000 || !allUserPermissions.has(userPermission)) {
+    if (exp < (new Date()).getTime()/1000 || !allUserPermissions.has(decodedToken?.permissions)) {
       return false
     }
     return true
@@ -78,7 +79,7 @@ export function useUserInfo() {
     try{
       if (token !== null || token !== undefined) decodedToken = decodeJwt(token);
       if (!checkToken(decodedToken)) decodedToken = null;
-      console.log(checkToken(decodeToken), decodedToken);
+      // console.log(checkToken(decodeToken), decodedToken);
     } catch(e) {}
     
     
@@ -86,7 +87,7 @@ export function useUserInfo() {
   };
 
 
-  const allUserPermissions = new Set(['not_active', 'user', 'admin']);
+  
 
   let decodedToken = decodeToken();
   const [userPermission, setUserPermission] = useState(decodedToken === null ? null: decodedToken.permissions);
