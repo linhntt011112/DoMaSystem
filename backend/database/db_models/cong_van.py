@@ -52,25 +52,6 @@ class LoaiCongVan(Base):
     mo_ta = Column(String(512), nullable=True)
     
 
-class TinhTrangXuLy(Base):
-    __tablename__ = 'tinh_trang_xu_ly'
-    id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    tinh_trang_xu_ly = Column(String(256), nullable=False)
-    
-    
-class MucDoBaoMat(Base):
-    __tablename__ = 'muc_do_bao_mat'
-    id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    muc_do_bao_mat = Column(String(256), nullable=False)
-    
-
-class MucDoKhanCap(Base):
-    __tablename__ = 'muc_do_khan_cap'
-    id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    muc_do_khan_cap  = Column(String(256), nullable=False)
-    
-    
-
 
 class CongVanDi(Base):
     __tablename__ = 'cong_van_di'

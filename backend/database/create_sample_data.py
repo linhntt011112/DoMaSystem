@@ -169,6 +169,25 @@ def create_sample_static_table():
         db_models.TonGiao(name="Hòa Hảo"),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in ton_giao_s]
+    
+    
+    ton_giao_s = [
+        db_models.TonGiao(name="Không"),
+        db_models.TonGiao(name="Phật Giáo"),
+        db_models.TonGiao(name="Công Giáo"),
+        db_models.TonGiao(name="Tin Lành"),
+        db_models.TonGiao(name="Hồi Giáo"),
+        db_models.TonGiao(name="Cao Đài"),
+        db_models.TonGiao(name="Hòa Hảo"),
+    ]
+    [common_queries.add_and_commit(get_session(), obj) for obj in ton_giao_s]
+    
+    tinh_trang_xu_ly_s = [
+        db_models.TinhTrangXuLy(name="ttxl 1"),
+        db_models.TinhTrangXuLy(name="ttxl 2"),
+        db_models.TinhTrangXuLy(name="Công Giáo")
+    ]
+    [common_queries.add_and_commit(get_session(), obj) for obj in ton_giao_s]
 
 
 def run_all():

@@ -36,23 +36,6 @@ class LoaiCongVanCreate(BaseModel):
     class Config:
         orm_mode=True
     
-    
-
-class TinhTrangXuLyFull(BaseModel):
-    id: int    
-    tinh_trang_xu_ly: str
-    
-
-
-class MucDoBaoMatFull(BaseModel):
-    id: int    
-    muc_do_bao_mat: str
-    
-
-
-class MucDoKhanCapFull(BaseModel):
-    id: int    
-    muc_do_khan_cap: str
 
 
 
