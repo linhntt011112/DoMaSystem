@@ -7,6 +7,6 @@ backend/log
 backend/test.ipynb
 **/__pycache__/
 
-github_token.txt
+# github_token.txt
 
 frontend/node_venv/

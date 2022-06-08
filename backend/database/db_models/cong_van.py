@@ -75,7 +75,9 @@ class MucDoKhanCap(Base):
 class CongVanDi(Base):
     __tablename__ = 'cong_van_di'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
+    so_cong_van = Column(String(256), nullable=False)
     ten_cong_van = Column(String(256), nullable=False)
+    
     id_phong_ban_nhan = Column(Integer, ForeignKey('phong_ban.id'), nullable=False)
     phong_ban_nhan = relationship("PhongBan", foreign_keys=id_phong_ban_nhan, uselist=False, post_update=True,
                                             primaryjoin=(id_phong_ban_nhan==PhongBan.id))
@@ -84,8 +86,7 @@ class CongVanDi(Base):
     nguoi_ky = relationship("NguoiDung", foreign_keys=id_nguoi_ky, uselist=False, post_update=True,
                                             primaryjoin=(id_nguoi_ky==NguoiDung.id))
     ngay_ky = Column(Date, nullable=False)
-    ngay_hieu_luc = Column(Date, nullable=False)
-    ngay_het_hieu_luc = Column(Date, nullable=True)
+    
     
     id_phong_ban_phat_hanh = Column(Integer, ForeignKey('phong_ban.id'), nullable=False)
     phong_ban_phat_hanh = relationship("PhongBan", foreign_keys=id_phong_ban_phat_hanh, uselist=False, post_update=True, 
@@ -98,7 +99,7 @@ class CongVanDi(Base):
     loai_cong_van = relationship('LoaiCongVan', backref="cong_van", uselist=False)
     
     trich_yeu_noi_dung = Column(String(256), nullable=True)
-    noi_dung = Column(String(1024), nullable=False)
+    noi_dung = Column(String(2**15-1), nullable=False)
     
     id_nguoi_xu_ly = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     nguoi_xu_ly = relationship("NguoiDung", foreign_keys=id_nguoi_xu_ly, uselist=False, post_update=True,
@@ -129,6 +130,9 @@ class CongVanDi(Base):
     id_nguoi_duyet = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
     nguoi_duyet = relationship("NguoiDung", foreign_keys=id_nguoi_duyet, uselist=False, post_update=True,
                                             primaryjoin=(id_nguoi_duyet==NguoiDung.id))
+    
+    ngay_hieu_luc = Column(Date, nullable=False)
+    ngay_het_hieu_luc = Column(Date, nullable=True)
     
     ngay_tao = Column(Date, nullable=False)
     ngay_duyet = Column(Date, nullable=True)

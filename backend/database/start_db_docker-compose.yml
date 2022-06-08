@@ -27,17 +27,30 @@ services:
         ports:
             - "3010:3306"
         #         mode: hostost
-    mysql-workbench:
-        image: lscr.io/linuxserver/mysql-workbench:8.0.26
-        container_name: DMS-mysql-workbench-2022
-        environment:
-            # - PUID=1000
-            # - PGID=1000
-            - TZ=Asia/Ho_Chi_Minh
-        volumes:
-          - ./db-data/mysql-workbench:/config
-        ports:
-          - 3011:3000
-        cap_add:
-          - IPC_LOCK
+    # mysql-workbench:
+    #     image: lscr.io/linuxserver/mysql-workbench:8.0.26
+    #     container_name: DMS-mysql-workbench-2022
+    #     environment:
+    #         # - PUID=1000
+    #         # - PGID=1000
+    #         - TZ=Asia/Ho_Chi_Minh
+    #     volumes:
+    #       - ./db-data/mysql-workbench:/config
+    #     ports:
+    #       - 3011:3000
+    #     cap_add:
+    #       - IPC_LOCK
         # restart: unless-stopped
+    redis:
+        image: redis:5.0-rc4
+        container_name: DMS-redis
+        # restart: on-failure
+        volumes:
+            - "./db-data/redis:/data"
+        command: redis-server --appendonly yes
+        ports:
+            - "3012:80"
+        # networks:
+        #     - webnet
+        # extra_hosts:
+        #     host.docker.internal: host-gateway
