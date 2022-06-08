@@ -33,3 +33,18 @@ class QuocTichFull(StaticTable):
 
 class TonGiaoFull(StaticTable):
     pass
+
+
+
+class TinhTrangXuLyFull(StaticTable):
+    pass
+    
+
+
+class MucDoBaoMatFull(StaticTable):
+    pass
+    
+
+
+class MucDoKhanCapFull(StaticTable):
+    pass
