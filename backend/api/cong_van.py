@@ -33,7 +33,7 @@ router = APIRouter(prefix='/cong_van')
 
 
 @router.get("/loai_cong_van/list")
-async def get_list_users(limit: int=10, offset: int=0,
+async def get_list_users(limit: int=None, offset: int=None,
                         order_by=None,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
 
@@ -80,10 +80,19 @@ async def delete_loai_cong_van(id: int,
 
 
 
-@router.post('/create')
+@router.post('/cvdi/create')
 async def create_cong_van(
-    cong_van: cong_van_schemas.CongVanDiCreate,
+    cong_van_di: cong_van_schemas.CongVanDiCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
-    pass
+    # if current_user.phan_quyen != db_models.PhanQuyen.admin:
+    #     raise exceptions.PERMISSION_EXCEPTION()
+    
+    try:
+        # loai_cong_van.id_nguoi_cap_nhat = current_user.id
+        new_cong_van_di = crud_cong_van.create_cong_van_di(db, cong_van_di)
+        return cong_van_schemas.CongVanDiFull.from_orm(new_cong_van_di)
+    except Exception as e:
+        # db.rollback()
+        return exceptions.handle_simple_exception(e, logger)
 

@@ -92,7 +92,7 @@ class CongVanDi(Base):
     id_tinh_trang_xu_ly = Column(Integer, ForeignKey('tinh_trang_xu_ly.id'), nullable=False)
     tinh_trang_xu_ly = relationship("TinhTrangXuLy", backref="cong_van")
     
-    ly_do = Column(String(512), nullable=False)
+    ly_do = Column(String(512), nullable=True)
     so_luong_van_ban = Column(Integer, nullable=False)
     
     id_muc_do_bao_mat = Column(Integer, ForeignKey('muc_do_bao_mat.id'), nullable=False)

@@ -38,12 +38,14 @@ def add_and_commit(session: scoped_session, data):
 
 
 def select_with_options(session: Session, class_: db_models.Base, 
-                        condition=None, limit=10, offset=0, order_by=None, 
+                        condition=None, limit=None, offset=None, order_by=None, 
                         **kwargs):
     query = session.query(class_)
     if condition is not None:
         query = query.filter(condition)
-    query = query.order_by(order_by).limit(limit).offset(offset)
+    
+    if limit is not None and offset is not None:
+        query = query.order_by(order_by).limit(limit).offset(offset)
 
     res = query.all()
     return res
