@@ -65,24 +65,20 @@ export default function CongVanDiChiTiet(props) {
                                 <div className="columnChildren2Info">02</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Mức độ bảo mật:</div>
-                                <div className="columnChildren2Info">Cao</div>
-                            </div>
-                            <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Mức độ khẩn cấp:</div>
+                                <div className="columnChildren2Title">Mức độ ưu tiên:</div>
                                 <div className="columnChildren2Info">Trung binh</div>
                             </div>
                             <div style={{display: 'flex'}}>
                                 <div className="columnChildren2Title">Ngày phát hành:</div>
                                 <div className="columnChildren2Info">14/03/3033</div>
                             </div>
+                            <div style={{display: 'flex'}}>
+                                <div className="columnChildren2Title">Loại công văn:</div>
+                                <div className="columnChildren2Info">14/03/3033</div>
+                            </div>
                         </div>
                     </div>
                     <div className="thongTinChungColumn2">
-                        <div style={{display:'flex'}}>
-                            <div className="column2Title">Loại công văn:</div>
-                            <div className="column2Info">Trung binh</div>
-                        </div>
                         <div style={{display:'flex'}}>
                             <div className="column2Title">Người xử lý:</div>
                             <div className="column2Info">Nguyen Thi Thuy Linh</div>

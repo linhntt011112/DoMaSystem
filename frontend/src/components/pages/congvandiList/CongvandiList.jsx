@@ -133,24 +133,14 @@ export default function CongvandiList(props) {
                         onChange={val => setValue_LoaiCongVan(val)}/>
                     </div>
                     <div style={{ width: 200 }}>
-                        <span className="dropdown-title">Mức độ khẩn cấp</span>
+                        <span className="dropdown-title">Mức độ ưu tiên</span>
                         <Dropdown 
                         datas={muc_do_khan_cap_Rows} 
-                        prompt='Chọn mức độ khẩn cấp ...'
+                        prompt='Chọn mức độ ưu tiên ...'
                         id='id'
                         label='muc_do_khan_cap'
                         value={value_mucdokhancap}
                         onChange={val => setValue_MucDoKhanCap(val)}/>
-                    </div>
-                    <div style={{ width: 200 }}>
-                        <span className="dropdown-title">Mức độ bảo mật</span>
-                        <Dropdown 
-                        datas={muc_do_bao_mat_Rows} 
-                        prompt='Chọn mức độ bảo mật ...'
-                        id='id'
-                        label='muc_do_bao_mat'
-                        value={value_mucdobaomat}
-                        onChange={val => setValue_MucDoBaoMat(val)}/>
                     </div>
                     <div style={{ width: 200 }}>
                         <span className="dropdown-title">Tình trạng xử lý</span>
