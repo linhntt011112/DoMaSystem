@@ -89,7 +89,7 @@ async def create_cong_van(
     #     raise exceptions.PERMISSION_EXCEPTION()
     
     try:
-        # loai_cong_van.id_nguoi_cap_nhat = current_user.id
+        cong_van_di.id_nguoi_tao = current_user.id
         new_cong_van_di = crud_cong_van.create_cong_van_di(db, cong_van_di)
         return cong_van_schemas.CongVanDiFull.from_orm(new_cong_van_di)
     except Exception as e:

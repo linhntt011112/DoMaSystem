@@ -34,7 +34,10 @@ name_to_db_model = {
     'hoc_van': db_models.HocVan,
     'dan_toc': db_models.DanToc,
     'quoc_tich': db_models.QuocTich,
-    'ton_giao': db_models.TonGiao
+    'ton_giao': db_models.TonGiao,
+    'tinh_trang_xu_ly': db_models.TinhTrangXuLy,
+    # 'muc_do_bao_mat': db_models.MucDoBaoMat,
+    'muc_do_uu_tien': db_models.MucDoUuTien
 }
 
 id_name_to_db_model = {'id_' + k: name_to_db_model[k] for k in name_to_db_model}
@@ -45,7 +48,10 @@ name_to_schema = {
     'hoc_van': schema_static_tables.HocVanFull,
     'dan_toc': schema_static_tables.DanTocFull,
     'quoc_tich': schema_static_tables.QuocTichFull,
-    'ton_giao': schema_static_tables.TonGiaoFull
+    'ton_giao': schema_static_tables.TonGiaoFull,
+    'tinh_trang_xu_ly': schema_static_tables.TinhTrangXuLyFull,
+    # 'muc_do_bao_mat': schema_static_tables.MucDoBaoMatFull,
+    'muc_do_uu_tien': schema_static_tables.MucDoUuTienFull
 }
 
 

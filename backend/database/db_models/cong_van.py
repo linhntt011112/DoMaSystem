@@ -95,11 +95,11 @@ class CongVanDi(Base):
     ly_do = Column(String(512), nullable=True)
     so_luong_van_ban = Column(Integer, nullable=False)
     
-    id_muc_do_bao_mat = Column(Integer, ForeignKey('muc_do_bao_mat.id'), nullable=False)
-    muc_do_bao_mat = relationship("MucDoBaoMat", backref="cong_van", uselist=False)
+    # id_muc_do_bao_mat = Column(Integer, ForeignKey('muc_do_bao_mat.id'), nullable=False)
+    # muc_do_bao_mat = relationship("MucDoBaoMat", backref="cong_van", uselist=False)
     
-    id_muc_do_khan_cap = Column(Integer, ForeignKey('muc_do_khan_cap.id'), nullable=False)
-    muc_do_bao_mat = relationship("MucDoKhanCap", backref="cong_van", uselist=False)
+    id_muc_do_uu_tien = Column(Integer, ForeignKey('muc_do_uu_tien.id'), nullable=False)
+    muc_do_uu_tien = relationship("MucDoUuTien", backref="cong_van", uselist=False)
     
     id_tep_dinh_kem = Column(Integer, ForeignKey('save_file.id'), nullable=True)
     tep_dinh_kem = relationship("SaveFile", backref="cong_van", uselist=False)

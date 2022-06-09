@@ -65,8 +65,8 @@ class CongVanDiFull(BaseModel):
     ly_do: str = None
     so_luong_van_ban: int
     
-    id_muc_do_bao_mat: int
-    id_muc_do_khan_cap: int
+    # id_muc_do_bao_mat: int
+    id_muc_do_uu_tien: int
     
     id_tep_dinh_kem: int = None
     id_nguoi_tao: int 
@@ -100,10 +100,10 @@ class CongVanDiCreate(BaseModel):
     ly_do: str = None
     so_luong_van_ban: int
     
-    id_muc_do_bao_mat: int
-    id_muc_do_khan_cap: int
+    # id_muc_do_bao_mat: int
+    id_muc_do_uu_tien: int
     
-    id_tep_dinh_kem: int = None
+    # id_tep_dinh_kem: int = None
     id_nguoi_tao: int 
     id_nguoi_duyet: int
     
