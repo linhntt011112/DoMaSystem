@@ -75,12 +75,12 @@ class TinhTrangXuLy(Base, StaticTable):
     pass
     
     
-class MucDoBaoMat(Base, StaticTable):
-    __tablename__ = 'muc_do_bao_mat'
-    pass
+# class MucDoBaoMat(Base, StaticTable):
+#     __tablename__ = 'muc_do_bao_mat'
+#     pass
     
 
-class MucDoKhanCap(Base, StaticTable):
-    __tablename__ = 'muc_do_khan_cap'
+class MucDoUuTien(Base, StaticTable):
+    __tablename__ = 'muc_do_uu_tien'
     pass
     

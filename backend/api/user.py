@@ -38,13 +38,16 @@ async def read_users_me(current_user = Depends(get_current_active_user)):
 
 @router.get("/list")
 async def get_list_users(current_user = Depends(get_current_active_user), db=Depends(get_db),
-                        limit: int=10, offset: int=0,
+                        limit: int=None, offset: int=None,
                         order_by=None):    
-    if current_user.phan_quyen == db_models.PhanQuyen.admin:
-        users = crud_user.select_list_user(db, limit=limit, offset=offset)
-        return [user_schemas.UserBase.from_orm(user) for user in users]
-    else:
-        raise exceptions.PERMISSION_EXCEPTION()
+    # if current_user.phan_quyen == db_models.PhanQuyen.admin:
+    #     users = crud_user.select_list_user(db, limit=limit, offset=offset)
+    #     return [user_schemas.UserBase.from_orm(user) for user in users]
+    # else:
+    #     raise exceptions.PERMISSION_EXCEPTION()
+    
+    users = crud_user.select_list_user(db, limit=limit, offset=offset)
+    return [user_schemas.UserBase.from_orm(user) for user in users]
 
 
 @router.get("/id/{user_id}")

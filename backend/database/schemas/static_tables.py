@@ -41,10 +41,10 @@ class TinhTrangXuLyFull(StaticTable):
     
 
 
-class MucDoBaoMatFull(StaticTable):
-    pass
+# class MucDoBaoMatFull(StaticTable):
+#     pass
     
 
 
-class MucDoKhanCapFull(StaticTable):
+class MucDoUuTienFull(StaticTable):
     pass

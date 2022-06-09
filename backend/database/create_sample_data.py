@@ -171,23 +171,29 @@ def create_sample_static_table():
     [common_queries.add_and_commit(get_session(), obj) for obj in ton_giao_s]
     
     
-    ton_giao_s = [
-        db_models.TonGiao(name="Không"),
-        db_models.TonGiao(name="Phật Giáo"),
-        db_models.TonGiao(name="Công Giáo"),
-        db_models.TonGiao(name="Tin Lành"),
-        db_models.TonGiao(name="Hồi Giáo"),
-        db_models.TonGiao(name="Cao Đài"),
-        db_models.TonGiao(name="Hòa Hảo"),
-    ]
-    [common_queries.add_and_commit(get_session(), obj) for obj in ton_giao_s]
-    
     tinh_trang_xu_ly_s = [
-        db_models.TinhTrangXuLy(name="ttxl 1"),
-        db_models.TinhTrangXuLy(name="ttxl 2"),
-        db_models.TinhTrangXuLy(name="Công Giáo")
+        db_models.TinhTrangXuLy(name="Đang chờ duyệt"),
+        db_models.TinhTrangXuLy(name="Đang chờ kí và phát hành"),
+        db_models.TinhTrangXuLy(name="Đang chờ xử lý"),
+        db_models.TinhTrangXuLy(name="Đã xử lý"),
     ]
-    [common_queries.add_and_commit(get_session(), obj) for obj in ton_giao_s]
+    [common_queries.add_and_commit(get_session(), obj) for obj in tinh_trang_xu_ly_s]
+    
+    
+    # muc_do_bao_mat_s = [
+    #     db_models.MucDoBaoMat(name="1"),
+    #     db_models.MucDoBaoMat(name="2"),
+    #     db_models.MucDoBaoMat(name="3"),
+    # ]
+    # [common_queries.add_and_commit(get_session(), obj) for obj in muc_do_bao_mat_s]
+    
+    
+    muc_do_uu_tien_s = [
+        db_models.MucDoUuTien(name="1"),
+        db_models.MucDoUuTien(name="2"),
+        db_models.MucDoUuTien(name="3"),
+    ]
+    [common_queries.add_and_commit(get_session(), obj) for obj in muc_do_uu_tien_s]
 
 
 def run_all():

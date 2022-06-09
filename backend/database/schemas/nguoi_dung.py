@@ -31,8 +31,8 @@ class UserBase(BaseModel):
     tk_ngan_hang: str = None
     ngan_hang: str = None
 
-    phong_ban: static_tables.PhongBanFull = None
-    chuc_vu: static_tables.ChucVuFull = None
+    phong_ban: static_tables.PhongBanFull
+    chuc_vu: static_tables.ChucVuFull
     hoc_van: static_tables.HocVanFull = None
     dan_toc: static_tables.DanTocFull = None
     quoc_tich: static_tables.QuocTichFull = None

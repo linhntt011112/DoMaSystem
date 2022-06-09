@@ -4,7 +4,7 @@ from .. import common_queries, db_models
 from ..schemas import cong_van as cong_van_schemas
 
 import typing 
-from . import exceptions
+from .exceptions import DBException
 
 
 
@@ -48,3 +48,43 @@ def delete_loai_cong_van_by_id(db, loai_cong_van_id: int):
 
 def delete_loai_cong_van(db, loai_cong_van):
     return common_queries.delete(db, loai_cong_van)
+
+
+
+def create_cong_van_di(db, cong_van_di: cong_van_schemas.CongVanDiCreate):
+    cong_van_di_dict = {k: v for k, v in cong_van_di.__dict__.item() if v is not None}
+    
+    def select_fields(fields_name, class_):
+        all_ids = [cong_van_di_dict[k] for k in fields_name if cong_van_di_dict[k] is not None]
+        all_objs = common_queries.select_with_options(db, class_, (class_.id.in_(all_ids)))
+        all_objs_id = set([str(obj.id) for obj in all_objs])
+        
+        objs_map = {}
+        
+        for i, id in enumerate(all_ids):
+            if str(id) not in all_objs_id:
+                raise DBException(f"Can not find {fields_name[i]}={id} !")
+            
+            for obj in all_objs:
+                if str(obj.id) == str(id):
+                    objs_map[fields_name[i]] = obj
+        
+        return all_objs
+    
+    all_phong_ban_fields = ['id_phong_ban_nhan', 'id_phong_ban_phat_hanh']
+    all_phong_ban = select_fields(all_phong_ban_fields, db_models.PhongBan)
+    
+    all_user_fields = [item for item in ['id_nguoi_ky', 'id_nguoi_theo_doi', 'id_nguoi_tao', 'id_nguoi_duyet', 'id_nguoi_xu_ly'] if item in cong_van_di_dict]
+    all_users = select_fields(all_user_fields, db_models.NguoiDung)
+    
+    if all_users['id_nguoi_ky'].phong_ban.id != all_phong_ban['id_phong_ban_phat_hanh']:
+        raise DBException("nguoi_ky khong thuoc phong_ban_phat_hanh") 
+
+    if all_users['id_nguoi_xu_ly'].phong_ban.id != all_phong_ban['id_phong_ban_nhan']:
+        raise DBException("nguoi_xu_ly khong thuoc phong_ban_nhan") 
+    
+    
+    new_cong_van_di = db_models.CongVanDi(**cong_van_di_dict)
+    new_cong_van_di.ngay_tao = datetime.now().date()
+    
+    return common_queries.add_and_commit(db, new_cong_van_di)

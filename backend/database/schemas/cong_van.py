@@ -62,11 +62,11 @@ class CongVanDiFull(BaseModel):
     id_nguoi_theo_doi: int = None
     id_tinh_trang_xu_ly: int 
     
-    ly_do: str 
+    ly_do: str = None
     so_luong_van_ban: int
     
-    id_muc_do_bao_mat: int
-    id_muc_do_khan_cap: int
+    # id_muc_do_bao_mat: int
+    id_muc_do_uu_tien: int
     
     id_tep_dinh_kem: int = None
     id_nguoi_tao: int 
@@ -78,7 +78,6 @@ class CongVanDiFull(BaseModel):
     
 
 class CongVanDiCreate(BaseModel):
-    id: int
     ten_cong_van: str
     id_phong_ban_nhan: int
     
@@ -98,13 +97,13 @@ class CongVanDiCreate(BaseModel):
     id_nguoi_theo_doi: int = None
     id_tinh_trang_xu_ly: int 
     
-    ly_do: str 
+    ly_do: str = None
     so_luong_van_ban: int
     
-    id_muc_do_bao_mat: int
-    id_muc_do_khan_cap: int
+    # id_muc_do_bao_mat: int
+    id_muc_do_uu_tien: int
     
-    id_tep_dinh_kem: int = None
+    # id_tep_dinh_kem: int = None
     id_nguoi_tao: int 
     id_nguoi_duyet: int
     

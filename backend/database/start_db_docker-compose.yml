@@ -41,4 +41,13 @@ services:
     #       - 3011:3000
     #     cap_add:
     #       - IPC_LOCK
-    #     # restart: unless-stopped
+        # restart: unless-stopped
+    redis:
+        image: redis:5.0-rc4
+        container_name: DMS-redis
+        # restart: on-failure
+        volumes:
+            - "./db-data/redis:/data"
+        command: redis-server --appendonly yes
+        ports:
+            - "3012:80"
