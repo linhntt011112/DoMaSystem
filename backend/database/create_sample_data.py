@@ -81,6 +81,8 @@ def create_sample_nguoi_dung():
             cccd = '234567890121',
             
             tk_ngan_hang = '23456781',
+            id_phong_ban = 2,
+            id_chuc_vu = 3,
             ),
     ]
 
