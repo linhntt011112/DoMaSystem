@@ -2,3 +2,8 @@
     flex: 5;
     padding: 20px;
 }
+
+.calendar-title{
+    padding: 10px;
+    text-align: center;
+}

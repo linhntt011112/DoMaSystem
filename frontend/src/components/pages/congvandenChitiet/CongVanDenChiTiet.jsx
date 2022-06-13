@@ -64,24 +64,20 @@ export default function CongVanDenChiTiet() {
                                 <div className="column-children-2-info">02</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="column-children-2-title">Mức độ bảo mật:</div>
-                                <div className="column-children-2-info">Cao</div>
-                            </div>
-                            <div style={{display: 'flex'}}>
-                                <div className="column-children-2-title">Mức độ khẩn cấp:</div>
+                                <div className="column-children-2-title">Mức độ ưu tiên:</div>
                                 <div className="column-children-2-info">Trung binh</div>
                             </div>
                             <div style={{display: 'flex'}}>
                                 <div className="column-children-2-title">Ngày phát hành:</div>
                                 <div className="column-children-2-info">14/03/3033</div>
                             </div>
+                            <div style={{display: 'flex'}}>
+                                <div className="column-children-2-title">Loại công văn:</div>
+                                <div className="column-children-2-info">14/03/3033</div>
+                            </div>
                         </div>
                     </div>
                     <div className="thong-tin-chung-column-2">
-                        <div style={{display:'flex'}}>
-                            <div className="column-2-title">Loại công văn:</div>
-                            <div className="column-2-info">Trung binh</div>
-                        </div>
                         <div style={{display:'flex'}}>
                             <div className="column-2-title">Người xử lý:</div>
                             <div className="column-2-info">Nguyen Thi Thuy Linh</div>
