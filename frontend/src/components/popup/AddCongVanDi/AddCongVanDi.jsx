@@ -17,6 +17,9 @@ export default function AddCongVanDi(props) {
 
     const {token, refreshFunc} = props;
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
+    const [muc_do_uu_tien_table, setMucDoUuTienTable] = React.useState([]);   
+    const [tinh_trang_xu_ly_table, setTinhTrangXuLyTable] = React.useState([]); 
+
     const [usersData, setUsersData] = useState([]);
     const [usersData_PhongBan, setUsersData_PhongBan] = useState([]);
     const [usersData_NoiNhan, setUsersData_NoiNhan] = useState([]);
@@ -35,10 +38,10 @@ export default function AddCongVanDi(props) {
     const [ngay_het_hieu_luc, setNgayHetHieuLuc] = React.useState(null);
     const [so_luong_van_ban, setSoLuongVanBan] = React.useState(null);
     const [muc_do_bao_mat, setMucDoBaoMat] = React.useState(null);
-    const [muc_do_khan_cap, setMucDoKhanCap] = React.useState(null);
+    const [muc_do_uu_tien, setMucDoUuTien] = React.useState(null);
     const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
     const [nguoi_xu_ly, setNguoiXuLy] = React.useState(null);
-    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(null);
+    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(0);
     const [ngay_tao, setNgayTao] = React.useState(today_date);
     const [ngay_duyet, setNgayDuyet] = React.useState(null);
     const [ly_do, setLyDo] = React.useState(null);
@@ -82,12 +85,9 @@ export default function AddCongVanDi(props) {
         setNguoiDuyet(event.target.value);
     }
 
-    const handleChangeMucDoBaoMat = (event) => {
-        setMucDoBaoMat(event.target.value);
-    }
 
-    const handleChangeMucDoKhanCap = (event) => {
-        setMucDoKhanCap(event.target.value);
+    const handleChangeMucDoUuTien = (event) => {
+        setMucDoUuTien(event.target.value);
     }
 
     const handleChangeNguoiXuLy = (event) => {
@@ -127,6 +127,8 @@ export default function AddCongVanDi(props) {
 
     useEffect(() => {
         fetchOneStaticTableData('phong_ban', setPhongBanTable);
+        fetchOneStaticTableData('muc_do_uu_tien', setMucDoUuTienTable);
+        fetchOneStaticTableData('tinh_trang_xu_ly', setTinhTrangXuLyTable);
         fetchUsersTableData();
     }, [])
 
@@ -153,7 +155,7 @@ export default function AddCongVanDi(props) {
             ngay_het_hieu_luc: ngay_het_hieu_luc,
             so_luong_van_ban: so_luong_van_ban,
             // id_muc_do_bao_mat: muc_do_bao_mat,
-            id_muc_do_uu_tien: muc_do_khan_cap,
+            id_muc_do_uu_tien: muc_do_uu_tien,
             ngay_phat_hanh: ngay_phat_hanh,
             id_nguoi_xu_ly: nguoi_xu_ly,
             id_tinh_trang_xu_ly: tinh_trang_xu_ly,
@@ -462,14 +464,14 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            onChange={handleChangeMucDoKhanCap}
+                                            onChange={handleChangeMucDoUuTien}
                                             // defaultValue={3}
                                             style={{
                                                 height: '36px'
                                             }}
                                             //required
                                         >
-                                            {phong_ban_table.map((item) => {
+                                            {muc_do_uu_tien_table.map((item) => {
                                                 return (<MenuItem value={item.id}>{item.name}</MenuItem> )
                                             })}
                                         </Select>
@@ -525,15 +527,16 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeTinhTrangXuLy}
-                                            // defaultValue={3}
+                                            defaultValue={1}
                                             style={{
                                                 height: '36px'
                                             }}
                                             //required
+                                            // disabled
                                         >
-                                            {phong_ban_table.map((item) => {
+                                            {tinh_trang_xu_ly_table.map((item) => {
                                                     
-                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                                return (<MenuItem value={item.id} >{item.name}</MenuItem> )
                                             })}
                                         </Select>
                                     </FormControl>
