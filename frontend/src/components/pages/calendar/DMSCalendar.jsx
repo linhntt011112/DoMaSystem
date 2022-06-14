@@ -8,6 +8,8 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import React, { useState } from "react";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import {Button} from "@mui/material";
+import {Add} from "@material-ui/icons";
 
 const locales = {
     "en-US": require("date-fns/locale/en-US")
@@ -42,7 +44,8 @@ const events = [
 
 function DMSCalendar() {
     const [newEvent, setNewEvent] = useState({title: "", start: "", end: ""})
-    const [allEvents, setAllEvents] = useState(events)
+    const [allEvents, setAllEvents] = useState(events);
+    const [buttonPopup, setButtonPopup] = useState(false);
 
     function handleAddEvent() {
         setAllEvents([...allEvents, newEvent])
@@ -50,8 +53,29 @@ function DMSCalendar() {
 
     return (
         <div className='Calendar'>
-            <h1>Calendar</h1>
+            <h1 className='calendar-title'>Lịch</h1>
             <h2>Add New Event</h2>
+            <div className='calendar-top'>
+                <Button
+                    className='button-add-event'
+                    style={{
+                        margin: '10px 10px 10px auto',
+                        display: 'flex',
+                        border: '1px solid #ff9b44',
+                        padding: '5px',
+                        backgroundColor: '#ff9b44',
+                        borderRadius: '50px',
+                        cursor: 'pointer',
+                        color: 'white',
+                        fontSize: '16px',
+                        textTransform: 'inherit',
+                    }}
+                    startIcon={<Add/>}
+                    onClick={() => setButtonPopup(true)}
+                >
+                    Thêm mới
+                </Button>
+            </div>
             <div>
                 <input 
                     type="text" 
@@ -80,6 +104,8 @@ function DMSCalendar() {
                 startAccessor="start" 
                 endAccessor="end"
                 style={{height: 500, margin: "50px"}}
+                selectable
+                tooltipAccessor={null}
             />
         </div>
     );
