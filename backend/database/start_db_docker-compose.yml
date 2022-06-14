@@ -19,7 +19,7 @@ services:
             MYSQL_USER: admin
             MYSQL_PASSWORD: 123456
         volumes:
-            - ./db-data/mysql-container:/var/lib/mysql
+            - /home/aimenext/tanhm/DMS/data/mysql-container:/var/lib/mysql
             # - ./docker-db/db-data:/var/lib/mysql
             # - ./docker-db/mysqld.sock:/var/run/mysqld/mysqld.sock
         # entrypoint:
@@ -47,7 +47,7 @@ services:
         container_name: DMS-redis
         # restart: on-failure
         volumes:
-            - "./db-data/redis:/data"
+            - "/home/aimenext/tanhm/DMS/data/redis:/data"
         command: redis-server --appendonly yes
         ports:
             - "3012:80"

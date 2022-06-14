@@ -17,7 +17,7 @@ import { DeletePopup } from '../../popup/Dialog/DeletePopup';
 import * as backend_config from '../../../config/backend'
 
 export default function CongvandiList(props) {
-    const token = props.token;
+    const {token} = props;
     const [buttonPopup, setButtonPopup] = useState(false);
     const [value_loaicongvan, setValue_LoaiCongVan] = useState(null);
     const [value_mucdokhancap, setValue_MucDoKhanCap] = useState(null);

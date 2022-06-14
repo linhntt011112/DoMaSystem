@@ -52,7 +52,7 @@ def delete_loai_cong_van(db, loai_cong_van):
 
 
 def create_cong_van_di(db, cong_van_di: cong_van_schemas.CongVanDiCreate):
-    cong_van_di_dict = {k: v for k, v in cong_van_di.__dict__.item() if v is not None}
+    cong_van_di_dict = {k: v for k, v in cong_van_di.__dict__.items() if v is not None}
     
     def select_fields(fields_name, class_):
         all_ids = [cong_van_di_dict[k] for k in fields_name if cong_van_di_dict[k] is not None]
@@ -69,7 +69,7 @@ def create_cong_van_di(db, cong_van_di: cong_van_schemas.CongVanDiCreate):
                 if str(obj.id) == str(id):
                     objs_map[fields_name[i]] = obj
         
-        return all_objs
+        return objs_map
     
     all_phong_ban_fields = ['id_phong_ban_nhan', 'id_phong_ban_phat_hanh']
     all_phong_ban = select_fields(all_phong_ban_fields, db_models.PhongBan)
@@ -77,10 +77,10 @@ def create_cong_van_di(db, cong_van_di: cong_van_schemas.CongVanDiCreate):
     all_user_fields = [item for item in ['id_nguoi_ky', 'id_nguoi_theo_doi', 'id_nguoi_tao', 'id_nguoi_duyet', 'id_nguoi_xu_ly'] if item in cong_van_di_dict]
     all_users = select_fields(all_user_fields, db_models.NguoiDung)
     
-    if all_users['id_nguoi_ky'].phong_ban.id != all_phong_ban['id_phong_ban_phat_hanh']:
+    if all_users['id_nguoi_ky'].phong_ban.id != all_phong_ban['id_phong_ban_phat_hanh'].id:
         raise DBException("nguoi_ky khong thuoc phong_ban_phat_hanh") 
 
-    if all_users['id_nguoi_xu_ly'].phong_ban.id != all_phong_ban['id_phong_ban_nhan']:
+    if all_users['id_nguoi_xu_ly'].phong_ban.id != all_phong_ban['id_phong_ban_nhan'].id:
         raise DBException("nguoi_xu_ly khong thuoc phong_ban_nhan") 
     
     

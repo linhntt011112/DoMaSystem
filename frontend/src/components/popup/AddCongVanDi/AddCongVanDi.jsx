@@ -15,11 +15,14 @@ export default function AddCongVanDi(props) {
     today_month = today.getMonth() + 1,
     today_date = today.getFullYear() + '-' + (today_month < 10 ? '0' + today_month : today_month) + '-' + (today.getDate() < 10 ? '0' + today.getDate() : today.getDate());
 
-    const {token, refreshFunc} = props;
+    const {token} = props;
+    // console.log(token)
+    const [loai_cong_van_table, setLoaiCongVanTable] = React.useState([]);
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
     const [muc_do_uu_tien_table, setMucDoUuTienTable] = React.useState([]);   
     const [tinh_trang_xu_ly_table, setTinhTrangXuLyTable] = React.useState([]); 
 
+    const [usersList, setUsersList] = useState([]);
     const [usersData, setUsersData] = useState([]);
     const [usersData_PhongBan, setUsersData_PhongBan] = useState([]);
     const [usersData_NoiNhan, setUsersData_NoiNhan] = useState([]);
@@ -32,7 +35,7 @@ export default function AddCongVanDi(props) {
     const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(null);
     const [loai_cong_van, setLoaiCongVan] = React.useState(null);
     const [nguoi_theo_doi, setNguoiTheoDoi] = React.useState(null);
-    const [nguoi_tao, setNguoiTao] = React.useState(null);
+    const [nguoi_tao, setNguoiTao] = React.useState({ho_ten: null});
     const [nguoi_duyet, setNguoiDuyet] = React.useState(null);
     const [ngay_hieu_luc, setNgayHieuLuc] = React.useState(null);
     const [ngay_het_hieu_luc, setNgayHetHieuLuc] = React.useState(null);
@@ -41,7 +44,7 @@ export default function AddCongVanDi(props) {
     const [muc_do_uu_tien, setMucDoUuTien] = React.useState(null);
     const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
     const [nguoi_xu_ly, setNguoiXuLy] = React.useState(null);
-    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(0);
+    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(1);
     const [ngay_tao, setNgayTao] = React.useState(today_date);
     const [ngay_duyet, setNgayDuyet] = React.useState(null);
     const [ly_do, setLyDo] = React.useState(null);
@@ -77,9 +80,9 @@ export default function AddCongVanDi(props) {
         setNguoiTheoDoi(event.target.value);
     }
 
-    const handleChangeNguoiTao = (event) => {
-        setNguoiTao(event.target.value);
-    }
+    // const handleChangeNguoiTao = (event) => {
+    //     setNguoiTao(event.target.value);
+    // }
 
     const handleChangeNguoiDuyet = (event) => {
         setNguoiDuyet(event.target.value);
@@ -103,8 +106,21 @@ export default function AddCongVanDi(props) {
         .then((response) => response.json())
         .then((data) => {
             setData(data);
-            console.log(data);
+            // console.log(data);
         })
+    }
+
+    const fetchCurrentUser = () =>{
+        backend_config.makeRequest("GET", backend_config.USER_GET_CURRENT_API, token)
+          .then((data) => data.json())
+          .then((data) => {setNguoiTao(data)})
+    }
+
+
+    const fetchLoaiCongVanTable = () =>{
+        backend_config.makeRequest("GET", backend_config.LOAI_CONG_VAN_GET_LIST, token)
+          .then((data) => data.json())
+          .then((data) => {setLoaiCongVanTable(data)})
     }
 
     const fetchUsersTableData = () => {
@@ -112,6 +128,7 @@ export default function AddCongVanDi(props) {
           .then((data) => data.json())
           .then((data) => {
             //   console.log(data)
+        
                 var usersData_ = {}
                 var phongBanId ;
                 for (let i = 0; i < data.length; i++) {
@@ -120,8 +137,9 @@ export default function AddCongVanDi(props) {
                     if (!(phongBanId in usersData_)) usersData_[phongBanId] = []
                     usersData_[phongBanId].push(data[i])
                 }
-                console.log(usersData_)
+                // console.log(usersData_)
                 setUsersData(usersData_);
+                setUsersList(data);
             })
     }
 
@@ -129,6 +147,8 @@ export default function AddCongVanDi(props) {
         fetchOneStaticTableData('phong_ban', setPhongBanTable);
         fetchOneStaticTableData('muc_do_uu_tien', setMucDoUuTienTable);
         fetchOneStaticTableData('tinh_trang_xu_ly', setTinhTrangXuLyTable);
+        fetchCurrentUser();
+        fetchLoaiCongVanTable();
         fetchUsersTableData();
     }, [])
 
@@ -140,16 +160,16 @@ export default function AddCongVanDi(props) {
     }
 
     const addCongVanDi = () => {
-        const body = JSON.stringify({
+        const body = {
             // id: so_cong_van,
             ten_cong_van: ten_cong_van,
             id_phong_ban_nhan: noi_nhan,
             id_nguoi_ky: nguoi_ky,
-            ngay_ky: ngay_ky,
+            // ngay_ky: ngay_ky,
             id_phong_ban_phat_hanh: bo_phan_phat_hanh,
             id_loai_cong_van: loai_cong_van,
             id_nguoi_theo_doi: nguoi_theo_doi,
-            id_nguoi_tao: nguoi_tao,
+            id_nguoi_tao: nguoi_tao?.id,
             id_nguoi_duyet: nguoi_duyet,
             ngay_hieu_luc: ngay_hieu_luc,
             ngay_het_hieu_luc: ngay_het_hieu_luc,
@@ -160,22 +180,28 @@ export default function AddCongVanDi(props) {
             id_nguoi_xu_ly: nguoi_xu_ly,
             id_tinh_trang_xu_ly: tinh_trang_xu_ly,
             ngay_tao: ngay_tao,
-            ngay_duyet: ngay_duyet,
+            // ngay_duyet: ngay_duyet,
             ly_do: ly_do,
-            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())),
-        })
-        console.log(body);
+            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', '. '),
+        }
+        // console.log(body);
+        let new_body = {}
         let formData = new FormData();
         for (const [key, value] of Object.entries(body)) {
-            formData.append(key, value);
+            if (value !== null) 
+            {
+                formData.append(key, value);
+                new_body[key] = value;
+            }
         }
+
+        new_body = JSON.stringify(new_body)
+        console.log(new_body)
 
         backend_config.makeRequest("POST", 
             backend_config.CONG_VAN_DI_POST_CREATE, 
             token,
-            body,
-            null,
-            true
+            new_body,
         )
         .then((response) => {
             if (response.ok){
@@ -323,7 +349,7 @@ export default function AddCongVanDi(props) {
                             <div className='cong-van-di-add-item'>
                                 <label>
                                     Ngày ký
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
                                 </label>
                                 <input 
                                     type="date" 
@@ -357,7 +383,7 @@ export default function AddCongVanDi(props) {
                                             }}
                                             //required
                                         >
-                                            {phong_ban_table.map((item) => {
+                                            {loai_cong_van_table.map((item) => {
                                                     
                                                 return (<MenuItem value={item.id}>{item.name}</MenuItem> )
                                             })}
@@ -372,20 +398,24 @@ export default function AddCongVanDi(props) {
                                 </label>
                                 <Box className='cong-van-di-add-select'>
                                     <FormControl fullWidth>
-                                        <Select
+                                        <select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            onChange={handleChangeNguoiTao}
+                                            // onChange={handleChangeNguoiTao}
                                             // defaultValue={3}
                                             style={{
                                                 height: '36px'
                                             }}
+                                            disabled
                                         >
-                                            {phong_ban_table.map((item) => {
+                                            <option >{nguoi_tao?.ho_ten}</option>
+                                            {/* {nguoi_tao?.ho_ten} */}
+                                            {/* {phong_ban_table.map((item) => {
                                                     
                                                 return (<MenuItem value={item.id}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
+                                            })} */}
+
+                                        </select>
                                     </FormControl>
                                 </Box>
                             </div>
@@ -406,9 +436,9 @@ export default function AddCongVanDi(props) {
                                             }}
                                             required
                                         >
-                                            {phong_ban_table.map((item) => {
+                                            {usersList.map((item) => {
                                                     
-                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                                return (<MenuItem value={item.id}>{item.ho_ten}</MenuItem> )
                                             })}
                                         </Select>
                                     </FormControl>

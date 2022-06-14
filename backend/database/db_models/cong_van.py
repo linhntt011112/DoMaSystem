@@ -56,7 +56,7 @@ class LoaiCongVan(Base):
 class CongVanDi(Base):
     __tablename__ = 'cong_van_di'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    so_cong_van = Column(String(256), nullable=False)
+    # so_cong_van = Column(String(256), nullable=False)
     ten_cong_van = Column(String(256), nullable=False)
     
     id_phong_ban_nhan = Column(Integer, ForeignKey('phong_ban.id'), nullable=False)
@@ -66,7 +66,7 @@ class CongVanDi(Base):
     id_nguoi_ky = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     nguoi_ky = relationship("NguoiDung", foreign_keys=id_nguoi_ky, uselist=False, post_update=True,
                                             primaryjoin=(id_nguoi_ky==NguoiDung.id))
-    ngay_ky = Column(Date, nullable=False)
+    ngay_ky = Column(Date, nullable=True)
     
     
     id_phong_ban_phat_hanh = Column(Integer, ForeignKey('phong_ban.id'), nullable=False)

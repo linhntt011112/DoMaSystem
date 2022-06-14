@@ -45,7 +45,7 @@ class CongVanDiFull(BaseModel):
     id_phong_ban_nhan: int
     
     id_nguoi_ky: int
-    ngay_ky: Union[datetime.datetime, datetime.date]
+    ngay_ky: Union[datetime.datetime, datetime.date] = None
     ngay_hieu_luc: Union[datetime.datetime, datetime.date]
     ngay_het_hieu_luc: Union[datetime.datetime, datetime.date] = None
     
@@ -75,6 +75,9 @@ class CongVanDiFull(BaseModel):
     ngay_tao: Union[datetime.datetime, datetime.date]
     ngay_duyet: Union[datetime.datetime, datetime.date] = None
     
+    class Config:
+        orm_mode = True
+    
     
 
 class CongVanDiCreate(BaseModel):
@@ -82,7 +85,7 @@ class CongVanDiCreate(BaseModel):
     id_phong_ban_nhan: int
     
     id_nguoi_ky: int
-    ngay_ky: Union[datetime.datetime, datetime.date]
+    ngay_ky: Union[datetime.datetime, datetime.date] = None
     ngay_hieu_luc: Union[datetime.datetime, datetime.date]
     ngay_het_hieu_luc: Union[datetime.datetime, datetime.date] = None
     
