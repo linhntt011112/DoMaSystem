@@ -80,7 +80,7 @@ class CongVanDi(Base):
     loai_cong_van = relationship('LoaiCongVan', backref="cong_van", uselist=False)
     
     # trich_yeu_noi_dung = Column(String(256), nullable=True)
-    noi_dung = Column(String(1024), nullable=False)
+    noi_dung = Column(String(2**13-1), nullable=False)
     
     id_nguoi_xu_ly = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     nguoi_xu_ly = relationship("NguoiDung", foreign_keys=id_nguoi_xu_ly, uselist=False, post_update=True,

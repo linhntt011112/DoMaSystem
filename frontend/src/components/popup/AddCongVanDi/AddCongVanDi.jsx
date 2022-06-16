@@ -15,7 +15,7 @@ export default function AddCongVanDi(props) {
     today_month = today.getMonth() + 1,
     today_date = today.getFullYear() + '-' + (today_month < 10 ? '0' + today_month : today_month) + '-' + (today.getDate() < 10 ? '0' + today.getDate() : today.getDate());
 
-    const {token} = props;
+    const {token, refreshFunc} = props;
     // console.log(token)
     const [loai_cong_van_table, setLoaiCongVanTable] = React.useState([]);
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
@@ -44,7 +44,7 @@ export default function AddCongVanDi(props) {
     const [muc_do_uu_tien, setMucDoUuTien] = React.useState(null);
     const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
     const [nguoi_xu_ly, setNguoiXuLy] = React.useState(null);
-    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(1);
+    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(null);
     const [ngay_tao, setNgayTao] = React.useState(today_date);
     const [ngay_duyet, setNgayDuyet] = React.useState(null);
     const [ly_do, setLyDo] = React.useState(null);
@@ -209,6 +209,9 @@ export default function AddCongVanDi(props) {
                     // setTrigger(false);
                     // refreshFunc();
                     console.log(response_json);
+                    props.setTrigger(false);
+                    addCongVanDiSuccessNotify();
+                    refreshFunc();
                 })
             }
             else {
@@ -225,7 +228,6 @@ export default function AddCongVanDi(props) {
         e.preventDefault();
         addCongVanDi();
         // props.setTrigger(false);
-        addCongVanDiSuccessNotify();
     }
 
     return (props.trigger) ? (
@@ -531,7 +533,6 @@ export default function AddCongVanDi(props) {
                             <div className="cong-van-di-add-item">
                                 <label>
                                     Số lượng văn bản
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input
                                     type="number"
@@ -543,7 +544,7 @@ export default function AddCongVanDi(props) {
                                     }}
                                     className='cong-van-di-add-input'
                                     onChange={(e) => setSoLuongVanBan(e.target.value)}
-                                    required
+                                    // required
                                 />
                             </div>
                             <div className='cong-van-di-add-item'>
@@ -557,7 +558,7 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeTinhTrangXuLy}
-                                            defaultValue={1}
+                                            // defaultValue={1}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -587,9 +588,9 @@ export default function AddCongVanDi(props) {
                                                 height: '36px'
                                             }}
                                         >
-                                            {phong_ban_table.map((item) => {
-                                                    
-                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            {usersList.map((item) => {
+                                                        
+                                                return (<MenuItem value={item.id}>{item.ho_ten}</MenuItem> )
                                             })}
                                         </Select>
                                     </FormControl>

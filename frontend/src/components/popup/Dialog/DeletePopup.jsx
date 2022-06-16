@@ -18,6 +18,13 @@ export function DeletePopup(props) {
       })
     }
 
+    const deleteLoaiCongVanFailNotify = () => {
+      toast.error("Không thể xóa loại công văn với trạng thái Hoạt động", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: true
+      })
+    }
+
     const deleteSuccessNotify = () => {
       toast.success("Xóa thành công", {
           position: toast.POSITION.TOP_RIGHT,
@@ -44,7 +51,8 @@ export function DeletePopup(props) {
                   deleteUserFailNotify();
                   return;
                 default:
-                  alert(text);
+                  // alert(text);
+                  deleteLoaiCongVanFailNotify();
                   return;
             }
           });

@@ -26,7 +26,10 @@ export default function Dropdown({
     function filter(datas) {
         return datas.filter(
             (data) => 
-                data[label].toLowerCase().indexOf(query.toLowerCase()) > -1
+            {
+                // console.log(data)
+                return data[label].toLowerCase().indexOf(query.toLowerCase()) > -1
+            }
         );
     }
 

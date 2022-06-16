@@ -3,16 +3,15 @@ import {Add, DeleteOutline} from "@material-ui/icons";
 import {Button} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
 import './CongvandiList.css';
-import {congvandiRows} from "../../../dummyCongVanDiData";
 import { Link } from "react-router-dom";
 import AddCongVanDi from "../../popup/AddCongVanDi/AddCongVanDi";
 import Dropdown from "../../dropdown/dropdown";
 import { loaicongvanRows } from "../../../dummyLoaiCongVanData";
 import { muc_do_khan_cap_Rows } from "../../../dummyMucDoKhanCapData";
-import { muc_do_bao_mat_Rows } from "../../../dummyMucDoBaoMatData";
 import { tinh_trang_xu_ly_Rows } from "../../../dummyTinhTrangXuLyData";
 import { ToastContainer, toast } from 'react-toastify';
 import { DeletePopup } from '../../popup/Dialog/DeletePopup';
+import {Box, FormControl, MenuItem, Select} from "@mui/material";
 
 import * as backend_config from '../../../config/backend'
 
@@ -27,6 +26,8 @@ export default function CongvandiList(props) {
     const [value_tinhtrangxuly, setValue_TinhTrangXuLy] = useState(null);
     const [buttonDeletePopup, setButtonDeletePopup] = useState(false);
     const [mark, setMark] = useState(null);
+    const [loai_cong_van_table, setLoaiCongVanTable] = React.useState([]);
+    
 
     const refreshTable = () => {
         backend_config.makeRequest("GET", backend_config.CONG_VAN_DI_GET_LIST, token)
@@ -39,14 +40,14 @@ export default function CongvandiList(props) {
     // };
 
     const columns = [
-        // {field: 'so_cong_van_di', headerName: 'Số công văn', width: 115},
-        {field: 'ten_cong_van', headerName: 'Tên công văn đi', flex: 1},
+        {field: 'id', headerName: 'Số công văn', width: 115},
+        {field: 'ten_cong_van', headerName: 'Tên công văn', flex: 1},
         {
-            field: 'nguoi_tao',
-            headerName: 'Người tạo',
+            field: 'nguoi_ky',
+            headerName: 'Người ký',
             width: 150,
             valueGetter: (params) => {
-                return params.row.nguoi_tao?.ho_ten
+                return params.row.nguoi_ky?.ho_ten
             }
         },
         {
@@ -68,8 +69,8 @@ export default function CongvandiList(props) {
             width: 200,
         },
         {
-            field: 'noi_dung',
-            headerName: 'Trích yếu nội dung',
+            field: 'ly_do',
+            headerName: 'Lý do',
             flex: 1,
         },
         {
@@ -102,8 +103,16 @@ export default function CongvandiList(props) {
         }
     ];
 
+    const fetchLoaiCongVanTable = () =>{
+        backend_config.makeRequest("GET", backend_config.LOAI_CONG_VAN_GET_LIST, token)
+          .then((data) => data.json())
+          .then((data) => {setLoaiCongVanTable(data)})
+    }
+
     // const [data, setData] = useState(congvandiRows);
     useEffect(() => {
+        fetchLoaiCongVanTable();
+        console.log(loai_cong_van_table.map((item) => {return item.name}));
         refreshTable();
     }, [])
 
@@ -133,15 +142,24 @@ export default function CongvandiList(props) {
                     </Button>
                 </div>
                 <div className="dowpdown-filter">
-                    <div style={{ width: 200 }}>
+                    <div style={{ width: '200px', display: 'flex', flexDirection: 'column' }}>
                         <span className="dropdown-title">Loại công văn</span>
-                        <Dropdown 
-                        datas={loaicongvanRows} 
-                        prompt='Chọn loại công văn ...'
-                        id='id'
-                        label='loai_cong_van'
-                        value={value_loaicongvan}
-                        onChange={val => setValue_LoaiCongVan(val)}/>
+                        <Select
+                            labelId="loai_cong_van"
+                            id="id"
+                            style={{
+                                height: '36px',
+                                position: 'relative',
+                                color: '#333',
+                                cursor: 'default',
+                                margin: '10px 0 20px 20px',
+                            }}
+                        >
+                            {loai_cong_van_table.map((item) => {
+                                                    
+                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                            })}
+                        </Select>
                     </div>
                     <div style={{ width: 200 }}>
                         <span className="dropdown-title">Mức độ ưu tiên</span>
@@ -178,7 +196,7 @@ export default function CongvandiList(props) {
                     />
                 </div>
             </main>
-            <AddCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token}>
+            <AddCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token} refreshFunc={refreshTable}>
             </AddCongVanDi>
             <ToastContainer className="cong-van-di-notify" />
         </div>

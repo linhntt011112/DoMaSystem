@@ -45,6 +45,7 @@ export default function LoaicongvanList(props) {
             field: 'trang_thai',
             headerName: 'Trạng thái',
             width: 150,
+            valueGetter: (params) => params.row?.trang_thai === 'hoat_dong' ? 'Hoạt động' : 'Không hoạt động',
         },
         {
             field: 'nguoi_cap_nhat',
