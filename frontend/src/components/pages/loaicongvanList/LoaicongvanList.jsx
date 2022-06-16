@@ -66,7 +66,18 @@ export default function LoaicongvanList(props) {
                 return(
                     <>
                         <Visibility className='loai-cong-van-list-View' onClick={() => setDetailButtonPopup(true)}></Visibility>
-                        <Edit className='loai-cong-van-list-EditIcon' onClick={() => setEditButtonPopup(true)}></Edit>
+                        <DetailLoaiCongVan trigger={detailButtonPopup} setTrigger={setDetailButtonPopup}>
+                        </DetailLoaiCongVan>
+
+                        <Edit className='loai-cong-van-list-EditIcon' onClick={() => {setMark(params.row.id); setEditButtonPopup(true)}}></Edit>
+                        <EditLoaiCongVan 
+                            trigger={editButtonPopup} setTrigger={setEditButtonPopup} 
+                            token={token} 
+                            loai_cong_van={params.row} 
+                            mark={mark}
+                            refreshFunc={refreshTable}>
+                        </EditLoaiCongVan>
+
                         <DeleteOutline className='loai-cong-van-list-Delete' onClick={()=>{setMark(params.row.id); setButtonDeletePopup(true)}}/>
                         <DeletePopup 
                             trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} 
@@ -130,9 +141,6 @@ export default function LoaicongvanList(props) {
             <AddLoaiCongVan trigger={addButtonPopup} setTrigger={setAddButtonPopup}
                 token={token} refreshFunc={refreshTable}>
             </AddLoaiCongVan>
-            <DetailLoaiCongVan trigger={detailButtonPopup} setTrigger={setDetailButtonPopup}>
-            </DetailLoaiCongVan>
-            <EditLoaiCongVan trigger={editButtonPopup} setTrigger={setEditButtonPopup}></EditLoaiCongVan>
             <ToastContainer className="loai-cong-van-notify"/>
         </div>
     )

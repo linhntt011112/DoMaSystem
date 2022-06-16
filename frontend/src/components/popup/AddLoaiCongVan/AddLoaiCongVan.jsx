@@ -120,7 +120,7 @@ export default function AddLoaiCongVan(props) {
                                 Trạng thái
                                 <span className='text-danger' style={{color: 'red'}}>  *</span>
                             </label>
-                            <Box sx={{ }} style={{width: '100%'}}>
+                            <Box sx={{ }} style={{width: '96%'}}>
                                 <FormControl fullWidth>
                                     <Select
                                         labelId="demo-simple-select-label"

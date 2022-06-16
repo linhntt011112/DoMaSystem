@@ -22,12 +22,26 @@ export default function CongvandiList(props) {
     const [buttonPopup, setButtonPopup] = useState(false);
     const [value_loaicongvan, setValue_LoaiCongVan] = useState(null);
     const [value_mucdokhancap, setValue_MucDoKhanCap] = useState(null);
-    const [value_mucdobaomat, setValue_MucDoBaoMat] = useState(null);
     const [value_tinhtrangxuly, setValue_TinhTrangXuLy] = useState(null);
     const [buttonDeletePopup, setButtonDeletePopup] = useState(false);
     const [mark, setMark] = useState(null);
+
     const [loai_cong_van_table, setLoaiCongVanTable] = React.useState([]);
-    
+    const [muc_do_uu_tien_table, setMucDoUuTienTable] = React.useState([]);   
+    const [tinh_trang_xu_ly_table, setTinhTrangXuLyTable] = React.useState([]);
+
+    const handleChangeLoaiCongVan = (event) => {
+        setValue_LoaiCongVan(event.target.value);
+    }
+
+    const handleChangeMucDoUuTien = (event) => {
+        setValue_MucDoKhanCap(event.target.value);
+    }
+
+    const handleChangeTinhTrangXuLy = (event) => {
+        setValue_TinhTrangXuLy(event.target.value);
+    }
+
 
     const refreshTable = () => {
         backend_config.makeRequest("GET", backend_config.CONG_VAN_DI_GET_LIST, token)
@@ -109,10 +123,20 @@ export default function CongvandiList(props) {
           .then((data) => {setLoaiCongVanTable(data)})
     }
 
+    const fetchOneStaticTableData = (name, setData) => {
+        return backend_config.makeRequest("GET", backend_config.STATIC_TABLE_GET_LIST.replace('{static_table_name}', name), token)
+        .then((response) => response.json())
+        .then((data) => {
+            setData(data);
+            // console.log(data);
+        })
+    }
+
     // const [data, setData] = useState(congvandiRows);
     useEffect(() => {
         fetchLoaiCongVanTable();
-        console.log(loai_cong_van_table.map((item) => {return item.name}));
+        fetchOneStaticTableData('muc_do_uu_tien', setMucDoUuTienTable);
+        fetchOneStaticTableData('tinh_trang_xu_ly', setTinhTrangXuLyTable);
         refreshTable();
     }, [])
 
@@ -154,6 +178,7 @@ export default function CongvandiList(props) {
                                 cursor: 'default',
                                 margin: '10px 0 20px 20px',
                             }}
+                            onChange={handleChangeLoaiCongVan}
                         >
                             {loai_cong_van_table.map((item) => {
                                                     
@@ -161,25 +186,47 @@ export default function CongvandiList(props) {
                             })}
                         </Select>
                     </div>
-                    <div style={{ width: 200 }}>
+                    <div style={{ width: 200, display: 'flex', flexDirection: 'column' }}>
                         <span className="dropdown-title">Mức độ ưu tiên</span>
-                        <Dropdown 
-                        datas={muc_do_khan_cap_Rows} 
-                        prompt='Chọn mức độ ưu tiên ...'
-                        id='id'
-                        label='muc_do_khan_cap'
-                        value={value_mucdokhancap}
-                        onChange={val => setValue_MucDoKhanCap(val)}/>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            // onChange={handleChangeMucDoUuTien}
+                            style={{
+                                height: '36px',
+                                position: 'relative',
+                                color: '#333',
+                                cursor: 'default',
+                                margin: '10px 0 20px 20px',
+                            }}
+                        >
+                            {muc_do_uu_tien_table.map((item) => {
+                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                            })}
+                        </Select>
                     </div>
-                    <div style={{ width: 200 }}>
+                    <div style={{ width: 200, display: 'flex', flexDirection: 'column' }}>
                         <span className="dropdown-title">Tình trạng xử lý</span>
-                        <Dropdown 
-                        datas={tinh_trang_xu_ly_Rows} 
-                        prompt='Chọn tình trạng xử lý ...'
-                        id='id'
-                        label='tinh_trang_xu_ly'
-                        value={value_tinhtrangxuly}
-                        onChange={val => setValue_TinhTrangXuLy(val)}/>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            onChange={handleChangeTinhTrangXuLy}
+                            // defaultValue={1}
+                            style={{
+                                height: '36px',
+                                position: 'relative',
+                                color: '#333',
+                                cursor: 'default',
+                                margin: '10px 0 20px 20px',
+                            }}
+                            //required
+                            // disabled
+                        >
+                            {tinh_trang_xu_ly_table.map((item) => {
+                                    
+                                return (<MenuItem value={item.id} >{item.name}</MenuItem> )
+                            })}
+                        </Select>
                     </div>
                     <button className="dropdown-button">Lọc</button>
                 </div>

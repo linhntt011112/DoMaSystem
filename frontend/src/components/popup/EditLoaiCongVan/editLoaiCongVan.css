@@ -6,3 +6,28 @@
     overflow: scroll;
     top: 45px;
 }
+
+.edit-LoaiCongVan{
+    width: 550px;
+}
+
+.loaiCongVan-edit-Item{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.loaiCongVan-edit-Item>label{
+    margin-right: 5px;
+    font-size: 15px;
+    padding: 1px 0px;
+    color: #1f1f1f;
+}
+
+.loaiCongVan-edit-Input{
+    width: 97%;
+    height: 30px;
+    box-shadow: none;
+    font-size: 15px;
+    padding-left: 10.5px;
+}
