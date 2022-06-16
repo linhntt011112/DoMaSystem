@@ -1,5 +1,5 @@
 from sqlalchemy import Table, Column, Integer, String, Boolean, Date, DateTime
-from sqlalchemy import ForeignKey, Sequence
+from sqlalchemy import ForeignKey, Sequence, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 from .base import Base, SaveFile
@@ -50,6 +50,9 @@ class LoaiCongVan(Base):
     
     mo_ta = Column(String(512), nullable=True)
     
+    __table_args__ = (UniqueConstraint('ma_loai', name='unique__ma_loai'),
+                    )
+    
 
 
 class CongVanDi(Base):
@@ -79,7 +82,7 @@ class CongVanDi(Base):
     loai_cong_van = relationship('LoaiCongVan', backref="cong_van", uselist=False)
     
     # trich_yeu_noi_dung = Column(String(256), nullable=True)
-    noi_dung = Column(String(2*13-1), nullable=False)
+    noi_dung = Column(String(2**13-1), nullable=False)
     
     id_nguoi_xu_ly = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     nguoi_xu_ly = relationship("NguoiDung", foreign_keys=id_nguoi_xu_ly, uselist=False, post_update=True,
