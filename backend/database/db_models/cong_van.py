@@ -1,5 +1,5 @@
 from sqlalchemy import Table, Column, Integer, String, Boolean, Date, DateTime
-from sqlalchemy import ForeignKey, Sequence
+from sqlalchemy import ForeignKey, Sequence, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 from .base import Base, SaveFile
@@ -49,6 +49,9 @@ class LoaiCongVan(Base):
     thoi_gian_cap_nhat = Column(DateTime, nullable=False)
     
     mo_ta = Column(String(512), nullable=True)
+    
+    __table_args__ = (UniqueConstraint('ma_loai', name='unique__ma_loai'),
+                    )
     
 
 
