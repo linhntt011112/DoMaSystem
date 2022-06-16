@@ -37,6 +37,22 @@ def create_loai_cong_van(db, loai_cong_van: cong_van_schemas.LoaiCongVanCreate):
     return common_queries.add_and_commit(db, new_loai_cong_van)
 
 
+
+def update_loai_cong_van(db, loai_cong_van: db_models.LoaiCongVan, loai_cong_van_pydantic: cong_van_schemas.LoaiCongVanUpdate):
+    now = datetime.now()
+    
+    data_dict = loai_cong_van_pydantic.__dict__
+    data_dict = {k: data_dict[k] for k in data_dict if data_dict[k] is not None}
+    if 'trang_thai' in data_dict and not db_models.TrangThaiLoaiCongVan.verify(data_dict['trang_thai']):
+        raise DBException()
+    
+    [setattr(loai_cong_van, k, data_dict[k]) for k in data_dict]
+    loai_cong_van.thoi_gian_cap_nhat = now
+    
+    return common_queries.add_and_commit(db, loai_cong_van)
+
+
+
 def delete_loai_cong_van_by_id(db, loai_cong_van_id: int):
     loai_cong_van = get_loai_cong_van_by_id(db, loai_cong_van_id)
     if loai_cong_van is None:

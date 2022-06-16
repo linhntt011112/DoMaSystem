@@ -58,6 +58,28 @@ async def get_list_users(loai_cong_van: cong_van_schemas.LoaiCongVanCreate,
     except Exception as e:
         # db.rollback()
         return exceptions.handle_simple_exception(e, logger)
+    
+    
+
+@router.put("/loai_cong_van/update")
+async def get_list_users(loai_cong_van_pydantic: cong_van_schemas.LoaiCongVanUpdate,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+    if current_user.phan_quyen != db_models.PhanQuyen.admin:
+        raise exceptions.PERMISSION_EXCEPTION()
+
+    
+    try:
+        loai_cong_van = crud_cong_van.get_loai_cong_van_by_id(db, loai_cong_van_pydantic.id)
+        if loai_cong_van is None:
+            raise exceptions.NOT_FOUND_EXCEPTION()
+        
+        loai_cong_van.id_nguoi_cap_nhat = current_user.id
+        loai_cong_van = crud_cong_van.update_loai_cong_van(db, loai_cong_van, loai_cong_van_pydantic)
+        
+        return cong_van_schemas.LoaiCongVanFull.from_orm(loai_cong_van)
+    except Exception as e:
+        # db.rollback()
+        return exceptions.handle_simple_exception(e, logger)
 
 
 

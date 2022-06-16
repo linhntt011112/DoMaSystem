@@ -21,6 +21,7 @@ class PhanQuyen:
     admin = "admin"
     user = "user"
     
+    @staticmethod
     def verify(phan_quyen):
         if phan_quyen in {"admin", "user"}:
             return True
@@ -32,6 +33,13 @@ class TrangThaiLoaiCongVan:
     type = str
     hoat_dong = "hoat_dong"
     khong_hoat_dong = "khong_hoat_dong"
+    
+    @staticmethod
+    def verify(trang_thai_cong_van):
+        if trang_thai_cong_van in {TrangThaiLoaiCongVan.hoat_dong, TrangThaiLoaiCongVan.khong_hoat_dong}:
+            return True
+        
+        return False
     
 
 class StaticTable:
