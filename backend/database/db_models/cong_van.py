@@ -1,4 +1,3 @@
-from ast import In
 from sqlalchemy import Table, Column, Integer, String, Boolean, Date, DateTime
 from sqlalchemy import ForeignKey, Sequence
 from sqlalchemy.orm import relationship

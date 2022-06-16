@@ -39,6 +39,17 @@ class LoaiCongVanCreate(BaseModel):
     
 
 
+class LoaiCongVanUpdate(BaseModel):
+    id: int
+    ma_loai: str = None
+    
+    name: str = None
+    trang_thai: str = None
+    id_nguoi_cap_nhat: int = None
+    
+    mo_ta: str = None
+    
+
 
 class CongVanDiFull(BaseModel):
     id: int
