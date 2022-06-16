@@ -16,6 +16,7 @@ export const LOAI_CONG_VAN_POST_CREATE = LOAI_CONG_VAN_PREFIX + '/create'
 export const LOAI_CONG_VAN_DELETE_BY_ID = LOAI_CONG_VAN_PREFIX + '/delete/{id}'
 
 export const CONG_VAN_DI_PREFIX = BACKEND_URL + '/cong_van/cvdi'
+export const CONG_VAN_DI_GET_LIST = CONG_VAN_DI_PREFIX + '/list'
 export const CONG_VAN_DI_POST_CREATE = CONG_VAN_DI_PREFIX + '/create'
 
 export const STATIC_TABLE_GET_LIST = BACKEND_URL + '/{static_table_name}/list';

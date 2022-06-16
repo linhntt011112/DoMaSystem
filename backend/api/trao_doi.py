@@ -14,7 +14,7 @@ from .user import get_current_active_user
 from . import exceptions
 
 
-router = APIRouter(prefix='/cong_van')
+router = APIRouter(prefix='/cong_van/trao_doi')
 
 
 # def authorize_user_for_loai_cong_van(user: db_models.NguoiDung, ai_model: db_models.AIModel):
@@ -91,21 +91,6 @@ async def get_list_cvdi(limit: int=None, offset: int=None,
     except Exception as e:
         # db.rollback()
         return exceptions.handle_simple_exception(e, logger)
-    
-
-
-@router.get('/cvdi/{id}')
-async def get_list_cvdi(id: int,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
-
-    try:
-        cong_van_di = crud_cong_van.get_cong_van_di_by_id(db, cong_van_di_id=id)
-        if cong_van_di is None:
-            raise exceptions.NOT_FOUND_EXCEPTION()
-        return cong_van_schemas.CongVanDiFull.from_orm(cong_van_di)
-    except Exception as e:
-        # db.rollback()
-        return exceptions.handle_simple_exception(e, logger)
 
 
 
@@ -121,27 +106,6 @@ async def create_cong_van(
         cong_van_di.id_nguoi_tao = current_user.id
         new_cong_van_di = crud_cong_van.create_cong_van_di(db, cong_van_di)
         return cong_van_schemas.CongVanDiFull.from_orm(new_cong_van_di)
-    except Exception as e:
-        # db.rollback()
-        return exceptions.handle_simple_exception(e, logger)
-    
-    
-
-@router.post('/cvdi/delete/{id}')
-async def create_cong_van(
-    id: int,
-    cong_van_di: cong_van_schemas.CongVanDiCreate,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
-):
-    if current_user.phan_quyen != db_models.PhanQuyen.admin:
-        raise exceptions.PERMISSION_EXCEPTION()
-    
-    cong_van_di = crud_cong_van.get_cong_van_di_by_id(db, cong_van_di_id=id)
-    if cong_van_di is None:
-        raise exceptions.NOT_FOUND_EXCEPTION()
-    
-    try:
-        return  crud_cong_van.delete_cong_van_di(db, cong_van_di)
     except Exception as e:
         # db.rollback()
         return exceptions.handle_simple_exception(e, logger)

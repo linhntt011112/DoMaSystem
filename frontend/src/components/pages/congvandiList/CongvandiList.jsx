@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {Add, DeleteOutline} from "@material-ui/icons";
 import {Button} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
@@ -18,6 +18,8 @@ import * as backend_config from '../../../config/backend'
 
 export default function CongvandiList(props) {
     const {token} = props;
+
+    const [tableData, setTableData] = useState([]);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [value_loaicongvan, setValue_LoaiCongVan] = useState(null);
     const [value_mucdokhancap, setValue_MucDoKhanCap] = useState(null);
@@ -27,22 +29,25 @@ export default function CongvandiList(props) {
     const [mark, setMark] = useState(null);
 
     const refreshTable = () => {
-        // backend_config.makeRequest("GET", backend_config.LOAI_CONG_VAN_GET_LIST, token)
-        //   .then((data) => data.json())
-        //   .then((data) => {setTableData(data)})
+        backend_config.makeRequest("GET", backend_config.CONG_VAN_DI_GET_LIST, token)
+          .then((data) => data.json())
+          .then((data) => {setTableData(data)})
     }
 
-    const handleDelete = (id)=>{
-        setData(data.filter(item=>item.id !== id));
-    };
+    // const handleDelete = (id)=>{
+    //     setData(data.filter(item=>item.id !== id));
+    // };
 
     const columns = [
-        {field: 'so_cong_van_di', headerName: 'Số công văn', width: 115},
-        {field: 'ten_cong_van_di', headerName: 'Tên công văn đi', flex: 1},
+        // {field: 'so_cong_van_di', headerName: 'Số công văn', width: 115},
+        {field: 'ten_cong_van', headerName: 'Tên công văn đi', flex: 1},
         {
-            field: 'nguoi_ky',
-            headerName: 'Người ký',
+            field: 'nguoi_tao',
+            headerName: 'Người tạo',
             width: 150,
+            valueGetter: (params) => {
+                return params.row.nguoi_tao?.ho_ten
+            }
         },
         {
             field: 'ngay_ky',
@@ -50,17 +55,20 @@ export default function CongvandiList(props) {
             width: 150,
         },
         {
-            field: 'bo_phan_phat_hanh',
+            field: 'phong_ban_phat_hanh',
             headerName: 'Bộ phận phát hành',
             width: 200,
+            valueGetter: (params) => {
+                return params.row.phong_ban_phat_hanh?.name
+            }
         },
         {
-            field: 'ngay_cap_nhat',
-            headerName: 'Ngày cập nhật',
+            field: 'ngay_tao',
+            headerName: 'Ngày tạo',
             width: 200,
         },
         {
-            field: 'trich_yeu_noi_dung',
+            field: 'noi_dung',
             headerName: 'Trích yếu nội dung',
             flex: 1,
         },
@@ -94,7 +102,10 @@ export default function CongvandiList(props) {
         }
     ];
 
-    const [data, setData] = useState(congvandiRows);
+    // const [data, setData] = useState(congvandiRows);
+    useEffect(() => {
+        refreshTable();
+    }, [])
 
     return (
         <div className='congVanDiList'>
@@ -157,7 +168,8 @@ export default function CongvandiList(props) {
                 
                 <div style={{ height: 'calc(90vh - 200px)' }}>
                     <DataGrid
-                        rows={data}
+                        getRowId={(r) => r.id}
+                        rows={tableData}
                         disableSelectionOnClick
                         columns={columns}
                         pageSize={8}
