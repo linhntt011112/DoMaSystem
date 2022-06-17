@@ -11,5 +11,7 @@ class CompanyNameTakenException(Exception):
     pass
 
 
-class ResourceNotFoundException(Exception):
+class ResourceNotFoundException(DBException):
     pass
+
+
