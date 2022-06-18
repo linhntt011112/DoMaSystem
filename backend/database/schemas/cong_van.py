@@ -8,6 +8,24 @@ from . import static_tables
 
 
 
+class SaveFileFull(BaseModel):
+    id: int
+    name: str
+    # save_location: str
+    url: str = None
+
+    upload_at: datetime.datetime
+    
+    
+class SaveFileCreate(BaseModel):
+    name: str
+    save_location: str
+    url: str = None
+
+    upload_at: datetime.datetime = None
+    
+
+
 class LoaiCongVanFull(BaseModel):
     id: int
     ma_loai: str
@@ -48,6 +66,19 @@ class LoaiCongVanUpdate(BaseModel):
     id_nguoi_cap_nhat: int = None
     
     mo_ta: str = None
+    
+    
+    
+########################################################################
+
+class CongVanListInput(BaseModel):
+    limit: int = None
+    offset: int = None
+    order_by: str = None
+    
+    id_loai_cong_van: int = None
+    id_tinh_trang_xu_ly: int = None
+    id_muc_do_uu_tien: int = None
     
 
 
@@ -91,6 +122,7 @@ class CongVanDiFull(BaseModel):
     muc_do_uu_tien: static_tables.MucDoUuTienFull
     
     id_tep_dinh_kem: int = None
+    tep_dinh_kem: SaveFileFull = None
     
     id_nguoi_tao: int 
     nguoi_tao: nguoi_dung.UserBase
@@ -139,6 +171,48 @@ class CongVanDiCreate(BaseModel):
     ngay_tao: Union[datetime.datetime, datetime.date]
     ngay_duyet: Union[datetime.datetime, datetime.date] = None
     
+    
+    
+class CongVanDiUpdate(BaseModel):
+    id: int
+    ten_cong_van: str
+    id_phong_ban_nhan: int
+    
+    id_nguoi_ky: int
+    
+    ngay_ky: Union[datetime.datetime, datetime.date] = None
+    ngay_hieu_luc: Union[datetime.datetime, datetime.date]
+    ngay_het_hieu_luc: Union[datetime.datetime, datetime.date] = None
+    
+    id_phong_ban_phat_hanh: int
+    
+    ngay_phat_hanh: Union[datetime.datetime, datetime.date]
+    
+    id_loai_cong_van: int 
+    
+    trich_yeu_noi_dung: str = None
+    noi_dung: str
+    
+    id_nguoi_xu_ly: int 
+    id_nguoi_theo_doi: int = None
+    
+    id_tinh_trang_xu_ly: int 
+    
+    ly_do: str = None
+    so_luong_van_ban: int
+    
+    id_muc_do_uu_tien: int
+    
+    id_tep_dinh_kem: int = None
+    
+    id_nguoi_tao: int 
+    
+    id_nguoi_duyet: int
+    
+    ngay_tao: Union[datetime.datetime, datetime.date]
+    ngay_duyet: Union[datetime.datetime, datetime.date] = None
+
+        
     
 class CongVanDi_TraoDoi(BaseModel):
     id_cong_van_di: int

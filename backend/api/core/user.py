@@ -20,7 +20,7 @@ from database import db_models
 
 from ..utils import Hasher
 from ..config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
-from .. import exceptions
+from exceptions import api_exceptions
 
 name_to_db_model = {
     'phong_ban': db_models.PhongBan,
@@ -108,7 +108,7 @@ async def get_current_active_user(current_user = Depends(get_current_user)) -> d
 
 def verify_static_attr(class_, attr_):
     if not class_.verify(attr_):
-        raise exceptions.NOT_FOUND_EXCEPTION(f"{attr_} is not a valid {class_.__name__}")
+        raise api_exceptions.NOT_FOUND_EXCEPTION(f"{attr_} is not a valid {class_.__name__}")
     
     return True
 
@@ -131,7 +131,7 @@ def create_user(db, user_schema_model: user_schemas.UserCreate, create_password=
     for id_name in id_name_to_db_model:
         id = getattr(user_schema_model, id_name)
         if id is not None and not crud_static_tables.get_static_table_by_id(db, id, id_name_to_db_model[id_name]):
-            raise exceptions.NOT_FOUND_EXCEPTION(f"Can not find object with {id_name} = {id} !")
+            raise api_exceptions.NOT_FOUND_EXCEPTION(f"Can not find object with {id_name} = {id} !")
     
     verify_static_attr(db_models.PhanQuyen, user_schema_model.phan_quyen)
     if user_schema_model.gioi_tinh is not None:
@@ -183,7 +183,7 @@ def update_password(db, user: db_models.NguoiDung, user_update_password: user_sc
     new_plain_password = user_update_password.new_plain_password
     
     if not verify_password(current_plain_password, password_salt, user.password):
-        raise exceptions.PERMISSION_EXCEPTION("Wrong password!")
+        raise api_exceptions.PERMISSION_EXCEPTION("Wrong password!")
     
     new_password = Hasher.get_password_hash(Hasher.salt_password(new_plain_password, password_salt))
     

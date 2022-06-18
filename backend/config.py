@@ -1,3 +1,5 @@
+import os
+
 class DBConfig:
     DB_PORT: int = "3010"
     DB_USER: str = 'root'
@@ -24,5 +26,8 @@ class ServerConfig:
     host = '0.0.0.0'
     port = 3009
     log_file = 'log/app_log.log'
+    
+    base_save_dir = '/home/aimenext/tanhm/DMS/storage'
+    tep_dinh_kem_save_dir = os.path.join(base_save_dir, 'tep_dinh_kem')
 
 server_config = ServerConfig()

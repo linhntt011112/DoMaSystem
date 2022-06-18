@@ -18,7 +18,7 @@ from database.crud import static_tables as crud_static_tables
 from database.schemas import static_tables as schema_static_tables
 
 from .utils import Hasher
-from .import exceptions
+from exceptions import api_exceptions
 from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from .core import user as user_core
 
@@ -65,7 +65,7 @@ name_to_schema = {
 def _get_static_table_by_id(db, static_table_id, class_) :
     static_table: db_models.StaticTable = crud_static_tables.get_static_table_by_id(db, static_table_id, class_)
     if static_table is None:
-        raise exceptions.NOT_FOUND_EXCEPTION(f"Can not find {class_.__name__} with id={static_table_id}")
+        raise api_exceptions.NOT_FOUND_EXCEPTION(f"Can not find {class_.__name__} with id={static_table_id}")
     
     return static_table
 
@@ -78,7 +78,7 @@ async def get_list(
     db=Depends(get_db)):    
     
     if static_table_name not in name_to_db_model:
-        raise exceptions.NOT_FOUND_EXCEPTION(f'Can not find static_table with name "{static_table_name}"')
+        raise api_exceptions.NOT_FOUND_EXCEPTION(f'Can not find static_table with name "{static_table_name}"')
     else:
         data = crud_static_tables.get_list(db, name_to_db_model[static_table_name])
         schema = name_to_schema[static_table_name]

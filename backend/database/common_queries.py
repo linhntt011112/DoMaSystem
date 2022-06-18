@@ -44,8 +44,11 @@ def select_with_options(session: Session, class_: db_models.Base,
     if condition is not None:
         query = query.filter(condition)
     
-    if limit is not None and offset is not None:
-        query = query.order_by(order_by).limit(limit).offset(offset)
+    if limit is not None:
+        query = query.order_by(order_by).limit(limit)
+    
+    if offset is not None:
+        query = query.offset(offset)
 
     res = query.all()
     return res

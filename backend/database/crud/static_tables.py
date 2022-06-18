@@ -4,7 +4,7 @@ from .. import common_queries, db_models
 from ..schemas import nguoi_dung as user_schemas
 
 import typing 
-from . import exceptions
+from exceptions import db_exceptions
 
 
 

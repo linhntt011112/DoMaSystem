@@ -17,7 +17,7 @@ from database.crud import user as crud_user
 from database.schemas import nguoi_dung as user_schemas
 
 from .utils import Hasher
-from .import exceptions
+from exceptions import api_exceptions
 from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from .core import user as user_core
 from .core.user import (
@@ -57,9 +57,9 @@ async def get_user_by_id(user_id: int, current_user = Depends(get_current_active
         if user is not None:
             return user_schemas.UserBase.from_orm(user)
         else:
-            raise exceptions.NOT_FOUND_EXCEPTION()
+            raise api_exceptions.NOT_FOUND_EXCEPTION()
     else:
-        raise exceptions.PERMISSION_EXCEPTION()
+        raise api_exceptions.PERMISSION_EXCEPTION()
 
 
 @router.post("/create")
@@ -68,7 +68,7 @@ async def create_user(user_register: user_schemas.UserCreate,
                       db=Depends(get_db)):
     logger.info(user_register)
     if current_user.phan_quyen != db_models.PhanQuyen.admin:
-        raise exceptions.PERMISSION_EXCEPTION()
+        raise api_exceptions.PERMISSION_EXCEPTION()
     
     try:
         user, plain_password = create_user_core(db, user_register, create_password=True)
@@ -80,12 +80,12 @@ async def create_user(user_register: user_schemas.UserCreate,
         # db.rollback()
         error_message = str(e)
         # logger.info(type(e))
-        if exceptions.filter_duplicate_entry_error(e):
+        if api_exceptions.filter_duplicate_entry_error(e):
             error_message = 'Duplicate ten_tai_khoan!'
             
         if not isinstance(e, HTTPException):
             logger.error(f'{error_message}: {traceback.format_exc()}')
-            raise exceptions.INTERNAL_SERVER_ERROR(error_message)
+            raise api_exceptions.INTERNAL_SERVER_ERROR(error_message)
         else:
             raise e
         
@@ -133,7 +133,7 @@ async def update_info_user(user_update_password: user_schemas.UserUpdatePassword
     
     except Exception as e:
         # db.rollback()
-        return exceptions.handle_simple_exception(e, logger)
+        return api_exceptions.handle_simple_exception(e, logger)
     
 
 
@@ -144,15 +144,15 @@ async def delete_user_by_id(user_id: int, current_user = Depends(get_current_act
         try:
             user_to_delete = crud_user.get_user_by_id(db, user_id)
             if user_to_delete is None:
-                raise exceptions.NOT_FOUND_EXCEPTION(f"Can not find user with id {user_id}")
+                raise api_exceptions.NOT_FOUND_EXCEPTION(f"Can not find user with id {user_id}")
             if user_to_delete.phan_quyen == db_models.PhanQuyen.admin:
-                raise exceptions.PERMISSION_EXCEPTION("Can not delete admin user!")
+                raise api_exceptions.PERMISSION_EXCEPTION("Can not delete admin user!")
             
             is_success = crud_user.delete_user(db, user_to_delete)
             if not is_success:
-                raise exceptions.INTERNAL_SERVER_ERROR(f"Can not delete user with id={user_id}")
+                raise api_exceptions.INTERNAL_SERVER_ERROR(f"Can not delete user with id={user_id}")
             return True
         except Exception as e:
-            return exceptions.handle_simple_exception(e, logger)
+            return api_exceptions.handle_simple_exception(e, logger)
     else:
-        raise exceptions.PERMISSION_EXCEPTION()
+        raise api_exceptions.PERMISSION_EXCEPTION()

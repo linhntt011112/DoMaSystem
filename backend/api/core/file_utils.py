@@ -9,7 +9,7 @@ from loguru import logger
 from fastapi import UploadFile
 
 
-from .. import exceptions
+from exceptions import api_exceptions
 
 # async def create_dir()
 
