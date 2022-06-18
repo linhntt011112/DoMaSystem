@@ -191,7 +191,7 @@ export default function CongvandiList(props) {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            // onChange={handleChangeMucDoUuTien}
+                            onChange={handleChangeMucDoUuTien}
                             style={{
                                 height: '36px',
                                 position: 'relative',
