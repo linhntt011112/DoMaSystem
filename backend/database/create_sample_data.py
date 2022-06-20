@@ -24,87 +24,88 @@ def drop_all_tables():
     
 
 def create_sample_static_table():
+    now = datetime.datetime.now()
     phong_ban_s = [
-        db_models.PhongBan(name="Phòng kế toán"),
-        db_models.PhongBan(name="Phòng hành chính"),
-        db_models.PhongBan(name="Phòng kiểm toán"),
-        db_models.PhongBan(name="Phòng chăm sóc khách hàng"),
-        db_models.PhongBan(name="Phòng nhân sự"),
-        db_models.PhongBan(name="Phòng Công nghệ thông tin"),
-        db_models.PhongBan(name="Phòng Quan hệ quốc tế"),
-        db_models.PhongBan(name="Phòng Marketing"),
-        db_models.PhongBan(name="Phòng Nghiên cứu và phát triển sản phẩm"),
-        db_models.PhongBan(name="Phòng kinh doanh"),
-        db_models.PhongBan(name="Phòng thu mua"),
+        db_models.PhongBan(name="Phòng kế toán", update_at=now),
+        db_models.PhongBan(name="Phòng hành chính", update_at=now),
+        db_models.PhongBan(name="Phòng kiểm toán", update_at=now),
+        db_models.PhongBan(name="Phòng chăm sóc khách hàng", update_at=now),
+        db_models.PhongBan(name="Phòng nhân sự", update_at=now),
+        db_models.PhongBan(name="Phòng Công nghệ thông tin", update_at=now),
+        db_models.PhongBan(name="Phòng Quan hệ quốc tế", update_at=now),
+        db_models.PhongBan(name="Phòng Marketing", update_at=now),
+        db_models.PhongBan(name="Phòng Nghiên cứu và phát triển sản phẩm", update_at=now),
+        db_models.PhongBan(name="Phòng kinh doanh", update_at=now),
+        db_models.PhongBan(name="Phòng thu mua", update_at=now),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in phong_ban_s]
 
     chuc_vu_s = [
-        db_models.ChucVu(name="Nhân viên"),
-        db_models.ChucVu(name="Giám đốc điều hành"),
-        db_models.ChucVu(name="Giám đốc tài chính"),
-        db_models.ChucVu(name="Giám đốc Marketing"),
-        db_models.ChucVu(name="Giám đốc pháp lý"),
-        db_models.ChucVu(name="Giám đốc thương mại"),
-        db_models.ChucVu(name="Giám đốc vận hành"),
+        db_models.ChucVu(name="Nhân viên", update_at=now),
+        db_models.ChucVu(name="Giám đốc điều hành", update_at=now),
+        db_models.ChucVu(name="Giám đốc tài chính", update_at=now),
+        db_models.ChucVu(name="Giám đốc Marketing", update_at=now),
+        db_models.ChucVu(name="Giám đốc pháp lý", update_at=now),
+        db_models.ChucVu(name="Giám đốc thương mại", update_at=now),
+        db_models.ChucVu(name="Giám đốc vận hành", update_at=now),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in chuc_vu_s]
 
     hoc_van_s = [
-        db_models.HocVan(name="Thạc sĩ"),
-        db_models.HocVan(name="Tiến sĩ"),
-        db_models.HocVan(name="Cao đẳng"),
-        db_models.HocVan(name="Cử nhân"),
+        db_models.HocVan(name="Thạc sĩ", update_at=now),
+        db_models.HocVan(name="Tiến sĩ", update_at=now),
+        db_models.HocVan(name="Cao đẳng", update_at=now),
+        db_models.HocVan(name="Cử nhân", update_at=now),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in hoc_van_s]
 
     dan_toc_s = [
-        db_models.DanToc(name="Kinh"),
-        db_models.DanToc(name="Tày"),
-        db_models.DanToc(name="Thái"),
-        db_models.DanToc(name="Khác"),
+        db_models.DanToc(name="Kinh", update_at=now),
+        db_models.DanToc(name="Tày", update_at=now),
+        db_models.DanToc(name="Thái", update_at=now),
+        db_models.DanToc(name="Khác", update_at=now),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in dan_toc_s]
 
     quoc_tich_s = [
-        db_models.QuocTich(name="Việt Nam"),
-        db_models.QuocTich(name="Khác"),
+        db_models.QuocTich(name="Việt Nam", update_at=now),
+        db_models.QuocTich(name="Khác", update_at=now),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in quoc_tich_s]
 
     ton_giao_s = [
-        db_models.TonGiao(name="Không"),
-        db_models.TonGiao(name="Phật Giáo"),
-        db_models.TonGiao(name="Công Giáo"),
-        db_models.TonGiao(name="Tin Lành"),
-        db_models.TonGiao(name="Hồi Giáo"),
-        db_models.TonGiao(name="Cao Đài"),
-        db_models.TonGiao(name="Hòa Hảo"),
+        db_models.TonGiao(name="Không", update_at=now),
+        db_models.TonGiao(name="Phật Giáo", update_at=now),
+        db_models.TonGiao(name="Công Giáo", update_at=now),
+        db_models.TonGiao(name="Tin Lành", update_at=now),
+        db_models.TonGiao(name="Hồi Giáo", update_at=now),
+        db_models.TonGiao(name="Cao Đài", update_at=now),
+        db_models.TonGiao(name="Hòa Hảo", update_at=now),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in ton_giao_s]
     
     
     tinh_trang_xu_ly_s = [
-        db_models.TinhTrangXuLy(name="Đang chờ duyệt"),
-        db_models.TinhTrangXuLy(name="Đang chờ kí và phát hành"),
-        db_models.TinhTrangXuLy(name="Đang chờ xử lý"),
-        db_models.TinhTrangXuLy(name="Đã xử lý"),
+        db_models.TinhTrangXuLy(name="Đang chờ duyệt", update_at=now),
+        db_models.TinhTrangXuLy(name="Đang chờ kí và phát hành", update_at=now),
+        db_models.TinhTrangXuLy(name="Đang chờ xử lý", update_at=now),
+        db_models.TinhTrangXuLy(name="Đã xử lý", update_at=now),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in tinh_trang_xu_ly_s]
     
     
     # muc_do_bao_mat_s = [
-    #     db_models.MucDoBaoMat(name="1"),
-    #     db_models.MucDoBaoMat(name="2"),
-    #     db_models.MucDoBaoMat(name="3"),
+    #     db_models.MucDoBaoMat(name="1", update_at=now),
+    #     db_models.MucDoBaoMat(name="2", update_at=now),
+    #     db_models.MucDoBaoMat(name="3", update_at=now),
     # ]
     # [common_queries.add_and_commit(get_session(), obj) for obj in muc_do_bao_mat_s]
     
     
     muc_do_uu_tien_s = [
-        db_models.MucDoUuTien(name="1"),
-        db_models.MucDoUuTien(name="2"),
-        db_models.MucDoUuTien(name="3"),
+        db_models.MucDoUuTien(name="1", update_at=now),
+        db_models.MucDoUuTien(name="2", update_at=now),
+        db_models.MucDoUuTien(name="3", update_at=now),
     ]
     [common_queries.add_and_commit(get_session(), obj) for obj in muc_do_uu_tien_s]
 

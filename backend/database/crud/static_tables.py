@@ -1,7 +1,7 @@
 
 from datetime import datetime
 from .. import common_queries, db_models
-from ..schemas import nguoi_dung as user_schemas
+from ..schemas import static_tables as static_table_schemas
 
 import typing 
 from exceptions import db_exceptions
@@ -28,5 +28,23 @@ def get_static_table_by_name(db, static_table_name, class_):
         return obj[0]
     else:
         return None
+    
+    
+def insert(db, obj: db_models.StaticTable):
+    obj.update_at = datetime.now()
+    return common_queries.add_and_commit(db, obj)
 
+
+def update(db, obj, obj_pydantic: static_table_schemas.StaticTableUpdate):
+    data_dict = obj_pydantic.__dict__
+    data_dict = {k: data_dict[k] for k in data_dict if data_dict[k] is not None}
+    
+    [setattr(obj, k, data_dict[k]) for k in data_dict]
+    obj.update_at = datetime.now()
+    
+    return common_queries.add_and_commit(db, obj)
+
+
+def delete(db, obj):
+    return common_queries.delete(db, obj)
 

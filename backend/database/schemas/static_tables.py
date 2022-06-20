@@ -8,8 +8,18 @@ class StaticTable(BaseModel):
     id: str
     name: str
     
+    update_at: datetime.datetime = None
+    
     class Config:
         orm_mode = True
+        
+        
+
+class StaticTableUpdate(BaseModel):
+    id: str
+    name: str
+    
+        
 
 class PhongBanFull(StaticTable):
     pass

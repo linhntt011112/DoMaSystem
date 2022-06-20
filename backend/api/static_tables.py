@@ -63,7 +63,12 @@ name_to_schema = {
 #         return True
 #     else:
 #         return False
-    
+
+
+def check_static_table_name(static_table_name):
+    if static_table_name not in name_to_db_model:
+        raise api_exceptions.NOT_FOUND_EXCEPTION(f'Can not find static_table with name "{static_table_name}"')
+
 
 def _get_static_table_by_id(db, static_table_id, class_) :
     static_table: db_models.StaticTable = crud_static_tables.get_static_table_by_id(db, static_table_id, class_)
@@ -83,24 +88,82 @@ async def get_list(
     
     # logger.debug('CACHE MISS')  
     
-    if static_table_name not in name_to_db_model:
-        raise api_exceptions.NOT_FOUND_EXCEPTION(f'Can not find static_table with name "{static_table_name}"')
-    else:
+    try:
+        check_static_table_name(static_table_name)
         data = crud_static_tables.get_list(db, name_to_db_model[static_table_name])
         schema = name_to_schema[static_table_name]
         return [schema.from_orm(item) for item in data]
+    except Exception as e:
+        return api_exceptions.handle_simple_exception(e, logger)
     
     
 
 @router.get("/{static_table_name}/reset_cache")
-async def get_list(
+async def reset_cache(
     static_table_name: str,
     current_user: db_models.NguoiDung = Depends(get_current_active_user)
     ):  
-    if static_table_name not in name_to_db_model:
-        raise api_exceptions.NOT_FOUND_EXCEPTION(f'Can not find static_table with name "{static_table_name}"')
-    else:
-        res = await caching.reset_cache(f'static_table:{static_table_name}:*')
-        return res
     
+    check_static_table_name(static_table_name)
+    res = await caching.reset_cache(f'static_table:{static_table_name}:*')
+    return res
+
+
+@router.post("/{static_table_name}/create")
+async def create(
+    static_table_name: str,
+    name: str,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), 
+    db=Depends(get_db)):  
+    
+    # logger.debug('CACHE MISS')  
+    
+    try:
+        check_static_table_name(static_table_name)
+        obj = name_to_db_model[static_table_name](name=name)
+        obj = crud_static_tables.insert(db, obj)
+        return name_to_schema[static_table_name].from_orm(obj)
+    except Exception as e:
+        return api_exceptions.handle_simple_exception(e, logger)
+        
+
+
+@router.put("/{static_table_name}/update")
+async def update(
+    static_table_name: str,
+    static_table_update_pydantic: schema_static_tables.StaticTableUpdate,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), 
+    db=Depends(get_db)):  
+    
+    # logger.debug('CACHE MISS')  
+    
+    try:
+        check_static_table_name(static_table_name)
+        obj = _get_static_table_by_id(db, static_table_update_pydantic.id, name_to_db_model[static_table_name])
+        obj = crud_static_tables.update(db, obj, static_table_update_pydantic)
+        return name_to_schema[static_table_name].from_orm(obj)
+    except Exception as e:
+        return api_exceptions.handle_simple_exception(e, logger)
+    
+    
+    
+@router.delete("/{static_table_name}/delete/{obj_id}")
+async def delete(
+    static_table_name: str,
+    obj_id: int,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), 
+    db=Depends(get_db)):  
+    
+    # logger.debug('CACHE MISS')  
+    
+    
+    try:
+        check_static_table_name(static_table_name)
+        obj = _get_static_table_by_id(db, obj_id, name_to_db_model[static_table_name])
+        return crud_static_tables.delete(db, obj)
+    except Exception as e:
+        return api_exceptions.handle_simple_exception(e, logger)
+
+
+
         

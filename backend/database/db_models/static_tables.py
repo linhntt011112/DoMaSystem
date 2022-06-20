@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, Date
+from sqlalchemy import Column, DateTime, Integer, String, Boolean, Date
 from sqlalchemy import ForeignKey, Sequence
 
 from .base import Base
@@ -59,6 +59,8 @@ class StaticTable:
     __tablename__ = 'static_table'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
     name = Column(String(128), nullable=False)
+    
+    update_at = Column(DateTime, nullable=True)
   
   
 class PhongBan(Base, StaticTable):
