@@ -20,7 +20,10 @@ from database.schemas import static_tables as schema_static_tables
 from .utils import Hasher
 from exceptions import api_exceptions
 from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
-from .core import user as user_core
+from .core import (
+    user as user_core,
+    caching
+)
 
 get_current_active_user = user_core.get_current_active_user
 
@@ -72,10 +75,13 @@ def _get_static_table_by_id(db, static_table_id, class_) :
 
 
 @router.get("/{static_table_name}/list")
+@caching.cache(namespace='static_table', key_builder=caching.static_tables_key_builder)
 async def get_list(
     static_table_name: str,
-    current_user:db_models.NguoiDung = Depends(get_current_active_user), 
-    db=Depends(get_db)):    
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), 
+    db=Depends(get_db)):  
+    
+    # logger.debug('CACHE MISS')  
     
     if static_table_name not in name_to_db_model:
         raise api_exceptions.NOT_FOUND_EXCEPTION(f'Can not find static_table with name "{static_table_name}"')
@@ -83,4 +89,18 @@ async def get_list(
         data = crud_static_tables.get_list(db, name_to_db_model[static_table_name])
         schema = name_to_schema[static_table_name]
         return [schema.from_orm(item) for item in data]
+    
+    
+
+@router.get("/{static_table_name}/reset_cache")
+async def get_list(
+    static_table_name: str,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user)
+    ):  
+    if static_table_name not in name_to_db_model:
+        raise api_exceptions.NOT_FOUND_EXCEPTION(f'Can not find static_table with name "{static_table_name}"')
+    else:
+        res = await caching.reset_cache(f'static_table:{static_table_name}:*')
+        return res
+    
         

@@ -28,6 +28,19 @@ class PhanQuyen:
         
         return False
     
+    
+class NotificationStatus:
+    type = int
+    unread = 0
+    read = 1
+    
+    @staticmethod
+    def verify(status):
+        if status in {0, 1}:
+            return True
+        
+        return False
+    
 
 class TrangThaiLoaiCongVan:
     type = str

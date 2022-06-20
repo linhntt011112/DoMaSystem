@@ -43,11 +43,13 @@ services:
     #       - IPC_LOCK
         # restart: unless-stopped
     redis:
-        image: redis:5.0-rc4
+        image: redis:6.2.7
         container_name: DMS-redis
         # restart: on-failure
+        # environment:
+        #     - ALLOW_EMPTY_PASSWORD=yes
         volumes:
             - "/home/aimenext/tanhm/DMS/data/redis:/data"
-        command: redis-server --appendonly yes
+        command: redis-server --save 20 1 --requirepass DMS
         ports:
-            - "3012:80"
+            - "3012:6379"

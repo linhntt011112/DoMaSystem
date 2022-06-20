@@ -1,5 +1,3 @@
-
-   
 from sys import prefix
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, APIRouter, Depends, Request, status
@@ -7,7 +5,11 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from loguru import logger
 
-from config import frontend_config
+from redis import asyncio as aioredis
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
+
+from config import frontend_config, server_config
 from api import user, login, static_tables, cong_van
 
 
@@ -17,7 +19,8 @@ origins = [
     'http://localhost:3008',
     'http://127.0.0.1:3008/'
     ]
-app = FastAPI()
+
+app = FastAPI(title=server_config.app_name)
 
 app.add_middleware(
     CORSMiddleware,
@@ -34,6 +37,17 @@ router.include_router(static_tables.router)
 router.include_router(cong_van.router)
 # router.include_router(company.router)
 app.include_router(router)
+
+
+@app.on_event("startup")
+async def startup():
+    redis = aioredis.from_url(server_config.caching.redis_url, encoding="utf8", decode_responses=True)
+    FastAPICache.init(RedisBackend(redis), prefix=server_config.app_name, expire=server_config.caching.default_expiration_time_in_seconds)
+    
+
+@app.on_event("shutdown")
+def shutdown_event():
+    logger.info("Application shutdown")
 
 # @app.exception_handler(RequestValidationError)
 # async def validation_exception_handler(request: Request, exc: RequestValidationError):
