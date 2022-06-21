@@ -47,5 +47,9 @@ async def save_file(file, file_path):
 
 
 
-def remove_file(path: str) -> None:
-    os.unlink(path)
+def remove_file(path: str):
+    if os.path.isfile(path):
+        os.unlink(path)
+        return True
+    
+    return False

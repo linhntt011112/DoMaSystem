@@ -11,8 +11,8 @@ class NotificationTemplate(Base):
     __tablename__ = 'notification_template'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
     
-    reference_table = Column(String(128), nullable=False)
-    action = Column(String(512), nullable=False)
+    entity_type = Column(String(128), nullable=False)  # reference_table
+    template = Column(String(512), nullable=False)
     
     
 
@@ -25,9 +25,10 @@ class NotificationObject(Base):
     
     created_on = Column(DateTime, nullable=False)
     
-    actor_id =  Column(Integer, nullable=False)
-    notification_template = relationship('NotificationTemplate', backref="notification_object", uselist=False)
-
+    actor_id = Column(Integer, nullable=False)
+    actor = relationship('NguoiDung', backref="notification_object", uselist=False)
+    
+    entity_id = Column(Integer, nullable=False)
     
     
 class Notification(Base):

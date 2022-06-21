@@ -54,7 +54,7 @@ async def get_list_loai_cong_van(limit: int=None, offset: int=None,
         cac_loai_cong_van = crud_cong_van.select_list_loai_cong_van(db, limit=limit, offset=offset)
         return [cong_van_schemas.LoaiCongVanFull.from_orm(loai_cong_van) for loai_cong_van in cac_loai_cong_van]
     except Exception as e:
-        # db.rollback()
+
         return api_exceptions.handle_simple_exception(e, logger)
 
 
@@ -69,7 +69,7 @@ async def create_loai_cong_van(loai_cong_van: cong_van_schemas.LoaiCongVanCreate
         new_loai_cong_van = crud_cong_van.create_loai_cong_van(db, loai_cong_van)
         return cong_van_schemas.LoaiCongVanFull.from_orm(new_loai_cong_van)
     except Exception as e:
-        # db.rollback()
+
         return api_exceptions.handle_simple_exception(e, logger)
     
     
@@ -91,7 +91,7 @@ async def get_list_users(loai_cong_van_pydantic: cong_van_schemas.LoaiCongVanUpd
         
         return cong_van_schemas.LoaiCongVanFull.from_orm(loai_cong_van)
     except Exception as e:
-        # db.rollback()
+
         return api_exceptions.handle_simple_exception(e, logger)
 
 
@@ -110,7 +110,7 @@ async def delete_loai_cong_van(id: int,
             raise api_exceptions.INTERNAL_SERVER_ERROR(f"Can not delete loai_cong_van with id={id}")
         
     except Exception as e:
-        # db.rollback()
+
         return api_exceptions.handle_simple_exception(e, logger)
 
 
@@ -126,7 +126,7 @@ async def get_list_cvdi(limit: int=None, offset: int=None, order_by: str=None,
         cong_van_s = crud_cong_van.select_list_cong_van_di(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien)
         return [cong_van_schemas.CongVanDiFull.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
-        # db.rollback()
+
         return api_exceptions.handle_simple_exception(e, logger)
     
 
@@ -141,7 +141,7 @@ async def get_list_cvdi(id: int,
             raise api_exceptions.NOT_FOUND_EXCEPTION()
         return cong_van_schemas.CongVanDiFull.from_orm(cong_van_di)
     except Exception as e:
-        # db.rollback()
+
         return api_exceptions.handle_simple_exception(e, logger)
 
 
@@ -159,7 +159,7 @@ async def create_cong_van(
         new_cong_van_di = crud_cong_van.create_cong_van_di(db, cong_van_di)
         return cong_van_schemas.CongVanDiFull.from_orm(new_cong_van_di)
     except Exception as e:
-        # db.rollback()
+
         return api_exceptions.handle_simple_exception(e, logger)
     
     
@@ -178,7 +178,7 @@ async def update_cong_van_di(
         cong_van_di = crud_cong_van.update_cong_van_di(db, cong_van_di, cong_van_di_pydantic)
         return cong_van_schemas.CongVanDiFull.from_orm(cong_van_di)
     except Exception as e:
-        # db.rollback()
+
         return api_exceptions.handle_simple_exception(e, logger)
     
     
@@ -186,22 +186,31 @@ async def update_cong_van_di(
 @router.post('/cvdi/update/tep_dinh_kem')
 async def update_cong_van_di__tep_dinh_kem(
     cong_van_di_id: int = Form(...),
-    tep_dinh_kem: UploadFile = File(),
+    tep_dinh_kem_input: UploadFile = File(),
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
     
+    save_location = None
+    tep_dinh_kem = None
+    cong_van_di = None
     try:
-        tep_dinh_kem, save_location = await create_location_and_save_tep_dinh_kem(tep_dinh_kem, db)
+        tep_dinh_kem, save_location = await create_location_and_save_tep_dinh_kem(tep_dinh_kem_input, db)
         cong_van_di: db_models.CongVanDi = crud_cong_van.get_cong_van_di_by_id(db, cong_van_di_id)
         if cong_van_di is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
         
         cong_van_di.id_tep_dinh_kem = tep_dinh_kem.id
         cong_van_di = crud_cong_van.update_cong_van_di(db, cong_van_di)
+        # logger.info(f"{cong_van_di.tep_dinh_kem.__dict__}")
         return cong_van_schemas.CongVanDiFull.from_orm(cong_van_di)
     except Exception as e:
+        if cong_van_di is not None:
+            cong_van_di.id_tep_dinh_kem = None
+            cong_van_di = crud_cong_van.update_cong_van_di(db, cong_van_di)
         
-        file_utils.remove_file(save_location)
+        if tep_dinh_kem is not None:
+            crud_cong_van.delete_save_file(db, tep_dinh_kem)
+            
         return api_exceptions.handle_simple_exception(e, logger)
     
     
@@ -222,6 +231,6 @@ async def delete_cong_van(
     try:
         return  crud_cong_van.delete_cong_van_di(db, cong_van_di)
     except Exception as e:
-        # db.rollback()
+
         return api_exceptions.handle_simple_exception(e, logger)
 

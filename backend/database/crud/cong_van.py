@@ -4,7 +4,9 @@ from .. import common_queries, db_models
 from ..schemas import cong_van as cong_van_schemas
 
 import typing 
+import os
 from exceptions import db_exceptions
+from api.core.file_utils import remove_file
 
 
 
@@ -25,7 +27,7 @@ def get_loai_cong_van_by_id(db, loai_cong_van_id):
 
 def validate_loai_cong_van(loai_cong_van_data_dict):
     if 'trang_thai' in loai_cong_van_data_dict and not db_models.TrangThaiLoaiCongVan.verify(loai_cong_van_data_dict['trang_thai']):
-        raise db_exceptions.ResourceNotFoundException()
+        raise db_exceptions.ResourceNotFoundException("Not a valid trang_thai !")
 
     return True
 
@@ -50,6 +52,7 @@ def update_loai_cong_van(db, loai_cong_van: db_models.LoaiCongVan, loai_cong_van
     data_dict = loai_cong_van_pydantic.__dict__
     data_dict = {k: data_dict[k] for k in data_dict if data_dict[k] is not None}
     
+    validate_loai_cong_van(data_dict)
     
     [setattr(loai_cong_van, k, data_dict[k]) for k in data_dict]
     loai_cong_van.thoi_gian_cap_nhat = now
@@ -193,4 +196,10 @@ def create_save_file(db, save_file_pydantic: cong_van_schemas.SaveFileCreate):
     save_file.upload_at = datetime.now()
     
     return common_queries.add_and_commit(db, save_file)
+
+
+def delete_save_file(db, save_file: db_models.SaveFile):
+    remove_file(save_file.save_location)
+    
+    return common_queries.delete(db, save_file)
 

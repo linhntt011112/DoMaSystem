@@ -16,6 +16,9 @@ class SaveFileFull(BaseModel):
 
     upload_at: datetime.datetime
     
+    class Config:
+        orm_mode = True
+    
     
 class SaveFileCreate(BaseModel):
     name: str
