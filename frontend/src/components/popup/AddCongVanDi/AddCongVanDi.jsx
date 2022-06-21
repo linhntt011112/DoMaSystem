@@ -48,11 +48,10 @@ export default function AddCongVanDi(props) {
     const [ngay_tao, setNgayTao] = React.useState(today_date);
     const [ngay_duyet, setNgayDuyet] = React.useState(null);
     const [ly_do, setLyDo] = React.useState(null);
+    const [file_dinh_kem, setFileDinhKem] = React.useState(null);
     const [editorState, setEditorState] = React.useState(
         () => EditorState.createEmpty(),
       );
-
-    
 
     const handleChangeNoiNhan = (event) => {
         const value = event.target.value;
@@ -159,6 +158,33 @@ export default function AddCongVanDi(props) {
         })
     }
 
+    const updateTepDinhKem = (id) => {
+        let formData = new FormData();
+
+        formData.append('cong_van_di_id', id);
+        if (file_dinh_kem !== null) formData.append('tep_dinh_kem_input', file_dinh_kem, file_dinh_kem.name);
+
+        const body = formData;
+
+        backend_config.makeRequest("POST",
+            backend_config.CONG_VAN_DI_POST_UPDATE_TEP_DINH_KEM,
+            token,
+            body,
+            null,
+            true
+        )
+        .then((response) => {
+            if (response.ok) {
+                return true;
+            }
+        else {
+            response.text().then((text) => {
+                console.log(text);
+                return false;
+            })
+        }})
+    }
+
     const addCongVanDi = () => {
         const body = {
             // id: so_cong_van,
@@ -209,6 +235,7 @@ export default function AddCongVanDi(props) {
                     // setTrigger(false);
                     // refreshFunc();
                     console.log(response_json);
+                    if (updateTepDinhKem(response_json.id) === false) ;
                     props.setTrigger(false);
                     addCongVanDiSuccessNotify();
                     refreshFunc();
@@ -670,6 +697,7 @@ export default function AddCongVanDi(props) {
                             // style={{ display: 'none' }}
                             id="contained-button-file"
                             className="cong-van-di-add-input-file"
+                            onChange={(event)=>{setFileDinhKem(event.target.files[0])}}
                         />
                     </div>
                     <div className='cong-van-di-add-footer'>

@@ -108,6 +108,7 @@ export default function CongvandiList(props) {
                             message={"Bạn có chắc muốn xóa công văn này không?"}
                             // url={backend_config.USER_DELETE_BY_ID.replace("{user_id}", params.row.id)}
                             refreshFunc={refreshTable}
+                            
                         >
                         </DeletePopup>
                     </>

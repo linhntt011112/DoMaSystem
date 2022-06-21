@@ -8,29 +8,37 @@ import { toast } from 'react-toastify';
 
 export function DeletePopup(props) {
     const { id, url, token, refreshFunc, message, handleDelete } = props;
+    let [ successNotifyMessage, failedNotifyMessageCollection ] = [null, null];
+    if ('notifyMessage' in props) {
+      if ('successNotifyMessage' in props.notifyMessage) successNotifyMessage = props.notifyMessage;
+      if ('failedNotifyMessageCollection' in props.notifyMessage) failedNotifyMessageCollection = props.notifyMessage;
+    }
+
+    if (successNotifyMessage === null) successNotifyMessage = "Xóa thành công!";
+    if (failedNotifyMessageCollection === null) {
+      failedNotifyMessageCollection = {}
+    }
+    const defaultFailedNotifyMessage = "Không thể xóa!";
+    
     // backend_config.AI_MODEL_VERSION_DELETE_BY_ID.replace('{ai_model_version_id}', id),
     // Are you sure to delete version "{name}" ?
 
-    const deleteUserFailNotify = () => {
-      toast.error("Không thể xóa quản trị viên", {
+    const deleteFailedNotify = (message) => {
+      toast.error(message, {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: true
       })
     }
 
-    const deleteLoaiCongVanFailNotify = () => {
-      toast.error("Không thể xóa loại công văn với trạng thái Hoạt động", {
+    const deleteSuccessNotify = (message) => {
+      toast.success(message, {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: true
       })
     }
 
-    const deleteSuccessNotify = () => {
-      toast.success("Xóa thành công", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: true
-      })
-    }
+    
+
   
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -40,21 +48,19 @@ export function DeletePopup(props) {
           response.json().then((response_json) => {
             props.setTrigger(false);
             refreshFunc();
-            deleteSuccessNotify();
+            deleteSuccessNotify(successNotifyMessage);
           });
         } else {
           response.text().then((text) => {
             let error = JSON.parse(text).detail;
             console.log(error)
-            switch (error) {
-                case "Can not delete admin user!": 
-                  deleteUserFailNotify();
-                  return;
-                default:
-                  // alert(text);
-                  deleteLoaiCongVanFailNotify();
-                  return;
+            for (const [errorKey, errorMessage] of Object.entries(failedNotifyMessageCollection)) {
+              if (error === errorKey) {
+                deleteFailedNotify(errorMessage);
+                return;
+              }
             }
+            deleteFailedNotify(defaultFailedNotifyMessage);
           });
         }
       });

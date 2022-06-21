@@ -7,6 +7,10 @@ backend/log
 backend/test.ipynb
 backend/config.py
 **/__pycache__/
+backend/database/start_db_docker-compose.yml
+backend/config.py
+storage/
+backend/database/docker-db/
 
 # github_token.txt
 

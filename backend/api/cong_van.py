@@ -186,7 +186,7 @@ async def update_cong_van_di(
 @router.post('/cvdi/update/tep_dinh_kem')
 async def update_cong_van_di__tep_dinh_kem(
     cong_van_di_id: int = Form(...),
-    tep_dinh_kem_input: UploadFile = File(),
+    tep_dinh_kem_input: UploadFile = File(...),
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
     
