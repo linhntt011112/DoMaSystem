@@ -12,3 +12,4 @@ Redis==4.3.3
 fastapi-cache2[redis]
 gunicorn==20.1.0
 loguru==0.6.0
+pymongo==4.1.1
