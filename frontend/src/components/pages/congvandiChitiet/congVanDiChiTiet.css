@@ -37,7 +37,7 @@
 .thongTinChungColumn2{
     float: left;
     width: 30%;
-    padding: 20px;
+    padding: 66px 20px 20px 20px;
     box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
 }
 .column1Title{
@@ -80,7 +80,7 @@
 .columnChildren2Info{
     margin: 20px 0px 0px 0px;
     float: left;
-    width: 35%;
+    width: 40%;
 }
 .column2Title{
     color: #4f4f4f;
@@ -109,7 +109,7 @@
     display: flex;
 }
 .trichDanInfo{
-    margin: 10px 0px 10px 10px;
+    margin: 10px 0px 30px 10px;
 }
 
 .commentsContainer{

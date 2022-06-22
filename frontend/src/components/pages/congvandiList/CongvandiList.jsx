@@ -94,7 +94,7 @@ export default function CongvandiList(props) {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Link to={"/dashboard/cong-van-di/"+params.row.so_cong_van_di} params={{id: params.row.so_cong_van_di}}>
+                        <Link to={"/dashboard/cong-van-di/"+params.row.id} params={{id: params.row.id}}>
                             <button className='congVanDiListEdit'>Chi tiết</button>
                         </Link>
                         <DeleteOutline className='congVanDiListDelete' onClick={()=>{setMark(params.row.id); setButtonDeletePopup(true)}}/>
@@ -102,13 +102,11 @@ export default function CongvandiList(props) {
                             className='cong-van-di-delete-popup'
                             trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} 
                             token={token} 
-                            // url={backend_config.LOAI_CONG_VAN_DELETE_BY_ID.replace('{id}', params.row.id)}
+                            url={backend_config.CONG_VAN_DI_DELETE_BY_ID.replace('{id}', params.row.id)}
                             mark={mark} 
                             id={params.row.id} 
                             message={"Bạn có chắc muốn xóa công văn này không?"}
-                            // url={backend_config.USER_DELETE_BY_ID.replace("{user_id}", params.row.id)}
                             refreshFunc={refreshTable}
-                            
                         >
                         </DeletePopup>
                     </>

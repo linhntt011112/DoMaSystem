@@ -62,18 +62,17 @@ class CongVanDi(Base):
     ten_cong_van = Column(String(256), nullable=False)
     
     id_phong_ban_nhan = Column(Integer, ForeignKey('phong_ban.id'), nullable=False)
-    phong_ban_nhan = relationship("PhongBan", foreign_keys=id_phong_ban_nhan, uselist=False, post_update=True,
-                                            primaryjoin=(id_phong_ban_nhan==PhongBan.id))
+    phong_ban_nhan = relationship("PhongBan", foreign_keys=id_phong_ban_nhan, uselist=False
+                                            )
     
     id_nguoi_ky = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
-    nguoi_ky = relationship("NguoiDung", foreign_keys=id_nguoi_ky, uselist=False, post_update=True,
-                                            primaryjoin=(id_nguoi_ky==NguoiDung.id))
+    nguoi_ky = relationship("NguoiDung", foreign_keys=id_nguoi_ky, uselist=False, post_update=True)
     ngay_ky = Column(Date, nullable=True)
     
     
     id_phong_ban_phat_hanh = Column(Integer, ForeignKey('phong_ban.id'), nullable=False)
-    phong_ban_phat_hanh = relationship("PhongBan", foreign_keys=id_phong_ban_phat_hanh, uselist=False, post_update=True, 
-                                       primaryjoin=(id_phong_ban_phat_hanh==PhongBan.id))
+    phong_ban_phat_hanh = relationship("PhongBan", foreign_keys=id_phong_ban_phat_hanh, uselist=False 
+                                       )
     
     # ngay_ky = Column(Date, nullable=False)
     ngay_phat_hanh = Column(Date, nullable=False)
@@ -85,12 +84,12 @@ class CongVanDi(Base):
     noi_dung = Column(String(2**13-1), nullable=False)
     
     id_nguoi_xu_ly = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
-    nguoi_xu_ly = relationship("NguoiDung", foreign_keys=id_nguoi_xu_ly, uselist=False, post_update=True,
-                                            primaryjoin=(id_nguoi_xu_ly==NguoiDung.id))
+    nguoi_xu_ly = relationship("NguoiDung", foreign_keys=id_nguoi_xu_ly, uselist=False
+                                           )
     
     id_nguoi_theo_doi = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
-    nguoi_theo_doi = relationship("NguoiDung", foreign_keys=id_nguoi_theo_doi, uselist=False, post_update=True,
-                                            primaryjoin=(id_nguoi_theo_doi==NguoiDung.id))
+    nguoi_theo_doi = relationship("NguoiDung", foreign_keys=id_nguoi_theo_doi, uselist=False
+                                           )
     id_tinh_trang_xu_ly = Column(Integer, ForeignKey('tinh_trang_xu_ly.id'), nullable=False)
     tinh_trang_xu_ly = relationship("TinhTrangXuLy", backref="cong_van")
     
@@ -107,12 +106,12 @@ class CongVanDi(Base):
     tep_dinh_kem = relationship("SaveFile", backref="cong_van", uselist=False)
     
     id_nguoi_tao = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
-    nguoi_tao = relationship("NguoiDung", foreign_keys=id_nguoi_tao, uselist=False, post_update=True,
-                                            primaryjoin=(id_nguoi_tao==NguoiDung.id))
+    nguoi_tao = relationship("NguoiDung", foreign_keys=id_nguoi_tao, uselist=False
+                                            )
     
     id_nguoi_duyet = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
-    nguoi_duyet = relationship("NguoiDung", foreign_keys=id_nguoi_duyet, uselist=False, post_update=True,
-                                            primaryjoin=(id_nguoi_duyet==NguoiDung.id))
+    nguoi_duyet = relationship("NguoiDung", foreign_keys=id_nguoi_duyet, uselist=False
+                                            )
     
     ngay_hieu_luc = Column(Date, nullable=False)
     ngay_het_hieu_luc = Column(Date, nullable=True)

@@ -257,10 +257,16 @@ export default function AddCongVanDi(props) {
         // props.setTrigger(false);
     }
 
+    const handleClose = (e) => {
+        e.preventDefault();
+        props.setTrigger(false);
+        setEditorState(() => EditorState.createEmpty())
+    }
+
     return (props.trigger) ? (
         <div className="popup-main">
             <form className="popup-inner" onSubmit={handleSubmit}>
-                <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
+                <Close className="close-btn" onClick={handleClose}/>
                 <div className="cong-van-di-add">
                     <div className="cong-van-di-add-header">
                         <span className="cong-van-di-add-title">Thêm mới công văn đi</span>
@@ -410,7 +416,7 @@ export default function AddCongVanDi(props) {
                                             style={{
                                                 height: '36px'
                                             }}
-                                            //required
+                                            required
                                         >
                                             {loai_cong_van_table.map((item) => {
                                                     
@@ -563,7 +569,7 @@ export default function AddCongVanDi(props) {
                                 </label>
                                 <input
                                     type="number"
-                                    // value="3969"
+                                    defaultValue="0"
                                     onKeyPress={(event) => {
                                         if (!/[0-9]/.test(event.key)) {
                                           event.preventDefault();
@@ -571,7 +577,7 @@ export default function AddCongVanDi(props) {
                                     }}
                                     className='cong-van-di-add-input'
                                     onChange={(e) => setSoLuongVanBan(e.target.value)}
-                                    // required
+                                    required
                                 />
                             </div>
                             <div className='cong-van-di-add-item'>
