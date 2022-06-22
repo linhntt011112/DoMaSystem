@@ -20,7 +20,9 @@ from database import db_models
 
 from ..utils import Hasher
 from ..config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from . import caching
 from exceptions import api_exceptions
+
 
 name_to_db_model = {
     'phong_ban': db_models.PhongBan,
@@ -79,6 +81,7 @@ def authenticate_user(db, username: str=None, password: str=None):
 #         return False
 
 
+@caching.cache(namespace='user', key_builder=caching.user_token_key_builder, expire=600)
 async def get_current_user(token: str = Depends(oauth2_scheme), db=Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -103,6 +106,11 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db=Depends(get_d
 
 async def get_current_active_user(current_user = Depends(get_current_user)) -> db_models.NguoiDung:
     return current_user
+
+
+async def logout(token: str = Depends(oauth2_scheme)):
+    res = await caching.reset_cache(f'user:{token}:*')
+    return res
 
 
 

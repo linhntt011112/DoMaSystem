@@ -14,7 +14,7 @@ from database.db import get_db
 from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 # from .user import authenticate_user, Token, TokenData
 from .core.user import (
-    authenticate_user, Token, TokenData
+    authenticate_user, Token, logout as core_user_logout
 )
 
 
@@ -54,10 +54,10 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 
 
 @router.post("/delete_token")
-async def logout():
+async def logout(is_success=Depends(core_user_logout)):
     # access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     # access_token = create_access_token(
     #     data={"sub": user.username}, expires_delta=access_token_expires
     # )
-    access_token = ""
-    return {"access_token": access_token, "token_type": "bearer"}
+    
+    return is_success
