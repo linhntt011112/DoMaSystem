@@ -31,7 +31,7 @@ const App = () => {
             <AdminRoute path="/dashboard/user/:userId" component={User} />
             <AdminRoute exact path="/dashboard/loai-cong-van/" component={LoaicongvanList}/>
             <AdminRoute exact path="/dashboard/cong-van-di/" component={CongvandiList}/>
-            <AdminRoute exact path="/dashboard/cong-van-di/:soCongVanDi" component={CongVanDiChiTiet}/>
+            <AdminRoute exact path="/dashboard/cong-van-di/:cvdiId" component={CongVanDiChiTiet}/>
             <AdminRoute exact path="/dashboard/cong-van-den/" component={CongVanDenList}/>
             <AdminRoute exact path="/dashboard/cong-van-den/:socongvan" component={CongVanDenChiTiet}/>
             <AdminRoute exact path="/dashboard/calendar" component={DMSCalendar}/>

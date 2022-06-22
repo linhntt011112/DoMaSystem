@@ -215,16 +215,17 @@ async def update_cong_van_di__tep_dinh_kem(
     
     
 
-@router.post('/cvdi/delete/{id}')
+@router.delete('/cvdi/delete/{id}')
 async def delete_cong_van(
     id: int,
-    cong_van_di: cong_van_schemas.CongVanDiCreate,
+    # cong_van_di: cong_van_schemas.CongVanDiCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
     if current_user.phan_quyen != db_models.PhanQuyen.admin:
         raise api_exceptions.PERMISSION_EXCEPTION()
     
     cong_van_di = crud_cong_van.get_cong_van_di_by_id(db, cong_van_di_id=id)
+    logger.info(f"{cong_van_di.__dict__}")
     if cong_van_di is None:
         raise api_exceptions.NOT_FOUND_EXCEPTION()
     

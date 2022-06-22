@@ -21,6 +21,8 @@ export const CONG_VAN_DI_PREFIX = BACKEND_URL + '/cong_van/cvdi'
 export const CONG_VAN_DI_GET_LIST = CONG_VAN_DI_PREFIX + '/list'
 export const CONG_VAN_DI_POST_CREATE = CONG_VAN_DI_PREFIX + '/create'
 export const CONG_VAN_DI_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_DI_PREFIX + '/update/tep_dinh_kem'
+export const CONG_VAN_DI_GET_BY_ID = CONG_VAN_DI_PREFIX + '/{id}'
+export const CONG_VAN_DI_DELETE_BY_ID = CONG_VAN_DI_PREFIX + '/delete/{id}'
 
 export const STATIC_TABLE_GET_LIST = BACKEND_URL + '/{static_table_name}/list';
 

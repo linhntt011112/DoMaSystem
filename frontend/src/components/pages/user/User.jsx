@@ -32,11 +32,9 @@ export default function User(props) {
                     {userData !== "" &&
                     <div>
                         <button className='profileEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
-                        
-                            <EditUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token}>
-                            </EditUserPopup>
-                        
-                        </div>
+                        <EditUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token}>
+                        </EditUserPopup>
+                    </div>
                     }
                     
                 </div>

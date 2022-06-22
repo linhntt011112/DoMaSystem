@@ -11,34 +11,36 @@ import * as backend_config from "../../../config/backend"
 import draftToHtml from 'draftjs-to-html';
 
 export default function EditCongVanDi(props) {
-
-    const {token, refreshFunc} = props;
+    const {cvdiData, token, refreshFunc} = props;
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
+    const [muc_do_uu_tien_table, setMucDoUuTienTable] = React.useState([]);   
+    const [tinh_trang_xu_ly_table, setTinhTrangXuLyTable] = React.useState([]); 
+    const [loai_cong_van_table, setLoaiCongVanTable] = React.useState([]);
     const [usersData, setUsersData] = useState([]);
     const [usersData_PhongBan, setUsersData_PhongBan] = useState([]);
     const [usersData_NoiNhan, setUsersData_NoiNhan] = useState([]);
+    const [usersList, setUsersList] = useState([]);
 
-    const [so_cong_van, setSoCongVan] = React.useState(null);
-    const [ten_cong_van, setTenCongVan] = React.useState(null);
-    const [noi_nhan, setNoiNhan] = React.useState(null);
-    const [nguoi_ky, setNguoiKy] = React.useState(null);
-    const [ngay_ky, setNgayKy] = React.useState(null);
-    const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(null);
-    const [loai_cong_van, setLoaiCongVan] = React.useState(null);
-    const [nguoi_theo_doi, setNguoiTheoDoi] = React.useState(null);
+    const [so_cong_van, setSoCongVan] = React.useState(cvdiData.id);
+    const [ten_cong_van, setTenCongVan] = React.useState(cvdiData.ten_cong_van);
+    const [noi_nhan, setNoiNhan] = React.useState(cvdiData.phong_ban_nhan?.id);
+    const [nguoi_ky, setNguoiKy] = React.useState(cvdiData.nguoi_ky?.id);
+    const [ngay_ky, setNgayKy] = React.useState(cvdiData.ngay_ky);
+    const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(cvdiData.bo_phan_phat_hanh?.id);
+    const [loai_cong_van, setLoaiCongVan] = React.useState(cvdiData.loai_cong_van?.id);
+    const [nguoi_theo_doi, setNguoiTheoDoi] = React.useState(cvdiData.nguoi_theo_doi?.id);
     const [nguoi_tao, setNguoiTao] = React.useState(null);
-    const [nguoi_duyet, setNguoiDuyet] = React.useState(null);
-    const [ngay_hieu_luc, setNgayHieuLuc] = React.useState(null);
-    const [ngay_het_hieu_luc, setNgayHetHieuLuc] = React.useState(null);
-    const [so_luong_van_ban, setSoLuongVanBan] = React.useState(null);
-    const [muc_do_bao_mat, setMucDoBaoMat] = React.useState(null);
-    const [muc_do_khan_cap, setMucDoKhanCap] = React.useState(null);
-    const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
-    const [nguoi_xu_ly, setNguoiXuLy] = React.useState(null);
-    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(null);
+    const [nguoi_duyet, setNguoiDuyet] = React.useState(cvdiData.nguoi_duyet?.id);
+    const [ngay_hieu_luc, setNgayHieuLuc] = React.useState(cvdiData.ngay_hieu_luc);
+    const [ngay_het_hieu_luc, setNgayHetHieuLuc] = React.useState(cvdiData.ngay_het_hieu_luc);
+    const [so_luong_van_ban, setSoLuongVanBan] = React.useState(cvdiData.so_luong_van_ban);
+    const [muc_do_uu_tien, setMucDoUuTien] = React.useState(cvdiData.muc_do_uu_tien?.id);
+    const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(cvdiData.ngay_phat_hanh);
+    const [nguoi_xu_ly, setNguoiXuLy] = React.useState(cvdiData.nguoi_xu_ly?.id);
+    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(cvdiData.tinh_trang_xu_ly?.id);
     const [ngay_tao, setNgayTao] = React.useState(null);
-    const [ngay_duyet, setNgayDuyet] = React.useState(null);
-    const [ly_do, setLyDo] = React.useState(null);
+    const [ngay_duyet, setNgayDuyet] = React.useState(cvdiData.ngay_duyet?.id);
+    const [ly_do, setLyDo] = React.useState(cvdiData.ly_do);
 
     const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -109,8 +111,24 @@ export default function EditCongVanDi(props) {
             })
     }
 
+    const fetchCurrentUser = () =>{
+        backend_config.makeRequest("GET", backend_config.USER_GET_CURRENT_API, token)
+          .then((data) => data.json())
+          .then((data) => {setNguoiTao(data)})
+    }
+
+    const fetchLoaiCongVanTable = () =>{
+        backend_config.makeRequest("GET", backend_config.LOAI_CONG_VAN_GET_LIST, token)
+          .then((data) => data.json())
+          .then((data) => {setLoaiCongVanTable(data)})
+    }
+
     useEffect(() => {
         fetchOneStaticTableData('phong_ban', setPhongBanTable);
+        fetchOneStaticTableData('muc_do_uu_tien', setMucDoUuTienTable);
+        fetchOneStaticTableData('tinh_trang_xu_ly', setTinhTrangXuLyTable);
+        fetchCurrentUser();
+        fetchLoaiCongVanTable();
         fetchUsersTableData();
     }, [])
 
@@ -129,7 +147,7 @@ export default function EditCongVanDi(props) {
             ngay_hieu_luc: ngay_hieu_luc,
             ngay_het_hieu_luc: ngay_het_hieu_luc,
             so_luong_van_ban: so_luong_van_ban,
-            id_muc_do_uu_tien: muc_do_khan_cap,
+            id_muc_do_uu_tien: muc_do_uu_tien,
             ngay_phat_hanh: ngay_phat_hanh,
             id_nguoi_xu_ly: nguoi_xu_ly,
             id_tinh_trang_xu_ly: tinh_trang_xu_ly,
@@ -167,7 +185,7 @@ export default function EditCongVanDi(props) {
                                 </label>
                                 <input
                                         type="text"
-                                        defaultValue="3969"
+                                        defaultValue={cvdiData.id}
                                         className='cong-van-di-update-input'
                                         disabled
                                         required
@@ -180,7 +198,7 @@ export default function EditCongVanDi(props) {
                                 </label>
                                 <input
                                         type="text"
-                                        defaultValue="3969"
+                                        defaultValue={cvdiData.ten_cong_van}
                                         className='cong-van-di-update-input'
                                         // disabled
                                         required
@@ -202,11 +220,35 @@ export default function EditCongVanDi(props) {
                                                 height: '36px'
                                             }}
                                             required
-                                            defaultValue="1"
+                                            defaultValue={cvdiData.phong_ban_nhan?.id}
                                         >
                                             {phong_ban_table.map((item) => {
                                                 
                                                     return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </div>
+                            <div className='cong-van-di-update-item'>
+                                <label>
+                                    Người nhận
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <Box className='cong-van-di-update-select'>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            onChange={handleChangeNguoiXuLy}
+                                            defaultValue={cvdiData.nguoi_xu_ly?.id}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
+                                        >
+                                            {usersData_NoiNhan.map((item) => { 
+                                                return (<MenuItem value={item.id}>{item.ho_ten}</MenuItem> )
                                             })}
                                         </Select>
                                     </FormControl>
@@ -245,7 +287,7 @@ export default function EditCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            defaultValue={2}
+                                            defaultValue={cvdiData.nguoi_ky?.id}
                                             onChange={handleChangeNguoiKy}
                                             style={{
                                                 height: '36px'
@@ -272,7 +314,7 @@ export default function EditCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     onChange={(e) => setNgayKy(e.target.value)}
-                                    defaultValue="2022-06-02"
+                                    defaultValue={cvdiData.ngay_ky}
                                     required
                                     style={{
                                         width: '253px',
@@ -293,15 +335,16 @@ export default function EditCongVanDi(props) {
                                             id="demo-simple-select"
                                             // value={loaiPhongBan}
                                             onChange={handleChangeLoaiCongVan}
-                                            defaultValue={3}
+                                            defaultValue={cvdiData.loai_cong_van?.id}
                                             style={{
                                                 height: '36px'
                                             }}
                                             required
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {loai_cong_van_table.map((item) => {
+                                                        
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -313,7 +356,7 @@ export default function EditCongVanDi(props) {
                                 </label>
                                 <input
                                     type="text"
-                                    value="3969"
+                                    value={cvdiData.nguoi_tao?.ho_ten}
                                     className='cong-van-di-update-input'
                                     disabled
                                 />
@@ -330,39 +373,16 @@ export default function EditCongVanDi(props) {
                                             id="demo-simple-select"
                                             // value={loaiPhongBan}
                                             onChange={handleChangeNguoiDuyet}
-                                            defaultValue={3}
+                                            defaultValue={cvdiData.nguoi_duyet?.id}
                                             style={{
                                                 height: '36px'
                                             }}
                                             required
                                         >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
-                            <div className='cong-van-di-update-item'>
-                                <label>
-                                    Người theo dõi
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <Box className='cong-van-di-update-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            // value={loaiPhongBan}
-                                            onChange={handleChangeNguoiTheoDoi}
-                                            defaultValue={3}
-                                            style={{
-                                                height: '36px'
-                                            }}
-                                        >
-                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
-                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
-                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                            {usersList.map((item) => {
+                                                        
+                                                return (<MenuItem value={item.id}>{item.ho_ten}</MenuItem> )
+                                            })}
                                         </Select>
                                     </FormControl>
                                 </Box>
@@ -512,6 +532,30 @@ export default function EditCongVanDi(props) {
                                                 height: '36px'
                                             }}
                                             required
+                                        >
+                                            <MenuItem value={1}>Phong Giam doc1</MenuItem>
+                                            <MenuItem value={2}>Phong Giam doc2</MenuItem>
+                                            <MenuItem value={3}>Phong Giam doc3</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </div>
+                            <div className='cong-van-di-update-item'>
+                                <label>
+                                    Người theo dõi
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <Box className='cong-van-di-update-select'>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            // value={loaiPhongBan}
+                                            onChange={handleChangeNguoiTheoDoi}
+                                            defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
                                         >
                                             <MenuItem value={1}>Phong Giam doc1</MenuItem>
                                             <MenuItem value={2}>Phong Giam doc2</MenuItem>
