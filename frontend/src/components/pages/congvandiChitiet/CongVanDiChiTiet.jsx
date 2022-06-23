@@ -19,7 +19,7 @@ export default function CongVanDiChiTiet(props) {
     useEffect(() => {
         backend_config.makeRequest("GET", backend_config.CONG_VAN_DI_GET_BY_ID.replace('{id}', cvdiId), token)
             .then((data) => data.json())
-            .then((data) => setCvdiData(data))
+            .then((data) => setCvdiData(data.cong_van_di_current_version))
     }, []);
 
     return (

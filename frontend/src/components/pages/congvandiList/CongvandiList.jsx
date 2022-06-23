@@ -46,7 +46,14 @@ export default function CongvandiList(props) {
     const refreshTable = () => {
         backend_config.makeRequest("GET", backend_config.CONG_VAN_DI_GET_LIST, token)
           .then((data) => data.json())
-          .then((data) => {setTableData(data)})
+          .then((data) => {
+            let data_of_current_version = [];
+            for (let i = 0; i < data.length; i++) {
+                data_of_current_version.push(data[i].cong_van_di_current_version)
+                // data_of_current_version.push(data[i].cong_van_di_versions[0])
+              }
+            setTableData(data_of_current_version)
+        })
     }
 
     // const handleDelete = (id)=>{
