@@ -67,6 +67,7 @@ export default function AddCongVanDi(props) {
     const handleChangeBoPhanPhatHanh = (event) => {
         const value = event.target.value;
         setBoPhanPhatHanh(event.target.value);
+        // console.log(value, usersData[value])
         if (value in usersData) setUsersData_PhongBan(usersData[value])
         else setUsersData_PhongBan([]);
     }
@@ -158,7 +159,9 @@ export default function AddCongVanDi(props) {
         })
     }
 
-    const updateTepDinhKem = (id) => {
+
+
+    const uploadTepDinhKem = (id) => {
         let formData = new FormData();
 
         formData.append('cong_van_di_id', id);
@@ -179,6 +182,10 @@ export default function AddCongVanDi(props) {
             }
         else {
             response.text().then((text) => {
+                toast.error(<div>Không thể thêm tệp đính kèm!</div>, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: false
+                })
                 console.log(text);
                 return false;
             })
@@ -235,8 +242,13 @@ export default function AddCongVanDi(props) {
                     // setTrigger(false);
                     // refreshFunc();
                     console.log(response_json);
-                    if (updateTepDinhKem(response_json.id) === false) ;
-                    props.setTrigger(false);
+                    if (file_dinh_kem !== null ) {
+                        if (uploadTepDinhKem(response_json.id) === false){
+                            return 
+                        }
+                        
+                    }
+                    // props.setTrigger(false);
                     addCongVanDiSuccessNotify();
                     refreshFunc();
                 })
