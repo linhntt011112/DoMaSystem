@@ -82,12 +82,8 @@ def authenticate_user(db, username: str=None, password: str=None):
 
 
 @caching.cache(namespace='user', key_builder=caching.user_token_key_builder, expire=600)
-async def get_current_user(token: str = Depends(oauth2_scheme), db=Depends(get_db)):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+async def decode_token(token: str = Depends(oauth2_scheme), db=Depends(get_db)):
+    
     try:
         # logger.debug(token)
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
@@ -95,9 +91,19 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db=Depends(get_d
         if username is None:
             raise credentials_exception
         token_data = TokenData(username=username)
+        return token_data.username
     except JWTError:
         raise credentials_exception
-    user = crud_user.get_user(db, ten_tai_khoan=token_data.username)
+
+
+async def get_current_user(username=Depends(decode_token), db=Depends(get_db)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    
+    user = crud_user.get_user(db, ten_tai_khoan=username)
     if user is None:
         raise credentials_exception
     # logger.debug(user)

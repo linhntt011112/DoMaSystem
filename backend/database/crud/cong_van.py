@@ -1,7 +1,6 @@
 
 from datetime import datetime
 
-from backend.database.db_models import cong_van
 from .. import common_queries, db_models
 from ..schemas import cong_van as cong_van_schemas
 
@@ -221,11 +220,11 @@ def validate_cong_van_di_version_from_current_version(
 
 
 
-def update_cong_van_di(db, cong_van_di_version_pydantic: cong_van_schemas.CongVanDiVersionCreate):
-    cong_van_di = None
+def update_cong_van_di(db, cong_van_di: db_models.CongVanDi,
+                       cong_van_di_version_pydantic: cong_van_schemas.CongVanDiVersionCreate):
+    prev_version_id = cong_van_di.cong_van_di_current_version_id
     cong_van_di_version = None
     try:
-        cong_van_di: db_models.CongVanDi = get_cong_van_di_by_id(db, cong_van_di_version_pydantic.cong_van_di_id)
         
         cong_van_di_version = create_cong_van_di_version(db, cong_van_di_version_pydantic)
         validate_cong_van_di_version_from_current_version(
@@ -238,10 +237,11 @@ def update_cong_van_di(db, cong_van_di_version_pydantic: cong_van_schemas.CongVa
         
         return common_queries.add_and_commit(cong_van_di)
     except Exception as e:
+        cong_van_di.cong_van_di_current_version_id = prev_version_id
+        common_queries.add_and_commit(cong_van_di)
+        
         if cong_van_di_version is not None:
             common_queries.delete(db, cong_van_di_version)
-        if cong_van_di is not None:
-            common_queries.delete(db, cong_van_di)
 
         raise db_exceptions.DBException(db_exceptions.get_error_description(e))
 

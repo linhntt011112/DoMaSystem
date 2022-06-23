@@ -148,15 +148,15 @@ async def get_list_cvdi(id: int,
 
 @router.post('/cvdi/create')
 async def create_cong_van(
-    cong_van_di: cong_van_schemas.CongVanDiCreate,
+    cong_van_di_version: cong_van_schemas.CongVanDiVersionCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
     # if current_user.phan_quyen != db_models.PhanQuyen.admin:
     #     raise exceptions.PERMISSION_EXCEPTION()
     
     try:
-        cong_van_di.id_nguoi_tao = current_user.id
-        new_cong_van_di = crud_cong_van.create_cong_van_di(db, cong_van_di)
+        cong_van_di_version.id_nguoi_tao = current_user.id
+        new_cong_van_di = crud_cong_van.create_cong_van_di(db, cong_van_di_version)
         return cong_van_schemas.CongVanDiFull.from_orm(new_cong_van_di)
     except Exception as e:
 
@@ -166,16 +166,16 @@ async def create_cong_van(
 
 @router.post('/cvdi/update')
 async def update_cong_van_di(
-    cong_van_di_pydantic: cong_van_schemas.CongVanDiUpdate,
+    cong_van_di_version_pydantic: cong_van_schemas.CongVanDiVersionCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
     
     try:
-        cong_van_di = crud_cong_van.get_cong_van_di_by_id(db, cong_van_di_pydantic.id)
+        cong_van_di = crud_cong_van.get_cong_van_di_by_id(db, cong_van_di_version_pydantic.cong_van_di_id)
         if cong_van_di is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
         
-        cong_van_di = crud_cong_van.update_cong_van_di(db, cong_van_di, cong_van_di_pydantic)
+        cong_van_di = crud_cong_van.update_cong_van_di(db, cong_van_di, cong_van_di_version_pydantic)
         return cong_van_schemas.CongVanDiFull.from_orm(cong_van_di)
     except Exception as e:
 
@@ -199,13 +199,13 @@ async def update_cong_van_di__tep_dinh_kem(
         if cong_van_di is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
         
-        cong_van_di.id_tep_dinh_kem = tep_dinh_kem.id
+        cong_van_di.cong_van_di_current_version.id_tep_dinh_kem = tep_dinh_kem.id
         cong_van_di = crud_cong_van.update_cong_van_di(db, cong_van_di)
         # logger.info(f"{cong_van_di.tep_dinh_kem.__dict__}")
         return cong_van_schemas.CongVanDiFull.from_orm(cong_van_di)
     except Exception as e:
         if cong_van_di is not None:
-            cong_van_di.id_tep_dinh_kem = None
+            cong_van_di.cong_van_di_current_version.id_tep_dinh_kem = None
             cong_van_di = crud_cong_van.update_cong_van_di(db, cong_van_di)
         
         if tep_dinh_kem is not None:
@@ -225,12 +225,12 @@ async def delete_cong_van(
         raise api_exceptions.PERMISSION_EXCEPTION()
     
     cong_van_di = crud_cong_van.get_cong_van_di_by_id(db, cong_van_di_id=id)
-    logger.info(f"{cong_van_di.__dict__}")
+    # logger.info(f"{cong_van_di.__dict__}")
     if cong_van_di is None:
         raise api_exceptions.NOT_FOUND_EXCEPTION()
     
     try:
-        return  crud_cong_van.delete_cong_van_di(db, cong_van_di)
+        return crud_cong_van.delete_cong_van_di(db, cong_van_di)
     except Exception as e:
 
         return api_exceptions.handle_simple_exception(e, logger)

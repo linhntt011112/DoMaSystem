@@ -87,7 +87,7 @@ class CongVanListInput(BaseModel):
 
 class CongVanDiVersionFull(BaseModel):
     id: int
-    version_name: str
+    version_name: str = None
     ten_cong_van: str
     id_phong_ban_nhan: int
     phong_ban_nhan: static_tables.PhongBanFull
@@ -146,7 +146,7 @@ class CongVanDiVersionFull(BaseModel):
     
 
 class CongVanDiVersionCreate(BaseModel):
-    version_name: str
+    version_name: str = None
     ten_cong_van: str
     id_phong_ban_nhan: int
     
@@ -187,7 +187,7 @@ class CongVanDiVersionCreate(BaseModel):
     
 class CongVanDiVersionUpdate(BaseModel):
     id: int
-    version_name: str
+    version_name: str = None
     ten_cong_van: str
     id_phong_ban_nhan: int
     

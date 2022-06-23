@@ -58,7 +58,7 @@ class LoaiCongVan(Base):
 class CongVanDiVersion(Base):
     __tablename__ = 'cong_van_di_version'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    version_name = Column(String(256), nullable=False)
+    version_name = Column(String(256), nullable=True)
     
     ten_cong_van = Column(String(256), nullable=False)
     
@@ -125,20 +125,19 @@ class CongVanDiVersion(Base):
     
     noi_dung_thay_doi = Column(String(4096), nullable=True)
     cong_van_di_id = Column(Integer, ForeignKey('cong_van_di.id', name="cong_van_di_id"), nullable=False)
-    # cong_van_di = relationship("CongVanDi", back_populates="cong_van_di_versions", foreign_keys=cong_van_di_id, primaryjoin="CongVanDiVersion.cong_van_di_id==CongVanDi.id", uselist=False)
+    cong_van_di = relationship("CongVanDi", back_populates="cong_van_di_versions", foreign_keys=cong_van_di_id, uselist=False)
     
     __table_args__ = (UniqueConstraint('version_name', 'cong_van_di_id', name='unique__version_name__cong_van_di_id'),
                     )
 
 
 
-class CongVanDi:
+class CongVanDi(Base):
     __tablename__ = 'cong_van_di'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
     
     cong_van_di_current_version_id = Column(Integer, ForeignKey("cong_van_di_version.id", name="cong_van_di_current_version_id"), nullable=True)
-    cong_van_di_current_version = relationship("CongVanDiVersion", foreign_keys=cong_van_di_current_version_id, uselist=False, post_update=True,
-                                            primaryjoin=(cong_van_di_current_version_id==CongVanDiVersion.id))
+    cong_van_di_current_version = relationship("CongVanDiVersion", foreign_keys=cong_van_di_current_version_id, uselist=False)
     
     cong_van_di_versions = relationship("CongVanDiVersion", back_populates="cong_van_di", order_by="CongVanDiVersion.ngay_tao", primaryjoin="CongVanDiVersion.cong_van_di_id==CongVanDi.id")
     
@@ -156,8 +155,8 @@ class TraoDoiBase:
 class TraoDoiCongVanDi(Base, TraoDoiBase):
     __tablename__ = 'trao_doi_cong_van_di'
     
-    id_cong_van_di = Column(Integer, ForeignKey('cong_van_di_version.id'), nullable=False)
-    cong_van_di_version = relationship("CongVanDi", back_populates="cac_trao_doi", uselist=False)
+    id_cong_van_di_version = Column(Integer, ForeignKey('cong_van_di_version.id'), nullable=False)
+    cong_van_di_version = relationship("CongVanDiVersion", back_populates="cac_trao_doi", uselist=False)
     
     id_nguoi_tao =  Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     nguoi_tao = relationship('NguoiDung', backref='trao_doi')
