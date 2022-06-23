@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {Add, DeleteOutline} from "@material-ui/icons";
 import {Button} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
@@ -17,11 +18,12 @@ import * as backend_config from '../../../config/backend'
 
 export default function CongvandiList(props) {
     const {token} = props;
+    const history = useHistory();
 
     const [tableData, setTableData] = useState([]);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [value_loaicongvan, setValue_LoaiCongVan] = useState(null);
-    const [value_mucdokhancap, setValue_MucDoKhanCap] = useState(null);
+    const [value_mucdouutien, setValue_MucDoUuTien] = useState(null);
     const [value_tinhtrangxuly, setValue_TinhTrangXuLy] = useState(null);
     const [buttonDeletePopup, setButtonDeletePopup] = useState(false);
     const [mark, setMark] = useState(null);
@@ -35,7 +37,7 @@ export default function CongvandiList(props) {
     }
 
     const handleChangeMucDoUuTien = (event) => {
-        setValue_MucDoKhanCap(event.target.value);
+        setValue_MucDoUuTien(event.target.value);
     }
 
     const handleChangeTinhTrangXuLy = (event) => {
@@ -146,6 +148,11 @@ export default function CongvandiList(props) {
         refreshTable();
     }, [])
 
+    const handleFilter = (e) => {
+        e.preventDefault();
+        history.push("/dashboard")
+    }
+
     return (
         <div className='congVanDiList'>
             <main>
@@ -234,7 +241,7 @@ export default function CongvandiList(props) {
                             })}
                         </Select>
                     </div>
-                    <button className="dropdown-button">Lọc</button>
+                    <button className="dropdown-button" onClick={handleFilter}>Lọc</button>
                 </div>
                 
                 <div style={{ height: 'calc(90vh - 200px)' }}>

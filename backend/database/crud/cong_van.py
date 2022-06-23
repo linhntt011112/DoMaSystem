@@ -148,7 +148,7 @@ def select_list_cong_van_di(db, limit: int=None, offset: int=None, order_by: str
                         id_muc_do_uu_tien: int = None):
     
     condition = None
-    class_ = db_models.CongVanDi
+    class_ = db_models.CongVanDi.cong_van_di_current_version
     if id_loai_cong_van is not None:
         if condition is None:
             condition = (class_.id_loai_cong_van == id_loai_cong_van)
