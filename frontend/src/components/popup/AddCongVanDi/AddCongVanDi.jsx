@@ -248,7 +248,7 @@ export default function AddCongVanDi(props) {
                         }
                         
                     }
-                    // props.setTrigger(false);
+                    props.setTrigger(false);
                     addCongVanDiSuccessNotify();
                     refreshFunc();
                 })
