@@ -58,7 +58,8 @@ class LoaiCongVan(Base):
 class CongVanDiVersion(Base):
     __tablename__ = 'cong_van_di_version'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    # so_cong_van = Column(String(256), nullable=False)
+    version_name = Column(String(256), nullable=False)
+    
     ten_cong_van = Column(String(256), nullable=False)
     
     id_phong_ban_nhan = Column(Integer, ForeignKey('phong_ban.id'), nullable=False)
@@ -119,12 +120,15 @@ class CongVanDiVersion(Base):
     ngay_tao = Column(DateTime, nullable=False)
     ngay_duyet = Column(DateTime, nullable=True)
     
-    noi_dung_thay_doi = Column(String(4096), nullable=True)
-    
+
     cac_trao_doi = relationship("TraoDoiCongVanDi", back_populates="cong_van_di_version")
     
+    noi_dung_thay_doi = Column(String(4096), nullable=True)
     cong_van_di_id = Column(Integer, ForeignKey('cong_van_di.id', name="cong_van_di_id"), nullable=False)
-    cong_van_di = relationship("CongVanDi", back_populates="cong_van_di_versions", foreign_keys=cong_van_di_id, primaryjoin="CongVanDiVersion.cong_van_di_id==CongVanDi.id", uselist=False)
+    # cong_van_di = relationship("CongVanDi", back_populates="cong_van_di_versions", foreign_keys=cong_van_di_id, primaryjoin="CongVanDiVersion.cong_van_di_id==CongVanDi.id", uselist=False)
+    
+    __table_args__ = (UniqueConstraint('version_name', 'cong_van_di_id', name='unique__version_name__cong_van_di_id'),
+                    )
 
 
 
@@ -137,6 +141,9 @@ class CongVanDi:
                                             primaryjoin=(cong_van_di_current_version_id==CongVanDiVersion.id))
     
     cong_van_di_versions = relationship("CongVanDiVersion", back_populates="cong_van_di", order_by="CongVanDiVersion.ngay_tao", primaryjoin="CongVanDiVersion.cong_van_di_id==CongVanDi.id")
+    
+    create_at = Column(DateTime, nullable=False)
+    update_at = Column(DateTime, nullable=False)
 
 
 
