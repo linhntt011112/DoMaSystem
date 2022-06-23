@@ -1,6 +1,6 @@
 import datetime
 
-from typing import Optional, Union
+from typing import List, Optional, Union
 from pydantic import BaseModel
 
 from . import nguoi_dung
@@ -85,8 +85,9 @@ class CongVanListInput(BaseModel):
     
 
 
-class CongVanDiFull(BaseModel):
+class CongVanDiVersionFull(BaseModel):
     id: int
+    version_name: str = None
     ten_cong_van: str
     id_phong_ban_nhan: int
     phong_ban_nhan: static_tables.PhongBanFull
@@ -136,12 +137,16 @@ class CongVanDiFull(BaseModel):
     ngay_tao: Union[datetime.datetime, datetime.date]
     ngay_duyet: Union[datetime.datetime, datetime.date] = None
     
+    noi_dung_thay_doi: str = None
+    cong_van_di_id: int
+    
     class Config:
         orm_mode = True
     
     
 
-class CongVanDiCreate(BaseModel):
+class CongVanDiVersionCreate(BaseModel):
+    version_name: str = None
     ten_cong_van: str
     id_phong_ban_nhan: int
     
@@ -174,10 +179,15 @@ class CongVanDiCreate(BaseModel):
     ngay_tao: Union[datetime.datetime, datetime.date]
     ngay_duyet: Union[datetime.datetime, datetime.date] = None
     
+    noi_dung_thay_doi: str = None
+    cong_van_di_id: int = None
+
     
     
-class CongVanDiUpdate(BaseModel):
+    
+class CongVanDiVersionUpdate(BaseModel):
     id: int
+    version_name: str = None
     ten_cong_van: str
     id_phong_ban_nhan: int
     
@@ -217,8 +227,35 @@ class CongVanDiUpdate(BaseModel):
 
         
     
-class CongVanDi_TraoDoi(BaseModel):
+class CongVanDiVersion_TraoDoi(BaseModel):
     id_cong_van_di: int
     id_trao_doi: int
+    
+    
+    
+    
+class CongVanDiFull(BaseModel):
+    id: int 
+    
+    cong_van_di_current_version_id: int
+    cong_van_di_current_version: CongVanDiVersionFull
+    
+    cong_van_di_versions: List[CongVanDiVersionFull]
+    
+    class Config:
+        orm_mode = True
+    
+
+class CongVanDiCurrent(BaseModel):
+    id: int 
+    
+    cong_van_di_current_version_id: int
+    cong_van_di_current_version: CongVanDiVersionFull
+    class Config:
+        orm_mode = True
+
+
+class CongVanDiCreate(BaseModel):   
+    cong_van_di_current_version_id: int = None
     
     

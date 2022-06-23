@@ -34,6 +34,25 @@ def static_tables_key_builder(
     return cache_key
 
 
+
+def user_token_key_builder(
+    func,
+    namespace: Optional[str] = "",
+    request: Request = None,
+    response: Response = None,
+    *args,
+    **kwargs,
+):
+    # logger.debug(f"{args}")
+    # logger.debug(f"{kwargs}")
+    kwargs = kwargs['kwargs']
+    prefix = FastAPICache.get_prefix()
+    token = kwargs['token']
+    cache_key = f"{prefix}:{namespace}:{token}:{func.__module__}:{func.__name__}"
+    # cache_key = f"{prefix}:{namespace}:{func.__module__}:{func.__name__}:{args}:{kwargs}"
+    return cache_key
+
+
 async def reset_cache(namespace: str):
     redis_conn: aioredis.Redis = FastAPICache.get_backend().redis
     prefix = FastAPICache.get_prefix()

@@ -20,7 +20,9 @@ from database import db_models
 
 from ..utils import Hasher
 from ..config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from . import caching
 from exceptions import api_exceptions
+
 
 name_to_db_model = {
     'phong_ban': db_models.PhongBan,
@@ -79,7 +81,8 @@ def authenticate_user(db, username: str=None, password: str=None):
 #         return False
 
 
-async def get_current_user(token: str = Depends(oauth2_scheme), db=Depends(get_db)):
+@caching.cache(namespace='user', key_builder=caching.user_token_key_builder, expire=600)
+async def decode_token(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -92,9 +95,19 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db=Depends(get_d
         if username is None:
             raise credentials_exception
         token_data = TokenData(username=username)
+        return token_data.username
     except JWTError:
         raise credentials_exception
-    user = crud_user.get_user(db, ten_tai_khoan=token_data.username)
+
+
+async def get_current_user(username=Depends(decode_token), db=Depends(get_db)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    
+    user = crud_user.get_user(db, ten_tai_khoan=username)
     if user is None:
         raise credentials_exception
     # logger.debug(user)
@@ -103,6 +116,11 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db=Depends(get_d
 
 async def get_current_active_user(current_user = Depends(get_current_user)) -> db_models.NguoiDung:
     return current_user
+
+
+async def logout(token: str = Depends(oauth2_scheme)):
+    res = await caching.reset_cache(f'user:{token}:*')
+    return res
 
 
 
