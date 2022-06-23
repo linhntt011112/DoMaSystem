@@ -157,9 +157,9 @@ async def create_cong_van(
     try:
         cong_van_di_version.id_nguoi_tao = current_user.id
         new_cong_van_di = crud_cong_van.create_cong_van_di(db, cong_van_di_version)
+        logger.info(f"{new_cong_van_di.__dict__}")
         return cong_van_schemas.CongVanDiFull.from_orm(new_cong_van_di)
     except Exception as e:
-
         return api_exceptions.handle_simple_exception(e, logger)
     
     

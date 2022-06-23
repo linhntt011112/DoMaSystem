@@ -4,8 +4,7 @@ from datetime import datetime
 from .. import common_queries, db_models
 from ..schemas import cong_van as cong_van_schemas
 
-import typing 
-import os
+from loguru import logger
 from exceptions import db_exceptions
 from api.core.file_utils import remove_file
 
@@ -126,7 +125,7 @@ def create_cong_van_di_version(db, cong_van_di_version_pydantic: cong_van_schema
     
     validate_cong_van_di_version(db, cong_van_di_version_data_dict=data_dict)
     
-    data_dict["ngay_tao"] = datetime.now().date()
+    data_dict["ngay_tao"] = datetime.now()
     new_cong_van_di_version = db_models.CongVanDiVersion(**data_dict)
     
     return common_queries.add_and_commit(db, new_cong_van_di_version)
@@ -199,8 +198,9 @@ def create_cong_van_di(db, cong_van_di_version_pydantic: cong_van_schemas.CongVa
         cong_van_di_version_pydantic.cong_van_di_id = cong_van_di.id
         cong_van_di_version = create_cong_van_di_version(db, cong_van_di_version_pydantic)
         cong_van_di.cong_van_di_current_version_id = cong_van_di_version.id
+        # logger.info(f"{cong_van_di.__dict__}")
         
-        return common_queries.add_and_commit(cong_van_di)
+        return common_queries.add_and_commit(db, cong_van_di)
     except Exception as e:
         if cong_van_di_version is not None:
             common_queries.delete(db, cong_van_di_version)
@@ -221,29 +221,33 @@ def validate_cong_van_di_version_from_current_version(
 
 
 def update_cong_van_di(db, cong_van_di: db_models.CongVanDi,
-                       cong_van_di_version_pydantic: cong_van_schemas.CongVanDiVersionCreate):
+                       cong_van_di_version_pydantic: cong_van_schemas.CongVanDiVersionCreate = None):
     prev_version_id = cong_van_di.cong_van_di_current_version_id
     cong_van_di_version = None
-    try:
-        
-        cong_van_di_version = create_cong_van_di_version(db, cong_van_di_version_pydantic)
-        validate_cong_van_di_version_from_current_version(
-            db, cong_van_schemas.CongVanDiVersionFull.from_orm(cong_van_di.cong_van_di_current_version),
-            cong_van_di_version_pydantic
-        )
-        
-        cong_van_di.cong_van_di_current_version_id = cong_van_di_version.id
-        cong_van_di.update_at = datetime.now()
-        
-        return common_queries.add_and_commit(cong_van_di)
-    except Exception as e:
-        cong_van_di.cong_van_di_current_version_id = prev_version_id
-        common_queries.add_and_commit(cong_van_di)
-        
-        if cong_van_di_version is not None:
-            common_queries.delete(db, cong_van_di_version)
+    
+    if cong_van_di_version_pydantic is not None:
+        try:
+            
+            cong_van_di_version = create_cong_van_di_version(db, cong_van_di_version_pydantic)
+            validate_cong_van_di_version_from_current_version(
+                db, cong_van_schemas.CongVanDiVersionFull.from_orm(cong_van_di.cong_van_di_current_version),
+                cong_van_di_version_pydantic
+            )
+            
+            cong_van_di.cong_van_di_current_version_id = cong_van_di_version.id
+            cong_van_di.update_at = datetime.now()
+            
+            return common_queries.add_and_commit(cong_van_di)
+        except Exception as e:
+            cong_van_di.cong_van_di_current_version_id = prev_version_id
+            common_queries.add_and_commit(cong_van_di)
+            
+            if cong_van_di_version is not None:
+                common_queries.delete(db, cong_van_di_version)
 
-        raise db_exceptions.DBException(db_exceptions.get_error_description(e))
+            raise db_exceptions.DBException(db_exceptions.get_error_description(e))
+    else:
+        return common_queries.add_and_commit(db, cong_van_di)
 
 
 

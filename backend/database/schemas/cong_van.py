@@ -242,6 +242,8 @@ class CongVanDiFull(BaseModel):
     
     cong_van_di_versions: List[CongVanDiVersionFull]
     
+    class Config:
+        orm_mode = True
     
 
 class CongVanDiCurrent(BaseModel):
@@ -249,7 +251,8 @@ class CongVanDiCurrent(BaseModel):
     
     cong_van_di_current_version_id: int
     cong_van_di_current_version: CongVanDiVersionFull
-
+    class Config:
+        orm_mode = True
 
 
 class CongVanDiCreate(BaseModel):   
