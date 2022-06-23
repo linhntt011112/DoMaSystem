@@ -83,7 +83,11 @@ def authenticate_user(db, username: str=None, password: str=None):
 
 @caching.cache(namespace='user', key_builder=caching.user_token_key_builder, expire=600)
 async def decode_token(token: str = Depends(oauth2_scheme), db=Depends(get_db)):
-    
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
     try:
         # logger.debug(token)
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
