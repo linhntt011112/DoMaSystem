@@ -39,8 +39,11 @@ def add_and_commit(session: scoped_session, data):
 
 def select_with_options(session: Session, class_: db_models.Base, 
                         condition=None, limit=None, offset=None, order_by=None, 
+                        join_field=None,
                         **kwargs):
     query = session.query(class_)
+    if join_field is not None:
+        query = query.join(join_field)
     if condition is not None:
         query = query.filter(condition)
     
