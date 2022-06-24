@@ -1,9 +1,15 @@
 .Calendar{
     flex: 5;
     padding: 20px;
+    height: 500px;
+    position: sticky
 }
 
 .calendar-title{
     padding: 10px;
     text-align: center;
+}
+
+.event-notify{
+    top: 4em !important;
 }

@@ -20,6 +20,7 @@ export default function EditCongVanDi(props) {
     const [usersData_PhongBan, setUsersData_PhongBan] = useState([]);
     const [usersData_NoiNhan, setUsersData_NoiNhan] = useState([]);
     const [usersList, setUsersList] = useState([]);
+    console.log(cvdiData);
 
     const [so_cong_van, setSoCongVan] = React.useState(cvdiData.id);
     const [ten_cong_van, setTenCongVan] = React.useState(cvdiData.ten_cong_van);
@@ -108,6 +109,7 @@ export default function EditCongVanDi(props) {
                 }
                 // console.log(usersData_)
                 setUsersData(usersData_);
+                setUsersList(data);
             })
     }
 
@@ -305,7 +307,6 @@ export default function EditCongVanDi(props) {
                             <div className='cong-van-di-update-item'>
                                 <label>
                                     Ngày ký
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input 
                                     type="date" 
@@ -315,7 +316,7 @@ export default function EditCongVanDi(props) {
                                     }}
                                     onChange={(e) => setNgayKy(e.target.value)}
                                     defaultValue={cvdiData.ngay_ky}
-                                    required
+                                    // required
                                     style={{
                                         width: '253px',
                                         fontSize: '16px',
@@ -371,7 +372,6 @@ export default function EditCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
                                             onChange={handleChangeNguoiDuyet}
                                             defaultValue={cvdiData.nguoi_duyet?.id}
                                             style={{
@@ -522,14 +522,12 @@ export default function EditCongVanDi(props) {
                             <div className='cong-van-di-update-item'>
                                 <label>
                                     Người theo dõi
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-di-update-select'>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            // value={loaiPhongBan}
                                             onChange={handleChangeNguoiTheoDoi}
                                             defaultValue={cvdiData.nguoi_theo_doi?.id}
                                             style={{
@@ -569,7 +567,6 @@ export default function EditCongVanDi(props) {
                             <div className='cong-van-di-update-item'>
                                 <label>
                                     Ngày duyệt
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input 
                                     type="date" 

@@ -27,7 +27,7 @@ export default function AddLoaiCongVan(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         submitAddLoaiCongVan();
-        props.setTrigger(false);
+        // props.setTrigger(false);
     }
 
     const submitAddLoaiCongVan = () => {

@@ -3,6 +3,8 @@ import './sidebar.css'
 import { Group, Assignment, CallMade, CalendarToday } from '@material-ui/icons'
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
 
 export default function Sidebar({userPermission, setToken}) {
 

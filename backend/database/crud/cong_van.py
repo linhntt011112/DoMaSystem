@@ -255,7 +255,7 @@ def update_cong_van_di(db, cong_van_di: db_models.CongVanDi,
 def delete_cong_van_di(db, cong_van_di: db_models.CongVanDi):
     cong_van_di.cong_van_di_current_version_id = None
     for cong_van_di_version in cong_van_di.cong_van_di_versions:
-        delete_cong_van_di_version(cong_van_di_version)
+        delete_cong_van_di_version(db, cong_van_di_version)
     return common_queries.delete(db, cong_van_di)
 
 
