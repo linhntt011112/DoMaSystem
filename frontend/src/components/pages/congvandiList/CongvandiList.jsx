@@ -51,7 +51,7 @@ export default function CongvandiList(props) {
           .then((data) => {
             let data_of_current_version = [];
             for (let i = 0; i < data.length; i++) {
-                data_of_current_version.push(data[i].cong_van_di_current_version)
+                data_of_current_version.push(data[i])
                 // data_of_current_version.push(data[i].cong_van_di_versions[0])
               }
             setTableData(data_of_current_version)
@@ -64,37 +64,49 @@ export default function CongvandiList(props) {
 
     const columns = [
         {field: 'id', headerName: 'Số công văn', width: 115},
-        {field: 'ten_cong_van', headerName: 'Tên công văn', flex: 1},
+        {field: 'ten_cong_van', headerName: 'Tên công văn', flex: 1,
+            valueGetter: (params) => {
+                return params.row.cong_van_di_current_version.ten_cong_van
+            }},
         {
             field: 'nguoi_ky',
             headerName: 'Người ký',
             width: 150,
             valueGetter: (params) => {
-                return params.row.nguoi_ky?.ho_ten
+                return params.row.cong_van_di_current_version.nguoi_ky?.ho_ten
             }
         },
         {
             field: 'ngay_ky',
             headerName: 'Ngày ký',
             width: 150,
+            valueGetter: (params) => {
+                return params.row.cong_van_di_current_version.ngay_ky
+            }
         },
         {
             field: 'phong_ban_phat_hanh',
             headerName: 'Bộ phận phát hành',
             width: 200,
             valueGetter: (params) => {
-                return params.row.phong_ban_phat_hanh?.name
+                return params.row.cong_van_di_current_version.phong_ban_phat_hanh?.name
             }
         },
         {
-            field: 'ngay_tao',
+            field: 'create_at',
             headerName: 'Ngày tạo',
             width: 200,
+            valueGetter: (params) => {
+                return params.row.create_at.split('T')[0];
+            }
         },
         {
             field: 'ly_do',
             headerName: 'Lý do',
             flex: 1,
+            valueGetter: (params) => {
+                return params.row.cong_van_di_current_version.ly_do
+            }
         },
         {
             field:"action",
@@ -103,7 +115,7 @@ export default function CongvandiList(props) {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Link to={"/dashboard/cong-van-di/"+params.row.id} params={{id: params.row.id}}>
+                        <Link to={"/cong-van-di/"+params.row.id} params={{id: params.row.id}}>
                             <button className='congVanDiListEdit'>Chi tiết</button>
                         </Link>
                         <DeleteOutline className='congVanDiListDelete' onClick={()=>{setMark(params.row.id); setButtonDeletePopup(true)}}/>

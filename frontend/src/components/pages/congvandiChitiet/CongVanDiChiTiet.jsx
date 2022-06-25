@@ -64,17 +64,17 @@ export default function CongVanDiChiTiet(props) {
                             </div>
                             <div style={{display: 'flex'}}>
                                 <div className="columnChildren1Title">Ngày ký:</div>
-                                <div className="columnChildren1Info">{cvdiData.ngay_ky}</div>
+                                <div className="columnChildren1Info">{cvdiData.ngay_ky?.split('T')[0]}</div>
                             </div>
                         </div>
                         <div className="columnChildren2">
                             <div style={{display: 'flex'}}>
                                 <div className="columnChildren2Title">Ngày hiệu lực:</div>
-                                <div className="columnChildren2Info">{cvdiData.ngay_hieu_luc}</div>
+                                <div className="columnChildren2Info">{cvdiData.ngay_hieu_luc?.split('T')[0]}</div>
                             </div>
                             <div style={{display: 'flex'}}>
                                 <div className="columnChildren2Title">Ngày hết hiệu lực:</div>
-                                <div className="columnChildren2Info">{cvdiData.ngay_het_hieu_luc}</div>
+                                <div className="columnChildren2Info">{cvdiData.ngay_het_hieu_luc?.split('T')[0]}</div>
                             </div>
                             <div style={{display: 'flex'}}>
                                 <div className="columnChildren2Title">Số lượng văn bản:</div>
@@ -86,7 +86,7 @@ export default function CongVanDiChiTiet(props) {
                             </div>
                             <div style={{display: 'flex'}}>
                                 <div className="columnChildren2Title">Ngày phát hành:</div>
-                                <div className="columnChildren2Info">{cvdiData.ngay_phat_hanh}</div>
+                                <div className="columnChildren2Info">{cvdiData.ngay_phat_hanh?.split('T')[0]}</div>
                             </div>
                             <div style={{display: 'flex'}}>
                                 <div className="columnChildren2Title">Loại công văn:</div>
@@ -113,7 +113,7 @@ export default function CongVanDiChiTiet(props) {
                         </div>
                         <div style={{display:'flex'}}>
                             <div className="column2Title">Ngày tạo:</div>
-                            <div className="column2Info">{cvdiData.ngay_tao}</div>
+                            <div className="column2Info">{cvdiData.ngay_tao?.split('T')[0]}</div>
                         </div>
                         <div style={{display:'flex'}}>
                             <div className="column2Title">Người duyệt:</div>
@@ -121,7 +121,7 @@ export default function CongVanDiChiTiet(props) {
                         </div>
                         <div style={{display:'flex'}}>
                             <div className="column2Title">Ngày duyệt:</div>
-                            <div className="column2Info">{cvdiData.ngay_duyet}</div>
+                            <div className="column2Info">{cvdiData.ngay_duyet?.split('T')[0]}</div>
                         </div>
                     </div>
                 </div> 

@@ -27,16 +27,16 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <UserRoute exact path="/" component={Dashboard} />
             <UserRoute exact path="/dashboard" component={Dashboard} />
-            <AdminRoute exact path="/dashboard/users" component={UserList} />
-            <AdminRoute path="/dashboard/user/:userId" component={User} />
-            <AdminRoute exact path="/dashboard/loai-cong-van/" component={LoaicongvanList}/>
-            <AdminRoute exact path="/dashboard/cong-van-di/" component={CongvandiList}/>
-            <AdminRoute exact path="/dashboard/cong-van-di/:cvdiId" component={CongVanDiChiTiet}/>
-            <AdminRoute exact path="/dashboard/cong-van-den/" component={CongVanDenList}/>
-            <AdminRoute exact path="/dashboard/cong-van-den/:socongvan" component={CongVanDenChiTiet}/>
-            <AdminRoute exact path="/dashboard/calendar" component={DMSCalendar}/>
-            <AdminRoute exact path="/dashboard/my-profile" component={MyProfile}/>
-            <AdminRoute exact path="/dashboard/change-password" component={ChangePassword}/>
+            <AdminRoute exact path="/management/users" component={UserList} />
+            <AdminRoute exact path="/management/user/:userId" component={User} />
+            <AdminRoute exact path="/management/loai-cong-van/" component={LoaicongvanList}/>
+            <UserRoute exact path="/cong-van-di/" component={CongvandiList}/>
+            <UserRoute exact path="/cong-van-di/:cvdiId" component={CongVanDiChiTiet}/>
+            <UserRoute exact path="/cong-van-den/" component={CongVanDenList}/>
+            <UserRoute exact path="/cong-van-den/:socongvan" component={CongVanDenChiTiet}/>
+            <UserRoute exact path="/calendar" component={DMSCalendar}/>
+            <UserRoute exact path="/my-profile" component={MyProfile}/>
+            <UserRoute exact path="/change-password" component={ChangePassword}/>
           </Switch>
         </BrowserRouter>        
       </div>
