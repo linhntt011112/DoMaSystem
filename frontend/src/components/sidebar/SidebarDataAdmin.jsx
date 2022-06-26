@@ -4,7 +4,7 @@ import * as AiIcons from 'react-icons/ai'
 import * as RiIcons from 'react-icons/ri'
 import * as IoIcons from 'react-icons/io'
 
-export const SidebarData = [
+export const SidebarDataAdmin = [
     {
         title: 'Quản lý dữ liệu',
         path: '/management',
@@ -33,20 +33,5 @@ export const SidebarData = [
                 icon: <RiIcons.RiGitRepositoryFill />,
             },
         ]
-    },
-    {
-        title: 'Công văn đi',
-        path: '/cong-van-di',
-        icon: <RiIcons.RiArrowRightUpLine />,
-    },
-    {
-        title: 'Công văn đến',
-        path: '/cong-van-den',
-        icon: <RiIcons.RiArrowLeftDownLine />,
-    },
-    {
-        title: 'Lịch',
-        path: '/calendar',
-        icon: <AiIcons.AiFillCalendar />,
     },
 ]

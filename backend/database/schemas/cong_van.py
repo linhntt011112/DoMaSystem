@@ -241,6 +241,9 @@ class CongVanDiFull(BaseModel):
     cong_van_di_current_version: CongVanDiVersionFull
     
     cong_van_di_versions: List[CongVanDiVersionFull]
+
+    create_at: Union[datetime.datetime, datetime.date]
+    update_at: Union[datetime.datetime, datetime.date]
     
     class Config:
         orm_mode = True

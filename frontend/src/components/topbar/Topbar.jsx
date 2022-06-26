@@ -27,14 +27,14 @@ export default function Topbar({user, setToken}) {
                         </div>
                     </li>
                     <li className='change-password-icon-Container'>
-                        <Link to={"/dashboard/change-password/"} className='top-bar-link'>
+                        <Link to={"/change-password/"} className='top-bar-link'>
                             <Settings>
                             </Settings>
                             <span class="change-password-text">Change password</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to={"/dashboard/my-profile/"} className='link'>
+                        <Link to={"/my-profile/"} className='link'>
                             <div className='user-current'>
                                 <span className='user-img'>
                                     <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="" className="topAvatar" />

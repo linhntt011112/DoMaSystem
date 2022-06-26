@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import SubMenu from './SubMenu';
+import { SidebarDataAdmin } from './SidebarDataAdmin';
+import { SidebarDataUser } from './SidebarDataUser';
 
 export default function Sidebar({userPermission, setToken}) {
 
@@ -22,49 +25,15 @@ export default function Sidebar({userPermission, setToken}) {
             <div className='sidebarWrapper'>
                 {
                     userPermission === "admin" && 
-                    <div>
-                        <div className='sidebarMenu'>
-                            <Link to={"/dashboard/users/"} className='link'>
-                                <h3 className='sidebarTitle'>
-                                    <Group className='sidebarIcon'/>
-                                    Nhân viên
-                                </h3>
-                            </Link> 
-                        </div>
-                        <div className='sidebarMenu'>
-                        <Link to={"/dashboard/loai-cong-van/"} className='link'>
-                            <h3 className='sidebarTitle'>
-                                <Assignment className='sidebarIcon'/>
-                                Loại công văn
-                            </h3>
-                        </Link>
-                        </div>
-                    </div>
+                    SidebarDataAdmin.map((item, index) => {
+                        return <SubMenu item={item} key={index}></SubMenu>
+                    })
                 }
-                <div className='sidebarMenu'>
-                    <Link to={"/dashboard/cong-van-di/"} className='link'> 
-                        <h3 className='sidebarTitle'>
-                            <CallMade className='sidebarIcon'/>    
-                            Công văn đi
-                        </h3>
-                    </Link>
-                </div>
-                <div className='sidebarMenu'>
-                    <Link to={"/dashboard/cong-van-den/"} className='link'> 
-                        <h3 className='sidebarTitle'>
-                            <CallMade className='sidebarIcon'/>    
-                            Công văn đến
-                        </h3>
-                    </Link>
-                </div>
-                <div className='sidebarMenu'>
-                    <Link to={"/dashboard/calendar/"} className='link'> 
-                        <h3 className='sidebarTitle'>
-                            <CalendarToday className='sidebarIcon'/>    
-                            Lịch
-                        </h3>
-                    </Link>
-                </div>
+                {
+                    SidebarDataUser.map((item, index) => {
+                        return <SubMenu item={item} key={index}></SubMenu>
+                    })
+                }
             </div>
             <div className="navigation-logout" onClick={handleLogoutClick}>
                 <a className="navigation-logout-button" href="">

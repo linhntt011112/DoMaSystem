@@ -57,7 +57,7 @@ export default function UserList(props) {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Link to={"/dashboard/user/"+params.row.id} params={{id: params.row.id}}>
+                        <Link to={"/management/user/"+params.row.id} params={{id: params.row.id}}>
                             <button className='userListEdit'>Chi tiết</button>
                         </Link>       
                         <DeleteOutline className='userListDelete' onClick={()=>{setMark(params.row.id); setButtonDeletePopup(true)}}/>

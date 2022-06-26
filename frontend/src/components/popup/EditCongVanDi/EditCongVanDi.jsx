@@ -315,7 +315,7 @@ export default function EditCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     onChange={(e) => setNgayKy(e.target.value)}
-                                    defaultValue={cvdiData.ngay_ky}
+                                    defaultValue={cvdiData.ngay_ky?.split('T')[0]}
                                     // required
                                     style={{
                                         width: '253px',
@@ -400,14 +400,14 @@ export default function EditCongVanDi(props) {
                                     onKeyDown={(e) => {
                                         e.preventDefault();
                                     }}
-                                    onChange={(e) => setNgayHieuLuc(e.target.value)}
+                                    onChange={(e) => setNgayHieuLuc(e.target.valuek)}
                                     required
                                     style={{
                                         width: '253px',
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
-                                    defaultValue={cvdiData.ngay_hieu_luc}
+                                    defaultValue={cvdiData.ngay_hieu_luc?.split('T')[0]}
                                 />
                             </div>
                             <div className='cong-van-di-update-item'>
@@ -426,7 +426,7 @@ export default function EditCongVanDi(props) {
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
-                                    defaultValue={cvdiData.ngay_het_hieu_luc}
+                                    defaultValue={cvdiData.ngay_het_hieu_luc?.split('T')[0]}
                                 />
                             </div>
                             <div className='cong-van-di-update-item'>
@@ -472,7 +472,7 @@ export default function EditCongVanDi(props) {
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
-                                    defaultValue={cvdiData.ngay_phat_hanh}
+                                    defaultValue={cvdiData.ngay_phat_hanh?.split('T')[0]}
                                 />
                             </div>
                             <div className="cong-van-di-update-item">
@@ -554,7 +554,7 @@ export default function EditCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     // onChange={(e) => setNgayTao(e.target.value)}
-                                    defaultValue="2022-06-02"
+                                    defaultValue={cvdiData.ngay_tao?.split('T')[0]}
                                     required
                                     style={{
                                         width: '253px',
@@ -580,7 +580,7 @@ export default function EditCongVanDi(props) {
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
-                                    defaultValue={cvdiData.ngay_duyet}
+                                    defaultValue={cvdiData.ngay_duyet?.split('T')[0]}
                                 />
                             </div>
                         </div>
