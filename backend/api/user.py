@@ -21,7 +21,7 @@ from exceptions import api_exceptions
 from .config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from .core import user as user_core
 from .core.user import (
-    get_current_user, get_current_active_user, create_user as create_user_core
+    get_current_user, get_current_active_user, create_user as create_user_core, request_download_token
 )
 
 
@@ -156,3 +156,9 @@ async def delete_user_by_id(user_id: int, current_user = Depends(get_current_act
             return api_exceptions.handle_simple_exception(e, logger)
     else:
         raise api_exceptions.PERMISSION_EXCEPTION()
+    
+    
+
+@router.get("/get_download_token")
+async def get_download_tokenn(download_token=Depends(request_download_token)):
+    return download_token

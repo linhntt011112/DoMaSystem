@@ -19,7 +19,7 @@ from database.schemas import nguoi_dung as user_schemas
 from database import db_models
 
 from ..utils import Hasher
-from ..config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from ..config import SECRET_KEY, ALGORITHM, DOWNLOAD_TOKEN_EXPIRE_MINUTES, SECRET_DOWNLOAD_KEY
 from . import caching
 from exceptions import api_exceptions
 
@@ -210,4 +210,36 @@ def update_password(db, user: db_models.NguoiDung, user_update_password: user_sc
     user.password = new_password
     
     return crud_user.update_user(db, user)
+
+
+
+async def request_download_token(current_user=Depends(get_current_active_user)):
+    to_encode = {"sub": current_user.ten_tai_khoan}
+    expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=DOWNLOAD_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_DOWNLOAD_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+
+
+async def get_user_of_download_token(download_token: str, db=Depends(get_db)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials!",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        # logger.debug(token)
+        payload = jwt.decode(download_token, SECRET_DOWNLOAD_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise credentials_exception
+        token_data = TokenData(username=username)
+    except JWTError:
+        raise credentials_exception
+    user = crud_user.get_user(db, ten_tai_khoan=token_data.username)
+    if user is None:
+        raise credentials_exception
+    return user
+
     
