@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 
 class StaticTable(BaseModel):
-    id: str
+    id: int
     name: str
     
     update_at: datetime.datetime = None
@@ -16,10 +16,16 @@ class StaticTable(BaseModel):
         
 
 class StaticTableUpdate(BaseModel):
-    id: str
+    id: int
+    name: str
+
+class StaticTableCreate(BaseModel):
     name: str
     
-        
+
+class StaticTableDelete(BaseModel):
+    id: int
+
 
 class PhongBanFull(StaticTable):
     pass

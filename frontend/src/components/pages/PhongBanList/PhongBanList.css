@@ -1,0 +1,25 @@
+.phong-ban-List{
+    flex: 5;
+    position: sticky;
+    top: 60px;
+}
+
+.phong-ban-ListTitle{
+    padding: 10px;
+    text-align: center;
+}
+
+.phong-ban-list-EditIcon{
+    padding-right: 5px;
+    cursor: pointer;
+    color: #3bb077;
+}
+
+.phong-ban-list-Delete{
+    color: red;
+    cursor: pointer;
+}
+
+.phong-ban-notify{
+    top: 4em !important;
+}

@@ -25,6 +25,7 @@ export const CONG_VAN_DI_GET_BY_ID = CONG_VAN_DI_PREFIX + '/{id}'
 export const CONG_VAN_DI_DELETE_BY_ID = CONG_VAN_DI_PREFIX + '/delete/{id}'
 
 export const STATIC_TABLE_GET_LIST = BACKEND_URL + '/{static_table_name}/list';
+export const STATIC_TABLE_POST_CREATE = BACKEND_URL + '/{static_table_name}/create';
 
 
 export const makeRequest = async (method, url, token, body=null, contentType="application/json", delete_contentType=false) => {
