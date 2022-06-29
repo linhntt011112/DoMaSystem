@@ -75,8 +75,7 @@ class CongVanDiVersion(Base):
     phong_ban_phat_hanh = relationship("PhongBan", foreign_keys=id_phong_ban_phat_hanh, uselist=False 
                                        )
     
-    # ngay_ky = Column(Date, nullable=False)
-    ngay_phat_hanh = Column(DateTime, nullable=False)
+    # ngay_phat_hanh = Column(DateTime, nullable=False)
     
     id_loai_cong_van = Column(Integer, ForeignKey('loai_cong_van.id'), nullable=False)
     loai_cong_van = relationship('LoaiCongVan', backref="cong_van", uselist=False)
@@ -87,6 +86,7 @@ class CongVanDiVersion(Base):
     id_nguoi_xu_ly = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     nguoi_xu_ly = relationship("NguoiDung", foreign_keys=id_nguoi_xu_ly, uselist=False
                                            )
+    ngay_hoan_tat = Column(DateTime, nullable=True)
     
     id_nguoi_theo_doi = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
     nguoi_theo_doi = relationship("NguoiDung", foreign_keys=id_nguoi_theo_doi, uselist=False
@@ -110,20 +110,22 @@ class CongVanDiVersion(Base):
     nguoi_tao = relationship("NguoiDung", foreign_keys=id_nguoi_tao, uselist=False
                                             )
     
-    id_nguoi_duyet = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
-    nguoi_duyet = relationship("NguoiDung", foreign_keys=id_nguoi_duyet, uselist=False
-                                            )
+    # id_nguoi_duyet = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=True)
+    # nguoi_duyet = relationship("NguoiDung", foreign_keys=id_nguoi_duyet, uselist=False
+    #                                         )
     
-    ngay_hieu_luc = Column(DateTime, nullable=False)
-    ngay_het_hieu_luc = Column(DateTime, nullable=True)
+    # ngay_hieu_luc = Column(DateTime, nullable=False)
+    # ngay_het_hieu_luc = Column(DateTime, nullable=True)
     
     ngay_tao = Column(DateTime, nullable=False)
-    ngay_duyet = Column(DateTime, nullable=True)
+    # ngay_duyet = Column(DateTime, nullable=True)
     
 
     cac_trao_doi = relationship("TraoDoiCongVanDi", back_populates="cong_van_di_version")
     
     noi_dung_thay_doi = Column(String(4096), nullable=True)
+    create_at = Column(DateTime, nullable=False)
+    
     cong_van_di_id = Column(Integer, ForeignKey('cong_van_di.id', name="cong_van_di_id"), nullable=False)
     cong_van_di = relationship("CongVanDi", back_populates="cong_van_di_versions", foreign_keys=cong_van_di_id, uselist=False)
     

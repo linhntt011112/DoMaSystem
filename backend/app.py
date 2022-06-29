@@ -10,7 +10,7 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 
 from config import frontend_config, server_config
-from api import user, login, static_tables, cong_van, cong_van_version
+from api import user, login, static_tables, cong_van, cong_van_version, common
 
 
 # origins = frontend_config.possible_urls
@@ -34,6 +34,7 @@ router = APIRouter(prefix='/api/v1')
 router.include_router(user.router)
 router.include_router(login.router)
 router.include_router(static_tables.router)
+router.include_router(common.router)
 router.include_router(cong_van.router)
 router.include_router(cong_van_version.router)
 app.include_router(router)

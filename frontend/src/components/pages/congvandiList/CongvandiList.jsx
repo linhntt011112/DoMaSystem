@@ -115,7 +115,7 @@ export default function CongvandiList(props) {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Link to={"/cong-van-di/"+params.row.id} params={{id: params.row.id}}>
+                        <Link to={"/cong-van-di/" + params.row.id} params={{id: params.row.id}}>
                             <button className='congVanDiListEdit'>Chi tiết</button>
                         </Link>
                         <DeleteOutline className='congVanDiListDelete' onClick={()=>{setMark(params.row.id); setButtonDeletePopup(true)}}/>

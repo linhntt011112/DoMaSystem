@@ -86,8 +86,7 @@ def create_sample_static_table():
     
     
     tinh_trang_xu_ly_s = [
-        db_models.TinhTrangXuLy(name="Đang chờ duyệt", update_at=now),
-        db_models.TinhTrangXuLy(name="Đang chờ kí và phát hành", update_at=now),
+        db_models.TinhTrangXuLy(name="Đang chờ duyệt và kí", update_at=now),
         db_models.TinhTrangXuLy(name="Đang chờ xử lý", update_at=now),
         db_models.TinhTrangXuLy(name="Đã xử lý", update_at=now),
     ]

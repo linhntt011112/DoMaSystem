@@ -108,7 +108,7 @@ def validate_cong_van_di_version(db, cong_van_di_version_data_dict):
     all_phong_ban_fields = ['id_phong_ban_nhan', 'id_phong_ban_phat_hanh']
     all_phong_ban = select_fields(all_phong_ban_fields, db_models.PhongBan)
     
-    all_user_fields = [item for item in ['id_nguoi_ky', 'id_nguoi_theo_doi', 'id_nguoi_tao', 'id_nguoi_duyet', 'id_nguoi_xu_ly'] if item in cong_van_di_dict]
+    all_user_fields = [item for item in ['id_nguoi_ky', 'id_nguoi_theo_doi', 'id_nguoi_tao', 'id_nguoi_xu_ly'] if item in cong_van_di_dict]
     all_users = select_fields(all_user_fields, db_models.NguoiDung)
     
     if all_users['id_nguoi_ky'].phong_ban.id != all_phong_ban['id_phong_ban_phat_hanh'].id:
@@ -126,6 +126,7 @@ def create_cong_van_di_version(db, cong_van_di_version_pydantic: cong_van_schema
     validate_cong_van_di_version(db, cong_van_di_version_data_dict=data_dict)
     
     data_dict["ngay_tao"] = datetime.now()
+    data_dict["create_at"] = data_dict["ngay_tao"]
     new_cong_van_di_version = db_models.CongVanDiVersion(**data_dict)
     
     return common_queries.add_and_commit(db, new_cong_van_di_version)
