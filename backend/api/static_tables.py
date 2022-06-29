@@ -150,7 +150,8 @@ async def update(
 @router.delete("/{static_table_name}/delete/{obj_id}")
 async def delete(
     static_table_name: str,
-    static_table_delete_pydantic: schema_static_tables.StaticTableDelete,
+    obj_id: int,
+    # static_table_delete_pydantic: schema_static_tables.StaticTableDelete,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), 
     db=Depends(get_db)):  
     
@@ -159,7 +160,7 @@ async def delete(
     
     try:
         check_static_table_name(static_table_name)
-        obj = _get_static_table_by_id(db, static_table_delete_pydantic.id, name_to_db_model[static_table_name])
+        obj = _get_static_table_by_id(db, obj_id, name_to_db_model[static_table_name])
         return crud_static_tables.delete(db, obj)
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
