@@ -1,0 +1,45 @@
+.edit-phong-ban-popup-inner{
+    position: relative;
+    padding: 32px;
+    width: fit-content;
+    background-color: #FFF;
+    overflow: scroll;
+    top: 145px;
+}
+
+.edit-phong-ban{
+    width: 550px;
+}
+
+.phong-ban-edit-Item{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.phong-ban-edit-Item>label{
+    margin-right: 5px;
+    font-size: 15px;
+    padding: 1px 0px;
+    color: #1f1f1f;
+}
+
+.phong-ban-edit-Input{
+    width: 97%;
+    height: 30px;
+    box-shadow: none;
+    font-size: 15px;
+    padding-left: 10.5px;
+}
+
+.phong-ban-edit-ButtonSubmit{
+    cursor: pointer;
+    background-color: #ff9b44;
+    border: 1px solid #ff9b44;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    min-width: 200px;
+    padding: 10px 20px;
+    color: white;
+}

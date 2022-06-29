@@ -49,7 +49,6 @@ export default function AddPhongBan(props) {
                 })
             }
         })
-
     }
 
     const handleSubmit = (e) => {

@@ -114,7 +114,7 @@ export default function UserList(props) {
                         Thêm mới
                     </Button>
                 </div>
-                <div style={{ height: 'calc(100vh - 170px)' }}>
+                <div style={{ height: 'calc(100vh - 180px)' }}>
                     <DataGrid
                         getRowId={(r) => r.id}
                         rows={tableData}

@@ -127,7 +127,7 @@ export default function LoaicongvanList(props) {
                         Thêm mới
                     </Button>
                 </div>
-                <div style={{ height: 'calc(100vh - 110px)' }}>
+                <div style={{ height: 'calc(100vh - 180px)' }}>
                     <DataGrid
                         rows={tableData}
                         disableSelectionOnClick

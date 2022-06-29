@@ -19,8 +19,6 @@ export default function EditLoaiCongVan(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         submitEditLoaiCongVan();
-        props.setTrigger(false);
-        editLoaiCongVanSuccessNotify();
     }
 
     const editLoaiCongVanSuccessNotify = (response_json) => {
@@ -48,7 +46,7 @@ export default function EditLoaiCongVan(props) {
         .then((response) => {
             if (response.ok){
                 response.json().then((response_json) => {
-                    // addLoaiCongVanSuccessNotify(response_json);
+                    editLoaiCongVanSuccessNotify();
                     props.setTrigger(false);
                     refreshFunc();
                     // setTenLoai(null);

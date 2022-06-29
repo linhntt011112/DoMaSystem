@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './PhongBanList.css';
 import { Edit } from '@mui/icons-material';
 import EditPhongBan from "../../popup/EditPhongBan/EditPhongBan";
@@ -8,6 +8,7 @@ import {Add, DeleteOutline} from "@material-ui/icons";
 import {DataGrid} from "@mui/x-data-grid";
 import AddPhongBan from "../../popup/AddPhongBan/AddPhongBan";
 import { ToastContainer} from 'react-toastify';
+import * as backend_config from '../../../config/backend'
 
 export default function PhongBanList(props) {
     const {token} = props;
@@ -19,10 +20,15 @@ export default function PhongBanList(props) {
     const [tableData, setTableData] = useState(null);
 
     const refreshTable = () => {
-        // backend_config.makeRequest("GET", backend_config.LOAI_CONG_VAN_GET_LIST, token)
-        //   .then((data) => data.json())
-        //   .then((data) => {setTableData(data)})
+        backend_config.makeRequest("GET", backend_config.STATIC_TABLE_GET_RESET_CACHE.replace('{static_table_name}', 'phong_ban'), token);
+        backend_config.makeRequest("GET", backend_config.STATIC_TABLE_GET_LIST.replace('{static_table_name}', 'phong_ban'), token)
+          .then((data) => data.json())
+          .then((data) => {setTableData(data)})
     }
+
+    useEffect(() => {
+        refreshTable();
+    }, []);
 
     const columns = [
         {field: 'id', headerName: 'Mã phòng ban', width: 130},
@@ -47,7 +53,7 @@ export default function PhongBanList(props) {
                         <DeletePopup 
                             trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} 
                             token={token} 
-                            // url={backend_config.LOAI_CONG_VAN_DELETE_BY_ID.replace('{id}', params.row.id)}
+                            url={backend_config.STATIC_TABLE_DELETE_BY_ID.replace('{id}', params.row.id).replace('{static_table_name}', 'phong_ban')}
                             mark={mark} 
                             id={params.row.id} 
                             message={"Bạn có chắc muốn xóa phòng ban này không?"}
@@ -85,7 +91,7 @@ export default function PhongBanList(props) {
                         Thêm mới
                     </Button>
                 </div>
-                <div style={{ height: 'calc(100vh - 110px)' }}>
+                <div style={{ height: 'calc(100vh - 180px)' }}>
                     <DataGrid
                         rows={tableData}
                         disableSelectionOnClick
