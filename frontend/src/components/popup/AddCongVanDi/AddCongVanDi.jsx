@@ -31,22 +31,22 @@ export default function AddCongVanDi(props) {
     const [ten_cong_van, setTenCongVan] = React.useState(null);
     const [noi_nhan, setNoiNhan] = React.useState(null);
     const [nguoi_ky, setNguoiKy] = React.useState(null);
-    const [ngay_ky, setNgayKy] = React.useState(null);
+    // const [ngay_ky, setNgayKy] = React.useState(null);
     const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(null);
     const [loai_cong_van, setLoaiCongVan] = React.useState(null);
     const [nguoi_theo_doi, setNguoiTheoDoi] = React.useState(null);
     const [nguoi_tao, setNguoiTao] = React.useState({ho_ten: null});
-    const [nguoi_duyet, setNguoiDuyet] = React.useState(null);
-    const [ngay_hieu_luc, setNgayHieuLuc] = React.useState(null);
-    const [ngay_het_hieu_luc, setNgayHetHieuLuc] = React.useState(null);
-    const [so_luong_van_ban, setSoLuongVanBan] = React.useState(null);
-    const [muc_do_bao_mat, setMucDoBaoMat] = React.useState(null);
+    // const [nguoi_duyet, setNguoiDuyet] = React.useState(null);
+    // const [ngay_hieu_luc, setNgayHieuLuc] = React.useState(null);
+    // const [ngay_het_hieu_luc, setNgayHetHieuLuc] = React.useState(null);
+    const [so_luong_van_ban, setSoLuongVanBan] = React.useState(1);
+    // const [muc_do_bao_mat, setMucDoBaoMat] = React.useState(null);
     const [muc_do_uu_tien, setMucDoUuTien] = React.useState(null);
-    const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
+    // const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
     const [nguoi_xu_ly, setNguoiXuLy] = React.useState(null);
     const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(null);
     const [ngay_tao, setNgayTao] = React.useState(today_date);
-    const [ngay_duyet, setNgayDuyet] = React.useState(null);
+    // const [ngay_duyet, setNgayDuyet] = React.useState(null);
     const [ly_do, setLyDo] = React.useState(null);
     const [file_dinh_kem, setFileDinhKem] = React.useState(null);
     const [editorState, setEditorState] = React.useState(
@@ -84,9 +84,9 @@ export default function AddCongVanDi(props) {
     //     setNguoiTao(event.target.value);
     // }
 
-    const handleChangeNguoiDuyet = (event) => {
-        setNguoiDuyet(event.target.value);
-    }
+    // const handleChangeNguoiDuyet = (event) => {
+    //     setNguoiDuyet(event.target.value);
+    // }
 
 
     const handleChangeMucDoUuTien = (event) => {
@@ -203,13 +203,13 @@ export default function AddCongVanDi(props) {
             id_loai_cong_van: loai_cong_van,
             id_nguoi_theo_doi: nguoi_theo_doi,
             id_nguoi_tao: nguoi_tao?.id,
-            id_nguoi_duyet: nguoi_duyet,
-            ngay_hieu_luc: ngay_hieu_luc,
-            ngay_het_hieu_luc: ngay_het_hieu_luc,
+            // id_nguoi_duyet: nguoi_duyet,
+            // ngay_hieu_luc: ngay_hieu_luc,
+            // ngay_het_hieu_luc: ngay_het_hieu_luc,
             so_luong_van_ban: so_luong_van_ban,
             // id_muc_do_bao_mat: muc_do_bao_mat,
             id_muc_do_uu_tien: muc_do_uu_tien,
-            ngay_phat_hanh: ngay_phat_hanh,
+            // ngay_phat_hanh: ngay_phat_hanh,
             id_nguoi_xu_ly: nguoi_xu_ly,
             id_tinh_trang_xu_ly: tinh_trang_xu_ly,
             ngay_tao: ngay_tao,
@@ -393,10 +393,9 @@ export default function AddCongVanDi(props) {
                                     </FormControl>
                                 </Box>
                             </div>
-                            <div className='cong-van-di-add-item'>
+                            {/* <div className='cong-van-di-add-item'>
                                 <label>
                                     Ngày ký
-                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
                                 </label>
                                 <input 
                                     type="date" 
@@ -412,7 +411,7 @@ export default function AddCongVanDi(props) {
                                         paddingLeft: '10.5px'
                                     }}
                                 />
-                            </div>
+                            </div> */}
                             <div className='cong-van-di-add-item'>
                                 <label>
                                     Loại công văn
@@ -466,7 +465,7 @@ export default function AddCongVanDi(props) {
                                     </FormControl>
                                 </Box>
                             </div>
-                            <div className='cong-van-di-add-item'>
+                            {/* <div className='cong-van-di-add-item'>
                                 <label>
                                     Người duyệt
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
@@ -490,8 +489,8 @@ export default function AddCongVanDi(props) {
                                         </Select>
                                     </FormControl>
                                 </Box>
-                            </div>
-                        </div>
+                            </div> */}
+                        {/* </div>
                         <div className="cong-van-di-add-body-column-2">
                             <div className="cong-van-di-add-item">
                                 <label>
@@ -530,7 +529,7 @@ export default function AddCongVanDi(props) {
                                         paddingLeft: '10.5px'
                                     }}
                                 />
-                            </div>
+                            </div> */}
                             <div className='cong-van-di-add-item'>
                                 <label>
                                     Mức độ ưu tiên
@@ -555,7 +554,7 @@ export default function AddCongVanDi(props) {
                                     </FormControl>
                                 </Box>
                             </div>
-                            <div className='cong-van-di-add-item'>
+                            {/* <div className='cong-van-di-add-item'>
                                 <label>
                                     Ngày phát hành
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
@@ -574,14 +573,14 @@ export default function AddCongVanDi(props) {
                                         paddingLeft: '10.5px'
                                     }}
                                 />
-                            </div>
+                            </div> */}
                             <div className="cong-van-di-add-item">
                                 <label>
                                     Số lượng văn bản
                                 </label>
                                 <input
                                     type="number"
-                                    defaultValue="0"
+                                    defaultValue={so_luong_van_ban}
                                     onKeyPress={(event) => {
                                         if (!/[0-9]/.test(event.key)) {
                                           event.preventDefault();
@@ -663,7 +662,7 @@ export default function AddCongVanDi(props) {
                                     disabled
                                 />
                             </div>
-                            <div className='cong-van-di-add-item'>
+                            {/* <div className='cong-van-di-add-item'>
                                 <label>
                                     Ngày duyệt
                                 </label>
@@ -680,7 +679,7 @@ export default function AddCongVanDi(props) {
                                         paddingLeft: '10.5px'
                                     }}
                                 />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="cong-van-di-add-item-reason">

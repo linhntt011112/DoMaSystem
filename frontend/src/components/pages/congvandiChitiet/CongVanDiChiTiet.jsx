@@ -12,7 +12,9 @@ export default function CongVanDiChiTiet(props) {
     let history = useHistory();
     const [buttonPopup, setButtonPopup] = useState(false);
 
-    const { cvdiId } = useParams();
+    let { cvdiId } = useParams();
+    if ("cvdiId" in props) cvdiId = props.cvdiId;
+    
 
     const [cvdiData, setCvdiData] = useState("");
 

@@ -2,6 +2,9 @@ export const BACKEND_URL = 'http://localhost:3009/api/v1';
 export const BACKEND_URL_TOKEN = BACKEND_URL + '/token';
 export const BACKEND_URL_TOKEN_CHECK = BACKEND_URL + '/user/me';
 
+export const COMMON_GET_DOWNLOAD_TOKEN = BACKEND_URL + '/common/get_download_token';
+
+
 export const USER_GET_LIST_API = BACKEND_URL + '/user/list';
 export const USER_GET_CURRENT_API = BACKEND_URL + '/user/me';
 export const USER_GET_BY_ID_API = BACKEND_URL + '/user/id/{id}';
@@ -23,6 +26,11 @@ export const CONG_VAN_DI_POST_CREATE = CONG_VAN_DI_PREFIX + '/create'
 export const CONG_VAN_DI_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_DI_PREFIX + '/update/tep_dinh_kem'
 export const CONG_VAN_DI_GET_BY_ID = CONG_VAN_DI_PREFIX + '/{id}'
 export const CONG_VAN_DI_DELETE_BY_ID = CONG_VAN_DI_PREFIX + '/delete/{id}'
+
+
+export const CONG_VAN_VERSION_PREFIX = BACKEND_URL + '/cong_van/version'
+export const CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM = CONG_VAN_VERSION_PREFIX + '/{cong_van_di_version_id}/download/tep_dinh_kem'
+
 
 export const STATIC_TABLE_GET_LIST = BACKEND_URL + '/{static_table_name}/list';
 export const STATIC_TABLE_POST_CREATE = BACKEND_URL + '/{static_table_name}/create';

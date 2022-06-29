@@ -22,8 +22,8 @@ from exceptions import api_exceptions
 router = APIRouter(prefix='/cong_van/version')
 
 
-@router.get("/download/tep_dinh_kem")
-async def download_training_log(
+@router.get("/{cong_van_di_version_id}/download/tep_dinh_kem")
+async def download_tep_dinh_kem(
                         cong_van_di_version_id: int,
                         user=Depends(user_core.get_user_of_download_token),
                         db=Depends(get_db)):
