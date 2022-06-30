@@ -34,7 +34,7 @@ export default function AddLoaiCongVan(props) {
         const body = JSON.stringify({
             ma_loai: ma_loai,
             name: ten_loai,
-            trang_thai: trang_thai === 1 ? "Hoạt động" : "Không hoạt động",
+            trang_thai: trang_thai === 1 ? "hoat_dong" : "khong_hoat_dong",
             mo_ta: mo_ta
         })
         console.log(body);

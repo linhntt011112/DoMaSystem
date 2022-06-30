@@ -1,5 +1,5 @@
 from sqlalchemy import Column, DateTime, Integer, String, Boolean, Date
-from sqlalchemy import ForeignKey, Sequence
+from sqlalchemy import ForeignKey, Sequence, UniqueConstraint
 
 from .base import Base
 
@@ -61,6 +61,8 @@ class StaticTable:
     name = Column(String(128), nullable=False)
     
     update_at = Column(DateTime, nullable=True)
+    __table_args__ = (UniqueConstraint('name', name='unique__name'),
+                    )
   
   
 class PhongBan(Base, StaticTable):

@@ -46,13 +46,13 @@ export default function CongvandiList(props) {
 
 
     const refreshTable = () => {
-        backend_config.makeRequest("GET", backend_config.CONG_VAN_DI_GET_LIST, token)
+        backend_config.makeRequest("GET", backend_config.CONG_VAN_GET_LIST, token)
           .then((data) => data.json())
           .then((data) => {
             let data_of_current_version = [];
             for (let i = 0; i < data.length; i++) {
                 data_of_current_version.push(data[i])
-                // data_of_current_version.push(data[i].cong_van_di_versions[0])
+                // data_of_current_version.push(data[i].cong_van_versions[0])
               }
             setTableData(data_of_current_version)
         })
@@ -66,14 +66,14 @@ export default function CongvandiList(props) {
         {field: 'id', headerName: 'Số công văn', width: 115},
         {field: 'ten_cong_van', headerName: 'Tên công văn', flex: 1,
             valueGetter: (params) => {
-                return params.row.cong_van_di_current_version.ten_cong_van
+                return params.row.cong_van_current_version.ten_cong_van
             }},
         {
             field: 'nguoi_ky',
             headerName: 'Người ký',
             width: 150,
             valueGetter: (params) => {
-                return params.row.cong_van_di_current_version.nguoi_ky?.ho_ten
+                return params.row.cong_van_current_version.nguoi_ky?.ho_ten
             }
         },
         {
@@ -81,7 +81,7 @@ export default function CongvandiList(props) {
             headerName: 'Ngày ký',
             width: 150,
             valueGetter: (params) => {
-                return params.row.cong_van_di_current_version.ngay_ky
+                return params.row.cong_van_current_version.ngay_ky
             }
         },
         {
@@ -89,7 +89,7 @@ export default function CongvandiList(props) {
             headerName: 'Bộ phận phát hành',
             width: 200,
             valueGetter: (params) => {
-                return params.row.cong_van_di_current_version.phong_ban_phat_hanh?.name
+                return params.row.cong_van_current_version.phong_ban_phat_hanh?.name
             }
         },
         {
@@ -105,7 +105,7 @@ export default function CongvandiList(props) {
             headerName: 'Lý do',
             flex: 1,
             valueGetter: (params) => {
-                return params.row.cong_van_di_current_version.ly_do
+                return params.row.cong_van_current_version.ly_do
             }
         },
         {
@@ -123,7 +123,7 @@ export default function CongvandiList(props) {
                             className='cong-van-di-delete-popup'
                             trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} 
                             token={token} 
-                            url={backend_config.CONG_VAN_DI_DELETE_BY_ID.replace('{id}', params.row.id)}
+                            url={backend_config.CONG_VAN_DELETE_BY_ID.replace('{id}', params.row.id)}
                             mark={mark} 
                             id={params.row.id} 
                             message={"Bạn có chắc muốn xóa công văn này không?"}
