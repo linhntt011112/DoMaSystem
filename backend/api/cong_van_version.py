@@ -22,20 +22,20 @@ from exceptions import api_exceptions
 router = APIRouter(prefix='/cong_van/version')
 
 
-@router.get("/{cong_van_di_version_id}/download/tep_dinh_kem")
+@router.get("/{cong_van_version_id}/download/tep_dinh_kem")
 async def download_tep_dinh_kem(
-                        cong_van_di_version_id: int,
+                        cong_van_version_id: int,
                         user=Depends(user_core.get_user_of_download_token),
                         db=Depends(get_db)):
-    cong_van_di_version: db_models.CongVanDiVersion = crud_cong_van.get_cong_van_di_version_by_id(db, cong_van_di_version_id)
+    cong_van_version: db_models.CongVanDiVersion = crud_cong_van.get_cong_van_version_by_id(db, cong_van_version_id)
     
     # is_authorized = authorize_user_for_ai_model_version(user, ai_model_version)
     is_authorized = True
     if is_authorized:
         try:
-            file_path = os.path.join(cong_van_di_version.tep_dinh_kem.save_location)
+            file_path = os.path.join(cong_van_version.tep_dinh_kem.save_location)
             if os.path.isfile(file_path):
-                return FileResponse(file_path, filename=cong_van_di_version.tep_dinh_kem.name)
+                return FileResponse(file_path, filename=cong_van_version.tep_dinh_kem.name)
             else:
                 return None
 

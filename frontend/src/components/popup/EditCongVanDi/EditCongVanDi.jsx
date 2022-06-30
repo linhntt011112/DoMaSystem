@@ -11,7 +11,7 @@ import * as backend_config from "../../../config/backend"
 import draftToHtml from 'draftjs-to-html';
 
 export default function EditCongVanDi(props) {
-    const {cvdiData, token, refreshFunc} = props;
+    const {cong_vanData, token, refreshFunc} = props;
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
     const [muc_do_uu_tien_table, setMucDoUuTienTable] = React.useState([]);   
     const [tinh_trang_xu_ly_table, setTinhTrangXuLyTable] = React.useState([]); 
@@ -20,28 +20,28 @@ export default function EditCongVanDi(props) {
     const [usersData_PhongBan, setUsersData_PhongBan] = useState([]);
     const [usersData_NoiNhan, setUsersData_NoiNhan] = useState([]);
     const [usersList, setUsersList] = useState([]);
-    // console.log(cvdiData);
+    // console.log(cong_vanData);
 
-    const [so_cong_van, setSoCongVan] = React.useState(cvdiData.id);
-    const [ten_cong_van, setTenCongVan] = React.useState(cvdiData.ten_cong_van);
-    const [noi_nhan, setNoiNhan] = React.useState(cvdiData.phong_ban_nhan?.id);
-    const [nguoi_ky, setNguoiKy] = React.useState(cvdiData.nguoi_ky?.id);
-    const [ngay_ky, setNgayKy] = React.useState(cvdiData.ngay_ky);
-    const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(cvdiData.bo_phan_phat_hanh?.id);
-    const [loai_cong_van, setLoaiCongVan] = React.useState(cvdiData.loai_cong_van?.id);
-    const [nguoi_theo_doi, setNguoiTheoDoi] = React.useState(cvdiData.nguoi_theo_doi?.id);
+    const [so_cong_van, setSoCongVan] = React.useState(cong_vanData.id);
+    const [ten_cong_van, setTenCongVan] = React.useState(cong_vanData.ten_cong_van);
+    const [noi_nhan, setNoiNhan] = React.useState(cong_vanData.phong_ban_nhan?.id);
+    const [nguoi_ky, setNguoiKy] = React.useState(cong_vanData.nguoi_ky?.id);
+    const [ngay_ky, setNgayKy] = React.useState(cong_vanData.ngay_ky);
+    const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(cong_vanData.bo_phan_phat_hanh?.id);
+    const [loai_cong_van, setLoaiCongVan] = React.useState(cong_vanData.loai_cong_van?.id);
+    const [nguoi_theo_doi, setNguoiTheoDoi] = React.useState(cong_vanData.nguoi_theo_doi?.id);
     const [nguoi_tao, setNguoiTao] = React.useState(null);
-    const [nguoi_duyet, setNguoiDuyet] = React.useState(cvdiData.nguoi_duyet?.id);
-    const [ngay_hieu_luc, setNgayHieuLuc] = React.useState(cvdiData.ngay_hieu_luc);
-    const [ngay_het_hieu_luc, setNgayHetHieuLuc] = React.useState(cvdiData.ngay_het_hieu_luc);
-    const [so_luong_van_ban, setSoLuongVanBan] = React.useState(cvdiData.so_luong_van_ban);
-    const [muc_do_uu_tien, setMucDoUuTien] = React.useState(cvdiData.muc_do_uu_tien?.id);
-    const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(cvdiData.ngay_phat_hanh);
-    const [nguoi_xu_ly, setNguoiXuLy] = React.useState(cvdiData.nguoi_xu_ly?.id);
-    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(cvdiData.tinh_trang_xu_ly?.id);
+    const [nguoi_duyet, setNguoiDuyet] = React.useState(cong_vanData.nguoi_duyet?.id);
+    const [ngay_hieu_luc, setNgayHieuLuc] = React.useState(cong_vanData.ngay_hieu_luc);
+    const [ngay_het_hieu_luc, setNgayHetHieuLuc] = React.useState(cong_vanData.ngay_het_hieu_luc);
+    const [so_luong_van_ban, setSoLuongVanBan] = React.useState(cong_vanData.so_luong_van_ban);
+    const [muc_do_uu_tien, setMucDoUuTien] = React.useState(cong_vanData.muc_do_uu_tien?.id);
+    const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(cong_vanData.ngay_phat_hanh);
+    const [nguoi_xu_ly, setNguoiXuLy] = React.useState(cong_vanData.nguoi_xu_ly?.id);
+    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(cong_vanData.tinh_trang_xu_ly?.id);
     const [ngay_tao, setNgayTao] = React.useState(null);
-    const [ngay_duyet, setNgayDuyet] = React.useState(cvdiData.ngay_duyet?.id);
-    const [ly_do, setLyDo] = React.useState(cvdiData.ly_do);
+    const [ngay_duyet, setNgayDuyet] = React.useState(cong_vanData.ngay_duyet?.id);
+    const [ly_do, setLyDo] = React.useState(cong_vanData.ly_do);
 
     const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -187,7 +187,7 @@ export default function EditCongVanDi(props) {
                                 </label>
                                 <input
                                         type="text"
-                                        defaultValue={cvdiData.id}
+                                        defaultValue={cong_vanData.id}
                                         className='cong-van-di-update-input'
                                         disabled
                                         required
@@ -200,7 +200,7 @@ export default function EditCongVanDi(props) {
                                 </label>
                                 <input
                                         type="text"
-                                        defaultValue={cvdiData.ten_cong_van}
+                                        defaultValue={cong_vanData.ten_cong_van}
                                         className='cong-van-di-update-input'
                                         // disabled
                                         required
@@ -222,7 +222,7 @@ export default function EditCongVanDi(props) {
                                                 height: '36px'
                                             }}
                                             required
-                                            defaultValue={cvdiData.phong_ban_nhan?.id}
+                                            defaultValue={cong_vanData.phong_ban_nhan?.id}
                                         >
                                             {phong_ban_table.map((item) => {
                                                 
@@ -243,7 +243,7 @@ export default function EditCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeNguoiXuLy}
-                                            defaultValue={cvdiData.nguoi_xu_ly?.id}
+                                            defaultValue={cong_vanData.nguoi_xu_ly?.id}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -289,7 +289,7 @@ export default function EditCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            defaultValue={cvdiData.nguoi_ky?.id}
+                                            defaultValue={cong_vanData.nguoi_ky?.id}
                                             onChange={handleChangeNguoiKy}
                                             style={{
                                                 height: '36px'
@@ -315,7 +315,7 @@ export default function EditCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     onChange={(e) => setNgayKy(e.target.value)}
-                                    defaultValue={cvdiData.ngay_ky?.split('T')[0]}
+                                    defaultValue={cong_vanData.ngay_ky?.split('T')[0]}
                                     // required
                                     style={{
                                         width: '253px',
@@ -336,7 +336,7 @@ export default function EditCongVanDi(props) {
                                             id="demo-simple-select"
                                             // value={loaiPhongBan}
                                             onChange={handleChangeLoaiCongVan}
-                                            defaultValue={cvdiData.loai_cong_van?.id}
+                                            defaultValue={cong_vanData.loai_cong_van?.id}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -357,7 +357,7 @@ export default function EditCongVanDi(props) {
                                 </label>
                                 <input
                                     type="text"
-                                    value={cvdiData.nguoi_tao?.ho_ten}
+                                    value={cong_vanData.nguoi_tao?.ho_ten}
                                     className='cong-van-di-update-input'
                                     disabled
                                 />
@@ -373,7 +373,7 @@ export default function EditCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeNguoiDuyet}
-                                            defaultValue={cvdiData.nguoi_duyet?.id}
+                                            defaultValue={cong_vanData.nguoi_duyet?.id}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -407,7 +407,7 @@ export default function EditCongVanDi(props) {
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
-                                    defaultValue={cvdiData.ngay_hieu_luc?.split('T')[0]}
+                                    defaultValue={cong_vanData.ngay_hieu_luc?.split('T')[0]}
                                 />
                             </div>
                             <div className='cong-van-di-update-item'>
@@ -426,7 +426,7 @@ export default function EditCongVanDi(props) {
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
-                                    defaultValue={cvdiData.ngay_het_hieu_luc?.split('T')[0]}
+                                    defaultValue={cong_vanData.ngay_het_hieu_luc?.split('T')[0]}
                                 />
                             </div>
                             <div className='cong-van-di-update-item'>
@@ -441,7 +441,7 @@ export default function EditCongVanDi(props) {
                                             id="demo-simple-select"
                                             // value={loaiPhongBan}
                                             // onChange={handleChangeLoaiPhongBan}
-                                            defaultValue={cvdiData.muc_do_uu_tien?.id}
+                                            defaultValue={cong_vanData.muc_do_uu_tien?.id}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -472,7 +472,7 @@ export default function EditCongVanDi(props) {
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
-                                    defaultValue={cvdiData.ngay_phat_hanh?.split('T')[0]}
+                                    defaultValue={cong_vanData.ngay_phat_hanh?.split('T')[0]}
                                 />
                             </div>
                             <div className="cong-van-di-update-item">
@@ -482,7 +482,7 @@ export default function EditCongVanDi(props) {
                                 </label>
                                 <input
                                     type="number"
-                                    defaultValue={cvdiData.so_luong_van_ban}
+                                    defaultValue={cong_vanData.so_luong_van_ban}
                                     className='cong-van-di-update-input'
                                     onKeyPress={(event) => {
                                         if (!/[0-9]/.test(event.key)) {
@@ -505,7 +505,7 @@ export default function EditCongVanDi(props) {
                                             id="demo-simple-select"
                                             // value={loaiPhongBan}
                                             onChange={handleChangeTinhTrangXuLy}
-                                            defaultValue={cvdiData.tinh_trang_xu_ly?.id}
+                                            defaultValue={cong_vanData.tinh_trang_xu_ly?.id}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -529,7 +529,7 @@ export default function EditCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeNguoiTheoDoi}
-                                            defaultValue={cvdiData.nguoi_theo_doi?.id}
+                                            defaultValue={cong_vanData.nguoi_theo_doi?.id}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -554,7 +554,7 @@ export default function EditCongVanDi(props) {
                                         e.preventDefault();
                                     }}
                                     // onChange={(e) => setNgayTao(e.target.value)}
-                                    defaultValue={cvdiData.ngay_tao?.split('T')[0]}
+                                    defaultValue={cong_vanData.ngay_tao?.split('T')[0]}
                                     required
                                     style={{
                                         width: '253px',
@@ -580,7 +580,7 @@ export default function EditCongVanDi(props) {
                                         fontSize: '16px',
                                         paddingLeft: '10.5px'
                                     }}
-                                    defaultValue={cvdiData.ngay_duyet?.split('T')[0]}
+                                    defaultValue={cong_vanData.ngay_duyet?.split('T')[0]}
                                 />
                             </div>
                         </div>
@@ -591,7 +591,7 @@ export default function EditCongVanDi(props) {
                         </label>
                         <input
                             type="text"
-                            defaultValue={cvdiData.ly_do}
+                            defaultValue={cong_vanData.ly_do}
                             className='cong-van-di-update-input-reason'
                             // disabled
                             onChange={(e) => setLyDo(e.target.value)}
@@ -604,7 +604,7 @@ export default function EditCongVanDi(props) {
                         <Editor
                             editorState={editorState}
                             onEditorStateChange={setEditorState}
-                            defaultValue={cvdiData.noi_dung}
+                            defaultValue={cong_vanData.noi_dung}
                         />
                     </div>
                     <div className="cong-van-di-edit-item-file">

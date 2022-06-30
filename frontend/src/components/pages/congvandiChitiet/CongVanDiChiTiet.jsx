@@ -13,8 +13,8 @@ export default function CongVanDiChiTiet(props) {
     let history = useHistory();
     const [buttonPopup, setButtonPopup] = useState(false);
 
-    let { cvdiId } = useParams();
-    if ("cvdiId" in props) cvdiId = props.cvdiId;
+    let { cong_vanId } = useParams();
+    if ("cong_vanId" in props) cong_vanId = props.cong_vanId;
     
 
     const [cong_van_versionData, setCong_van_versionData] = useState("");
@@ -31,9 +31,9 @@ export default function CongVanDiChiTiet(props) {
     }
 
     useEffect(() => {
-        backend_config.makeRequest("GET", backend_config.CONG_VAN_DI_GET_BY_ID.replace('{id}', cvdiId), token)
+        backend_config.makeRequest("GET", backend_config.CONG_VAN_GET_BY_ID.replace('{id}', cong_vanId), token)
             .then((data) => data.json())
-            .then((data) => setCong_van_versionData(data.cong_van_di_current_version))
+            .then((data) => setCong_van_versionData(data.cong_van_current_version))
     }, []);
 
     return (
@@ -157,7 +157,7 @@ export default function CongVanDiChiTiet(props) {
                         {cong_van_versionData !== "" && cong_van_versionData.id_tep_dinh_kem !== null &&
                         <div>
                             <h5>{cong_van_versionData.tep_dinh_kem.name}</h5>
-                            <FileDownloadIcon style={{cursor: 'pointer'}}
+                            <FileDownloadIcon style={{cursor: 'pointer', "background-color": "#086cae", color: "white"}}
                             onClick={() => downloadTep_dinh_kem(backend_config.CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM.replace(
                                 "{cong_van_version_id}", cong_van_versionData.id))}>
                             </FileDownloadIcon>

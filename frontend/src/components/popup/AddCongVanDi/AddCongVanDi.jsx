@@ -164,13 +164,13 @@ export default function AddCongVanDi(props) {
     const uploadTepDinhKem = (id) => {
         let formData = new FormData();
 
-        formData.append('cong_van_di_id', id);
+        formData.append('cong_van_id', id);
         if (file_dinh_kem !== null) formData.append('tep_dinh_kem_input', file_dinh_kem, file_dinh_kem.name);
 
         const body = formData;
 
         backend_config.makeRequest("POST",
-            backend_config.CONG_VAN_DI_POST_UPDATE_TEP_DINH_KEM,
+            backend_config.CONG_VAN_POST_UPDATE_TEP_DINH_KEM,
             token,
             body,
             null,
@@ -232,7 +232,7 @@ export default function AddCongVanDi(props) {
         console.log(new_body)
 
         backend_config.makeRequest("POST", 
-            backend_config.CONG_VAN_DI_POST_CREATE, 
+            backend_config.CONG_VAN_POST_CREATE, 
             token,
             new_body,
         )

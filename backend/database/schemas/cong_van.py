@@ -141,7 +141,7 @@ class CongVanDiVersionFull(BaseModel):
     
     create_at: Union[datetime.datetime, datetime.date]
     noi_dung_thay_doi: str = None
-    cong_van_di_id: int = None
+    cong_van_id: int = None
     
     class Config:
         orm_mode = True
@@ -180,7 +180,7 @@ class CongVanDiVersionCreate(BaseModel):
     
     # create_at: Union[datetime.datetime, datetime.date] = None
     noi_dung_thay_doi: str = None
-    cong_van_di_id: int = None
+    cong_van_id: int = None
 
     
     
@@ -228,7 +228,7 @@ class CongVanDiVersionUpdate(BaseModel):
         
     
 class CongVanDiVersion_TraoDoi(BaseModel):
-    id_cong_van_di: int
+    id_cong_van: int
     id_trao_doi: int
     
     
@@ -237,10 +237,10 @@ class CongVanDiVersion_TraoDoi(BaseModel):
 class CongVanDiFull(BaseModel):
     id: int 
     
-    cong_van_di_current_version_id: int
-    cong_van_di_current_version: CongVanDiVersionFull
+    cong_van_current_version_id: int
+    cong_van_current_version: CongVanDiVersionFull
     
-    cong_van_di_versions: List[CongVanDiVersionFull]
+    cong_van_versions: List[CongVanDiVersionFull]
 
     create_at: Union[datetime.datetime, datetime.date]
     update_at: Union[datetime.datetime, datetime.date]
@@ -252,13 +252,13 @@ class CongVanDiFull(BaseModel):
 class CongVanDiCurrent(BaseModel):
     id: int 
     
-    cong_van_di_current_version_id: int
-    cong_van_di_current_version: CongVanDiVersionFull
+    cong_van_current_version_id: int
+    cong_van_current_version: CongVanDiVersionFull
     class Config:
         orm_mode = True
 
 
 class CongVanDiCreate(BaseModel):   
-    cong_van_di_current_version_id: int = None
+    cong_van_current_version_id: int = None
     
     

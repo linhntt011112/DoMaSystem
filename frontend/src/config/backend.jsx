@@ -20,12 +20,12 @@ export const LOAI_CONG_VAN_PUT_UPDATE = LOAI_CONG_VAN_PREFIX + '/update'
 export const LOAI_CONG_VAN_DELETE_BY_ID = LOAI_CONG_VAN_PREFIX + '/delete/{id}'
 
 
-export const CONG_VAN_DI_PREFIX = BACKEND_URL + '/cong_van/cvdi'
-export const CONG_VAN_DI_GET_LIST = CONG_VAN_DI_PREFIX + '/list'
-export const CONG_VAN_DI_POST_CREATE = CONG_VAN_DI_PREFIX + '/create'
-export const CONG_VAN_DI_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_DI_PREFIX + '/update/tep_dinh_kem'
-export const CONG_VAN_DI_GET_BY_ID = CONG_VAN_DI_PREFIX + '/{id}'
-export const CONG_VAN_DI_DELETE_BY_ID = CONG_VAN_DI_PREFIX + '/delete/{id}'
+export const CONG_VAN_PREFIX = BACKEND_URL + '/cong_van/cong_van'
+export const CONG_VAN_GET_LIST = CONG_VAN_PREFIX + '/list'
+export const CONG_VAN_POST_CREATE = CONG_VAN_PREFIX + '/create'
+export const CONG_VAN_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_PREFIX + '/update/tep_dinh_kem'
+export const CONG_VAN_GET_BY_ID = CONG_VAN_PREFIX + '/{id}'
+export const CONG_VAN_DELETE_BY_ID = CONG_VAN_PREFIX + '/delete/{id}'
 
 
 export const CONG_VAN_VERSION_PREFIX = BACKEND_URL + '/cong_van/version'
