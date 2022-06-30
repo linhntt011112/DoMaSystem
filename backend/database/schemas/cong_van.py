@@ -138,7 +138,10 @@ class CongVanVersionFull(BaseModel):
     
     ngay_tao: Union[datetime.datetime, datetime.date]
     
-    create_at: Union[datetime.datetime, datetime.date]
+    thoi_gian_cap_nhat: Union[datetime.datetime, datetime.date]
+    
+    id_nguoi_cap_nhat: int
+    nguoi_cap_nhat: nguoi_dung.UserBase
     noi_dung_thay_doi: str = None
     cong_van_id: int = None
     
@@ -153,7 +156,7 @@ class CongVanVersionCreate(BaseModel):
     id_phong_ban_nhan: int
     
     id_nguoi_ky: int
-    ngay_ky: Union[datetime.datetime, datetime.date] = None
+    # ngay_ky: Union[datetime.datetime, datetime.date] = None
     
     id_phong_ban_phat_hanh: int
     # ngay_phat_hanh: Union[datetime.datetime, datetime.date]
@@ -173,55 +176,66 @@ class CongVanVersionCreate(BaseModel):
     id_muc_do_uu_tien: int
     
     # id_tep_dinh_kem: int = None
-    id_nguoi_tao: int 
+    id_nguoi_tao: int = None
     
-    ngay_tao: Union[datetime.datetime, datetime.date]
+    ngay_tao: Union[datetime.datetime, datetime.date] = None
     
-    # create_at: Union[datetime.datetime, datetime.date] = None
+    thoi_gian_cap_nhat: Union[datetime.datetime, datetime.date] = None
+    
+    id_nguoi_cap_nhat: int = None
+    # nguoi_cap_nhat: nguoi_dung.UserBase
     noi_dung_thay_doi: str = None
     cong_van_id: int = None
 
-    
-    
-    
+
+
 class CongVanVersionUpdate(BaseModel):
-    id: int
+    pass
+    
+    
+class CongVanVersionUpdateBT1(CongVanVersionUpdate):
+    """Thay doi truoc khi duyet
+
+    Args:
+        BaseModel (_type_): _description_
+    """
     version_name: str = None
-    ten_cong_van: str
-    id_phong_ban_nhan: int
+    ten_cong_van: str = None
+    id_phong_ban_nhan: int = None
     
-    id_nguoi_ky: int
+    id_nguoi_ky: int = None
+    # ngay_ky: Union[datetime.datetime, datetime.date] = None
     
-    ngay_ky: Union[datetime.datetime, datetime.date] = None
-    ngay_hieu_luc: Union[datetime.datetime, datetime.date]
-    ngay_het_hieu_luc: Union[datetime.datetime, datetime.date] = None
+    id_phong_ban_phat_hanh: int = None
+    # ngay_phat_hanh: Union[datetime.datetime, datetime.date]
     
-    id_phong_ban_phat_hanh: int
+    id_loai_cong_van: int  = None
     
-    ngay_phat_hanh: Union[datetime.datetime, datetime.date] = None
+    noi_dung: str = None
     
-    id_loai_cong_van: int 
-    
-    noi_dung: str
-    
-    id_nguoi_xu_ly: int 
+    id_nguoi_xu_ly: int = None
     id_nguoi_theo_doi: int = None
-    
-    id_tinh_trang_xu_ly: int 
+    # id_tinh_trang_xu_ly: int 
     
     ly_do: str = None
-    so_luong_van_ban: int
+    so_luong_van_ban: int = None
     
-    id_muc_do_uu_tien: int
+    # id_muc_do_bao_mat: int
+    id_muc_do_uu_tien: int = None
     
     id_tep_dinh_kem: int = None
+    # id_nguoi_tao: int = None
+    
+    # ngay_tao: Union[datetime.datetime, datetime.date] = None
+    
+    thoi_gian_cap_nhat: Union[datetime.datetime, datetime.date] = None
+    
+    id_nguoi_cap_nhat: int = None
+    # nguoi_cap_nhat: nguoi_dung.UserBase
+    noi_dung_thay_doi: str = None
+    cong_van_id: int = None
     
     
-    id_nguoi_duyet: int
-    
-    ngay_tao: Union[datetime.datetime, datetime.date]
-    ngay_duyet: Union[datetime.datetime, datetime.date] = None
-
         
     
 class CongVanVersion_TraoDoi(BaseModel):

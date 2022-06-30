@@ -119,18 +119,37 @@ def validate_cong_van_version(db, cong_van_version_data_dict):
 
 
 
-def create_cong_van_version(db, cong_van_version_pydantic: cong_van_schemas.CongVanVersionCreate):
-    data_dict = cong_van_version_pydantic.__dict__
-    data_dict = {k: data_dict[k] for k in data_dict if data_dict[k] is not None}
-    
+def create_cong_van_version_from_data_dict(db, data_dict):
     validate_cong_van_version(db, cong_van_version_data_dict=data_dict)
     
     data_dict["ngay_tao"] = datetime.now()
-    data_dict["create_at"] = data_dict["ngay_tao"]
+    data_dict["thoi_gian_cap_nhat"] = data_dict["ngay_tao"]
     new_cong_van_version = db_models.CongVanVersion(**data_dict)
     
     return common_queries.add_and_commit(db, new_cong_van_version)
 
+
+
+def create_cong_van_version(db, cong_van_version_pydantic: cong_van_schemas.CongVanVersionCreate):
+    data_dict = cong_van_version_pydantic.__dict__
+    data_dict = {k: data_dict[k] for k in data_dict if data_dict[k] is not None}
+    
+    return create_cong_van_version_from_data_dict(db, data_dict)
+
+
+
+def create_cong_van_version_from_current_and_data_dict(
+    db, current_cong_van_version: db_models.CongVanVersion,
+    data_dict: dict
+    ):
+    data_dict = {k: data_dict[k] for k in data_dict if data_dict[k] is not None}
+    if len(data_dict) == 0:
+        raise db_exceptions.DBException("Can not create new version with empty data!")
+    current_data_dict = current_cong_van_version.__dict__
+    current_data_dict = {k: current_data_dict[k] for k in current_data_dict if k not in {'_sa_instance_state', 'id'}}
+    current_data_dict.update(data_dict)
+
+    return common_queries.add_and_commit(db, db_models.CongVanVersion(**current_data_dict))
 
 
 def delete_cong_van_version(db, cong_van_version: db_models.CongVanVersion):
@@ -213,36 +232,35 @@ def create_cong_van(db, cong_van_version_pydantic: cong_van_schemas.CongVanVersi
     
 
 
-# TODO
-def validate_cong_van_version_from_current_version(
-    db, 
-    cong_van_current_version_pydantic: cong_van_schemas.CongVanVersionFull,
-    cong_van_version_pydantic: cong_van_schemas.CongVanVersionCreate):
-    return True
+# # TODO
+# def validate_cong_van_version_from_current_version(
+#     db, 
+#     cong_van_current_version_pydantic: cong_van_schemas.CongVanVersionFull,
+#     cong_van_version_pydantic: cong_van_schemas.CongVanVersionCreate):
+#     return True
 
 
 
 def update_cong_van(db, cong_van: db_models.CongVan,
-                       cong_van_version_pydantic: cong_van_schemas.CongVanVersionCreate = None):
+                       cong_van_version_pydantic: cong_van_schemas.CongVanVersionUpdate = None):
     prev_version_id = cong_van.cong_van_current_version_id
     cong_van_version = None
     
     if cong_van_version_pydantic is not None:
         try:
             
-            cong_van_version = create_cong_van_version(db, cong_van_version_pydantic)
-            validate_cong_van_version_from_current_version(
-                db, cong_van_schemas.CongVanVersionFull.from_orm(cong_van.cong_van_current_version),
-                cong_van_version_pydantic
+            new_cong_van_version = create_cong_van_version_from_current_and_data_dict(
+                db, cong_van.cong_van_current_version, cong_van_version_pydantic.__dict__
             )
             
-            cong_van.cong_van_current_version_id = cong_van_version.id
+            logger.debug(f"{new_cong_van_version.__dict__}")
+            cong_van.cong_van_current_version_id = new_cong_van_version.id
             cong_van.update_at = datetime.now()
             
-            return common_queries.add_and_commit(cong_van)
+            return common_queries.add_and_commit(db, cong_van)
         except Exception as e:
             cong_van.cong_van_current_version_id = prev_version_id
-            common_queries.add_and_commit(cong_van)
+            common_queries.add_and_commit(db, cong_van)
             
             if cong_van_version is not None:
                 common_queries.delete(db, cong_van_version)
