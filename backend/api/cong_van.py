@@ -124,7 +124,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
     
     try:
         cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien)
-        return [cong_van_schemas.CongVanDiFull.from_orm(cong_van) for cong_van in cong_van_s]
+        return [cong_van_schemas.CongVanFull.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
 
         return api_exceptions.handle_simple_exception(e, logger)
@@ -139,7 +139,7 @@ async def get_list_cong_van(id: int,
         cong_van = crud_cong_van.get_cong_van_by_id(db, cong_van_id=id)
         if cong_van is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
-        return cong_van_schemas.CongVanDiFull.from_orm(cong_van)
+        return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
         return api_exceptions.handle_simple_exception(e, logger)
@@ -148,7 +148,7 @@ async def get_list_cong_van(id: int,
 
 @router.post('/cong_van/create')
 async def create_cong_van(
-    cong_van_version: cong_van_schemas.CongVanDiVersionCreate,
+    cong_van_version: cong_van_schemas.CongVanVersionCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
     # if current_user.phan_quyen != db_models.PhanQuyen.admin:
@@ -158,7 +158,7 @@ async def create_cong_van(
         cong_van_version.id_nguoi_tao = current_user.id
         new_cong_van = crud_cong_van.create_cong_van(db, cong_van_version)
         logger.info(f"{new_cong_van.__dict__}")
-        return cong_van_schemas.CongVanDiFull.from_orm(new_cong_van)
+        return cong_van_schemas.CongVanFull.from_orm(new_cong_van)
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
     
@@ -166,7 +166,7 @@ async def create_cong_van(
 
 @router.post('/cong_van/update')
 async def update_cong_van(
-    cong_van_version_pydantic: cong_van_schemas.CongVanDiVersionCreate,
+    cong_van_version_pydantic: cong_van_schemas.CongVanVersionCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
     
@@ -176,7 +176,7 @@ async def update_cong_van(
             raise api_exceptions.NOT_FOUND_EXCEPTION()
         
         cong_van = crud_cong_van.update_cong_van(db, cong_van, cong_van_version_pydantic)
-        return cong_van_schemas.CongVanDiFull.from_orm(cong_van)
+        return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
         return api_exceptions.handle_simple_exception(e, logger)
@@ -195,14 +195,14 @@ async def update_cong_van__tep_dinh_kem(
     cong_van = None
     try:
         tep_dinh_kem, save_location = await create_location_and_save_tep_dinh_kem(tep_dinh_kem_input, db)
-        cong_van: db_models.CongVanDi = crud_cong_van.get_cong_van_by_id(db, cong_van_id)
+        cong_van: db_models.CongVan = crud_cong_van.get_cong_van_by_id(db, cong_van_id)
         if cong_van is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
         
         cong_van.cong_van_current_version.id_tep_dinh_kem = tep_dinh_kem.id
         cong_van = crud_cong_van.update_cong_van(db, cong_van)
         # logger.info(f"{cong_van.tep_dinh_kem.__dict__}")
-        return cong_van_schemas.CongVanDiFull.from_orm(cong_van)
+        return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
         if cong_van is not None:
             cong_van.cong_van_current_version.id_tep_dinh_kem = None
@@ -218,7 +218,7 @@ async def update_cong_van__tep_dinh_kem(
 @router.delete('/cong_van/delete/{id}')
 async def delete_cong_van(
     id: int,
-    # cong_van: cong_van_schemas.CongVanDiCreate,
+    # cong_van: cong_van_schemas.CongVanCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
     if current_user.phan_quyen != db_models.PhanQuyen.admin:

@@ -37,13 +37,13 @@ export default function CongVanDiChiTiet(props) {
     }, []);
 
     return (
-        <div className="PageChiTietCongVanDi">
+        <div className="PageChiTietCongVan">
             <main>
                 <div className="congVanDiTitleContainer">
                     <ArrowBack className='congVanDiTitleContainerIcon' onClick={() => history.goBack()} ></ArrowBack>
                     <h1 className='congVanDiTitle'>Thông tin chi tiết</h1>
                     <button className='congVanDiEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
-                    {/* <EditCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token} cong_van_versionData={cong_van_versionData}></EditCongVanDi> */}
+                    {/* <EditCongVan trigger={buttonPopup} setTrigger={setButtonPopup} token={token} cong_van_versionData={cong_van_versionData}></EditCongVan> */}
                 </div>
                 <div className="thongTinChungContainer">
                     <div className="thongTinChungColumn1">

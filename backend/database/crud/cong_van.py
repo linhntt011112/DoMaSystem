@@ -77,7 +77,7 @@ def delete_loai_cong_van(db, loai_cong_van):
 
 
 def get_cong_van_version_by_id(db, cong_van_version_id):
-    cong_van = common_queries.query_filter(db, db_models.CongVanDiVersion, condition=(db_models.CongVanDiVersion.id == cong_van_version_id))
+    cong_van = common_queries.query_filter(db, db_models.CongVanVersion, condition=(db_models.CongVanVersion.id == cong_van_version_id))
     if len(cong_van) >= 1:
         return cong_van[0]
     else:
@@ -119,7 +119,7 @@ def validate_cong_van_version(db, cong_van_version_data_dict):
 
 
 
-def create_cong_van_version(db, cong_van_version_pydantic: cong_van_schemas.CongVanDiVersionCreate):
+def create_cong_van_version(db, cong_van_version_pydantic: cong_van_schemas.CongVanVersionCreate):
     data_dict = cong_van_version_pydantic.__dict__
     data_dict = {k: data_dict[k] for k in data_dict if data_dict[k] is not None}
     
@@ -127,13 +127,13 @@ def create_cong_van_version(db, cong_van_version_pydantic: cong_van_schemas.Cong
     
     data_dict["ngay_tao"] = datetime.now()
     data_dict["create_at"] = data_dict["ngay_tao"]
-    new_cong_van_version = db_models.CongVanDiVersion(**data_dict)
+    new_cong_van_version = db_models.CongVanVersion(**data_dict)
     
     return common_queries.add_and_commit(db, new_cong_van_version)
 
 
 
-def delete_cong_van_version(db, cong_van_version: db_models.CongVanDiVersion):
+def delete_cong_van_version(db, cong_van_version: db_models.CongVanVersion):
     if cong_van_version.id_tep_dinh_kem is not None:
         cong_van_version.id_tep_dinh_kem = None
         delete_save_file(db, cong_van_version.tep_dinh_kem)
@@ -149,7 +149,7 @@ def select_list_cong_van(db, limit: int=None, offset: int=None, order_by: str=No
                         id_muc_do_uu_tien: int = None):
     
     condition = None
-    class_ = db_models.CongVanDiVersion
+    class_ = db_models.CongVanVersion
     if id_loai_cong_van is not None:
         if condition is None:
             condition = (class_.id_loai_cong_van == id_loai_cong_van)
@@ -167,17 +167,17 @@ def select_list_cong_van(db, limit: int=None, offset: int=None, order_by: str=No
             condition = condition & (class_.id_muc_do_uu_tien == id_muc_do_uu_tien)
     # print(condition)
     
-    list_of_objs = common_queries.select_with_options(db, db_models.CongVanDi, 
+    list_of_objs = common_queries.select_with_options(db, db_models.CongVan, 
                                                       limit=limit,
                                                       offset=offset,
                                                       order_by=order_by,
                                                       condition=condition,
-                                                      join_field=db_models.CongVanDi.cong_van_current_version)
+                                                      join_field=db_models.CongVan.cong_van_current_version)
     return list_of_objs
 
 
 def get_cong_van_by_id(db, cong_van_id):
-    cong_van = common_queries.query_filter(db, db_models.CongVanDi, condition=(db_models.CongVanDi.id == cong_van_id))
+    cong_van = common_queries.query_filter(db, db_models.CongVan, condition=(db_models.CongVan.id == cong_van_id))
     if len(cong_van) >= 1:
         return cong_van[0]
     else:
@@ -189,13 +189,13 @@ def get_cong_van_by_id(db, cong_van_id):
 #     return True 
 
 
-def create_cong_van(db, cong_van_version_pydantic: cong_van_schemas.CongVanDiVersionCreate):
+def create_cong_van(db, cong_van_version_pydantic: cong_van_schemas.CongVanVersionCreate):
     cong_van = None
     cong_van_version = None
     try:
         now = datetime.now()
-        cong_van = db_models.CongVanDi(create_at=now, update_at=now)
-        cong_van: db_models.CongVanDi = common_queries.add_and_commit(db, cong_van)
+        cong_van = db_models.CongVan(create_at=now, update_at=now)
+        cong_van: db_models.CongVan = common_queries.add_and_commit(db, cong_van)
         
         cong_van_version_pydantic.cong_van_id = cong_van.id
         cong_van_version = create_cong_van_version(db, cong_van_version_pydantic)
@@ -216,14 +216,14 @@ def create_cong_van(db, cong_van_version_pydantic: cong_van_schemas.CongVanDiVer
 # TODO
 def validate_cong_van_version_from_current_version(
     db, 
-    cong_van_current_version_pydantic: cong_van_schemas.CongVanDiVersionFull,
-    cong_van_version_pydantic: cong_van_schemas.CongVanDiVersionCreate):
+    cong_van_current_version_pydantic: cong_van_schemas.CongVanVersionFull,
+    cong_van_version_pydantic: cong_van_schemas.CongVanVersionCreate):
     return True
 
 
 
-def update_cong_van(db, cong_van: db_models.CongVanDi,
-                       cong_van_version_pydantic: cong_van_schemas.CongVanDiVersionCreate = None):
+def update_cong_van(db, cong_van: db_models.CongVan,
+                       cong_van_version_pydantic: cong_van_schemas.CongVanVersionCreate = None):
     prev_version_id = cong_van.cong_van_current_version_id
     cong_van_version = None
     
@@ -232,7 +232,7 @@ def update_cong_van(db, cong_van: db_models.CongVanDi,
             
             cong_van_version = create_cong_van_version(db, cong_van_version_pydantic)
             validate_cong_van_version_from_current_version(
-                db, cong_van_schemas.CongVanDiVersionFull.from_orm(cong_van.cong_van_current_version),
+                db, cong_van_schemas.CongVanVersionFull.from_orm(cong_van.cong_van_current_version),
                 cong_van_version_pydantic
             )
             
@@ -253,7 +253,7 @@ def update_cong_van(db, cong_van: db_models.CongVanDi,
 
 
 
-def delete_cong_van(db, cong_van: db_models.CongVanDi):
+def delete_cong_van(db, cong_van: db_models.CongVan):
     cong_van.cong_van_current_version_id = None
     for cong_van_version in cong_van.cong_van_versions:
         delete_cong_van_version(db, cong_van_version)

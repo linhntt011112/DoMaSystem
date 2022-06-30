@@ -85,7 +85,7 @@ class CongVanListInput(BaseModel):
     
 
 
-class CongVanDiVersionFull(BaseModel):
+class CongVanVersionFull(BaseModel):
     id: int
     version_name: str = None
     ten_cong_van: str
@@ -108,7 +108,6 @@ class CongVanDiVersionFull(BaseModel):
     id_loai_cong_van: int 
     loai_cong_van: LoaiCongVanFull
     
-    trich_yeu_noi_dung: str = None
     noi_dung: str
     
     id_nguoi_xu_ly: int 
@@ -148,7 +147,7 @@ class CongVanDiVersionFull(BaseModel):
     
     
 
-class CongVanDiVersionCreate(BaseModel):
+class CongVanVersionCreate(BaseModel):
     version_name: str = None
     ten_cong_van: str
     id_phong_ban_nhan: int
@@ -185,7 +184,7 @@ class CongVanDiVersionCreate(BaseModel):
     
     
     
-class CongVanDiVersionUpdate(BaseModel):
+class CongVanVersionUpdate(BaseModel):
     id: int
     version_name: str = None
     ten_cong_van: str
@@ -199,11 +198,10 @@ class CongVanDiVersionUpdate(BaseModel):
     
     id_phong_ban_phat_hanh: int
     
-    ngay_phat_hanh: Union[datetime.datetime, datetime.date]
+    ngay_phat_hanh: Union[datetime.datetime, datetime.date] = None
     
     id_loai_cong_van: int 
     
-    trich_yeu_noi_dung: str = None
     noi_dung: str
     
     id_nguoi_xu_ly: int 
@@ -218,7 +216,6 @@ class CongVanDiVersionUpdate(BaseModel):
     
     id_tep_dinh_kem: int = None
     
-    id_nguoi_tao: int 
     
     id_nguoi_duyet: int
     
@@ -227,20 +224,20 @@ class CongVanDiVersionUpdate(BaseModel):
 
         
     
-class CongVanDiVersion_TraoDoi(BaseModel):
+class CongVanVersion_TraoDoi(BaseModel):
     id_cong_van: int
     id_trao_doi: int
     
     
     
     
-class CongVanDiFull(BaseModel):
+class CongVanFull(BaseModel):
     id: int 
     
     cong_van_current_version_id: int
-    cong_van_current_version: CongVanDiVersionFull
+    cong_van_current_version: CongVanVersionFull
     
-    cong_van_versions: List[CongVanDiVersionFull]
+    cong_van_versions: List[CongVanVersionFull]
 
     create_at: Union[datetime.datetime, datetime.date]
     update_at: Union[datetime.datetime, datetime.date]
@@ -249,16 +246,16 @@ class CongVanDiFull(BaseModel):
         orm_mode = True
     
 
-class CongVanDiCurrent(BaseModel):
+class CongVanCurrent(BaseModel):
     id: int 
     
     cong_van_current_version_id: int
-    cong_van_current_version: CongVanDiVersionFull
+    cong_van_current_version: CongVanVersionFull
     class Config:
         orm_mode = True
 
 
-class CongVanDiCreate(BaseModel):   
+class CongVanCreate(BaseModel):   
     cong_van_current_version_id: int = None
     
     

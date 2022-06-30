@@ -152,7 +152,7 @@ export default function AddCongVanDi(props) {
         fetchUsersTableData();
     }, [])
 
-    const addCongVanDiSuccessNotify = (response_json) => {
+    const addCongVanSuccessNotify = (response_json) => {
         toast.success(<div>Tạo mới công văn đi thành công!</div>, {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: true
@@ -192,7 +192,7 @@ export default function AddCongVanDi(props) {
         }})
     }
 
-    const addCongVanDi = () => {
+    const addCongVan = () => {
         const body = {
             // id: so_cong_van,
             ten_cong_van: ten_cong_van,
@@ -249,7 +249,7 @@ export default function AddCongVanDi(props) {
                         
                     }
                     props.setTrigger(false);
-                    addCongVanDiSuccessNotify();
+                    addCongVanSuccessNotify();
                     refreshFunc();
                 })
             }
@@ -265,7 +265,7 @@ export default function AddCongVanDi(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addCongVanDi();
+        addCongVan();
         // props.setTrigger(false);
     }
 

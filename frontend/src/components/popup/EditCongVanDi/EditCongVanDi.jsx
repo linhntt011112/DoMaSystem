@@ -134,7 +134,7 @@ export default function EditCongVanDi(props) {
         fetchUsersTableData();
     }, [])
 
-    const EditCongVanDi = () => {
+    const EditCongVan = () => {
         const body = JSON.stringify({
             // id: so_cong_van,
             ten_cong_van: ten_cong_van,
@@ -162,7 +162,7 @@ export default function EditCongVanDi(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        EditCongVanDi();
+        EditCongVan();
         props.setTrigger(false);
     }
 

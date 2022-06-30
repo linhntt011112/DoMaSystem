@@ -27,7 +27,7 @@ async def download_tep_dinh_kem(
                         cong_van_version_id: int,
                         user=Depends(user_core.get_user_of_download_token),
                         db=Depends(get_db)):
-    cong_van_version: db_models.CongVanDiVersion = crud_cong_van.get_cong_van_version_by_id(db, cong_van_version_id)
+    cong_van_version: db_models.CongVanVersion = crud_cong_van.get_cong_van_version_by_id(db, cong_van_version_id)
     
     # is_authorized = authorize_user_for_ai_model_version(user, ai_model_version)
     is_authorized = True
