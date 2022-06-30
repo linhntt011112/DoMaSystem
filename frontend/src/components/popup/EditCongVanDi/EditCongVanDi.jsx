@@ -20,7 +20,7 @@ export default function EditCongVanDi(props) {
     const [usersData_PhongBan, setUsersData_PhongBan] = useState([]);
     const [usersData_NoiNhan, setUsersData_NoiNhan] = useState([]);
     const [usersList, setUsersList] = useState([]);
-    console.log(cvdiData);
+    // console.log(cvdiData);
 
     const [so_cong_van, setSoCongVan] = React.useState(cvdiData.id);
     const [ten_cong_van, setTenCongVan] = React.useState(cvdiData.ten_cong_van);

@@ -29,7 +29,7 @@ export const CONG_VAN_DI_DELETE_BY_ID = CONG_VAN_DI_PREFIX + '/delete/{id}'
 
 
 export const CONG_VAN_VERSION_PREFIX = BACKEND_URL + '/cong_van/version'
-export const CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM = CONG_VAN_VERSION_PREFIX + '/{cong_van_di_version_id}/download/tep_dinh_kem'
+export const CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM = CONG_VAN_VERSION_PREFIX + '/{cong_van_version_id}/download/tep_dinh_kem?download_token={download_token}'
 
 
 export const STATIC_TABLE_GET_LIST = BACKEND_URL + '/{static_table_name}/list';
