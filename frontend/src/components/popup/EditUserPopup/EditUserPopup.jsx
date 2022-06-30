@@ -249,6 +249,7 @@ export default function EditUserPopup(props) {
                                     <div className='userUpdateItem'>
                                         <label>
                                             Phòng ban
+                                            <span className='text-danger' style={{color: 'red'}}>  *</span>
                                         </label>
                                         <Box sx={{ width: 261 }}>
                                             <FormControl fullWidth>
@@ -258,6 +259,7 @@ export default function EditUserPopup(props) {
                                                     onChange={handleChangePhongBan}
                                                     defaultValue={userData.phong_ban?.id}
                                                     style={{height: '36px'}}
+                                                    required
                                                 >
                                                     {phong_ban_table.map((item) => {
                                                         
@@ -272,6 +274,7 @@ export default function EditUserPopup(props) {
                                     <div className='userUpdateItem'>
                                         <label>
                                             Chức vụ
+                                            <span className='text-danger' style={{color: 'red'}}>  *</span>
                                         </label>
                                         <Box sx={{ width: 261 }}>
                                             <FormControl fullWidth>
@@ -281,6 +284,7 @@ export default function EditUserPopup(props) {
                                                     onChange={handleChangeChucVu}
                                                     defaultValue={userData.chuc_vu?.id}
                                                     style={{height: '36px'}}
+                                                    required
                                                 >
                                                     {chuc_vu_table.map((item) => {
                                                             

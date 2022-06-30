@@ -18,6 +18,8 @@ import MyProfile from './components/pages/MyProfile/MyProfile';
 import ChangePassword from './components/pages/ChangePassword/ChangePassword';
 import UserRoute from './routes/user/UserRoute';
 import PhongBanList from './components/pages/PhongBanList/PhongBanList';
+import ChucVuList from './components/pages/ChucVuList/ChucVuList';
+import CongVanList from './components/pages/CongVanList/CongVanList';
 
 const App = () => {
 
@@ -33,6 +35,8 @@ const App = () => {
             <AdminRoute exact path="/management/user/:userId" component={User} />
             <AdminRoute exact path="/management/loai-cong-van/" component={LoaicongvanList}/>
             <AdminRoute exact path="/management/phong-ban/" component={PhongBanList}/>
+            <AdminRoute exact path="/management/chuc-vu/" component={ChucVuList}/>
+            <AdminRoute exact path="/management/so-luu-tru/" component={CongVanList}/>
             <UserRoute exact path="/cong-van-di/" component={CongvandiList}/>
             <UserRoute exact path="/cong-van-di/:cvdiId" component={CongVanDiChiTiet}/>
             <UserRoute exact path="/cong-van-den/" component={CongVanDenList}/>

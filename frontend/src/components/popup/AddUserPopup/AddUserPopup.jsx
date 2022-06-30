@@ -381,6 +381,7 @@ export default function AddUserPopup(props) {
                                 <div className='userAddItem'>
                                     <label>
                                         Phòng ban
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
                                     </label>
                                     <Box sx={{ width: 261 }}>
                                         <FormControl fullWidth>
@@ -392,6 +393,7 @@ export default function AddUserPopup(props) {
                                                 style={{
                                                     height: '35px'
                                                 }}
+                                                required
                                             >
                                                 {phong_ban_table.map((item) => {
                                                     
@@ -406,6 +408,7 @@ export default function AddUserPopup(props) {
                                 <div className='userAddItem'>
                                     <label>
                                         Chức vụ
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
                                     </label>
                                     <Box sx={{ width: 261 }}>
                                         <FormControl fullWidth>
@@ -415,6 +418,7 @@ export default function AddUserPopup(props) {
                                                 value={chuc_vu}
                                                 onChange={handleChangeChucVu}
                                                 style={{height: '35px'}}
+                                                required
                                             >
                                                 {chuc_vu_table.map((item) => {
                                                         
