@@ -124,7 +124,12 @@ class CongVanVersion(Base):
     cac_trao_doi = relationship("TraoDoiCongVan", back_populates="cong_van_version")
    
     noi_dung_thay_doi = Column(String(4096), nullable=True)
-    create_at = Column(DateTime, nullable=False)
+        
+    thoi_gian_cap_nhat = Column(DateTime, nullable=False)
+
+    id_nguoi_cap_nhat =  Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
+    nguoi_cap_nhat = relationship("NguoiDung", foreign_keys=id_nguoi_cap_nhat, uselist=False)
+                                  
    
     cong_van_id = Column(Integer, ForeignKey('cong_van.id', name="cong_van_id"), nullable=False)
     cong_van = relationship("CongVan", back_populates="cong_van_versions", foreign_keys=cong_van_id, uselist=False)
