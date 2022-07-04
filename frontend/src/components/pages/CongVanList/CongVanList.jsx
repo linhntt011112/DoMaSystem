@@ -123,7 +123,7 @@ export default function CongVanList(props) {
                             className='cong-van-di-delete-popup'
                             trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} 
                             token={token} 
-                            url={backend_config.CONG_VAN_DI_DELETE_BY_ID.replace('{id}', params.row.id)}
+                            url={backend_config.CONG_VAN_DELETE_BY_ID.replace('{id}', params.row.id)}
                             mark={mark} 
                             id={params.row.id} 
                             message={"Bạn có chắc muốn xóa công văn này không?"}
