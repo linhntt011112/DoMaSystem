@@ -153,8 +153,9 @@ def create_cong_van_version_from_current_and_data_dict(
 
 
 def delete_cong_van_version(db, cong_van_version: db_models.CongVanVersion):
-    if cong_van_version.id_tep_dinh_kem is not None:
-        cong_van_version.id_tep_dinh_kem = None
+    if cong_van_version.tep_dinh_kem is not None:
+        # cong_van_version.id_tep_dinh_kem = None
+        # logger.info(f"{cong_van_version.__dict__}")
         delete_save_file(db, cong_van_version.tep_dinh_kem)
     return common_queries.delete(db, cong_van_version)
 
