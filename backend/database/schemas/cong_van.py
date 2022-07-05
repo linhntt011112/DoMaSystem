@@ -37,7 +37,7 @@ class LoaiCongVanFull(BaseModel):
     trang_thai: str
     
     id_nguoi_cap_nhat: int
-    nguoi_cap_nhat: nguoi_dung.UserBase
+    nguoi_cap_nhat: nguoi_dung.UserShort
     thoi_gian_cap_nhat: datetime.datetime
     
     mo_ta: str = None
@@ -94,7 +94,7 @@ class CongVanVersionFull(BaseModel):
     phong_ban_nhan: static_tables.PhongBanFull
     
     id_nguoi_ky: int
-    nguoi_ky: nguoi_dung.UserBase
+    nguoi_ky: nguoi_dung.UserShort
     
     ngay_ky: Union[datetime.datetime, datetime.date] = None
     # ngay_hieu_luc: Union[datetime.datetime, datetime.date]
@@ -111,11 +111,11 @@ class CongVanVersionFull(BaseModel):
     noi_dung: str
     
     id_nguoi_xu_ly: int 
-    nguoi_xu_ly: nguoi_dung.UserBase
+    nguoi_xu_ly: nguoi_dung.UserShort
     ngay_hoan_tat: Union[datetime.datetime, datetime.date] = None
     
     id_nguoi_theo_doi: int = None
-    nguoi_theo_doi: nguoi_dung.UserBase = None
+    nguoi_theo_doi: nguoi_dung.UserShort = None
     
     id_tinh_trang_xu_ly: int 
     tinh_trang_xu_ly: static_tables.TinhTrangXuLyFull
@@ -131,17 +131,17 @@ class CongVanVersionFull(BaseModel):
     tep_dinh_kem: SaveFileFull = None
     
     id_nguoi_tao: int 
-    nguoi_tao: nguoi_dung.UserBase
+    nguoi_tao: nguoi_dung.UserShort
     
     # id_nguoi_duyet: int
-    # nguoi_duyet: nguoi_dung.UserBase
+    # nguoi_duyet: nguoi_dung.UserShort
     
     ngay_tao: Union[datetime.datetime, datetime.date]
     
     thoi_gian_cap_nhat: Union[datetime.datetime, datetime.date]
     
     id_nguoi_cap_nhat: int
-    nguoi_cap_nhat: nguoi_dung.UserBase
+    nguoi_cap_nhat: nguoi_dung.UserShort
     noi_dung_thay_doi: str = None
     cong_van_id: int = None
     
@@ -183,7 +183,7 @@ class CongVanVersionCreate(BaseModel):
     thoi_gian_cap_nhat: Union[datetime.datetime, datetime.date] = None
     
     id_nguoi_cap_nhat: int = None
-    # nguoi_cap_nhat: nguoi_dung.UserBase
+    # nguoi_cap_nhat: nguoi_dung.UserShort
     noi_dung_thay_doi: str = None
     cong_van_id: int = None
 
@@ -231,7 +231,7 @@ class CongVanVersionUpdateBT1(CongVanVersionUpdate):
     thoi_gian_cap_nhat: Union[datetime.datetime, datetime.date] = None
     
     id_nguoi_cap_nhat: int = None
-    # nguoi_cap_nhat: nguoi_dung.UserBase
+    # nguoi_cap_nhat: nguoi_dung.UserShort
     noi_dung_thay_doi: str = None
     cong_van_id: int = None
     

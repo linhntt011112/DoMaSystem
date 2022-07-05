@@ -10,7 +10,7 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 
 from config import frontend_config, server_config
-from api import user, login, static_tables, cong_van, cong_van_version, common
+from api import user, login, static_tables, cong_van, common, cong_van_version
 
 
 # origins = frontend_config.possible_urls
