@@ -17,7 +17,8 @@ import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import * as backend_config from '../../../config/backend'
 
 export default function CongvandiList(props) {
-    const {token} = props;
+    const {token, cong_van_di_get_list_url} = props;
+    // console.log(props);
     const history = useHistory();
 
     const [tableData, setTableData] = useState([]);
@@ -46,7 +47,7 @@ export default function CongvandiList(props) {
 
 
     const refreshTable = () => {
-        backend_config.makeRequest("GET", backend_config.CONG_VAN_GET_LIST, token)
+        backend_config.makeRequest("GET", cong_van_di_get_list_url, token)
           .then((data) => data.json())
           .then((data) => {
             let data_of_current_version = [];
@@ -230,7 +231,7 @@ export default function CongvandiList(props) {
                             })}
                         </Select>
                     </div>
-                    <div style={{ width: 200, display: 'flex', flexDirection: 'column' }}>
+                    {/* <div style={{ width: 200, display: 'flex', flexDirection: 'column' }}>
                         <span className="dropdown-title">Tình trạng xử lý</span>
                         <Select
                             labelId="demo-simple-select-label"
@@ -252,7 +253,7 @@ export default function CongvandiList(props) {
                                 return (<MenuItem value={item.id} >{item.name}</MenuItem> )
                             })}
                         </Select>
-                    </div>
+                    </div> */}
                     <button className="dropdown-button" onClick={handleFilter}>Lọc</button>
                 </div>
                 

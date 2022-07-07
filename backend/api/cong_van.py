@@ -55,7 +55,7 @@ async def create_location_and_save_tep_dinh_kem(data_file, db=Depends(get_db)):
 
 
 
-@router.get('/cong_van/list')
+@router.get('/list')
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_tinh_trang_xu_ly: int = None,
@@ -71,7 +71,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
 
 
 
-@router.get('/cong_van/list/cho_duyet')
+@router.get('/list/cho_duyet')
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_muc_do_uu_tien: int = None,
@@ -89,7 +89,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
     
     
 
-@router.get('/cong_van/list/chua_duyet')
+@router.get('/list/chua_duyet')
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_muc_do_uu_tien: int = None,
@@ -107,7 +107,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
     
     
     
-@router.get('/cong_van/list/cho_xu_ly')
+@router.get('/list/cho_xu_ly')
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_muc_do_uu_tien: int = None,
@@ -125,7 +125,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
     
     
 
-@router.get('/cong_van/list/chua_xu_ly')
+@router.get('/list/chua_xu_ly')
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_muc_do_uu_tien: int = None,
@@ -143,7 +143,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
 
 
 
-@router.get('/cong_van/{id}')
+@router.get('/{id}')
 async def get_list_cong_van(id: int,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
 

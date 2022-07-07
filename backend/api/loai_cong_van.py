@@ -14,10 +14,9 @@ from exceptions import api_exceptions
 from config import server_config
 from .user import get_current_active_user
 from .core import file_utils
-from .cong_van  import  router
 
 
-
+router = APIRouter(prefix='/cong_van')
 @router.get("/loai_cong_van/list")
 async def get_list_loai_cong_van(limit: int=None, offset: int=None,
                         order_by=None,
