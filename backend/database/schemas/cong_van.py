@@ -265,6 +265,10 @@ class CongVanCurrent(BaseModel):
     
     cong_van_current_version_id: int
     cong_van_current_version: CongVanVersionFull
+    
+    create_at: Union[datetime.datetime, datetime.date]
+    update_at: Union[datetime.datetime, datetime.date]
+    
     class Config:
         orm_mode = True
 

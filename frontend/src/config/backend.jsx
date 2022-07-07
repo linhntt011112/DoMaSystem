@@ -28,7 +28,7 @@ export const CONG_VAN_GET_LIST_CHUA_XU_LY = CONG_VAN_PREFIX + '/list/chua_xu_ly'
 export const CONG_VAN_POST_CREATE = CONG_VAN_PREFIX + '/create'
 export const CONG_VAN_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_PREFIX + '/update/tep_dinh_kem'
 export const CONG_VAN_GET_BY_ID = CONG_VAN_PREFIX + '/{id}'
-export const CONG_VAN_DELETE_BY_ID = CONG_VAN_PREFIX + '/delete/{id}'
+export const CONG_VAN_DELETE_BY_ID = CONG_VAN_PREFIX + '/{id}/delete'
 
 
 export const CONG_VAN_VERSION_PREFIX = BACKEND_URL + '/cong_van/version'

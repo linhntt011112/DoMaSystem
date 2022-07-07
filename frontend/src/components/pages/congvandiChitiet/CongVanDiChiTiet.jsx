@@ -109,10 +109,10 @@ export default function CongVanDiChiTiet(props) {
                         </div>
                     </div>
                     <div className="thongTinChungColumn2">
-                        <div style={{display:'flex'}}>
+                        {/* <div style={{display:'flex'}}>
                             <div className="column2Title">Người xử lý:</div>
                             <div className="column2Info">{cong_van_versionData.nguoi_xu_ly?.ho_ten}</div>
-                        </div>
+                        </div> */}
                         <div style={{display:'flex'}}>
                             <div className="column2Title">Người theo dõi:</div>
                             <div className="column2Info">{cong_van_versionData.nguoi_theo_doi?.ho_ten}</div>

@@ -55,19 +55,19 @@ async def create_location_and_save_tep_dinh_kem(data_file, db=Depends(get_db)):
 
 
 
-@router.get('/list')
-async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
-                        id_loai_cong_van: int = None, 
-                        id_tinh_trang_xu_ly: int = None,
-                        id_muc_do_uu_tien: int = None,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+# @router.get('/list')
+# async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
+#                         id_loai_cong_van: int = None, 
+#                         id_tinh_trang_xu_ly: int = None,
+#                         id_muc_do_uu_tien: int = None,
+#     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
     
-    try:
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien)
-        return [cong_van_schemas.CongVanFull.from_orm(cong_van) for cong_van in cong_van_s]
-    except Exception as e:
+#     try:
+#         cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien)
+#         return [cong_van_schemas.CongVanFull.from_orm(cong_van) for cong_van in cong_van_s]
+#     except Exception as e:
 
-        return api_exceptions.handle_simple_exception(e, logger)
+#         return api_exceptions.handle_simple_exception(e, logger)
 
 
 
@@ -82,7 +82,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
         id_tinh_trang_xu_ly = 1
         condition = (db_models.CongVanVersion.id_nguoi_tao == current_user.id)
         cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
-        return [cong_van_schemas.CongVanFull.from_orm(cong_van) for cong_van in cong_van_s]
+        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
 
         return api_exceptions.handle_simple_exception(e, logger)
@@ -100,7 +100,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
         id_tinh_trang_xu_ly = 1
         condition = (db_models.CongVanVersion.id_nguoi_ky == current_user.id)
         cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
-        return [cong_van_schemas.CongVanFull.from_orm(cong_van) for cong_van in cong_van_s]
+        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
 
         return api_exceptions.handle_simple_exception(e, logger)
@@ -118,7 +118,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
         id_tinh_trang_xu_ly = 2
         condition = (db_models.CongVanVersion.id_nguoi_tao == current_user.id) | (db_models.CongVanVersion.id_nguoi_ky == current_user.id)
         cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
-        return [cong_van_schemas.CongVanFull.from_orm(cong_van) for cong_van in cong_van_s]
+        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
 
         return api_exceptions.handle_simple_exception(e, logger)
@@ -136,7 +136,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
         id_tinh_trang_xu_ly = 2
         condition = (db_models.CongVanVersion.id_nguoi_xu_ly == current_user.id) 
         cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
-        return [cong_van_schemas.CongVanFull.from_orm(cong_van) for cong_van in cong_van_s]
+        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
 
         return api_exceptions.handle_simple_exception(e, logger)
@@ -158,7 +158,7 @@ async def get_list_cong_van(id: int,
 
 
 
-@router.post('/cong_van/create')
+@router.post('/create')
 async def create_cong_van(
     cong_van_version: cong_van_schemas.CongVanVersionCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
@@ -196,9 +196,9 @@ async def create_cong_van(
     
     
 
-@router.post('/cong_van/update/tep_dinh_kem')
+@router.post('/{cong_van_id}/update/tep_dinh_kem')
 async def update_cong_van__tep_dinh_kem(
-    cong_van_id: int = Form(...),
+    cong_van_id: int,
     tep_dinh_kem_input: UploadFile = File(...),
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
@@ -228,7 +228,7 @@ async def update_cong_van__tep_dinh_kem(
     
     
     
-@router.post('/cong_van/update-truoc_khi_duyet/{cong_van_id}')
+@router.post('/{cong_van_id}/update/truoc_khi_duyet')
 async def update_cong_van(
     cong_van_id: int,
     cong_van_version_pydantic: cong_van_schemas.CongVanVersionUpdateBT1,
@@ -236,9 +236,11 @@ async def update_cong_van(
 ):
     
     try:
-        cong_van = crud_cong_van.get_cong_van_by_id(db, cong_van_id)
+        cong_van: db_models.CongVan = crud_cong_van.get_cong_van_by_id(db, cong_van_id)
         if cong_van is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
+        elif cong_van.cong_van_current_version.id_nguoi_tao != current_user.id:
+            raise api_exceptions.PERMISSION_EXCEPTION()
         
         cong_van = crud_cong_van.update_cong_van(db, cong_van, cong_van_version_pydantic)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
@@ -249,7 +251,7 @@ async def update_cong_van(
     
     
 
-@router.delete('/cong_van/delete/{id}')
+@router.delete('/{cong_van_id}/delete')
 async def delete_cong_van(
     id: int,
     # cong_van: cong_van_schemas.CongVanCreate,
