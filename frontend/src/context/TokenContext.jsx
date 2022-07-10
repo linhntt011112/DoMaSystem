@@ -91,7 +91,10 @@ export function useUserInfo() {
 
   let decodedToken = decodeToken();
   const [userPermission, setUserPermission] = useState(decodedToken === null ? null: decodedToken.permissions);
-  const [user, setUser] = useState({name: decodedToken === null ? null: decodedToken.sub});
+  const [user, setUser] = useState({
+    name: decodedToken === null ? null: decodedToken.sub,
+    id: decodedToken === null ? null: decodedToken.id 
+  });
 
 
   return {

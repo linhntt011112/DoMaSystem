@@ -25,6 +25,9 @@ export const CONG_VAN_GET_LIST_CHO_DUYET = CONG_VAN_PREFIX + '/list/cho_duyet'
 export const CONG_VAN_GET_LIST_CHUA_DUYET = CONG_VAN_PREFIX + '/list/chua_duyet'
 export const CONG_VAN_GET_LIST_CHO_XU_LY = CONG_VAN_PREFIX + '/list/cho_xu_ly'
 export const CONG_VAN_GET_LIST_CHUA_XU_LY = CONG_VAN_PREFIX + '/list/chua_xu_ly'
+
+export const CONG_VAN_PUT_DUYET = CONG_VAN_PREFIX + '/{id}/update/duyet'
+
 export const CONG_VAN_POST_CREATE = CONG_VAN_PREFIX + '/create'
 export const CONG_VAN_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_PREFIX + '/update/tep_dinh_kem'
 export const CONG_VAN_GET_BY_ID = CONG_VAN_PREFIX + '/{id}'

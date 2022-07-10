@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import Depends, FastAPI, APIRouter, File, UploadFile, Form
 from pydantic import BaseModel
 from jose import JWTError, jwt
@@ -243,6 +244,30 @@ async def update_cong_van(
             raise api_exceptions.PERMISSION_EXCEPTION()
         
         cong_van = crud_cong_van.update_cong_van(db, cong_van, cong_van_version_pydantic)
+        return cong_van_schemas.CongVanFull.from_orm(cong_van)
+    except Exception as e:
+
+        return api_exceptions.handle_simple_exception(e, logger)
+    
+
+
+@router.put('/{cong_van_id}/update/duyet')
+async def update_cong_van(
+    cong_van_id: int,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
+):
+    
+    try:
+        cong_van: db_models.CongVan = crud_cong_van.get_cong_van_by_id(db, cong_van_id)
+        if cong_van is None:
+            raise api_exceptions.NOT_FOUND_EXCEPTION()
+        elif cong_van.cong_van_current_version.id_nguoi_ky != current_user.id:
+            raise api_exceptions.PERMISSION_EXCEPTION()
+        
+        cong_van.cong_van_current_version.id_tinh_trang_xu_ly = 2
+        cong_van.cong_van_current_version.ngay_ky = datetime.now()
+        cong_van.update_at = datetime.now()
+        cong_van = crud_cong_van.update_cong_van(db, cong_van)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
