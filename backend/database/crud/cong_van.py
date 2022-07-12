@@ -314,3 +314,32 @@ def delete_save_file(db, save_file: db_models.SaveFile):
     
     return common_queries.delete(db, save_file)
 
+
+
+#########################################################################
+
+
+
+def get_cong_van_luu_tru_by_id(db, cong_van_id):
+    cong_van = common_queries.query_filter(db, db_models.CongVanLuuTru, condition=(db_models.CongVanLuuTru.id == cong_van_id))
+    if len(cong_van) >= 1:
+        return cong_van[0]
+    else:
+        return None
+
+
+def create_cong_van_luu_tru(db, cong_van_luu_tru_pydantic: cong_van_schemas.CongVanLuuTruCreate):
+
+    now = datetime.now()
+    data_dict = cong_van_luu_tru_pydantic.__dict__
+    data_dict["create_at"] = now
+    data_dict["update_at"] = now
+    cong_van = db_models.CongVanLuuTru(**data_dict)
+    return  common_queries.add_and_commit(db, cong_van)
+    
+
+def update_cong_van_luu_tru(db, cong_van_luu_tru: db_models.CongVanLuuTru):
+
+    now = datetime.now()
+    cong_van_luu_tru.update_at = now
+    return  common_queries.add_and_commit(db, cong_van_luu_tru)

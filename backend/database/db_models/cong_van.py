@@ -172,3 +172,49 @@ class TraoDoiCongVan(Base, TraoDoiBase):
 #     __tablename__ = 'associate_cong_van__trao_doi'
 #     id_cong_van = Column(Integer, ForeignKey("cong_van_version.id"), primary_key=True, nullable=False)
 #     id_trao_doi = Column(Integer, ForeignKey("trao_doi.id"), primary_key=True, nullable=False)
+
+
+
+class CongVanLuuTru(Base):
+    __tablename__ = 'cong_van_luu_tru'
+    id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
+   
+    ten_cong_van = Column(String(256), nullable=True)
+   
+    phong_ban_nhan = Column(String(256), nullable=True)
+   
+    nguoi_ky = Column(String(256), nullable=True)
+    ngay_ky = Column(DateTime, nullable=True)
+   
+   
+    phong_ban_phat_hanh = Column(String(256), nullable=True)
+   
+    loai_cong_van = Column(String(256), nullable=True)
+   
+    noi_dung = Column(String(2**13-1), nullable=True)
+   
+    nguoi_xu_ly = Column(String(256), nullable=True)
+    
+    ngay_hoan_tat = Column(DateTime, nullable=True)
+   
+    nguoi_theo_doi = Column(String(256), nullable=True)
+    tinh_trang_xu_ly = Column(String(256), nullable=True)
+   
+    ly_do = Column(String(512), nullable=True)
+    so_luong_van_ban = Column(Integer, nullable=True)
+   
+    # id_muc_do_bao_mat = Column(Integer, ForeignKey('muc_do_bao_mat.id'), nullable=False)
+    # muc_do_bao_mat = relationship("MucDoBaoMat", backref="cong_van", uselist=False)
+   
+    muc_do_uu_tien = Column(String(256), nullable=True)
+   
+    id_tep_dinh_kem = Column(Integer, ForeignKey('save_file.id'), nullable=True)
+    tep_dinh_kem = relationship("SaveFile", backref="cong_van_luu_tru", uselist=False)
+   
+    nguoi_tao = Column(String(256), nullable=True)
+
+   
+    ngay_tao = Column(DateTime, nullable=True)
+    
+    create_at = Column(DateTime, nullable=False)
+    update_at = Column(DateTime, nullable=False)

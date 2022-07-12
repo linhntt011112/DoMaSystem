@@ -277,3 +277,57 @@ class CongVanCreate(BaseModel):
     cong_van_current_version_id: int = None
     
     
+
+###########################################################################
+
+class CongVanLuuTruCreate(BaseModel):
+    ten_cong_van: str = None
+   
+    phong_ban_nhan: str = None
+   
+    nguoi_ky: str = None
+    ngay_ky: Union[datetime.datetime, datetime.date] = None
+   
+   
+    phong_ban_phat_hanh: str = None
+   
+    loai_cong_van: str = None
+   
+    noi_dung: str = None
+   
+    nguoi_xu_ly: str = None
+    
+    ngay_hoan_tat: Union[datetime.datetime, datetime.date] = None
+   
+    nguoi_theo_doi: str = None
+    tinh_trang_xu_ly: str = None
+   
+    ly_do: str =  None
+    so_luong_van_ban: int  = None
+   
+    # id_muc_do_bao_mat = Column(Integer, ForeignKey('muc_do_bao_mat.id'), nullable=False)
+    # muc_do_bao_mat = relationship("MucDoBaoMat", backref="cong_van", uselist=False)
+   
+    muc_do_uu_tien: str = None
+   
+   
+    nguoi_tao: str = None
+
+    ngay_tao: Union[datetime.datetime, datetime.date] = None
+    
+    
+
+class CongVanLuuTruFull(CongVanLuuTruCreate):
+    id: int
+    
+    id_tep_dinh_kem: int = None
+    tep_dinh_kem: SaveFileFull = None
+    create_at: Union[datetime.datetime, datetime.date]
+    update_at: Union[datetime.datetime, datetime.date]
+    
+    class Config:
+        orm_mode=True
+    
+    
+    
+    
