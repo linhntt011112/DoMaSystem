@@ -13,6 +13,11 @@ export const SidebarDataUser = [
         iconOpened: <RiIcons.RiArrowUpSFill />,
         subNav: [
             {
+                title: 'Thêm mới',
+                path: '/cong-van-di/add_cvdi',
+                icon: <IoIcons.IoIosDocument />,
+            },
+            {
                 title: 'Chưa duyệt',
                 path: '/cong-van-di/chua_duyet',
                 icon: <IoIcons.IoIosDocument />,

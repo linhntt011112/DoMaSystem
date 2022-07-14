@@ -160,16 +160,18 @@ async def get_list_cong_van(id: int,
 
 
 @router.post('/create')
-async def create_cong_van(
+async def create_cong_van_di(
     cong_van_version: cong_van_schemas.CongVanVersionCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
+    """some"""
     # if current_user.phan_quyen != db_models.PhanQuyen.admin:
     #     raise exceptions.PERMISSION_EXCEPTION()
     
     try:
         cong_van_version.id_nguoi_tao = current_user.id
         cong_van_version.id_nguoi_cap_nhat = current_user.id
+        logger.info(cong_van_version.__dict__)
         new_cong_van = crud_cong_van.create_cong_van(db, cong_van_version)
         # logger.info(f"{new_cong_van.__dict__}")
         return cong_van_schemas.CongVanFull.from_orm(new_cong_van)

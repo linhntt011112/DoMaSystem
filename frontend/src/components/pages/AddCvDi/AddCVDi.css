@@ -1,0 +1,19 @@
+.add-cong-van-di-form{
+    flex: 5;
+    padding: 20px;
+    height: 100vh;
+    position: sticky;
+    overflow: scroll;
+}
+
+.cong-van-di-add-body-column-1{
+    float: left;
+    padding: 20px 20px 0 20px;
+    width: 50%;
+}
+
+.cong-van-di-add-body-column-2{
+    float: left;
+    padding: 20px 20px 0 20px;
+    width: 50%;
+}
