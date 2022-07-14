@@ -129,6 +129,24 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
 
         return api_exceptions.handle_simple_exception(e, logger)
     
+    
+    
+    
+@router.get('/cong_van/cvdi/list')
+async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
+                        id_loai_cong_van: int = None, 
+                        id_tinh_trang_xu_ly: int = None,
+                        id_muc_do_uu_tien: int = None,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+    
+    try:
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien)
+        return [cong_van_schemas.CongVanFull.from_orm(cong_van) for cong_van in cong_van_s]
+    except Exception as e:
+
+        return api_exceptions.handle_simple_exception(e, logger)
+    
+
 
 
 @router.get('/cong_van/{id}')
