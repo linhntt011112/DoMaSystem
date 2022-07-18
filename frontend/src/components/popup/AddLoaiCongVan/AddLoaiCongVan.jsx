@@ -115,7 +115,7 @@ export default function AddLoaiCongVan(props) {
                                 onChange={(e) => setMoTa(e.target.value)}
                             />
                         </div>
-                        <div className='loaiCongVanAddItem'>
+                        <div className='loaiCongVanAddItem' style={{display: 'none'}}>
                             <label>
                                 Trạng thái
                                 <span className='text-danger' style={{color: 'red'}}>  *</span>
@@ -125,7 +125,7 @@ export default function AddLoaiCongVan(props) {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        value={trang_thai}
+                                        defaultValue={1}
                                         onChange={handleChangeTrangThai}
                                         style={{height: '36px'}}
                                         required

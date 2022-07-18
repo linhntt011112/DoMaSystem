@@ -116,7 +116,7 @@ export default function EditLoaiCongVan(props) {
                                 onChange={(e) => setMoTa(e.target.value)}
                             />
                         </div>
-                        <div className='loaiCongVan-edit-Item'>
+                        <div className='loaiCongVan-edit-Item' style={{display: 'none'}}>
                             <label>
                                 Trạng thái
                                 <span className='text-danger' style={{color: 'red'}}>  *</span>
