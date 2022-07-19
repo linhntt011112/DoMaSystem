@@ -231,7 +231,7 @@ async def update_cong_van__tep_dinh_kem(
     
     
     
-@router.post('/{cong_van_id}/update/truoc_khi_duyet')
+@router.post('/{cong_van_id}/update')
 async def update_cong_van(
     cong_van_id: int,
     cong_van_version_pydantic: cong_van_schemas.CongVanVersionUpdateBT1,
@@ -242,9 +242,10 @@ async def update_cong_van(
         cong_van: db_models.CongVan = crud_cong_van.get_cong_van_by_id(db, cong_van_id)
         if cong_van is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
-        elif cong_van.cong_van_current_version.id_nguoi_tao != current_user.id:
+        elif cong_van.cong_van_current_version.id_nguoi_tao != current_user.id or cong_van.cong_van_current_version.id_nguoi_ky != current_user.id:
             raise api_exceptions.PERMISSION_EXCEPTION()
         
+        cong_van_version_pydantic.id_nguoi_cap_nhat = current_user.id
         cong_van = crud_cong_van.update_cong_van(db, cong_van, cong_van_version_pydantic)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:

@@ -148,8 +148,9 @@ def create_cong_van_version_from_current_and_data_dict(
     current_data_dict = current_cong_van_version.__dict__
     current_data_dict = {k: current_data_dict[k] for k in current_data_dict if k not in {'_sa_instance_state', 'id'}}
     current_data_dict.update(data_dict)
+    cong_van_version = create_cong_van_version_from_data_dict(current_data_dict)
 
-    return common_queries.add_and_commit(db, db_models.CongVanVersion(**current_data_dict))
+    return common_queries.add_and_commit(db, cong_van_version)
 
 
 def delete_cong_van_version(db, cong_van_version: db_models.CongVanVersion):
@@ -266,9 +267,10 @@ def update_cong_van(db, cong_van: db_models.CongVan,
     
     if cong_van_version_pydantic is not None:
         try:
-            
+            data_dict = cong_van_version_pydantic.__dict__
+            data_dict["thoi_gian_cap_nhat"] = datetime.now()
             new_cong_van_version = create_cong_van_version_from_current_and_data_dict(
-                db, cong_van.cong_van_current_version, cong_van_version_pydantic.__dict__
+                db, cong_van.cong_van_current_version, data_dict
             )
             
             logger.debug(f"{new_cong_van_version.__dict__}")

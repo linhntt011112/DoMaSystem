@@ -1,3 +1,9 @@
+.AddCVDi{
+    flex: 5;
+    position: sticky;
+    top: 60px;
+}
+
 .add-cong-van-di-form{
     flex: 5;
     padding: 20px;

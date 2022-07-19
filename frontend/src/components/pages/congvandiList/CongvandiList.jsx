@@ -171,7 +171,7 @@ export default function CongvandiList(props) {
             <main>
                 <h1 className='cong-van-di-ListTitle'>Danh sách công văn đi</h1>
                 <div className='congVanDiListTop'>
-                    <Button
+                    {/* <Button
                         className='buttonAddCongVan'
                         style={{
                             margin: '10px 10px 10px auto',
@@ -189,7 +189,7 @@ export default function CongvandiList(props) {
                         onClick={() => setButtonPopup(true)}
                     >
                         Thêm mới
-                    </Button>
+                    </Button> */}
                 </div>
                 <div className="dowpdown-filter">
                     <div style={{ width: '200px', display: 'flex', flexDirection: 'column' }}>
@@ -269,8 +269,8 @@ export default function CongvandiList(props) {
                     />
                 </div>
             </main>
-            <AddCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token} refreshFunc={refreshTable}>
-            </AddCongVanDi>
+            {/* <AddCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token} refreshFunc={refreshTable}>
+            </AddCongVanDi> */}
             <ToastContainer className="cong-van-di-notify" />
         </div>
     )
