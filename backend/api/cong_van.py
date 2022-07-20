@@ -279,7 +279,7 @@ async def update_cong_van(
     
     
 
-@router.delete('/{cong_van_id}/delete')
+@router.delete('/{id}/delete')
 async def delete_cong_van(
     id: int,
     # cong_van: cong_van_schemas.CongVanCreate,

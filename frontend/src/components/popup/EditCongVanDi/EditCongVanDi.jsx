@@ -20,7 +20,6 @@ export default function EditCongVanDi(props) {
     const [loai_cong_van_table, setLoaiCongVanTable] = React.useState([]);
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
     const [muc_do_uu_tien_table, setMucDoUuTienTable] = React.useState([]);   
-    const [tinh_trang_xu_ly_table, setTinhTrangXuLyTable] = React.useState([]); 
 
     const [usersList, setUsersList] = useState([]);
     const [usersData, setUsersData] = useState([]);
@@ -132,7 +131,7 @@ export default function EditCongVanDi(props) {
     useEffect(() => {
         fetchOneStaticTableData('phong_ban', setPhongBanTable);
         fetchOneStaticTableData('muc_do_uu_tien', setMucDoUuTienTable);
-        fetchOneStaticTableData('tinh_trang_xu_ly', setTinhTrangXuLyTable);
+        // fetchOneStaticTableData('tinh_trang_xu_ly', setTinhTrangXuLyTable);
         fetchLoaiCongVanTable();
         fetchUsersTableData();
     }, [])
