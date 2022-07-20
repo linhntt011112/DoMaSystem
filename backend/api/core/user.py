@@ -92,6 +92,7 @@ async def decode_token(token: str = Depends(oauth2_scheme)):
         # logger.debug(token)
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
+        exp: int = int(payload.get("exp"))
         if username is None:
             raise credentials_exception
         token_data = TokenData(username=username)

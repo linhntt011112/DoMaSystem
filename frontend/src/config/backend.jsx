@@ -20,23 +20,30 @@ export const LOAI_CONG_VAN_PUT_UPDATE = LOAI_CONG_VAN_PREFIX + '/update'
 export const LOAI_CONG_VAN_DELETE_BY_ID = LOAI_CONG_VAN_PREFIX + '/delete/{id}'
 
 
-export const CONG_VAN_PREFIX = BACKEND_URL + '/cong_van/cong_van'
-export const CONG_VAN_GET_LIST = CONG_VAN_PREFIX + '/list'
+export const CONG_VAN_PREFIX = BACKEND_URL + '/cong_van'
+export const CONG_VAN_GET_LIST_CHO_DUYET = CONG_VAN_PREFIX + '/list/cho_duyet'
+export const CONG_VAN_GET_LIST_CHUA_DUYET = CONG_VAN_PREFIX + '/list/chua_duyet'
+export const CONG_VAN_GET_LIST_CHO_XU_LY = CONG_VAN_PREFIX + '/list/cho_xu_ly'
+export const CONG_VAN_GET_LIST_CHUA_XU_LY = CONG_VAN_PREFIX + '/list/chua_xu_ly'
+
+export const CONG_VAN_PUT_DUYET = CONG_VAN_PREFIX + '/{id}/update/duyet'
+
 export const CONG_VAN_POST_CREATE = CONG_VAN_PREFIX + '/create'
 export const CONG_VAN_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_PREFIX + '/update/tep_dinh_kem'
 export const CONG_VAN_GET_BY_ID = CONG_VAN_PREFIX + '/{id}'
-export const CONG_VAN_DELETE_BY_ID = CONG_VAN_PREFIX + '/delete/{id}'
+export const CONG_VAN_DELETE_BY_ID = CONG_VAN_PREFIX + '/{id}/delete'
 
 
 export const CONG_VAN_VERSION_PREFIX = BACKEND_URL + '/cong_van/version'
 export const CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM = CONG_VAN_VERSION_PREFIX + '/{cong_van_version_id}/download/tep_dinh_kem?download_token={download_token}'
 
 
-export const STATIC_TABLE_GET_LIST = BACKEND_URL + '/{static_table_name}/list';
-export const STATIC_TABLE_POST_CREATE = BACKEND_URL + '/{static_table_name}/create';
-export const STATIC_TABLE_GET_RESET_CACHE = BACKEND_URL + '/{static_table_name}/reset_cache';
-export const STATIC_TABLE_PUT_UPDATE = BACKEND_URL + '/{static_table_name}/update';
-export const STATIC_TABLE_DELETE_BY_ID = BACKEND_URL + '/{static_table_name}/delete/{id}';
+export const STATIC_TABLE_PREFIX = BACKEND_URL + "/static_table"
+export const STATIC_TABLE_GET_LIST = STATIC_TABLE_PREFIX + '/{static_table_name}/list';
+export const STATIC_TABLE_POST_CREATE = STATIC_TABLE_PREFIX + '/{static_table_name}/create';
+export const STATIC_TABLE_GET_RESET_CACHE = STATIC_TABLE_PREFIX + '/{static_table_name}/reset_cache';
+export const STATIC_TABLE_PUT_UPDATE = STATIC_TABLE_PREFIX + '/{static_table_name}/update';
+export const STATIC_TABLE_DELETE_BY_ID = STATIC_TABLE_PREFIX + '/{static_table_name}/delete/{id}';
 
 
 export const makeRequest = async (method, url, token, body=null, contentType="application/json", delete_contentType=false) => {

@@ -29,7 +29,7 @@ get_current_active_user = user_core.get_current_active_user
 
 
 
-router = APIRouter()
+router = APIRouter(prefix="/static_table")
 
 name_to_db_model = {
     'phong_ban': db_models.PhongBan,

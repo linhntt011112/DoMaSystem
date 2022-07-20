@@ -8,8 +8,12 @@ import Comments from "../../comments/Comments";
 import EditCongVanDi from "../../popup/EditCongVanDi/EditCongVanDi";
 import * as backend_config from "../../../config/backend"
 
+import { useUserInfo } from "../../../context/TokenContext";
+
 export default function CongVanDiChiTiet(props) {
     const token = props.token;
+    const {user} = useUserInfo();
+    // console.log(user)
     let history = useHistory();
     const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -20,9 +24,15 @@ export default function CongVanDiChiTiet(props) {
     const [cong_van_versionData, setCong_van_versionData] = useState("");
     // const [downloadTep_dinh_kemUrl, setDownloadTep_dinh_kemUrl] = useState("");
 
+    const refreshFunc = () => {
+        backend_config.makeRequest("GET", backend_config.CONG_VAN_GET_BY_ID.replace('{id}', cong_vanId), token)
+            .then((data) => data.json())
+            .then((data) => setCong_van_versionData(data.cong_van_current_version))
+    }
+
 
     const downloadTep_dinh_kem = (downloadTep_dinh_kemUrl) =>{
-        console.log(cong_van_versionData);
+        // console.log(cong_van_versionData);
         return backend_config.makeRequest("GET", backend_config.COMMON_GET_DOWNLOAD_TOKEN, token)
         .then((response) => response.json())
         .then((download_token) => {
@@ -30,10 +40,32 @@ export default function CongVanDiChiTiet(props) {
         })
     }
 
+
+    const duyet = () => {
+        backend_config.makeRequest("PUT", backend_config.CONG_VAN_PUT_DUYET.replace("{id}", cong_van_versionData.cong_van_id), token)
+        .then((response) => {
+            if (response.ok){
+                response.json().then((response_json) => {
+                    // addPhongBanSuccessNotify(response_json);
+                    history.push('/cong-van-di/cho_xu_ly')
+                })
+            }
+            else {
+                response.text().then((text) => {
+                    let error = JSON.parse(text).detail;
+                    switch (error) {
+                        default:
+                            alert(text);
+                            return;
+                    }
+                })
+            }
+        })
+    }
+
+
     useEffect(() => {
-        backend_config.makeRequest("GET", backend_config.CONG_VAN_GET_BY_ID.replace('{id}', cong_vanId), token)
-            .then((data) => data.json())
-            .then((data) => setCong_van_versionData(data.cong_van_current_version))
+        refreshFunc()
     }, []);
 
     return (
@@ -42,6 +74,8 @@ export default function CongVanDiChiTiet(props) {
                 <div className="congVanDiTitleContainer">
                     <ArrowBack className='congVanDiTitleContainerIcon' onClick={() => history.goBack()} ></ArrowBack>
                     <h1 className='congVanDiTitle'>Thông tin chi tiết</h1>
+                    {cong_van_versionData.id_tinh_trang_xu_ly === 1 && user.id === cong_van_versionData.id_nguoi_ky &&
+                        <button className='congVanDiEdit' onClick={() => duyet()}>Duyệt</button>}
                     <button className='congVanDiEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
                     {/* <EditCongVan trigger={buttonPopup} setTrigger={setButtonPopup} token={token} cong_van_versionData={cong_van_versionData}></EditCongVan> */}
                 </div>
@@ -109,10 +143,10 @@ export default function CongVanDiChiTiet(props) {
                         </div>
                     </div>
                     <div className="thongTinChungColumn2">
-                        <div style={{display:'flex'}}>
+                        {/* <div style={{display:'flex'}}>
                             <div className="column2Title">Người xử lý:</div>
                             <div className="column2Info">{cong_van_versionData.nguoi_xu_ly?.ho_ten}</div>
-                        </div>
+                        </div> */}
                         <div style={{display:'flex'}}>
                             <div className="column2Title">Người theo dõi:</div>
                             <div className="column2Info">{cong_van_versionData.nguoi_theo_doi?.ho_ten}</div>

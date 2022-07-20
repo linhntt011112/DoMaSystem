@@ -1,0 +1,10 @@
+.cong-van-List{
+    flex: 5;
+    position: sticky;
+    top: 60px;
+}
+
+.cong-van-ListTitle{
+    padding: 10px;
+    text-align: center;
+}

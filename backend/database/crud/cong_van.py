@@ -153,8 +153,9 @@ def create_cong_van_version_from_current_and_data_dict(
 
 
 def delete_cong_van_version(db, cong_van_version: db_models.CongVanVersion):
-    if cong_van_version.id_tep_dinh_kem is not None:
-        cong_van_version.id_tep_dinh_kem = None
+    if cong_van_version.tep_dinh_kem is not None:
+        # cong_van_version.id_tep_dinh_kem = None
+        # logger.info(f"{cong_van_version.__dict__}")
         delete_save_file(db, cong_van_version.tep_dinh_kem)
     return common_queries.delete(db, cong_van_version)
 
@@ -165,9 +166,9 @@ def delete_cong_van_version(db, cong_van_version: db_models.CongVanVersion):
 def select_list_cong_van(db, limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_tinh_trang_xu_ly: int = None,
-                        id_muc_do_uu_tien: int = None):
+                        id_muc_do_uu_tien: int = None,
+                        condition=None):
     
-    condition = None
     class_ = db_models.CongVanVersion
     if id_loai_cong_van is not None:
         if condition is None:
@@ -201,6 +202,23 @@ def get_cong_van_by_id(db, cong_van_id):
         return cong_van[0]
     else:
         return None
+    
+    
+    
+# def get_cong_van_by_id_and_user(db, cong_van_id, user: db_models.NguoiDung):
+#     class_ = db_models.CongVanVersion
+#     condition = (class_.id == cong_van_id) & \
+#                 (
+#                     (user.id == class_.id_nguoi_tao) | \
+#                     (user.id == class_.id_nguoi_ky) | \
+#                     (user.id == class_.id_nguoi_xu_ly) | \
+#                     (user.id == class_.id_nguoi_theo_doi)
+#                 )
+#     cong_van = common_queries.query_filter(db, db_models.CongVan, condition=(db_models.CongVan.id == cong_van_id))
+#     if len(cong_van) >= 1:
+#         return cong_van[0]
+#     else:
+#         return None
 
 
 
@@ -296,3 +314,32 @@ def delete_save_file(db, save_file: db_models.SaveFile):
     
     return common_queries.delete(db, save_file)
 
+
+
+#########################################################################
+
+
+
+def get_cong_van_luu_tru_by_id(db, cong_van_id):
+    cong_van = common_queries.query_filter(db, db_models.CongVanLuuTru, condition=(db_models.CongVanLuuTru.id == cong_van_id))
+    if len(cong_van) >= 1:
+        return cong_van[0]
+    else:
+        return None
+
+
+def create_cong_van_luu_tru(db, cong_van_luu_tru_pydantic: cong_van_schemas.CongVanLuuTruCreate):
+
+    now = datetime.now()
+    data_dict = cong_van_luu_tru_pydantic.__dict__
+    data_dict["create_at"] = now
+    data_dict["update_at"] = now
+    cong_van = db_models.CongVanLuuTru(**data_dict)
+    return  common_queries.add_and_commit(db, cong_van)
+    
+
+def update_cong_van_luu_tru(db, cong_van_luu_tru: db_models.CongVanLuuTru):
+
+    now = datetime.now()
+    cong_van_luu_tru.update_at = now
+    return  common_queries.add_and_commit(db, cong_van_luu_tru)

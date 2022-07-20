@@ -3,7 +3,7 @@
     color: #ebecf1;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 10px 10px 0px 10px;
     list-style: none;
     height: 60px;
     text-decoration: none;
@@ -23,7 +23,7 @@
 .dropdown-link{
     background: #414757;
     height: 60px;
-    padding-left: 3rem;
+    padding-left: 2rem;
     display: flex;
     align-items: center;
     text-decoration: none;

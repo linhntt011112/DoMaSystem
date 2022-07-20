@@ -7,6 +7,21 @@ from database.db_models import PhanQuyen, GioiTinh
 from . import static_tables
 
 
+
+class UserShort(BaseModel):
+    id: int
+    ho_ten: str
+    ten_tai_khoan: str
+
+    phan_quyen: PhanQuyen.type 
+
+    phong_ban: static_tables.PhongBanFull
+    chuc_vu: static_tables.ChucVuFull
+    
+    class Config:
+        orm_mode = True
+        
+
 class UserBase(BaseModel):
     id: int
     ho_ten: str
@@ -40,6 +55,7 @@ class UserBase(BaseModel):
     
     class Config:
         orm_mode = True
+        
         
 
 class UserBaseFirstTime(UserBase):

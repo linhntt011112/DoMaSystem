@@ -32,6 +32,11 @@ export const SidebarDataAdmin = [
                 path: '/management/chuc-vu',
                 icon: <RiIcons.RiGitRepositoryFill />,
             },
+            {
+                title: 'Sổ lưu trữ công văn',
+                path: '/management/so-luu-tru',
+                icon: <AiIcons.AiFillBook />,
+            },
         ]
     },
 ]

@@ -37,7 +37,7 @@ class LoaiCongVanFull(BaseModel):
     trang_thai: str
     
     id_nguoi_cap_nhat: int
-    nguoi_cap_nhat: nguoi_dung.UserBase
+    nguoi_cap_nhat: nguoi_dung.UserShort
     thoi_gian_cap_nhat: datetime.datetime
     
     mo_ta: str = None
@@ -94,7 +94,7 @@ class CongVanVersionFull(BaseModel):
     phong_ban_nhan: static_tables.PhongBanFull
     
     id_nguoi_ky: int
-    nguoi_ky: nguoi_dung.UserBase
+    nguoi_ky: nguoi_dung.UserShort
     
     ngay_ky: Union[datetime.datetime, datetime.date] = None
     # ngay_hieu_luc: Union[datetime.datetime, datetime.date]
@@ -111,11 +111,11 @@ class CongVanVersionFull(BaseModel):
     noi_dung: str
     
     id_nguoi_xu_ly: int 
-    nguoi_xu_ly: nguoi_dung.UserBase
+    nguoi_xu_ly: nguoi_dung.UserShort
     ngay_hoan_tat: Union[datetime.datetime, datetime.date] = None
     
     id_nguoi_theo_doi: int = None
-    nguoi_theo_doi: nguoi_dung.UserBase = None
+    nguoi_theo_doi: nguoi_dung.UserShort = None
     
     id_tinh_trang_xu_ly: int 
     tinh_trang_xu_ly: static_tables.TinhTrangXuLyFull
@@ -131,17 +131,17 @@ class CongVanVersionFull(BaseModel):
     tep_dinh_kem: SaveFileFull = None
     
     id_nguoi_tao: int 
-    nguoi_tao: nguoi_dung.UserBase
+    nguoi_tao: nguoi_dung.UserShort
     
     # id_nguoi_duyet: int
-    # nguoi_duyet: nguoi_dung.UserBase
+    # nguoi_duyet: nguoi_dung.UserShort
     
     ngay_tao: Union[datetime.datetime, datetime.date]
     
     thoi_gian_cap_nhat: Union[datetime.datetime, datetime.date]
     
     id_nguoi_cap_nhat: int
-    nguoi_cap_nhat: nguoi_dung.UserBase
+    nguoi_cap_nhat: nguoi_dung.UserShort
     noi_dung_thay_doi: str = None
     cong_van_id: int = None
     
@@ -183,7 +183,7 @@ class CongVanVersionCreate(BaseModel):
     thoi_gian_cap_nhat: Union[datetime.datetime, datetime.date] = None
     
     id_nguoi_cap_nhat: int = None
-    # nguoi_cap_nhat: nguoi_dung.UserBase
+    # nguoi_cap_nhat: nguoi_dung.UserShort
     noi_dung_thay_doi: str = None
     cong_van_id: int = None
 
@@ -231,7 +231,7 @@ class CongVanVersionUpdateBT1(CongVanVersionUpdate):
     thoi_gian_cap_nhat: Union[datetime.datetime, datetime.date] = None
     
     id_nguoi_cap_nhat: int = None
-    # nguoi_cap_nhat: nguoi_dung.UserBase
+    # nguoi_cap_nhat: nguoi_dung.UserShort
     noi_dung_thay_doi: str = None
     cong_van_id: int = None
     
@@ -265,11 +265,69 @@ class CongVanCurrent(BaseModel):
     
     cong_van_current_version_id: int
     cong_van_current_version: CongVanVersionFull
+    
+    create_at: Union[datetime.datetime, datetime.date]
+    update_at: Union[datetime.datetime, datetime.date]
+    
     class Config:
         orm_mode = True
 
 
 class CongVanCreate(BaseModel):   
     cong_van_current_version_id: int = None
+    
+    
+
+###########################################################################
+
+class CongVanLuuTruCreate(BaseModel):
+    ten_cong_van: str = None
+   
+    phong_ban_nhan: str = None
+   
+    nguoi_ky: str = None
+    ngay_ky: Union[datetime.datetime, datetime.date] = None
+   
+   
+    phong_ban_phat_hanh: str = None
+   
+    loai_cong_van: str = None
+   
+    noi_dung: str = None
+   
+    nguoi_xu_ly: str = None
+    
+    ngay_hoan_tat: Union[datetime.datetime, datetime.date] = None
+   
+    nguoi_theo_doi: str = None
+    tinh_trang_xu_ly: str = None
+   
+    ly_do: str =  None
+    so_luong_van_ban: int  = None
+   
+    # id_muc_do_bao_mat = Column(Integer, ForeignKey('muc_do_bao_mat.id'), nullable=False)
+    # muc_do_bao_mat = relationship("MucDoBaoMat", backref="cong_van", uselist=False)
+   
+    muc_do_uu_tien: str = None
+   
+   
+    nguoi_tao: str = None
+
+    ngay_tao: Union[datetime.datetime, datetime.date] = None
+    
+    
+
+class CongVanLuuTruFull(CongVanLuuTruCreate):
+    id: int
+    
+    id_tep_dinh_kem: int = None
+    tep_dinh_kem: SaveFileFull = None
+    create_at: Union[datetime.datetime, datetime.date]
+    update_at: Union[datetime.datetime, datetime.date]
+    
+    class Config:
+        orm_mode=True
+    
+    
     
     

@@ -1,0 +1,25 @@
+.chuc-vu-List{
+    flex: 5;
+    position: sticky;
+    top: 60px;
+}
+
+.chuc-vu-ListTitle{
+    padding: 10px;
+    text-align: center;
+}
+
+.chuc-vu-list-EditIcon{
+    padding-right: 5px;
+    cursor: pointer;
+    color: #3bb077;
+}
+
+.chuc-vu-list-Delete{
+    color: red;
+    cursor: pointer;
+}
+
+.chuc-vu-notify{
+    top: 4em !important;
+}

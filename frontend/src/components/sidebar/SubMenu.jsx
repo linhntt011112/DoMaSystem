@@ -8,7 +8,7 @@ export default function SubMenu({item}) {
     const showSubNav = (e) => {
         e.preventDefault();
         setSubNav(!subnav);
-        console.log(subnav);
+        // console.log(subnav);
     }
 
     return (
