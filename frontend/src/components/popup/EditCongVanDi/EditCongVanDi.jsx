@@ -39,6 +39,7 @@ export default function EditCongVanDi(props) {
     const [muc_do_uu_tien, setMucDoUuTien] = React.useState(cong_van_versionData.id_muc_do_uu_tien);
     // const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
     const [nguoi_xu_ly, setNguoiXuLy] = React.useState(cong_van_versionData.id_nguoi_xu_ly);
+    console.log(cong_van_versionData)
 
     const [ly_do, setLyDo] = React.useState(cong_van_versionData.ly_do);
 
@@ -125,6 +126,9 @@ export default function EditCongVanDi(props) {
                 // console.log(usersData_)
                 setUsersData(usersData_);
                 setUsersList(data);
+
+                setUsersData_PhongBan(usersData_[nguoi_ky])
+                setUsersData_NoiNhan(usersData_[nguoi_xu_ly])
             })
     }
 
@@ -134,6 +138,8 @@ export default function EditCongVanDi(props) {
         // fetchOneStaticTableData('tinh_trang_xu_ly', setTinhTrangXuLyTable);
         fetchLoaiCongVanTable();
         fetchUsersTableData();
+
+
     }, [])
 
     const addCongVanSuccessNotify = (response_json) => {
@@ -358,7 +364,7 @@ export default function EditCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={nguoi_xu_ly}
+                                            value={nguoi_ky}
                                             onChange={handleChangeNguoiKy}
                                             style={{
                                                 height: '36px'
