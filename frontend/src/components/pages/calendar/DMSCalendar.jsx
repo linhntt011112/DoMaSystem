@@ -84,6 +84,7 @@ function DMSCalendar(props) {
                 endAccessor="end"
                 selectable
                 tooltipAccessor={null}
+                style={{position: 'inherit'}}
             />
             <AddEvent trigger={addButtonPopup} setTrigger={setAddButtonPopup}
                 token={token}>

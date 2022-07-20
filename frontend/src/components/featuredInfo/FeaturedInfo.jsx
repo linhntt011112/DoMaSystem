@@ -38,17 +38,6 @@ export default function FeaturedInfo() {
                     </span>
                 </div>
             </div>
-            <div className='featuredItem'>
-                <div className='featuredMoneyContainer'>
-                    <span className='featuredMoney'>
-                        <Group/>
-                    </span>
-                    <span className='featuredMoneyRate'>
-                        <h3>218</h3>
-                        <span>Documents</span>
-                    </span>
-                </div>
-            </div>
         </div>
     )
 }

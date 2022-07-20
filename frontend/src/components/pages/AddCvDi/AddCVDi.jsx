@@ -279,8 +279,7 @@ export default function AddCongVanDi(props) {
     }
 
     return <div className="AddCVDi">
-            <form className="popup-inner" onSubmit={handleSubmit}>
-                <Close className="close-btn" onClick={handleClose}/>
+            <form className="add-cvdi-popup-inner" onSubmit={handleSubmit}>
                 <div className="cong-van-di-add">
                     <div className="cong-van-di-add-header">
                         <span className="cong-van-di-add-title">Thêm mới công văn đi</span>
@@ -325,7 +324,7 @@ export default function AddCongVanDi(props) {
                             </div>
                             <div className='cong-van-di-add-item'>
                                 <label>
-                                    Người nhận
+                                    Người nhận và xử lý
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-di-add-select'>
@@ -373,7 +372,7 @@ export default function AddCongVanDi(props) {
                             </div>
                             <div className='cong-van-di-add-item'>
                                 <label>
-                                    Người ký
+                                    Người duyệt và ký
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <Box className='cong-van-di-add-select'>
@@ -414,31 +413,6 @@ export default function AddCongVanDi(props) {
                                     }}
                                 />
                             </div> */}
-                            <div className='cong-van-di-add-item'>
-                                <label>
-                                    Loại công văn
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <Box className='cong-van-di-add-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            onChange={handleChangeLoaiCongVan}
-                                            // defaultValue={3}
-                                            style={{
-                                                height: '36px'
-                                            }}
-                                            required
-                                        >
-                                            {loai_cong_van_table.map((item) => {
-                                                    
-                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </div>
                             <div className='cong-van-di-add-item'>
                                 <label>
                                     Người tạo
@@ -492,46 +466,33 @@ export default function AddCongVanDi(props) {
                                     </FormControl>
                                 </Box>
                             </div> */}
-                        {/* </div>
+                        </div>
                         <div className="cong-van-di-add-body-column-2">
-                            <div className="cong-van-di-add-item">
-                                <label>
-                                    Ngày hiệu lực
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <input 
-                                    type="date" 
-                                    className='datepicker' 
-                                    onKeyDown={(e) => {
-                                        e.preventDefault();
-                                    }}
-                                    onChange={(e) => setNgayHieuLuc(e.target.value)}
-                                    //required
-                                    style={{
-                                        width: '244px',
-                                        fontSize: '15px',
-                                        paddingLeft: '10.5px'
-                                    }}
-                                />
-                            </div>
                             <div className='cong-van-di-add-item'>
                                 <label>
-                                    Ngày hết hiệu lực
+                                    Loại công văn
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <input 
-                                    type="date" 
-                                    className='datepicker' 
-                                    onKeyDown={(e) => {
-                                        e.preventDefault();
-                                    }}
-                                    onChange={(e) => setNgayHetHieuLuc(e.target.value)}
-                                    style={{
-                                        width: '244px',
-                                        fontSize: '15px',
-                                        paddingLeft: '10.5px'
-                                    }}
-                                />
-                            </div> */}
+                                <Box className='cong-van-di-add-select'>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="demo-simple-select"
+                                            onChange={handleChangeLoaiCongVan}
+                                            // defaultValue={3}
+                                            style={{
+                                                height: '36px'
+                                            }}
+                                            required
+                                        >
+                                            {loai_cong_van_table.map((item) => {
+                                                    
+                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                            })}
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </div>
                             <div className='cong-van-di-add-item'>
                                 <label>
                                     Mức độ ưu tiên
@@ -576,7 +537,7 @@ export default function AddCongVanDi(props) {
                                     }}
                                 />
                             </div> */}
-                            <div className="cong-van-di-add-item">
+                            <div className="cong-van-di-add-item" style={{display: 'none'}}>
                                 <label>
                                     Số lượng văn bản
                                 </label>
