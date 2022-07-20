@@ -231,7 +231,7 @@ async def update_cong_van__tep_dinh_kem(
     
     
     
-@router.post('/{cong_van_id}/update')
+@router.put('/{cong_van_id}/update')
 async def update_cong_van(
     cong_van_id: int,
     cong_van_version_pydantic: cong_van_schemas.CongVanVersionUpdateBT1,

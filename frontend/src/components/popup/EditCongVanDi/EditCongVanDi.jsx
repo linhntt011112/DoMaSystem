@@ -30,7 +30,7 @@ export default function EditCongVanDi(props) {
     const [noi_nhan, setNoiNhan] = React.useState(cong_van_versionData.id_phong_ban_nhan);
     const [nguoi_ky, setNguoiKy] = React.useState(cong_van_versionData.id_nguoi_ky);
     // const [ngay_ky, setNgayKy] = React.useState(null);
-    const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(cong_van_versionData.bo_phan_phat_hanh);
+    const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(cong_van_versionData.id_phong_ban_phat_hanh);
     const [loai_cong_van, setLoaiCongVan] = React.useState(cong_van_versionData.id_loai_cong_van);
     const [nguoi_theo_doi, setNguoiTheoDoi] = React.useState(cong_van_versionData.id_nguoi_theo_doi);
     
@@ -206,8 +206,8 @@ export default function EditCongVanDi(props) {
         new_body = JSON.stringify(new_body)
         console.log(new_body)
 
-        backend_config.makeRequest("POST", 
-            backend_config.CONG_VAN_POST_CREATE, 
+        backend_config.makeRequest("PUT", 
+            backend_config.CONG_VAN_PUT_UPDATE, 
             token,
             new_body,
         )
@@ -267,6 +267,7 @@ export default function EditCongVanDi(props) {
                                 </label>
                                 <input
                                     type="text"
+                                    value={ten_cong_van}
                                     className='cong-van-di-update-input'
                                     onChange={(e) => setTenCongVan(e.target.value)}
                                     required
@@ -283,6 +284,7 @@ export default function EditCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeNoiNhan}
+                                            value={noi_nhan}
                                             style={{
                                                 height: '36px'
                                             }}
@@ -306,6 +308,7 @@ export default function EditCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
+                                            value={nguoi_xu_ly}
                                             onChange={handleChangeNguoiXuLy}
                                             // defaultValue={3}
                                             style={{
@@ -330,6 +333,7 @@ export default function EditCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
+                                            value={bo_phan_phat_hanh}
                                             onChange={handleChangeBoPhanPhatHanh}
                                             style={{
                                                 height: '36px'
@@ -354,6 +358,7 @@ export default function EditCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
+                                            value={nguoi_xu_ly}
                                             onChange={handleChangeNguoiKy}
                                             style={{
                                                 height: '36px'
@@ -368,25 +373,6 @@ export default function EditCongVanDi(props) {
                                     </FormControl>
                                 </Box>
                             </div>
-                            {/* <div className='cong-van-di-add-item'>
-                                <label>
-                                    Ngày ký
-                                </label>
-                                <input 
-                                    type="date" 
-                                    className='datepicker' 
-                                    onKeyDown={(e) => {
-                                        e.preventDefault();
-                                    }}
-                                    onChange={(e) => setNgayKy(e.target.value)}
-                                    //required
-                                    style={{
-                                        width: '244px',
-                                        fontSize: '15px',
-                                        paddingLeft: '10.5px'
-                                    }}
-                                />
-                            </div> */}
                         </div>
                         <div className="cong-van-di-update-body-column-2">
                             <div className='cong-van-di-update-item'>
@@ -399,6 +385,7 @@ export default function EditCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
+                                            value={loai_cong_van}
                                             onChange={handleChangeLoaiCongVan}
                                             // defaultValue={3}
                                             style={{
@@ -425,6 +412,7 @@ export default function EditCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
+                                            value={muc_do_uu_tien}
                                             onChange={handleChangeMucDoUuTien}
                                             // defaultValue={3}
                                             style={{
@@ -439,26 +427,6 @@ export default function EditCongVanDi(props) {
                                     </FormControl>
                                 </Box>
                             </div>
-                            {/* <div className='cong-van-di-add-item'>
-                                <label>
-                                    Ngày phát hành
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <input 
-                                    type="date" 
-                                    className='datepicker' 
-                                    onKeyDown={(e) => {
-                                        e.preventDefault();
-                                    }}
-                                    onChange={(e) => setNgayPhatHanh(e.target.value)}
-                                    //required
-                                    style={{
-                                        width: '244px',
-                                        fontSize: '15px',
-                                        paddingLeft: '10.5px'
-                                    }}
-                                />
-                            </div> */}
                             <div className="cong-van-di-update-item" style={{display: 'none'}}>
                                 <label>
                                     Số lượng văn bản
@@ -486,6 +454,7 @@ export default function EditCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
+                                            value={nguoi_theo_doi}
                                             onChange={handleChangeNguoiTheoDoi}
                                             // defaultValue={3}
                                             style={{
@@ -509,7 +478,7 @@ export default function EditCongVanDi(props) {
                         </label>
                         <input
                             type="text"
-                            // value="3969"
+                            value={ly_do}
                             className='cong-van-di-update-input-reason'
                             onChange={(e) => setLyDo(e.target.value)}
                         />
