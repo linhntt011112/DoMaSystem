@@ -5,8 +5,9 @@ import { Close } from '@material-ui/icons';
 import OutsideAlerter from "../Common/OutsideClick";
 
 export default function DetailLoaiCongVan(props) {
+    const {loai_cong_van, token } = props;
     
-    return(props.trigger) ? (
+    return(props.trigger && props.mark === loai_cong_van?.id) ? (
         <div className="popup-main">
             <OutsideAlerter setTrigger={props.setTrigger}>    
                 <form className="chi-tiet-loai-cong-van-popup-inner">
@@ -23,7 +24,7 @@ export default function DetailLoaiCongVan(props) {
                             <input 
                                 type="text"
                                 className="loaiCongVanDetailInput"
-                                placeholder="PD"
+                                placeholder={loai_cong_van?.ma_loai}
                                 disabled="true"
                             />
                         </div>
@@ -35,7 +36,7 @@ export default function DetailLoaiCongVan(props) {
                             <input 
                                 type="text"
                                 className="loaiCongVanDetailInput"
-                                placeholder="Phuc dap"
+                                placeholder={loai_cong_van?.name}
                                 disabled="true"
                             />
                         </div>
@@ -46,32 +47,9 @@ export default function DetailLoaiCongVan(props) {
                             <textarea 
                                 type="text"
                                 className="loaiCongVanDetailInput"
-                                value="Lâu nay nghe mọi người khen nương nương này sang, nương nương kia sang mà vẫn không xác định được tiêu chuẩn sang của quý vị nó như thế nào."
+                                value={loai_cong_van?.mo_ta}
                                 disabled="true"
                             />
-                        </div>
-                        <div className="loaiCongVanDetailItem">
-                            <label>
-                                Trạng thái
-                                <span className='text-danger' style={{color: 'red'}}> *</span>
-                            </label>
-                            <Box sx={{ }} style={{width: '100%'}}>
-                                <FormControl fullWidth>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        // value={loaiTrangThai}
-                                        // onChange={handleChangeLoaiTrangThai}
-                                        defaultValue={3}
-                                        disabled="true"
-                                        style={{height: '36px'}}
-                                    >
-                                        <MenuItem value={1}>Hoạt động 1</MenuItem>
-                                        <MenuItem value={2}>Hoạt động 2</MenuItem>
-                                        <MenuItem value={3}>Hoạt động 3</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Box>
                         </div>
                     </div>
                 </form>

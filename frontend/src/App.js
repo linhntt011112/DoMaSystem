@@ -20,6 +20,7 @@ import UserRoute from './routes/user/UserRoute';
 import PhongBanList from './components/pages/PhongBanList/PhongBanList';
 import ChucVuList from './components/pages/ChucVuList/ChucVuList';
 import CongVanList from './components/pages/CongVanList/CongVanList';
+import AddCVDi from './components/pages/AddCvDi/AddCVDi';
 
 import * as backend_config from './config/backend'
 
@@ -40,6 +41,7 @@ const App = () => {
             <AdminRoute exact path="/management/chuc-vu/" component={ChucVuList}/>
             <AdminRoute exact path="/management/so-luu-tru/" component={CongVanList}/>
 
+            <UserRoute exact path="/cong-van-di/add_cvdi" component={AddCVDi} />
             <UserRoute exact path="/cong-van-di/cho_duyet" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHO_DUYET}/>
             <UserRoute exact path="/cong-van-di/chua_duyet" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHUA_DUYET}/>
             <UserRoute exact path="/cong-van-di/cho_xu_ly" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHO_XU_LY}/>
@@ -47,6 +49,7 @@ const App = () => {
             <UserRoute exact path="/cong-van-di/:cong_vanId" component={CongVanChiTiet}/>
             <UserRoute exact path="/cong-van-den/" component={CongVanDenList}/>
             <UserRoute exact path="/cong-van-den/:socongvan" component={CongVanDenChiTiet}/>
+            
 
             <UserRoute exact path="/calendar" component={DMSCalendar}/>
             <UserRoute exact path="/my-profile" component={MyProfile}/>

@@ -42,12 +42,6 @@ export default function LoaicongvanList(props) {
         { field: 'ma_loai', headerName: 'Kí hiệu', width: 130},
         { field: 'name', headerName: 'Tên loại công văn', flex: 1 },
         {
-            field: 'trang_thai',
-            headerName: 'Trạng thái',
-            width: 150,
-            valueGetter: (params) => params.row?.trang_thai === 'hoat_dong' ? 'Hoạt động' : 'Không hoạt động',
-        },
-        {
             field: 'nguoi_cap_nhat',
             headerName: 'Người cập nhật',
             flex: 1,
@@ -65,8 +59,14 @@ export default function LoaicongvanList(props) {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Visibility className='loai-cong-van-list-View' onClick={() => setDetailButtonPopup(true)}></Visibility>
-                        <DetailLoaiCongVan trigger={detailButtonPopup} setTrigger={setDetailButtonPopup}>
+                        <Visibility className='loai-cong-van-list-View' onClick={() => {setMark(params.row.id); setDetailButtonPopup(true)}}></Visibility>
+                        <DetailLoaiCongVan 
+                            trigger={detailButtonPopup} 
+                            setTrigger={setDetailButtonPopup}
+                            token={token} 
+                            loai_cong_van={params.row} 
+                            mark={mark}
+                        >
                         </DetailLoaiCongVan>
 
                         <Edit className='loai-cong-van-list-EditIcon' onClick={() => {setMark(params.row.id); setEditButtonPopup(true)}}></Edit>

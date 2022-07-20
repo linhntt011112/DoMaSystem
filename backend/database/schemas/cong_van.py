@@ -233,7 +233,7 @@ class CongVanVersionUpdateBT1(CongVanVersionUpdate):
     id_nguoi_cap_nhat: int = None
     # nguoi_cap_nhat: nguoi_dung.UserShort
     noi_dung_thay_doi: str = None
-    cong_van_id: int = None
+    # cong_van_id: int = None
     
     
         

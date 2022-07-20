@@ -77,7 +77,7 @@ export default function CongVanDiChiTiet(props) {
                     {cong_van_versionData.id_tinh_trang_xu_ly === 1 && user.id === cong_van_versionData.id_nguoi_ky &&
                         <button className='congVanDiEdit' onClick={() => duyet()}>Duyệt</button>}
                     <button className='congVanDiEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
-                    {/* <EditCongVan trigger={buttonPopup} setTrigger={setButtonPopup} token={token} cong_van_versionData={cong_van_versionData}></EditCongVan> */}
+                    <EditCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token} cong_van_versionData={cong_van_versionData}></EditCongVanDi>
                 </div>
                 <div className="thongTinChungContainer">
                     <div className="thongTinChungColumn1">

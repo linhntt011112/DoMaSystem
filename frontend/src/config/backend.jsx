@@ -37,6 +37,11 @@ export const CONG_VAN_DELETE_BY_ID = CONG_VAN_PREFIX + '/{id}/delete'
 export const CONG_VAN_VERSION_PREFIX = BACKEND_URL + '/cong_van/version'
 export const CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM = CONG_VAN_VERSION_PREFIX + '/{cong_van_version_id}/download/tep_dinh_kem?download_token={download_token}'
 
+<<<<<<< HEAD
+=======
+export const CONG_VAN_LUU_TRU_PREFIX = BACKEND_URL + '/cong_van/luu_tru'
+export const CONG_VAN_LUU_TRU_POST_CREATE = CONG_VAN_LUU_TRU_PREFIX + '/create'
+>>>>>>> d36618e2eacc6987db07083d8fde46dae0a3edae
 
 export const STATIC_TABLE_PREFIX = BACKEND_URL + "/static_table"
 export const STATIC_TABLE_GET_LIST = STATIC_TABLE_PREFIX + '/{static_table_name}/list';

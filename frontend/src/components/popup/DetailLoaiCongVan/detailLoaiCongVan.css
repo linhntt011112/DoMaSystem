@@ -3,6 +3,8 @@
 }
 .loaiCongVanDetailItem{
     padding: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .loaiCongVanDetailItem>label{
@@ -31,7 +33,7 @@
 .chi-tiet-loai-cong-van-popup-inner{
     position: relative;
     padding: 32px;
-    width: fit-content;
+    width: 100%;
     background-color: #FFF;
     overflow: scroll;
     top: 45px;
