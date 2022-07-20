@@ -99,46 +99,30 @@ export default function CongVanDiChiTiet(props) {
                                 <div className="columnChildren1Info">{cong_van_versionData.phong_ban_nhan?.name}</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren1Title">Người nhận:</div>
+                                <div className="columnChildren1Title">Người nhận và xử lý:</div>
                                 <div className="columnChildren1Info">{cong_van_versionData.nguoi_xu_ly?.ho_ten}</div>
-                            </div>
-                            <div style={{display: 'flex'}}>
-                                <div className="columnChildren1Title">Bộ phận phát hành:</div>
-                                <div className="columnChildren1Info">{cong_van_versionData.phong_ban_phat_hanh?.name}</div>
-                            </div>
-                            <div style={{display: 'flex'}}>
-                                <div className="columnChildren1Title">Người ký:</div>
-                                <div className="columnChildren1Info">{cong_van_versionData.nguoi_ky?.ho_ten}</div>
-                            </div>
-                            <div style={{display: 'flex'}}>
-                                <div className="columnChildren1Title">Ngày ký:</div>
-                                <div className="columnChildren1Info">{cong_van_versionData.ngay_ky?.split('T')[0]}</div>
                             </div>
                         </div>
                         <div className="columnChildren2">
-                            <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Ngày hiệu lực:</div>
-                                <div className="columnChildren2Info">{cong_van_versionData.ngay_hieu_luc?.split('T')[0]}</div>
-                            </div>
-                            <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Ngày hết hiệu lực:</div>
-                                <div className="columnChildren2Info">{cong_van_versionData.ngay_het_hieu_luc?.split('T')[0]}</div>
-                            </div>
-                            <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Số lượng văn bản:</div>
-                                <div className="columnChildren2Info">{cong_van_versionData.so_luong_van_ban}</div>
-                            </div>
                             <div style={{display: 'flex'}}>
                                 <div className="columnChildren2Title">Mức độ ưu tiên:</div>
                                 <div className="columnChildren2Info">{cong_van_versionData.muc_do_uu_tien?.name}</div>
                             </div>
                             <div style={{display: 'flex'}}>
-                                <div className="columnChildren2Title">Ngày phát hành:</div>
-                                <div className="columnChildren2Info">{cong_van_versionData.ngay_phat_hanh?.split('T')[0]}</div>
-                            </div>
-                            <div style={{display: 'flex'}}>
                                 <div className="columnChildren2Title">Loại công văn:</div>
                                 <div className="columnChildren2Info">{cong_van_versionData.loai_cong_van?.name}</div>
+                            </div>
+                            <div style={{display: 'flex'}}>
+                                <div className="columnChildren2Title">Bộ phận phát hành:</div>
+                                <div className="columnChildren2Info">{cong_van_versionData.phong_ban_phat_hanh?.name}</div>
+                            </div>
+                            <div style={{display: 'flex'}}>
+                                <div className="columnChildren2Title">Người duyệt và ký:</div>
+                                <div className="columnChildren2Info">{cong_van_versionData.nguoi_ky?.ho_ten}</div>
+                            </div>
+                            <div style={{display: 'flex'}}>
+                                <div className="columnChildren2Title">Ngày ký:</div>
+                                <div className="columnChildren2Info">{cong_van_versionData.ngay_ky?.split('T')[0]}</div>
                             </div>
                         </div>
                     </div>
@@ -162,14 +146,6 @@ export default function CongVanDiChiTiet(props) {
                         <div style={{display:'flex'}}>
                             <div className="column2Title">Ngày tạo:</div>
                             <div className="column2Info">{cong_van_versionData.ngay_tao?.split('T')[0]}</div>
-                        </div>
-                        <div style={{display:'flex'}}>
-                            <div className="column2Title">Người duyệt:</div>
-                            <div className="column2Info">{cong_van_versionData.nguoi_duyet?.ho_ten}</div>
-                        </div>
-                        <div style={{display:'flex'}}>
-                            <div className="column2Title">Ngày duyệt:</div>
-                            <div className="column2Info">{cong_van_versionData.ngay_duyet?.split('T')[0]}</div>
                         </div>
                     </div>
                 </div> 

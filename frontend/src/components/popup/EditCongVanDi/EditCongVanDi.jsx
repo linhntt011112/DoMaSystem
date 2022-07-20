@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Close } from '@material-ui/icons';
-import "./addCongVanDi.css";
+import "./editCongVanDi.css";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
@@ -252,33 +252,33 @@ export default function EditCongVanDi(props) {
     }
 
     return (props.trigger) ? (
-        <div className="popup-main">
+        <div className="popup-main" style={{left: '115px'}}>
             <form className="popup-inner" onSubmit={handleSubmit}>
                 <Close className="close-btn" onClick={handleClose}/>
-                <div className="cong-van-di-add">
-                    <div className="cong-van-di-add-header">
-                        <span className="cong-van-di-add-title">Thêm mới công văn đi</span>
+                <div className="cong-van-di-update">
+                    <div className="cong-van-di-update-header">
+                        <span className="cong-van-di-update-title">Chỉnh sửa công văn đi</span>
                     </div>
-                    <div className="cong-van-di-add-body">
-                        <div className="cong-van-di-add-body-column-1">
-                            <div className="cong-van-di-add-item">
+                    <div className="cong-van-di-update-body">
+                        <div className="cong-van-di-update-body-column-1">
+                            <div className="cong-van-di-update-item">
                                 <label>
                                     Tên công văn
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input
                                     type="text"
-                                    className='cong-van-di-add-input'
+                                    className='cong-van-di-update-input'
                                     onChange={(e) => setTenCongVan(e.target.value)}
                                     required
                                 />
                             </div>
-                            <div className="cong-van-di-add-item">
+                            <div className="cong-van-di-update-item">
                                 <label>
                                     Nơi nhận
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <Box sx={{ width: 258 }}>
+                                <Box sx={{ width: 265 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -297,12 +297,12 @@ export default function EditCongVanDi(props) {
                                     </FormControl>
                                 </Box>
                             </div>
-                            <div className='cong-van-di-add-item'>
+                            <div className='cong-van-di-update-item'>
                                 <label>
-                                    Người nhận
+                                    Người nhận và xử lý
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <Box className='cong-van-di-add-select'>
+                                <Box className='cong-van-di-update-select'>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -321,12 +321,12 @@ export default function EditCongVanDi(props) {
                                     </FormControl>
                                 </Box>
                             </div>
-                            <div className='cong-van-di-add-item'>
+                            <div className='cong-van-di-update-item'>
                                 <label>
                                     Bộ phận phát hành
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <Box sx={{ width: 258 }}>
+                                <Box sx={{ width: 265 }}>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -345,12 +345,12 @@ export default function EditCongVanDi(props) {
                                     </FormControl>
                                 </Box>
                             </div>
-                            <div className='cong-van-di-add-item'>
+                            <div className='cong-van-di-update-item'>
                                 <label>
-                                    Người ký
+                                    Người duyệt và ký
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <Box className='cong-van-di-add-select'>
+                                <Box className='cong-van-di-update-select'>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -388,12 +388,14 @@ export default function EditCongVanDi(props) {
                                     }}
                                 />
                             </div> */}
-                            <div className='cong-van-di-add-item'>
+                        </div>
+                        <div className="cong-van-di-update-body-column-2">
+                            <div className='cong-van-di-update-item'>
                                 <label>
                                     Loại công văn
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <Box className='cong-van-di-add-select'>
+                                <Box className='cong-van-di-update-select'>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -414,12 +416,12 @@ export default function EditCongVanDi(props) {
                                 </Box>
                             </div>
                            
-                            <div className='cong-van-di-add-item'>
+                            <div className='cong-van-di-update-item'>
                                 <label>
                                     Mức độ ưu tiên
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <Box className='cong-van-di-add-select'>
+                                <Box className='cong-van-di-update-select'>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -458,7 +460,7 @@ export default function EditCongVanDi(props) {
                                     }}
                                 />
                             </div> */}
-                            <div className="cong-van-di-add-item">
+                            <div className="cong-van-di-update-item" style={{display: 'none'}}>
                                 <label>
                                     Số lượng văn bản
                                 </label>
@@ -470,17 +472,17 @@ export default function EditCongVanDi(props) {
                                           event.preventDefault();
                                         }
                                     }}
-                                    className='cong-van-di-add-input'
+                                    className='cong-van-di-update-input'
                                     onChange={(e) => setSoLuongVanBan(e.target.value)}
                                     required
                                 />
                             </div>
                             
-                            <div className='cong-van-di-add-item'>
+                            <div className='cong-van-di-update-item'>
                                 <label>
                                     Người theo dõi
                                 </label>
-                                <Box className='cong-van-di-add-select'>
+                                <Box className='cong-van-di-update-select'>
                                     <FormControl fullWidth>
                                         <Select
                                             labelId="demo-simple-select-label"
@@ -499,21 +501,21 @@ export default function EditCongVanDi(props) {
                                     </FormControl>
                                 </Box>
                             </div>
-            
+                                            
                         </div>
                     </div>
-                    <div className="cong-van-di-add-item-reason">
+                    <div className="cong-van-di-update-item-reason">
                         <label>
                             Lý do
                         </label>
                         <input
                             type="text"
                             // value="3969"
-                            className='cong-van-di-add-input-reason'
+                            className='cong-van-di-update-input-reason'
                             onChange={(e) => setLyDo(e.target.value)}
                         />
                     </div>
-                    <div className="cong-van-di-add-item-content">
+                    <div className="cong-van-di-update-item-content">
                         Nội dung
                         <span className='text-danger' style={{color: 'red'}}> *</span>
                     </div>
@@ -524,7 +526,7 @@ export default function EditCongVanDi(props) {
                             //required
                         />
                     </div>
-                    <div className="cong-van-di-add-item-file">
+                    <div className="cong-van-di-update-item-file">
                         <label>
                             Tệp đính kèm
                         </label>
@@ -533,13 +535,13 @@ export default function EditCongVanDi(props) {
                             accept="*"
                             // style={{ display: 'none' }}
                             id="contained-button-file"
-                            className="cong-van-di-add-input-file"
+                            className="cong-van-di-update-input-file"
                             onChange={(event)=>{setFileDinhKem(event.target.files[0])}}
                         />
                         <h5>{file_dinh_kem == null && cong_van_versionData.tep_dinh_kem?.name}</h5>
                     </div>
-                    <div className='cong-van-di-add-footer'>
-                        <button className='cong-van-di-add-button'>Thêm</button>
+                    <div className='cong-van-di-update-footer'>
+                        <button className='cong-van-di-update-button'>Thêm</button>
                     </div>
                 </div>
             </form>

@@ -39,6 +39,7 @@ export const CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM = CONG_VAN_VERSION_PREFIX + 
 
 export const CONG_VAN_LUU_TRU_PREFIX = BACKEND_URL + '/cong_van/luu_tru'
 export const CONG_VAN_LUU_TRU_POST_CREATE = CONG_VAN_LUU_TRU_PREFIX + '/create'
+export const CONG_VAN_LUU_TRU_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_LUU_TRU_PREFIX + '/update/tep_dinh_kem'
 
 export const STATIC_TABLE_PREFIX = BACKEND_URL + "/static_table"
 export const STATIC_TABLE_GET_LIST = STATIC_TABLE_PREFIX + '/{static_table_name}/list';

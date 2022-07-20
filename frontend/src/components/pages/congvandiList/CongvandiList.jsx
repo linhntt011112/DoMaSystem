@@ -257,7 +257,7 @@ export default function CongvandiList(props) {
                     <button className="dropdown-button" onClick={handleFilter}>Lọc</button>
                 </div>
                 
-                <div style={{ height: 'calc(90vh - 200px)' }}>
+                <div style={{ height: 'calc(90vh - 140px)' }}>
                     <DataGrid
                         getRowId={(r) => r.id}
                         rows={tableData}

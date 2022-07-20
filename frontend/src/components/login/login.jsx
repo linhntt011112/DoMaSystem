@@ -65,7 +65,7 @@ const Login = () => {
       <form id="loginForm" className='loginForm' onSubmit={handleSubmit}>
         <img src={Logo} alt='' className='logo'/>
         <h2>
-          Welcome!
+          Xin chào!
         </h2>
         <fieldset>
           <legend>Đăng nhập</legend>

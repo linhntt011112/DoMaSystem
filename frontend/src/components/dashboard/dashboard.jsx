@@ -41,11 +41,8 @@ const Dashboard = (props) => {
 
   return (
     <div className="dashboard">
-      <h3 className="pageTitle">Welcome!</h3>
+      <h3 className="pageTitle">Xin chào!</h3>
       <FeaturedInfo />
-      <button onClick={getCurrentUser}>getCurrentUser</button>
-      <button onClick={getUserList}>getUserList</button>
-      <button onClick={getUserById}>getUserById</button>
     </div>
     );
 };

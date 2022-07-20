@@ -31,6 +31,11 @@ export const SidebarDataUser = [
                 title: 'Chờ xử lý',
                 path: '/cong-van-di/cho_xu_ly',
                 icon: <IoIcons.IoIosDocument />,
+            },
+            {
+                title: 'Đã hoàn tất',
+                path: '/cong-van-di/da-hoan-tat',
+                icon: <IoIcons.IoIosDocument />,
             }
         ]
     },
@@ -43,7 +48,12 @@ export const SidebarDataUser = [
         subNav: [
             {
                 title: 'Chưa xử lý',
-                path: '/cong-van-di/chua_xu_ly',
+                path: '/cong-van-den/chua_xu_ly',
+                icon: <IoIcons.IoIosDocument />,
+            },
+            {
+                title: 'Đã hoàn tất',
+                path: '/cong-van-den/da-hoan-tat',
                 icon: <IoIcons.IoIosDocument />,
             }
         ]

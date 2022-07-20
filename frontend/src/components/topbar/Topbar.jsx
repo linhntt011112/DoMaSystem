@@ -5,7 +5,6 @@ import Logo from '../../img/logo_4.png';
 import { Link } from "react-router-dom";
 
 export default function Topbar({user, setToken}) {
-    // console.log(user);
 
     return (
         <div className='topbar'>  
@@ -44,10 +43,8 @@ export default function Topbar({user, setToken}) {
                             </div>
                         </Link>
                     </li>
-                    
                 </ul>
             </div>
-            
         </div>
     )
 }
