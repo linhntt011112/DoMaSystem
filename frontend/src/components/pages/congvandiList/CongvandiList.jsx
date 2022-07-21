@@ -83,7 +83,7 @@ export default function CongvandiList(props) {
             headerName: 'Ngày ký',
             width: 150,
             valueGetter: (params) => {
-                return params.row.cong_van_current_version.ngay_ky
+                return params.row.cong_van_current_version.ngay_ky?.split('T')[0]
             }
         },
         {

@@ -130,6 +130,10 @@ export default function CongVanDiChiTiet(props) {
                                 <div className="columnChildren1Title">Người nhận và xử lý:</div>
                                 <div className="columnChildren1Info">{cong_van_versionData.nguoi_xu_ly?.ho_ten}</div>
                             </div>
+                            <div style={{display: 'flex'}}>
+                                <div className="columnChildren1Title">Ngày hoàn tất:</div>
+                                <div className="columnChildren1Info">{cong_van_versionData.ngay_hoan_tat?.split('T')[0]}</div>
+                            </div>
                         </div>
                         <div className="columnChildren2">
                             <div style={{display: 'flex'}}>
@@ -193,9 +197,9 @@ export default function CongVanDiChiTiet(props) {
                         <AttachFile style={{margin: '2px 5px 0 0'}}/> 
                         <h5>Tệp đính kèm: </h5>
                         {cong_van_versionData !== "" && cong_van_versionData.id_tep_dinh_kem !== null &&
-                        <div>
-                            <h5>{cong_van_versionData.tep_dinh_kem.name}</h5>
-                            <FileDownloadIcon style={{cursor: 'pointer', "background-color": "#086cae", color: "white"}}
+                        <div style={{display: 'flex'}}>
+                            <h5 style={{marginLeft: "5px"}}>{cong_van_versionData.tep_dinh_kem.name}</h5>
+                            <FileDownloadIcon style={{cursor: 'pointer', "background-color": "#086cae", color: "white", marginLeft: "10px"}}
                             onClick={() => downloadTep_dinh_kem(backend_config.CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM.replace(
                                 "{cong_van_version_id}", cong_van_versionData.id))}>
                             </FileDownloadIcon>
