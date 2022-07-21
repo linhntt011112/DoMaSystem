@@ -7,6 +7,7 @@ import { EditorState, convertToRaw } from "draft-js";
 import Button from '@material-ui/core/Button';
 import * as backend_config from "../../../config/backend"
 import draftToHtml from 'draftjs-to-html';
+import { stateFromHTML } from 'draft-js-import-html'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -46,7 +47,7 @@ export default function EditCongVanDi(props) {
     const [file_dinh_kem, setFileDinhKem] = React.useState(null);
 
     const [editorState, setEditorState] = React.useState(
-        () => EditorState.createEmpty(),
+        () => EditorState.createWithContent(stateFromHTML(cong_van_versionData.noi_dung)),
       );
 
     const handleChangeNoiNhan = (event) => {
@@ -142,8 +143,8 @@ export default function EditCongVanDi(props) {
 
     }, [])
 
-    const addCongVanSuccessNotify = (response_json) => {
-        toast.success(<div>Tạo mới công văn đi thành công!</div>, {
+    const updateCongVanSuccessNotify = (response_json) => {
+        toast.success(<div>Chỉnh sửa công văn đi thành công!</div>, {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: true
         })
@@ -160,7 +161,7 @@ export default function EditCongVanDi(props) {
         const body = formData;
 
         backend_config.makeRequest("POST",
-            backend_config.CONG_VAN_POST_UPDATE_TEP_DINH_KEM,
+            backend_config.CONG_VAN_POST_UPDATE_TEP_DINH_KEM.replace("{id}", id),
             token,
             body,
             null,
@@ -182,7 +183,7 @@ export default function EditCongVanDi(props) {
         }})
     }
 
-    const addCongVan = () => {
+    const updateCongVan = () => {
         const body = {
             // id: so_cong_van,
             ten_cong_van: ten_cong_van,
@@ -213,7 +214,7 @@ export default function EditCongVanDi(props) {
         console.log(new_body)
 
         backend_config.makeRequest("PUT", 
-            backend_config.CONG_VAN_PUT_UPDATE, 
+            backend_config.CONG_VAN_PUT_UPDATE.replace("{id}", cong_van_versionData.cong_van_id), 
             token,
             new_body,
         )
@@ -230,7 +231,7 @@ export default function EditCongVanDi(props) {
                         
                     }
                     props.setTrigger(false);
-                    addCongVanSuccessNotify();
+                    updateCongVanSuccessNotify();
                     refreshFunc();
                 })
             }
@@ -246,14 +247,14 @@ export default function EditCongVanDi(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addCongVan();
+        updateCongVan();
         // props.setTrigger(false);
     }
 
     const handleClose = (e) => {
         e.preventDefault();
         props.setTrigger(false);
-        setEditorState(() => EditorState.createEmpty())
+        // setEditorState(() => EditorState.createEmpty())
     }
 
     return (props.trigger) ? (
