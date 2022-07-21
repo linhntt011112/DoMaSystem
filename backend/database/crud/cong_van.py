@@ -120,7 +120,7 @@ def validate_cong_van_version(db, cong_van_version_data_dict):
 
 
 def create_cong_van_version_from_data_dict(db, data_dict):
-    validate_cong_van_version(db, cong_van_version_data_dict=data_dict)
+    # validate_cong_van_version(db, cong_van_version_data_dict=data_dict)
     
     data_dict["ngay_tao"] = datetime.now()
     data_dict["thoi_gian_cap_nhat"] = data_dict["ngay_tao"]
@@ -148,7 +148,8 @@ def create_cong_van_version_from_current_and_data_dict(
     current_data_dict = current_cong_van_version.__dict__
     current_data_dict = {k: current_data_dict[k] for k in current_data_dict if k not in {'_sa_instance_state', 'id'}}
     current_data_dict.update(data_dict)
-    cong_van_version = create_cong_van_version_from_data_dict(current_data_dict)
+    # logger.info(f"{current_data_dict}")
+    cong_van_version = create_cong_van_version_from_data_dict(db, current_data_dict)
 
     return common_queries.add_and_commit(db, cong_van_version)
 
@@ -273,7 +274,7 @@ def update_cong_van(db, cong_van: db_models.CongVan,
                 db, cong_van.cong_van_current_version, data_dict
             )
             
-            logger.debug(f"{new_cong_van_version.__dict__}")
+            # logger.debug(f"{new_cong_van_version.__dict__}")
             cong_van.cong_van_current_version_id = new_cong_van_version.id
             cong_van.update_at = datetime.now()
             
