@@ -17,7 +17,8 @@ import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import * as backend_config from '../../../config/backend'
 
 export default function CongvandiList(props) {
-    const {token, cong_van_di_get_list_url} = props;
+    const {token, cong_van_di_get_list_url, title} = props;
+    // console.log (cong_van_di_get_list_url)
     // console.log(props);
     const history = useHistory();
 
@@ -169,7 +170,7 @@ export default function CongvandiList(props) {
     return (
         <div className='congVanDiList'>
             <main>
-                <h1 className='cong-van-di-ListTitle'>Danh sách công văn đi</h1>
+                <h1 className='cong-van-di-ListTitle'>Danh sách công văn {title}</h1>
                 <div className='congVanDiListTop'>
                     {/* <Button
                         className='buttonAddCongVan'

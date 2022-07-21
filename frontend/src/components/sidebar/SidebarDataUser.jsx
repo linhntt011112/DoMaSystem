@@ -34,7 +34,7 @@ export const SidebarDataUser = [
             },
             {
                 title: 'Đã hoàn tất',
-                path: '/cong-van-di/da-hoan-tat',
+                path: '/cong-van-di/da_hoan_tat',
                 icon: <IoIcons.IoIosDocument />,
             }
         ]
@@ -53,7 +53,7 @@ export const SidebarDataUser = [
             },
             {
                 title: 'Đã hoàn tất',
-                path: '/cong-van-den/da-hoan-tat',
+                path: '/cong-van-den/da_hoan_tat',
                 icon: <IoIcons.IoIosDocument />,
             }
         ]

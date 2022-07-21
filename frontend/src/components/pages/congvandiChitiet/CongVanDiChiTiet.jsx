@@ -63,6 +63,28 @@ export default function CongVanDiChiTiet(props) {
         })
     }
 
+    const xu_ly = () => {
+        backend_config.makeRequest("PUT", backend_config.CONG_VAN_PUT_DUYET.replace("{id}", cong_van_versionData.cong_van_id), token)
+        .then((response) => {
+            if (response.ok){
+                response.json().then((response_json) => {
+                    // addPhongBanSuccessNotify(response_json);
+                    history.push('/cong-van-di/da_hoan_tat')
+                })
+            }
+            else {
+                response.text().then((text) => {
+                    let error = JSON.parse(text).detail;
+                    switch (error) {
+                        default:
+                            alert(text);
+                            return;
+                    }
+                })
+            }
+        })
+    }
+
 
     useEffect(() => {
         refreshFunc()
@@ -76,6 +98,9 @@ export default function CongVanDiChiTiet(props) {
                     <h1 className='congVanDiTitle'>Thông tin chi tiết</h1>
                     {cong_van_versionData.id_tinh_trang_xu_ly === 1 && user.id === cong_van_versionData.id_nguoi_ky &&
                         <button className='congVanDiEdit' onClick={() => duyet()}>Duyệt</button>}
+                    {cong_van_versionData.id_tinh_trang_xu_ly === 2 && user.id === cong_van_versionData.id_nguoi_xu_ly &&
+                        <button className='congVanDiEdit' onClick={() => xu_ly()}>Xử lý</button>}
+
                     <button className='congVanDiEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
                     {cong_van_versionData !== "" && <EditCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token} cong_van_versionData={cong_van_versionData}></EditCongVanDi>}
                 </div>

@@ -72,6 +72,42 @@ async def create_location_and_save_tep_dinh_kem(data_file, db=Depends(get_db)):
 
 
 
+@router.get('/cvdi/list/da_hoan_tat')
+async def get_list_cong_van_di_da_hoan_tat(limit: int=None, offset: int=None, order_by: str=None,
+                        id_loai_cong_van: int = None, 
+                        id_muc_do_uu_tien: int = None,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+    """ List ra các công văn đi đã được xử lý xong (id_tinh_trang_xu_ly = 3)"""
+    
+    try:
+        id_tinh_trang_xu_ly = 3
+        condition = (db_models.CongVanVersion.id_nguoi_tao == current_user.id) | (db_models.CongVanVersion.id_nguoi_ky == current_user.id)        
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
+        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
+    except Exception as e:
+
+        return api_exceptions.handle_simple_exception(e, logger)
+    
+    
+
+@router.get('/cvden/list/da_hoan_tat')
+async def get_list_cong_van_den_da_hoan_tat(limit: int=None, offset: int=None, order_by: str=None,
+                        id_loai_cong_van: int = None, 
+                        id_muc_do_uu_tien: int = None,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+    """ List ra các công văn đến đã xử lý xong (id_tinh_trang_xu_ly = 3)"""
+    
+    try:
+        id_tinh_trang_xu_ly = 3
+        condition = (db_models.CongVanVersion.id_nguoi_xu_ly == current_user.id)
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
+        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
+    except Exception as e:
+
+        return api_exceptions.handle_simple_exception(e, logger)
+
+
+
 @router.get('/list/cho_duyet')
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
@@ -276,6 +312,30 @@ async def update_cong_van(
 
         return api_exceptions.handle_simple_exception(e, logger)
     
+
+
+
+@router.put('/{cong_van_id}/update/xu_ly')
+async def update_cong_van(
+    cong_van_id: int,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
+):
+    
+    try:
+        cong_van: db_models.CongVan = crud_cong_van.get_cong_van_by_id(db, cong_van_id)
+        if cong_van is None:
+            raise api_exceptions.NOT_FOUND_EXCEPTION()
+        elif cong_van.cong_van_current_version.id_nguoi_xu_ly != current_user.id:
+            raise api_exceptions.PERMISSION_EXCEPTION()
+        
+        cong_van.cong_van_current_version.id_tinh_trang_xu_ly = 3
+        cong_van.cong_van_current_version.ngay_hoan_tat = datetime.now()
+        cong_van.update_at = datetime.now()
+        cong_van = crud_cong_van.update_cong_van(db, cong_van)
+        return cong_van_schemas.CongVanFull.from_orm(cong_van)
+    except Exception as e:
+
+        return api_exceptions.handle_simple_exception(e, logger)
     
     
 
