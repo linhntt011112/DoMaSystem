@@ -30,9 +30,10 @@ export const CONG_VAN_DEN_GET_LIST_DA_HOAN_TAT = BACKEND_URL + '/cong_van/cvden/
 
 
 export const CONG_VAN_PUT_DUYET = CONG_VAN_PREFIX + '/{id}/update/duyet'
+export const CONG_VAN_PUT_XU_LY = CONG_VAN_PREFIX + '/{id}/update/xu_ly'
 
 export const CONG_VAN_POST_CREATE = CONG_VAN_PREFIX + '/create'
-export const CONG_VAN_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_PREFIX + '/update/tep_dinh_kem'
+export const CONG_VAN_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_PREFIX + '/{id}/update/tep_dinh_kem'
 export const CONG_VAN_PUT_UPDATE = CONG_VAN_PREFIX + '/{id}/update'
 export const CONG_VAN_GET_BY_ID = CONG_VAN_PREFIX + '/{id}'
 export const CONG_VAN_DELETE_BY_ID = CONG_VAN_PREFIX + '/{id}/delete'

@@ -64,12 +64,12 @@ export default function CongVanDiChiTiet(props) {
     }
 
     const xu_ly = () => {
-        backend_config.makeRequest("PUT", backend_config.CONG_VAN_PUT_DUYET.replace("{id}", cong_van_versionData.cong_van_id), token)
+        backend_config.makeRequest("PUT", backend_config.CONG_VAN_PUT_XU_LY.replace("{id}", cong_van_versionData.cong_van_id), token)
         .then((response) => {
             if (response.ok){
                 response.json().then((response_json) => {
                     // addPhongBanSuccessNotify(response_json);
-                    history.push('/cong-van-di/da_hoan_tat')
+                    history.push('/cong-van-den/da_hoan_tat')
                 })
             }
             else {
