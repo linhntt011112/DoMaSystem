@@ -172,7 +172,7 @@ export default function AddCongVanDi(props) {
         const body = formData;
 
         backend_config.makeRequest("POST",
-            backend_config.CONG_VAN_POST_UPDATE_TEP_DINH_KEM.replace("{id}", id),
+            backend_config.CONG_VAN_POST_UPDATE_TEP_DINH_KEM,
             token,
             body,
             null,
