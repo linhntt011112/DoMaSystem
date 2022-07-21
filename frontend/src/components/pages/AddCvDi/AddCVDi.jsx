@@ -7,9 +7,9 @@ import { EditorState, convertToRaw } from "draft-js";
 import Button from '@material-ui/core/Button';
 import * as backend_config from "../../../config/backend"
 import draftToHtml from 'draftjs-to-html';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function AddCongVanDi(props) {
     let today = new Date(),
@@ -685,6 +685,7 @@ export default function AddCongVanDi(props) {
                     </div>
                 </div>
             </form>
+            <ToastContainer className="cong-van-di-notify" />
         </div>
     
 }

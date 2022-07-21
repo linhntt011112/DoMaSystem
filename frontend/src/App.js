@@ -42,13 +42,13 @@ const App = () => {
             <AdminRoute exact path="/management/so-luu-tru/" component={CongVanList}/>
 
             <UserRoute exact path="/cong-van-di/add_cvdi" component={AddCVDi} />
-            <UserRoute exact path="/cong-van-di/cho_duyet" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHO_DUYET} title="chờ duyệt"/>
-            <UserRoute exact path="/cong-van-di/chua_duyet" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHUA_DUYET} title="chưa duyệt"/>
-            <UserRoute exact path="/cong-van-di/cho_xu_ly" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHO_XU_LY} title="chờ xử lý"/>
+            <UserRoute exact path="/cong-van-di/cho_duyet" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHO_DUYET} title="đi chờ duyệt"/>
+            <UserRoute exact path="/cong-van-di/chua_duyet" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHUA_DUYET} title="đi chưa duyệt"/>
+            <UserRoute exact path="/cong-van-di/cho_xu_ly" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHO_XU_LY} title="đi chờ xử lý"/>
             <UserRoute exact path="/cong-van-di/da_hoan_tat" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_DI_GET_LIST_DA_HOAN_TAT} title="đi đã hoàn tất"/>
             <UserRoute exact path="/cong-van-di/:cong_vanId" component={CongVanChiTiet}/>
 
-            <UserRoute exact path="/cong-van-den/chua_xu_ly" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHUA_XU_LY} title="chưa xử lý"/>
+            <UserRoute exact path="/cong-van-den/chua_xu_ly" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHUA_XU_LY} title="đến chưa xử lý"/>
             <UserRoute exact path="/cong-van-den/da_hoan_tat" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_DEN_GET_LIST_DA_HOAN_TAT} title="đến đã hoàn tất"/>
             <UserRoute exact path="/cong-van-den/" component={CongVanDenList}/>
             <UserRoute exact path="/cong-van-den/:socongvan" component={CongVanDenChiTiet}/>
