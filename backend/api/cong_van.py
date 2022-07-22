@@ -14,7 +14,7 @@ from database.schemas import cong_van as cong_van_schemas
 from config import server_config
 from .user import get_current_active_user
 from .core import file_utils
-from exceptions import api_exceptions
+from exceptions import api_exceptions, db_exceptions
 
 
 router = APIRouter(prefix='/cong_van')
@@ -360,7 +360,20 @@ async def delete_cong_van(
 
         return api_exceptions.handle_simple_exception(e, logger)
     
-    
+
+#################################################################### 
+
+@router.post('/trao_doi/create')
+async def create_trao_doi(trao_doi_pydantic: cong_van_schemas.TraoDoiCongVanCreate,
+                          current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
+                          ):
+    try:
+        trao_doi = crud_cong_van.create_trao_doi(db, trao_doi=trao_doi_pydantic)
+        return cong_van_schemas.TraoDoiCongVanFull.from_orm(trao_doi)
+    except db_exceptions.PermissionException as e:
+        raise api_exceptions.PERMISSION_EXCEPTION()
+    except Exception as e:
+        return api_exceptions.handle_simple_exception(e, logger)
     
     
 #################################################################### 

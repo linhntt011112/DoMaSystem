@@ -9,6 +9,10 @@ class DBException(Exception):
     pass
 
 
+class PermissionException(DBException):
+    pass
+
+
 class EmailTakenException(Exception):
     pass
 

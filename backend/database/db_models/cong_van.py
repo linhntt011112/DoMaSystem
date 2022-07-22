@@ -121,7 +121,7 @@ class CongVanVersion(Base):
     # ngay_duyet = Column(DateTime, nullable=True)
    
 
-    cac_trao_doi = relationship("TraoDoiCongVan", back_populates="cong_van_version")
+    # cac_trao_doi = relationship("TraoDoiCongVan", back_populates="cong_van_version")
    
     noi_dung_thay_doi = Column(String(4096), nullable=True)
         
@@ -156,17 +156,18 @@ class CongVan(Base):
 class TraoDoiBase:
     __tablename__ = 'trao_doi'
     id = Column(Integer, Sequence('id_autoincrement', start=1, increment=1), primary_key=True, index=True)
-    noi_dung = Column(String(512), nullable=False)
+    noi_dung = Column(String(1024), nullable=False)
    
    
 class TraoDoiCongVan(Base, TraoDoiBase):
     __tablename__ = 'trao_doi_cong_van'
    
-    id_cong_van_version = Column(Integer, ForeignKey('cong_van_version.id'), nullable=False)
-    cong_van_version = relationship("CongVanVersion", back_populates="cac_trao_doi", uselist=False)
+    id_cong_van = Column(Integer, ForeignKey('cong_van.id'), nullable=False)
    
     id_nguoi_tao =  Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     nguoi_tao = relationship('NguoiDung', backref='trao_doi')
+    
+    create_at = Column(DateTime, nullable=False)
 
 # class CongVan_TraoDoi(Base):
 #     __tablename__ = 'associate_cong_van__trao_doi'

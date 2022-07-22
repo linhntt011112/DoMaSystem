@@ -327,6 +327,27 @@ class CongVanLuuTruFull(CongVanLuuTruCreate):
     
     class Config:
         orm_mode=True
+        
+        
+        
+class TraoDoiCongVanFull(BaseModel):
+    id: int
+    noi_dung: str
+    id_cong_van: int
+   
+    id_nguoi_tao: int
+    nguoi_tao: nguoi_dung.UserShort
+    
+    create_at: Union[datetime.datetime, datetime.date]
+    
+    class Config:
+        orm_mode = True
+    
+    
+class TraoDoiCongVanCreate(BaseModel):
+    noi_dung: str
+    id_cong_van: int
+    id_nguoi_tao: int
     
     
     

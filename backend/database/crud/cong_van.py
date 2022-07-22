@@ -1,6 +1,10 @@
 
 from datetime import datetime
 
+from bson import is_valid
+
+from backend.database.db_models import cong_van
+
 from .. import common_queries, db_models
 from ..schemas import cong_van as cong_van_schemas
 
@@ -321,6 +325,30 @@ def delete_save_file(db, save_file: db_models.SaveFile):
 
 #########################################################################
 
+def select_list_trao_doi_by_cong_van_id(db, cong_van_id, **kwargs):
+    list_of_objs = common_queries.select_with_options(db, db_models.TraoDoiCongVan, condition=(db_models.TraoDoiCongVan.id_cong_van==cong_van_id), **kwargs)
+    return list_of_objs
+
+
+def create_trao_doi(db, trao_doi: cong_van_schemas.TraoDoiCongVanCreate):
+    cong_van = get_cong_van_by_id(db, trao_doi.id_cong_van)
+    people = ['id_nguoi_ky', 'id_nguoi_tao', 'id_nguoi_xu_ly', 'id_nguoi_theo_doi']
+    is_valid_permission = False
+    for k in people:
+        if cong_van.__dict__[k] == trao_doi.id_nguoi_tao:
+            is_valid_permission = True
+            break
+    if not is_valid_permission:
+        raise db_exceptions.PermissionException()
+    
+    data_dict = trao_doi.__dict__
+    data_dict["create_at"] = datetime.now()
+
+    trao_doi = db_models.TraoDoiCongVan(**data_dict)
+    return common_queries.add_and_commit(db, trao_doi)
+
+
+#########################################################################
 
 
 def get_cong_van_luu_tru_by_id(db, cong_van_id):
