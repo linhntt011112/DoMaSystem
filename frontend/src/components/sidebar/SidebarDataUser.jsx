@@ -59,6 +59,11 @@ export const SidebarDataUser = [
         ]
     },
     {
+        title: 'Công văn đang theo dõi',
+        path: '/cong-van-dang-theo-doi',
+        icon: <IoIcons.IoIosDocument />,
+    },
+    {
         title: 'Lịch',
         path: '/calendar',
         icon: <AiIcons.AiFillCalendar />,
