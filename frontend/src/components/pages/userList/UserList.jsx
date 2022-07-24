@@ -29,7 +29,6 @@ export default function UserList(props) {
         { field: 'ho_ten', headerName: 'Họ và tên', flex: 1, renderCell: (params)=>{
             return (
                 <div className="userListUser">
-                    <img className='userListImg' src={params.row.avatar} alt=''/>
                     {params.row.ho_ten}
                 </div>
             )

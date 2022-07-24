@@ -51,6 +51,9 @@ export default function LoaicongvanList(props) {
             field: 'thoi_gian_cap_nhat',
             headerName: 'Ngày cập nhật',
             width: 200,
+            valueGetter: (params) => {
+                return params.row?.thoi_gian_cap_nhat?.split('T')[0];
+            }
         },
         {
             field:"action",
