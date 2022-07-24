@@ -349,6 +349,11 @@ def create_trao_doi(db, trao_doi: cong_van_schemas.TraoDoiCongVanCreate):
 #########################################################################
 
 
+def select_list_cong_van_luu_tru(db, **kwargs):
+    list_of_objs = common_queries.select_with_options(db, db_models.CongVanLuuTru, **kwargs)
+    return list_of_objs
+
+
 def get_cong_van_luu_tru_by_id(db, cong_van_id):
     cong_van = common_queries.query_filter(db, db_models.CongVanLuuTru, condition=(db_models.CongVanLuuTru.id == cong_van_id))
     if len(cong_van) >= 1:

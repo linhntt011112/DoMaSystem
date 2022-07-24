@@ -378,6 +378,18 @@ async def create_trao_doi(trao_doi_pydantic: cong_van_schemas.TraoDoiCongVanCrea
     
 #################################################################### 
 
+@router.get("/luu_tru/list")
+async def get_list_cong_van_luu_tru(limit: int=None, offset: int=None,
+                        order_by=None,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+
+    try:
+        cac_cong_van_luu_tru = crud_cong_van.select_list_cong_van_luu_tru(db, limit=limit, offset=offset)
+        return [cong_van_schemas.CongVanLuuTruFull.from_orm(cong_van_luu_tru) for cong_van_luu_tru in cac_cong_van_luu_tru]
+    except Exception as e:
+
+        return api_exceptions.handle_simple_exception(e, logger)
+
 
 @router.get('/luu_tru/{cong_van_luu_tru_id}')
 async def get_cong_van_luu_tru_by_id(
