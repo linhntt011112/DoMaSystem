@@ -1,9 +1,7 @@
 
 from datetime import datetime
 
-from bson import is_valid
-
-from backend.database.db_models import cong_van
+from database.db_models import cong_van
 
 from .. import common_queries, db_models
 from ..schemas import cong_van as cong_van_schemas
