@@ -135,6 +135,22 @@ async def update_info_user(user_update_password: user_schemas.UserUpdatePassword
         # db.rollback()
         return api_exceptions.handle_simple_exception(e, logger)
     
+    
+
+
+
+@router.put("/update")
+async def update_info_user_self(user_schema_model: user_schemas.UserSelfUpdateInfo,
+    current_user=Depends(get_current_active_user), db=Depends(get_db)):
+    # if current_user.id != user_update_password.id:
+    #     raise exceptions.PERMISSION_EXCEPTION()
+    try:
+        current_user = user_core.update_user_self(db, current_user, user_schema_model)
+        return user_schemas.UserBase.from_orm(current_user)
+    
+    except Exception as e:
+        return api_exceptions.handle_simple_exception(e, logger)
+    
 
 
 

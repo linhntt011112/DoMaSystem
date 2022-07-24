@@ -346,8 +346,8 @@ class TraoDoiCongVanFull(BaseModel):
     
 class TraoDoiCongVanCreate(BaseModel):
     noi_dung: str
-    id_cong_van: int
-    id_nguoi_tao: int
+    id_cong_van: int = None
+    id_nguoi_tao: int = None
     
     
     
