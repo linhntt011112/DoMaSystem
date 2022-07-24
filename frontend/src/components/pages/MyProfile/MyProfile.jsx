@@ -12,10 +12,14 @@ export default function MyProfile(props) {
 
     const [userData, setUserData] = useState("");
 
-    useEffect(() => {
+    const refreshFunc = () =>{
         backend_config.makeRequest("GET", backend_config.USER_GET_CURRENT_API, token)
           .then((data) => data.json())
           .then((data) => setUserData(data))
+    }
+
+    useEffect(() => {
+        refreshFunc();
     }, [])
 
     return  (
@@ -26,7 +30,7 @@ export default function MyProfile(props) {
                     {userData !== "" &&
                         <div>
                             <button className='my-profile-Edit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
-                                <EditMyProfile trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token}>
+                                <EditMyProfile trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token} refreshFunc={refreshFunc}>
                                 </EditMyProfile>
                         </div>   
                     }

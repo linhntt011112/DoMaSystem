@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function EditMyProfile(props) {
     const [image, setImage] = useState("https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg");
-    const {userData, token} = props
+    const {userData, token, refreshFunc} = props;
 
     const [chuc_vu_table, setChucVuTable] = React.useState([]);
     const [phong_ban_table, setPhongBanTable] = React.useState([]);
@@ -107,26 +107,53 @@ export default function EditMyProfile(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         submitEditMyProfile();
-        props.setTrigger(false);
-        editMyProfileNotify();
+        
     }
 
     const submitEditMyProfile = () => {
         const body = JSON.stringify({
             dien_thoai: dien_thoai,
             email: email,
-            ngay_cap: ngay_cap,
-            noi_cap: noi_cap,
+            // ngay_cap: ngay_cap,
+            // noi_cap: noi_cap,
             dia_chi: dia_chi,
-            que_quan: que_quan,
+            // que_quan: que_quan,
             tk_ngan_hang: tk_ngan_hang,
             ngan_hang: ngan_hang,
-            hoc_van: hoc_van,
-            dan_toc: dan_toc,
-            quoc_tich: quoc_tich,
-            ton_giao: ton_giao
+            id_hoc_van: hoc_van,
+            id_dan_toc: dan_toc,
+            id_quoc_tich: quoc_tich,
+            id_ton_giao: ton_giao
         })
-        console.log(body)
+
+        backend_config.makeRequest("PUT", 
+            backend_config.USER_PUT_SELF_UPDATE, 
+            token,
+            body
+        )
+        .then((response) => {
+            if (response.ok){
+                response.json().then((response_json) => {
+                    editMyProfileNotify();
+                    props.setTrigger(false);
+                    refreshFunc();
+                    
+                })
+            }
+            else {
+                response.text().then((text) => {
+                    let error = JSON.parse(text).detail;
+                    switch (error) {
+                        // case "Duplicate ten_tai_khoan!": 
+                        //     addUserNotifyDuplicateUsername();
+                        //     return;
+                        default:
+                            alert(text);
+                            return;
+                    }
+                })
+            }
+        })
     }
 
     return (props.trigger) ? (
@@ -298,7 +325,8 @@ export default function EditMyProfile(props) {
                                                 e.preventDefault();
                                             }}
                                             defaultValue={userData.ngay_cap}
-                                            onChange={(e) => setNgayCap(e.target.value)}
+                                            // onChange={(e) => setNgayCap(e.target.value)}
+                                            disabled
                                         />
                                     </div>
                                 </Col>
@@ -311,7 +339,8 @@ export default function EditMyProfile(props) {
                                             type="text"
                                             defaultValue={userData.noi_cap}
                                             className='edit-my-profile-Input'
-                                            onChange={(e) => setNoiCap(e.target.value)}
+                                            // onChange={(e) => setNoiCap(e.target.value)}
+                                            disabled
                                         />
                                     </div>
                                 </Col>
@@ -339,7 +368,8 @@ export default function EditMyProfile(props) {
                                         type="text"
                                         className='edit-my-profile-Input'
                                         style={{width: '830px'}}
-                                        onChange={(e) => setQueQuan(e.target.value)}
+                                        // onChange={(e) => setQueQuan(e.target.value)}
+                                        disabled
                                         defaultValue={userData.que_quan}
                                     />
                                 </div>
