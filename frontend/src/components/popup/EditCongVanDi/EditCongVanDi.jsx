@@ -128,8 +128,11 @@ export default function EditCongVanDi(props) {
                 setUsersData(usersData_);
                 setUsersList(data);
 
-                setUsersData_PhongBan(usersData_[nguoi_ky])
-                setUsersData_NoiNhan(usersData_[nguoi_xu_ly])
+                setUsersData_PhongBan(usersData_[cong_van_versionData.nguoi_ky.phong_ban.id])
+                setUsersData_NoiNhan(usersData_[cong_van_versionData.nguoi_xu_ly.phong_ban.id])
+                setNguoiXuLy(cong_van_versionData.id_nguoi_xu_ly);
+                setNguoiKy(cong_van_versionData.id_nguoi_ky)
+                // console.log(usersData_)
             })
     }
 
@@ -169,6 +172,7 @@ export default function EditCongVanDi(props) {
         )
         .then((response) => {
             if (response.ok) {
+                setFileDinhKem(null);
                 return true;
             }
         else {
