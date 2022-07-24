@@ -214,6 +214,26 @@ def update_password(db, user: db_models.NguoiDung, user_update_password: user_sc
 
 
 
+def update_user_self(db, user: db_models.NguoiDung, user_schema_model: user_schemas.UserSelfUpdateInfo):
+    now = datetime.datetime.now()
+    
+    for id_name in id_name_to_db_model:
+        if id_name in user_schema_model.__dict__:
+            id = getattr(user_schema_model, id_name)
+            if id is not None and not crud_static_tables.get_static_table_by_id(db, id, id_name_to_db_model[id_name]):
+                raise api_exceptions.NOT_FOUND_EXCEPTION(f"Can not find object with {id_name} = {id} !")
+    
+    data_dict = user_schema_model.__dict__
+    data_dict["ngay_cap_nhat"] = now
+    data_dict = {k: data_dict[k] for k in data_dict if data_dict[k] is not None}
+    # logger.info(f"{data_dict}")
+    for attr in data_dict:
+        setattr(user, attr, data_dict[attr])
+    
+    return crud_user.update_user(db, user)
+
+
+
 async def request_download_token(current_user=Depends(get_current_active_user)):
     to_encode = {"sub": current_user.ten_tai_khoan}
     expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=DOWNLOAD_TOKEN_EXPIRE_MINUTES)

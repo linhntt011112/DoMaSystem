@@ -328,12 +328,12 @@ def select_list_trao_doi_by_cong_van_id(db, cong_van_id, **kwargs):
     return list_of_objs
 
 
-def create_trao_doi(db, trao_doi: cong_van_schemas.TraoDoiCongVanCreate):
-    cong_van = get_cong_van_by_id(db, trao_doi.id_cong_van)
+def create_trao_doi(db, cong_van: db_models.CongVan, trao_doi: cong_van_schemas.TraoDoiCongVanCreate):
+    
     people = ['id_nguoi_ky', 'id_nguoi_tao', 'id_nguoi_xu_ly', 'id_nguoi_theo_doi']
     is_valid_permission = False
     for k in people:
-        if cong_van.__dict__[k] == trao_doi.id_nguoi_tao:
+        if cong_van.cong_van_current_version.__dict__[k] == trao_doi.id_nguoi_tao:
             is_valid_permission = True
             break
     if not is_valid_permission:

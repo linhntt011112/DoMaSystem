@@ -363,12 +363,18 @@ async def delete_cong_van(
 
 #################################################################### 
 
-@router.post('/trao_doi/create')
-async def create_trao_doi(trao_doi_pydantic: cong_van_schemas.TraoDoiCongVanCreate,
+@router.post('/{cong_van_id}/trao_doi/create')
+async def create_trao_doi(cong_van_id: int, trao_doi_pydantic: cong_van_schemas.TraoDoiCongVanCreate,
                           current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
                           ):
+    cong_van = crud_cong_van.get_cong_van_by_id(db, cong_van_id)
+    if cong_van is None:
+        raise api_exceptions.NOT_FOUND_EXCEPTION(f"Can not find cong_van with id={cong_van_id}")
+    
     try:
-        trao_doi = crud_cong_van.create_trao_doi(db, trao_doi=trao_doi_pydantic)
+        trao_doi_pydantic.id_nguoi_tao = current_user.id
+        trao_doi_pydantic.id_cong_van = cong_van_id
+        trao_doi = crud_cong_van.create_trao_doi(db, cong_van, trao_doi=trao_doi_pydantic)
         return cong_van_schemas.TraoDoiCongVanFull.from_orm(trao_doi)
     except db_exceptions.PermissionException as e:
         raise api_exceptions.PERMISSION_EXCEPTION()
