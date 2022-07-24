@@ -39,7 +39,7 @@ const App = () => {
             <AdminRoute exact path="/management/loai-cong-van/" component={LoaicongvanList}/>
             <AdminRoute exact path="/management/phong-ban/" component={PhongBanList}/>
             <AdminRoute exact path="/management/chuc-vu/" component={ChucVuList}/>
-            <AdminRoute exact path="/management/so-luu-tru/" component={CongVanList}/>
+            <AdminRoute exact path="/management/so-luu-tru/" component={CongVanList} cong_van_di_get_list_url={backend_config.CONG_VAN_LUU_TRU_GET_LIST} title="đã lưu trữ"/>
 
             <UserRoute exact path="/cong-van-di/add_cvdi" component={AddCVDi} />
             <UserRoute exact path="/cong-van-di/cho_duyet" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHO_DUYET} title="đi chờ duyệt"/>
