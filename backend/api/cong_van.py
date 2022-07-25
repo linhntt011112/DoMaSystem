@@ -1,8 +1,11 @@
 from datetime import datetime
+import traceback
 from fastapi import Depends, FastAPI, APIRouter, File, UploadFile, Form
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from jose import JWTError, jwt
 from loguru import logger
+import os
 
 from database import db_models
 from database.common_queries import query_all, query_filter
@@ -13,7 +16,7 @@ from database.schemas import cong_van as cong_van_schemas
 
 from config import server_config
 from .user import get_current_active_user
-from .core import file_utils
+from .core import file_utils, user as user_core
 from exceptions import api_exceptions, db_exceptions
 
 
@@ -496,7 +499,6 @@ async def update_cong_van_luu_tru__tep_dinh_kem(
         return api_exceptions.handle_simple_exception(e, logger)
     
     
-    
 
 @router.delete('/luu_tru/{cong_van_luu_tru_id}/delete')
 async def delete_cong_van_luu_tru(
@@ -517,3 +519,27 @@ async def delete_cong_van_luu_tru(
     except Exception as e:
 
         return api_exceptions.handle_simple_exception(e, logger)
+    
+
+@router.get("/luu_tru/{cong_van_id}/download/tep_dinh_kem")
+async def download_tep_dinh_kem(
+                        cong_van_id: int,
+                        user=Depends(user_core.get_user_of_download_token),
+                        db=Depends(get_db)):
+    cong_van_luu_tru: db_models.CongVanLuuTru = crud_cong_van.get_cong_van_luu_tru_by_id(db, cong_van_id)
+    
+    # is_authorized = authorize_user_for_ai_model_version(user, ai_model_version)
+    is_authorized = True
+    if is_authorized:
+        try:
+            file_path = os.path.join(cong_van_luu_tru.tep_dinh_kem.save_location)
+            if os.path.isfile(file_path):
+                return FileResponse(file_path, filename=cong_van_luu_tru.tep_dinh_kem.name)
+            else:
+                return None
+
+        except Exception as e:
+            logger.error(f'{str(e)}: {traceback.format_exc()}')
+            raise api_exceptions.INTERNAL_SERVER_ERROR(str(e))
+    else:
+        raise api_exceptions.PERMISSION_EXCEPTION()
