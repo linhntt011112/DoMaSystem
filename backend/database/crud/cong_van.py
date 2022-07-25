@@ -387,3 +387,7 @@ def update_cong_van_luu_tru(db, cong_van_luu_tru: db_models.CongVanLuuTru):
     now = datetime.now()
     cong_van_luu_tru.update_at = now
     return  common_queries.add_and_commit(db, cong_van_luu_tru)
+
+
+def delete_cong_van_luu_tru(db, cong_van_luu_tru):
+    return common_queries.delete(db, cong_van_luu_tru)

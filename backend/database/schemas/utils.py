@@ -24,7 +24,7 @@ class LichFull(BaseModel):
         
 class LichCreate(BaseModel):
     name: str
-    id_nguoi_tao: int
+    id_nguoi_tao: int = None
     
     start_time: Union[datetime.datetime, datetime.date]
     end_time: Union[datetime.datetime, datetime.date]

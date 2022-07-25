@@ -52,6 +52,11 @@ export const CONG_VAN_LUU_TRU_PREFIX = BACKEND_URL + '/cong_van/luu_tru'
 export const CONG_VAN_LUU_TRU_POST_CREATE = CONG_VAN_LUU_TRU_PREFIX + '/create'
 export const CONG_VAN_LUU_TRU_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_LUU_TRU_PREFIX + '/update/tep_dinh_kem'
 
+export const UTILS_API_PREFIX = BACKEND_URL + "/utils"
+export const LICH_GET_LIST_BY_USER_ID = UTILS_API_PREFIX + "/lich/?user_id={user_id}"
+export const LICH_POST_CREATE = UTILS_API_PREFIX + "/lich/create"
+export const LICH_DELETE = UTILS_API_PREFIX + "/lich/{id}/delete"
+
 export const STATIC_TABLE_PREFIX = BACKEND_URL + "/static_table"
 export const STATIC_TABLE_GET_LIST = STATIC_TABLE_PREFIX + '/{static_table_name}/list';
 export const STATIC_TABLE_POST_CREATE = STATIC_TABLE_PREFIX + '/{static_table_name}/create';

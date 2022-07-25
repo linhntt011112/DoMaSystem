@@ -494,3 +494,26 @@ async def update_cong_van_luu_tru__tep_dinh_kem(
             crud_cong_van.delete_save_file(db, tep_dinh_kem)
             
         return api_exceptions.handle_simple_exception(e, logger)
+    
+    
+    
+
+@router.delete('/luu_tru/{cong_van_luu_tru_id}/delete')
+async def delete_cong_van_luu_tru(
+    cong_van_luu_tru_id: int,
+    # cong_van: cong_van_schemas.CongVanCreate,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
+):
+    if current_user.phan_quyen != db_models.PhanQuyen.admin:
+        raise api_exceptions.PERMISSION_EXCEPTION()
+    
+    cong_van = crud_cong_van.get_cong_van_luu_tru_by_id(db, cong_van_luu_tru_id)
+    # logger.info(f"{cong_van.__dict__}")
+    if cong_van is None:
+        raise api_exceptions.NOT_FOUND_EXCEPTION()
+    
+    try:
+        return crud_cong_van.delete_cong_van_luu_tru(db, cong_van)
+    except Exception as e:
+
+        return api_exceptions.handle_simple_exception(e, logger)
