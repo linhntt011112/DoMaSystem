@@ -8,58 +8,85 @@ import {
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import "./comments.css";
+import * as backend_config from "../../config/backend"
 
-const Comments = ({commentsUrl, currentUserId}) => {
-    const [backendComments, setBackendComments] = useState([]);
-    const [activeComment, setActiveComment] = useState(null);
-    const rootComments = backendComments.filter(
-        (backendComments) => backendComments.parentId === null
-    );
-    const getReplies = commentId => {
-        return backendComments
-            .filter(backendComment => backendComment.parentId === commentId)
-            .sort(
-                (a, b) => 
-                    new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-            );
-    };
+
+
+const Comments = ({cong_van_id, token}) => {
+    // const [backendComments, setBackendComments] = useState([]);
+    // const [activeComment, setActiveComment] = useState(null);
+    // const rootComments = backendComments.filter(
+    //     (backendComments) => backendComments.parentId === null
+    // );
+
+    const [rootComments, serRootComments] = useState([]);
+
+    // const getReplies = commentId => {
+    //     return backendComments
+    //         .filter(backendComment => backendComment.parentId === commentId)
+    //         .sort(
+    //             (a, b) => 
+    //                 new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    //         );
+    // };
     // console.log('backendComments', backendComments);
-    const addComment = (text, parentId) => {
-        console.log('addComment', text, parentId);
-        createCommentApi(text, parentId).then(comment => {
-            setBackendComments([comment, ...backendComments]);
-            setActiveComment(null);
+    const addComment = (text) => {
+        const body = JSON.stringify({
+            noi_dung: text,
+        })
+        backend_config.makeRequest("POST", backend_config.TRAO_DOI_POST_CREATE.replace("{id}", cong_van_id), token, body)
+        .then((response) => {
+            if (response.ok){
+                response.json().then((response_json) => {
+                    // addPhongBanSuccessNotify(response_json);
+                    refreshFunc()
+                })
+            }
+            else {
+                response.text().then((text) => {
+                    let error = JSON.parse(text).detail;
+                    switch (error) {
+                        default:
+                            alert(text);
+                            return;
+                    }
+                })
+            }
         })
     }
 
-    const updateComment = (text, commentId) => {
-        updateCommentApi(text).then(() => {
-            const updatedBackendComments = backendComments.map((backendComment) => {
-                if (backendComment.id === commentId) {
-                    return { ...backendComment, body: text};
-                }
-                return backendComment;
-            });
-            setBackendComments(updatedBackendComments);
-            setActiveComment(null);
-        })
-    }
+    // const updateComment = (text, commentId) => {
+    //     updateCommentApi(text).then(() => {
+    //         const updatedBackendComments = backendComments.map((backendComment) => {
+    //             if (backendComment.id === commentId) {
+    //                 return { ...backendComment, body: text};
+    //             }
+    //             return backendComment;
+    //         });
+    //         setBackendComments(updatedBackendComments);
+    //         setActiveComment(null);
+    //     })
+    // }
 
-    const deleteComment = (commentId) => {
-        if (window.confirm('Bạn có chắc chắn muốn xóa trao đổi này không?')) {
-            deleteCommentApi(commentId).then(() => {
-                const updatedBackendComments = backendComments.filter(
-                    (backendComment) => backendComment.id !== commentId
-                );
-                setBackendComments(updatedBackendComments);
-            });
-        }
+    // const deleteComment = (commentId) => {
+    //     if (window.confirm('Bạn có chắc chắn muốn xóa trao đổi này không?')) {
+    //         deleteCommentApi(commentId).then(() => {
+    //             const updatedBackendComments = backendComments.filter(
+    //                 (backendComment) => backendComment.id !== commentId
+    //             );
+    //             setBackendComments(updatedBackendComments);
+    //         });
+    //     }
+    // }
+
+    const refreshFunc = () => {
+        backend_config.makeRequest("GET", backend_config.TRAO_DOI_GET_LIST.replace('{id}', cong_van_id), token)
+            .then((data) => data.json())
+            .then((data) => serRootComments(data))
     }
 
     useEffect(()=> {
-        getCommentsApi().then(data => {
-            setBackendComments(data);
-        });
+        refreshFunc();
     }, [])
     return (
         <div className="comments">
@@ -68,16 +95,19 @@ const Comments = ({commentsUrl, currentUserId}) => {
             <div className="comments-container">
                 {rootComments.map((rootComment) => (
                     <Comment 
-                        key={rootComment.id} 
                         comment={rootComment} 
-                        replies={getReplies(rootComment.id)}
-                        currentUserId={currentUserId}
-                        deleteComment={deleteComment}
-                        activeComment={activeComment}
-                        setActiveComment={setActiveComment}
-                        addComment={addComment}
-                        updateComment={updateComment}
                     />
+                    // <Comment 
+                    //     key={rootComment.id} 
+                    //     comment={rootComment} 
+                    //     replies={getReplies(rootComment.id)}
+                    //     currentUserId={currentUserId}
+                    //     deleteComment={deleteComment}
+                    //     activeComment={activeComment}
+                    //     setActiveComment={setActiveComment}
+                    //     addComment={addComment}
+                    //     updateComment={updateComment}
+                    // />
                 ))}
             </div>
         </div>

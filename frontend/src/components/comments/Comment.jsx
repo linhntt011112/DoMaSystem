@@ -3,31 +3,33 @@ import CommentForm from "./CommentForm";
 
 const Comment = ({
     comment, 
-    replies, 
-    currentUserId, 
-    deleteComment, 
-    addComment,
-    updateComment,
-    activeComment, 
-    setActiveComment,
-    parentId = null,
+    // replies, 
+    // currentUserId, 
+    // deleteComment, 
+    // addComment,
+    // updateComment,
+    // activeComment, 
+    // setActiveComment,
+    // parentId = null,
 }) => {
     const fiveMinutes = 300000;
     const timePassed = new Date() - new Date(comment.createdAt) > fiveMinutes;
-    const canReply = Boolean(currentUserId);
-    const canEdit = currentUserId === comment.userId && !timePassed;
-    const canDelete =
-        currentUserId === comment.userId && replies.length === 0 && !timePassed;
-    const createdAt = new Date(comment.createdAt).toLocaleDateString();
-    const isReplying = 
-        activeComment && 
-        activeComment.type === 'replying' && 
-        activeComment.id === comment.id;
-    const isEditing = 
-        activeComment && 
-        activeComment.type === 'editing' && 
-        activeComment.id === comment.id;
-    const replyId = parentId ? parentId : comment.id;
+    const canReply = false
+            // Boolean(currentUserId);
+    const canEdit = false
+            // currentUserId === comment.userId && !timePassed;
+    const canDelete = false
+        // currentUserId === comment.userId && replies.length === 0 && !timePassed;
+    // const createdAt = new Date(comment.createdAt).toLocaleDateString();
+    const isReplying = false
+        // activeComment && 
+        // activeComment.type === 'replying' && 
+        // activeComment.id === comment.id;
+    const isEditing = false
+        // activeComment && 
+        // activeComment.type === 'editing' && 
+        // activeComment.id === comment.id;
+    // const replyId = parentId ? parentId : comment.id;
     return (
         <div key={comment.id} className="comment">
             <div className="comment-image-container">
@@ -35,11 +37,11 @@ const Comment = ({
             </div>
             <div className="comment-right-part">
                 <div className="comment-content">
-                    <div className="comment-author">{comment.username}</div>
-                    <div className="comment-date">{createdAt}</div>
+                    <div className="comment-author">{comment.nguoi_tao.ho_ten}</div>
+                    <div className="comment-date">{comment.create_at}</div>
                 </div>
-                {!isEditing && <div className="comment-text">{comment.body}</div>}
-                {isEditing && (
+                {!isEditing && <div className="comment-text">{comment.noi_dung}</div>}
+                {/* {isEditing && (
                     <CommentForm 
                         submitLabel="Cập nhật" 
                         hasCancelButton 
@@ -80,8 +82,8 @@ const Comment = ({
                         submitLabel="Trả lời" 
                         handleSubmit={(text) => addComment(text, replyId)}
                     />
-                )}
-                {replies.length > 0 && (
+                )} */}
+                {/* {replies.length > 0 && (
                     <div className="replies">
                         {replies.map(reply => (
                             <Comment 
@@ -98,7 +100,7 @@ const Comment = ({
                             />
                         ))}
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     );

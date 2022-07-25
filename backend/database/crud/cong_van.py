@@ -323,6 +323,17 @@ def delete_save_file(db, save_file: db_models.SaveFile):
 
 #########################################################################
 
+def check_permission_trao_doi(db, cong_van: db_models.CongVan, user_id):
+    people = ['id_nguoi_ky', 'id_nguoi_tao', 'id_nguoi_xu_ly', 'id_nguoi_theo_doi']
+    is_valid_permission = False
+    for k in people:
+        if cong_van.cong_van_current_version.__dict__[k] == user_id:
+            is_valid_permission = True
+            break
+    if not is_valid_permission:
+        raise db_exceptions.PermissionException()
+
+
 def select_list_trao_doi_by_cong_van_id(db, cong_van_id, **kwargs):
     list_of_objs = common_queries.select_with_options(db, db_models.TraoDoiCongVan, condition=(db_models.TraoDoiCongVan.id_cong_van==cong_van_id), **kwargs)
     return list_of_objs
@@ -330,14 +341,7 @@ def select_list_trao_doi_by_cong_van_id(db, cong_van_id, **kwargs):
 
 def create_trao_doi(db, cong_van: db_models.CongVan, trao_doi: cong_van_schemas.TraoDoiCongVanCreate):
     
-    people = ['id_nguoi_ky', 'id_nguoi_tao', 'id_nguoi_xu_ly', 'id_nguoi_theo_doi']
-    is_valid_permission = False
-    for k in people:
-        if cong_van.cong_van_current_version.__dict__[k] == trao_doi.id_nguoi_tao:
-            is_valid_permission = True
-            break
-    if not is_valid_permission:
-        raise db_exceptions.PermissionException()
+    check_permission_trao_doi(db, cong_van, trao_doi.id_nguoi_tao)
     
     data_dict = trao_doi.__dict__
     data_dict["create_at"] = datetime.now()

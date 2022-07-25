@@ -44,6 +44,9 @@ export const CONG_VAN_DELETE_BY_ID = CONG_VAN_PREFIX + '/{id}/delete'
 export const CONG_VAN_VERSION_PREFIX = BACKEND_URL + '/cong_van/version'
 export const CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM = CONG_VAN_VERSION_PREFIX + '/{cong_van_version_id}/download/tep_dinh_kem?download_token={download_token}'
 
+export const TRAO_DOI_GET_LIST = CONG_VAN_PREFIX + '/{id}/trao_doi/list'
+export const TRAO_DOI_POST_CREATE = CONG_VAN_PREFIX + '/{id}/trao_doi/create'
+
 export const CONG_VAN_LUU_TRU_PREFIX = BACKEND_URL + '/cong_van/luu_tru'
 export const CONG_VAN_LUU_TRU_POST_CREATE = CONG_VAN_LUU_TRU_PREFIX + '/create'
 export const CONG_VAN_LUU_TRU_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_LUU_TRU_PREFIX + '/update/tep_dinh_kem'

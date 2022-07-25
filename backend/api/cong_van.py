@@ -362,14 +362,27 @@ async def delete_cong_van(
     
 
 #################################################################### 
+@router.get("/{cong_van_id}/trao_doi/list")
+async def get_list_cong_van_luu_tru(
+    cong_van_id: int, limit: int=None, offset: int=None, order_by=None,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+
+    try:
+        cac_trao_doi = crud_cong_van.select_list_trao_doi_by_cong_van_id(db, cong_van_id, limit=limit, offset=offset)
+        return [cong_van_schemas.TraoDoiCongVanFull.from_orm(trao_doi) for trao_doi in cac_trao_doi]
+    except Exception as e:
+        return api_exceptions.handle_simple_exception(e, logger)
+    
 
 @router.post('/{cong_van_id}/trao_doi/create')
 async def create_trao_doi(cong_van_id: int, trao_doi_pydantic: cong_van_schemas.TraoDoiCongVanCreate,
                           current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
                           ):
-    cong_van = crud_cong_van.get_cong_van_by_id(db, cong_van_id)
+    cong_van: db_models.CongVan = crud_cong_van.get_cong_van_by_id(db, cong_van_id)
     if cong_van is None:
         raise api_exceptions.NOT_FOUND_EXCEPTION(f"Can not find cong_van with id={cong_van_id}")
+    elif cong_van.cong_van_current_version.id_tinh_trang_xu_ly == 3:
+        raise api_exceptions.UNPROCESSABLE_ENTITY(f"Can not post comment on processed document!")
     
     try:
         trao_doi_pydantic.id_nguoi_tao = current_user.id
