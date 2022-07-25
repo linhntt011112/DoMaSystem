@@ -187,8 +187,8 @@ export default function SLTcongVanChiTiet(props) {
                         <div style={{display: 'flex'}}>
                             <h5 style={{marginLeft: "5px"}}>{cong_van_versionData.tep_dinh_kem.name}</h5>
                             <FileDownloadIcon style={{cursor: 'pointer', "background-color": "#086cae", color: "white", marginLeft: "10px"}}
-                            onClick={() => downloadTep_dinh_kem(backend_config.CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM.replace(
-                                "{cong_van_version_id}", cong_van_versionData.id))}>
+                            onClick={() => downloadTep_dinh_kem(backend_config.CONG_VAN_LUU_TRU_DOWNLOAD_TEP_DINH_KEM.replace(
+                                "{cong_van_id}", cong_van_versionData.id))}>
                             </FileDownloadIcon>
                         </div>
                         }

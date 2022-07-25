@@ -52,6 +52,7 @@ export const CONG_VAN_LUU_TRU_PREFIX = BACKEND_URL + '/cong_van/luu_tru'
 export const CONG_VAN_LUU_TRU_POST_CREATE = CONG_VAN_LUU_TRU_PREFIX + '/create'
 export const CONG_VAN_LUU_TRU_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_LUU_TRU_PREFIX + '/{id}/update/tep_dinh_kem'
 export const CONG_VAN_LUU_TRU_GET_BY_ID = CONG_VAN_LUU_TRU_PREFIX + '/{id}'
+export const CONG_VAN_LUU_TRU_DOWNLOAD_TEP_DINH_KEM = CONG_VAN_LUU_TRU_PREFIX + '/{cong_van_id}/download/tep_dinh_kem?download_token={download_token}'
 
 export const UTILS_API_PREFIX = BACKEND_URL + "/utils"
 export const LICH_GET_LIST_BY_USER_ID = UTILS_API_PREFIX + "/lich/?user_id={user_id}"
