@@ -5,12 +5,14 @@ import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import {Button} from "@mui/material";
 import {Add} from "@material-ui/icons";
 import AddEvent from '../../popup/AddEvent/AddEvent';
 import { ToastContainer} from 'react-toastify';
+import * as backend_config from '../../../config/backend'
+import { useUserInfo } from "../../../context/TokenContext";
 
 const locales = {
     "en-US": require("date-fns/locale/en-US")
@@ -45,13 +47,27 @@ const events = [
 
 function DMSCalendar(props) {
     const {token} = props;
+    const {user} = useUserInfo();
+    // console.log(user)
     const [newEvent, setNewEvent] = useState({title: "", start: "", end: ""})
-    const [allEvents, setAllEvents] = useState(events);
+    const [allEvents, setAllEvents] = useState([]);
     const [addButtonPopup, setAddButtonPopup] = useState(false);
 
     function handleAddEvent() {
         setAllEvents([...allEvents, newEvent])
     }
+    
+    const refreshFunc = () => {
+        backend_config.makeRequest("GET", backend_config.LICH_GET_LIST_BY_USER_ID.replace("{user_id}", user.id), token)
+          .then((data) => data.json())
+          .then((data) => {
+            setAllEvents(data)
+        })
+    }
+
+    useEffect(() => {
+        refreshFunc();
+    }, [])
 
     return (
         <div className='Calendar'>
@@ -80,14 +96,15 @@ function DMSCalendar(props) {
             <Calendar 
                 localizer={localizer} 
                 events={allEvents} 
-                startAccessor="start" 
-                endAccessor="end"
+                titleAccessor="name"
+                startAccessor="start_time" 
+                endAccessor="end_time"
                 selectable
                 tooltipAccessor={null}
                 style={{position: 'inherit'}}
             />
             <AddEvent trigger={addButtonPopup} setTrigger={setAddButtonPopup}
-                token={token}>
+                token={token} user_id={user.id} refreshFunc={refreshFunc}>
             </AddEvent>
             <ToastContainer className="event-notify"/>
         </div>
