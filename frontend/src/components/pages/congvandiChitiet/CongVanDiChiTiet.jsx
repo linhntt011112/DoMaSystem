@@ -215,7 +215,7 @@ export default function CongVanDiChiTiet(props) {
                         <People style={{margin: '2px 5px 0 0'}}/> 
                         <h5>Trao đổi</h5>
                     </div>
-                    <Comments token={token} cong_van_id={cong_vanId}/>
+                    <Comments token={token} cong_van_id={cong_vanId} is_active={cong_van_versionData.id_tinh_trang_xu_ly === 3? false: true}/>
                 </div>
             </main>
         </div>

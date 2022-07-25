@@ -12,7 +12,7 @@ import * as backend_config from "../../config/backend"
 
 
 
-const Comments = ({cong_van_id, token}) => {
+const Comments = ({cong_van_id, token, is_active}) => {
     // const [backendComments, setBackendComments] = useState([]);
     // const [activeComment, setActiveComment] = useState(null);
     // const rootComments = backendComments.filter(
@@ -90,8 +90,8 @@ const Comments = ({cong_van_id, token}) => {
     }, [])
     return (
         <div className="comments">
-            <div className="comment-form-title">Nhập nội dung</div>
-            <CommentForm submitLabel="Gửi" handleSubmit={addComment}/>
+            {is_active && <div className="comment-form-title">Nhập nội dung</div>}
+            {is_active && <CommentForm submitLabel="Gửi" handleSubmit={addComment}/>}
             <div className="comments-container">
                 {rootComments.map((rootComment) => (
                     <Comment 
