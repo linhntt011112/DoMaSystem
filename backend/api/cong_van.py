@@ -476,7 +476,7 @@ async def update_cong_van_luu_tru__tep_dinh_kem(
     old_id_tep_dinh_kem = None
     try:
         tep_dinh_kem, save_location = await create_location_and_save_tep_dinh_kem(tep_dinh_kem_input, db)
-        cong_van: db_models.CongVanLuuTru = crud_cong_van.get_cong_van_by_id(db, cong_van_luu_tru_id)
+        cong_van: db_models.CongVanLuuTru = crud_cong_van.get_cong_van_luu_tru_by_id(db, cong_van_luu_tru_id)
         if cong_van is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
         
@@ -484,11 +484,11 @@ async def update_cong_van_luu_tru__tep_dinh_kem(
         cong_van.id_tep_dinh_kem = tep_dinh_kem.id
         cong_van = crud_cong_van.update_cong_van_luu_tru(db, cong_van)
         # logger.info(f"{cong_van.tep_dinh_kem.__dict__}")
-        return cong_van_schemas.CongVanFull.from_orm(cong_van)
+        return cong_van_schemas.CongVanLuuTruFull.from_orm(cong_van)
     except Exception as e:
         if cong_van is not None:
             cong_van.id_tep_dinh_kem = old_id_tep_dinh_kem
-            cong_van = crud_cong_van.update_cong_van(db, cong_van)
+            cong_van = crud_cong_van.update_cong_van_luu_tru(db, cong_van)
         
         if tep_dinh_kem is not None:
             crud_cong_van.delete_save_file(db, tep_dinh_kem)

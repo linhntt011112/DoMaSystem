@@ -50,7 +50,8 @@ export const TRAO_DOI_POST_CREATE = CONG_VAN_PREFIX + '/{id}/trao_doi/create'
 
 export const CONG_VAN_LUU_TRU_PREFIX = BACKEND_URL + '/cong_van/luu_tru'
 export const CONG_VAN_LUU_TRU_POST_CREATE = CONG_VAN_LUU_TRU_PREFIX + '/create'
-export const CONG_VAN_LUU_TRU_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_LUU_TRU_PREFIX + '/update/tep_dinh_kem'
+export const CONG_VAN_LUU_TRU_POST_UPDATE_TEP_DINH_KEM = CONG_VAN_LUU_TRU_PREFIX + '/{id}/update/tep_dinh_kem'
+export const CONG_VAN_LUU_TRU_GET_BY_ID = CONG_VAN_LUU_TRU_PREFIX + '/{id}'
 
 export const STATIC_TABLE_PREFIX = BACKEND_URL + "/static_table"
 export const STATIC_TABLE_GET_LIST = STATIC_TABLE_PREFIX + '/{static_table_name}/list';

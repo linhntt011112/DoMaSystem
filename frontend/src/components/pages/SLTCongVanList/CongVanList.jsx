@@ -75,9 +75,9 @@ export default function CongVanList(props) {
             field: 'ngay_ky',
             headerName: 'Ngày ký',
             width: 150,
-            // valueGetter: (params) => {
-            //     return params.row.cong_van_di_current_version.ngay_ky
-            // }
+            valueGetter: (params) => {
+                return params.row.ngay_ky?.split('T')[0]
+            }
         },
         {
             field: 'phong_ban_phat_hanh',
@@ -91,9 +91,9 @@ export default function CongVanList(props) {
             field: 'create_at',
             headerName: 'Ngày tạo',
             width: 200,
-            // valueGetter: (params) => {
-            //     return params.row.create_at.split('T')[0];
-            // }
+            valueGetter: (params) => {
+                return params.row.create_at.split('T')[0];
+            }
         },
         {
             field: 'ly_do',
@@ -110,7 +110,7 @@ export default function CongVanList(props) {
             renderCell: (params)=>{
                 return(
                     <>
-                        <Link to={"/so-luu-tru/" + params.row.id} params={{id: params.row.id}}>
+                        <Link to={"/management/so-luu-tru/" + params.row.id} params={{id: params.row.id}}>
                             <button className='congVanDiListEdit'>Chi tiết</button>
                         </Link>
                         <DeleteOutline className='congVanDiListDelete' onClick={()=>{setMark(params.row.id); setButtonDeletePopup(true)}}/>
@@ -233,7 +233,7 @@ export default function CongVanList(props) {
                         rows={tableData}
                         disableSelectionOnClick
                         columns={columns}
-                        pageSize={8}
+                        pageSize={6}
                         rowsPerPageOptions={[5]}
                         checkboxSelection
                     />

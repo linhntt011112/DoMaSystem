@@ -19,10 +19,11 @@ import ChangePassword from './components/pages/ChangePassword/ChangePassword';
 import UserRoute from './routes/user/UserRoute';
 import PhongBanList from './components/pages/PhongBanList/PhongBanList';
 import ChucVuList from './components/pages/ChucVuList/ChucVuList';
-import CongVanList from './components/pages/CongVanList/CongVanList';
+import CongVanList from './components/pages/SLTCongVanList/CongVanList';
 import AddCVDi from './components/pages/AddCvDi/AddCVDi';
 
 import * as backend_config from './config/backend'
+import SLTcongVanChiTiet from './components/pages/SLTcongvanChitiet/SLTCongVanChiTiet';
 
 const App = () => {
 
@@ -40,6 +41,7 @@ const App = () => {
             <AdminRoute exact path="/management/phong-ban/" component={PhongBanList}/>
             <AdminRoute exact path="/management/chuc-vu/" component={ChucVuList}/>
             <AdminRoute exact path="/management/so-luu-tru/" component={CongVanList} cong_van_di_get_list_url={backend_config.CONG_VAN_LUU_TRU_GET_LIST} title="đã lưu trữ"/>
+            <AdminRoute exact path="/management/so-luu-tru/:cong_vanId" component={SLTcongVanChiTiet}/>
 
             <UserRoute exact path="/cong-van-di/add_cvdi" component={AddCVDi} />
             <UserRoute exact path="/cong-van-di/cho_duyet" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_GET_LIST_CHO_DUYET} title="đi chờ duyệt"/>

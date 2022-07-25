@@ -28,7 +28,7 @@ export default function SLTAddCongVan(props) {
     const [ngay_ky, setNgayKy] = React.useState(null);
 
     const [muc_do_uu_tien, setMucDoUuTien] = React.useState(null);
-    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(null);
+    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState("Đã xử lý");
     const [ngay_tao, setNgayTao] = React.useState(null);
     const [nguoi_tao, setNguoiTao] = React.useState(null);
     const [loai_cong_van, setLoaiCongVan] = React.useState(null);
@@ -111,7 +111,7 @@ export default function SLTAddCongVan(props) {
         const body = formData;
 
         backend_config.makeRequest("POST",
-            backend_config.CONG_VAN_POST_UPDATE_TEP_DINH_KEM,
+            backend_config.CONG_VAN_LUU_TRU_POST_UPDATE_TEP_DINH_KEM.replace("{id}", id),
             token,
             body,
             null,
@@ -136,17 +136,18 @@ export default function SLTAddCongVan(props) {
     const addCongVan = () => {
         const body = {
             ten_cong_van: ten_cong_van,
-            id_phong_ban_nhan: noi_nhan,
-            id_nguoi_xu_ly: nguoi_xu_ly,
-            id_phong_ban_phat_hanh: bo_phan_phat_hanh,
-            id_nguoi_ky: nguoi_ky,
+            phong_ban_nhan: noi_nhan,
+            nguoi_xu_ly: nguoi_xu_ly,
+            ngay_hoan_tat: ngay_hoan_tat,
+            phong_ban_phat_hanh: bo_phan_phat_hanh,
+            nguoi_ky: nguoi_ky,
             ngay_ky: ngay_ky,
 
-            id_muc_do_uu_tien: muc_do_uu_tien,
-            id_tinh_trang_xu_ly: tinh_trang_xu_ly,
+            muc_do_uu_tien: muc_do_uu_tien,
+            tinh_trang_xu_ly: tinh_trang_xu_ly,
             ngay_tao: ngay_tao,
             nguoi_tao: nguoi_tao,
-            id_loai_cong_van: loai_cong_van,
+            loai_cong_van: loai_cong_van,
             so_luong_van_ban: 0,
             ly_do: ly_do,
             noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', '. '),
@@ -318,7 +319,7 @@ export default function SLTAddCongVan(props) {
                                             //required
                                         >
                                             {muc_do_uu_tien_table.map((item) => {
-                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
+                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
                                             })}
                                         </Select>
                                     </FormControl>
@@ -346,26 +347,14 @@ export default function SLTAddCongVan(props) {
                                     Tình trạng xử lý
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <Box className='cong-van-add-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            onChange={handleChangeTinhTrangXuLy}
-                                            defaultValue={3}
-                                            style={{
-                                                height: '36px'
-                                            }}
-                                            //required
-                                            disabled
-                                        >
-                                            {tinh_trang_xu_ly_table.map((item) => {
-                                                    
-                                                return (<MenuItem value={item.id} >{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
+                                <input
+                                    type="text"
+                                    className='cong-van-add-input'
+                                    value="Đã xử lý"
+                                    onChange={(e) => setTinhTrangXuLy(e.target.value)}
+                                    required
+                                    disabled
+                                />
                             </div>
                             <div className='cong-van-add-item'>
                                 <label>
@@ -404,25 +393,12 @@ export default function SLTAddCongVan(props) {
                                     Loại công văn
                                     <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
-                                <Box className='cong-van-add-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            onChange={handleChangeLoaiCongVan}
-                                            // defaultValue={3}
-                                            style={{
-                                                height: '36px'
-                                            }}
-                                            required
-                                        >
-                                            {loai_cong_van_table.map((item) => {
-                                                    
-                                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
+                                <input
+                                    type="text"
+                                    className='cong-van-add-input'
+                                    onChange={(e) => setLoaiCongVan(e.target.value)}
+                                    required
+                                />
                             </div>
                             <div className='cong-van-di-add-item'>
                                 <label>

@@ -205,9 +205,8 @@ export default function AddUserPopup(props) {
                                         className='userAddInput'
                                         onChange={(e) => setHoVaTen(e.target.value)}
                                         required
-                                        pattern='^[a-zA-Z]{1,}(?: [a-zA-Z]+){0,5}$'
+                                        // pattern='^[a-zA-Z]{1,}(?: [a-zA-Z]+){0,5}$'
                                     />
-                                    <span className='errorMessage'>Chứa ít nhất 4 kí tự</span>
                                 </div>
                             </Col>
                             <Col sm={4} style={{padding: '15px 15px 0 15px'}}>

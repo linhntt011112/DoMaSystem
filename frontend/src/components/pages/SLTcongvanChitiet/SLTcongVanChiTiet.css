@@ -1,0 +1,125 @@
+.Page-SLT-ChiTietCongVan{
+    flex: 5;
+    padding: 20px;
+}
+.SLT-congVan-TitleContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+.SLT-congVan-TitleContainerIcon{
+    cursor: pointer;
+}
+.SLT-congVan-Edit{
+    margin-right: 30px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #3bb077;
+    color: white;
+    cursor: pointer;
+}
+.thongTinChungContainer{
+    display: flex;
+}
+.congVanDiTop{
+    display: flex;
+    align-items: center;
+    color: #444;
+}
+.thongTinChungColumn1{
+    float: left;
+    width: 70%;
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+.thongTinChungColumn2{
+    float: left;
+    width: 30%;
+    padding: 66px 20px 20px 20px;
+    box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+.column1Title{
+    color: #1f1f1f;
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+}
+.columnChildren1{
+    float: left;
+    width: 60%;
+}
+.columnChildren2{
+    float: left;
+    width: 40%;
+}
+.columnChildren1Title{
+    color: #4f4f4f;
+    font-weight: bold;
+    margin: 20px 0px 0px 0px;
+    float: left;
+    width: 30%;
+}
+.columnChildren1Info{
+    margin: 20px 0px 0px 0px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    float: left;
+    width: 60%;
+}
+.columnChildren2Title{
+    float: left;
+    width: 65%;
+    color: #4f4f4f;
+    font-weight: bold;
+    margin: 20px 0px 0px 0px;
+}
+.columnChildren2Info{
+    margin: 20px 0px 0px 0px;
+    float: left;
+    width: 40%;
+}
+.column2Title{
+    color: #4f4f4f;
+    font-weight: bold;
+    margin: 0px 0px 20px 0px;
+    float: left;
+    width: 35%;
+}
+.column2Info{
+    margin: 0px 0px 20px 0px;
+}
+.trichDanContainer{
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+.noiDungTitle{
+    color: #1f1f1f;
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+}
+.trichDanTitle{
+    color: #1f1f1f;
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+}
+.trichDanInfo{
+    margin: 10px 0px 30px 10px;
+}
+
+.commentsContainer{
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgb(0 0 0 / 75%);
+}
+
+.commentsTitle{
+    color: #1f1f1f;
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+}

@@ -33,12 +33,12 @@ const Comment = ({
     return (
         <div key={comment.id} className="comment">
             <div className="comment-image-container">
-                <img className="comment-image" src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" alt=""/>
+                <img className="comment-image" src="https://www.w3schools.com/howto/img_avatar2.png" alt=""/>
             </div>
             <div className="comment-right-part">
                 <div className="comment-content">
                     <div className="comment-author">{comment.nguoi_tao.ho_ten}</div>
-                    <div className="comment-date">{comment.create_at}</div>
+                    <div className="comment-date">{comment.create_at.split('T')[0]}</div>
                 </div>
                 {!isEditing && <div className="comment-text">{comment.noi_dung}</div>}
                 {/* {isEditing && (

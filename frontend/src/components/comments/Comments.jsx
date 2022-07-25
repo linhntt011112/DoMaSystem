@@ -93,6 +93,10 @@ const Comments = ({cong_van_id, token, is_active}) => {
             {is_active && <div className="comment-form-title">Nhập nội dung</div>}
             {is_active && <CommentForm submitLabel="Gửi" handleSubmit={addComment}/>}
             <div className="comments-container">
+                {rootComments.length === 0 && 
+                    <div style={{textAlign: 'center'}}>
+                        Chưa có trao đổi nào!    
+                    </div>}
                 {rootComments.map((rootComment) => (
                     <Comment 
                         comment={rootComment} 
