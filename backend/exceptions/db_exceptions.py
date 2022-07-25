@@ -25,3 +25,7 @@ class ResourceNotFoundException(DBException):
     pass
 
 
+class InvalidValueException(DBException):
+    pass
+
+

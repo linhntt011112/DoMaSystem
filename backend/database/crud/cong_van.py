@@ -180,10 +180,16 @@ def select_list_cong_van(db, limit: int=None, offset: int=None, order_by: str=No
         else:
             condition = condition & (class_.id_loai_cong_van == id_loai_cong_van)
     if id_tinh_trang_xu_ly is not None:
-        if condition is None:
-            condition = (class_.id_tinh_trang_xu_ly == id_tinh_trang_xu_ly)
+        if id_tinh_trang_xu_ly > 0:
+            if condition is None:
+                condition = (class_.id_tinh_trang_xu_ly == id_tinh_trang_xu_ly)
+            else:
+                condition = condition & (class_.id_tinh_trang_xu_ly == id_tinh_trang_xu_ly)
         else:
-            condition = condition & (class_.id_tinh_trang_xu_ly == id_tinh_trang_xu_ly)
+            if condition is None:
+                condition = (class_.id_tinh_trang_xu_ly != -id_tinh_trang_xu_ly)
+            else:
+                condition = condition & (class_.id_tinh_trang_xu_ly != -id_tinh_trang_xu_ly)
     if id_muc_do_uu_tien is not None:
         if condition is None:
             condition += (class_.id_muc_do_uu_tien == id_muc_do_uu_tien)

@@ -28,6 +28,7 @@ export const CONG_VAN_GET_LIST_CHO_XU_LY = CONG_VAN_PREFIX + '/list/cho_xu_ly'
 export const CONG_VAN_GET_LIST_CHUA_XU_LY = CONG_VAN_PREFIX + '/list/chua_xu_ly'
 export const CONG_VAN_DI_GET_LIST_DA_HOAN_TAT = BACKEND_URL + '/cong_van/cvdi/list/da_hoan_tat'
 export const CONG_VAN_DEN_GET_LIST_DA_HOAN_TAT = BACKEND_URL + '/cong_van/cvden/list/da_hoan_tat'
+export const CONG_VAN_DEN_GET_LIST_DANG_THEO_DOI = BACKEND_URL + '/cong_van/list/dang_theo_doi'
 export const CONG_VAN_LUU_TRU_GET_LIST = BACKEND_URL + '/cong_van/luu_tru/list/'
 
 

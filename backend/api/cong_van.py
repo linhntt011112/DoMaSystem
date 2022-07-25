@@ -177,6 +177,24 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
     except Exception as e:
 
         return api_exceptions.handle_simple_exception(e, logger)
+    
+    
+
+@router.get('/list/dang_theo_doi')
+async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
+                        id_loai_cong_van: int = None, 
+                        id_muc_do_uu_tien: int = None,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+    """ List ra các công văn current_user đang theo dõi mà chưa hoàn tất (id_tinh_trang_xu_ly != 3)"""
+    
+    try:
+        id_tinh_trang_xu_ly = -3 # temporary
+        condition = (db_models.CongVanVersion.id_nguoi_theo_doi == current_user.id) 
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
+        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
+    except Exception as e:
+
+        return api_exceptions.handle_simple_exception(e, logger)
 
 
 

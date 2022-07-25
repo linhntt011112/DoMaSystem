@@ -53,6 +53,7 @@ const App = () => {
             <UserRoute exact path="/cong-van-den/" component={CongVanDenList}/>
             <UserRoute exact path="/cong-van-den/:socongvan" component={CongVanDenChiTiet}/>
             
+            <UserRoute exact path="/cong-van/dang_theo_doi" component={CongvandiList} cong_van_di_get_list_url={backend_config.CONG_VAN_DEN_GET_LIST_DANG_THEO_DOI} title="đang theo dõi"/>
 
             <UserRoute exact path="/calendar" component={DMSCalendar}/>
             <UserRoute exact path="/my-profile" component={MyProfile}/>

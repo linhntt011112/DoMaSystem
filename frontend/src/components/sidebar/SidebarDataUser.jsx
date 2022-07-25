@@ -60,7 +60,7 @@ export const SidebarDataUser = [
     },
     {
         title: 'Công văn đang theo dõi',
-        path: '/cong-van-dang-theo-doi',
+        path: '/cong-van/dang_theo_doi',
         icon: <IoIcons.IoIosDocument />,
     },
     {
