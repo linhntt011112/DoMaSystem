@@ -304,6 +304,8 @@ def delete_cong_van(db, cong_van: db_models.CongVan):
     cong_van.cong_van_current_version_id = None
     for cong_van_version in cong_van.cong_van_versions:
         delete_cong_van_version(db, cong_van_version)
+    for trao_doi in cong_van.tat_ca_trao_doi:
+        delete_trao_doi(db,  trao_doi)
     return common_queries.delete(db, cong_van)
 
 
@@ -354,6 +356,10 @@ def create_trao_doi(db, cong_van: db_models.CongVan, trao_doi: cong_van_schemas.
 
     trao_doi = db_models.TraoDoiCongVan(**data_dict)
     return common_queries.add_and_commit(db, trao_doi)
+
+
+def delete_trao_doi(db, trao_doi):
+    return common_queries.delete(db, trao_doi)
 
 
 #########################################################################

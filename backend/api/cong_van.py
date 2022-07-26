@@ -367,15 +367,18 @@ async def delete_cong_van(
     # cong_van: cong_van_schemas.CongVanCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
-    if current_user.phan_quyen != db_models.PhanQuyen.admin:
-        raise api_exceptions.PERMISSION_EXCEPTION()
-    
-    cong_van = crud_cong_van.get_cong_van_by_id(db, cong_van_id=id)
+    cong_van: db_models.CongVan = crud_cong_van.get_cong_van_by_id(db, id)
     # logger.info(f"{cong_van.__dict__}")
     if cong_van is None:
         raise api_exceptions.NOT_FOUND_EXCEPTION()
     
     try:
+        if cong_van.cong_van_current_version.id_tinh_trang_xu_ly == 1 and \
+            (current_user.id != cong_van.cong_van_current_version.id_nguoi_tao and current_user.id != cong_van.cong_van_current_version.id_nguoi_ky):
+            raise api_exceptions.PERMISSION_EXCEPTION()
+        
+        if cong_van.cong_van_current_version.id_tinh_trang_xu_ly > 1 and current_user.phan_quyen != db_models.PhanQuyen.admin:
+            raise api_exceptions.PERMISSION_EXCEPTION()
         return crud_cong_van.delete_cong_van(db, cong_van)
     except Exception as e:
 
@@ -506,10 +509,10 @@ async def delete_cong_van_luu_tru(
     # cong_van: cong_van_schemas.CongVanCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
-    if current_user.phan_quyen != db_models.PhanQuyen.admin:
-        raise api_exceptions.PERMISSION_EXCEPTION()
-    
-    cong_van = crud_cong_van.get_cong_van_luu_tru_by_id(db, cong_van_luu_tru_id)
+    if  current_user.phan_quyen != db_models.PhanQuyen.admin:
+            raise api_exceptions.PERMISSION_EXCEPTION()
+        
+    cong_van: db_models.CongVan = crud_cong_van.get_cong_van_luu_tru_by_id(db, cong_van_luu_tru_id)
     # logger.info(f"{cong_van.__dict__}")
     if cong_van is None:
         raise api_exceptions.NOT_FOUND_EXCEPTION()
