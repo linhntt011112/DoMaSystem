@@ -67,7 +67,7 @@ class CongVanVersion(Base):
                                             )
    
     id_nguoi_ky = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
-    nguoi_ky = relationship("NguoiDung", foreign_keys=id_nguoi_ky, uselist=False, post_update=True)
+    nguoi_ky = relationship("NguoiDung", foreign_keys=id_nguoi_ky, uselist=False)
     ngay_ky = Column(DateTime, nullable=True)
    
    
@@ -147,6 +147,7 @@ class CongVan(Base):
     cong_van_current_version = relationship("CongVanVersion", foreign_keys=cong_van_current_version_id, uselist=False)
    
     cong_van_versions = relationship("CongVanVersion", back_populates="cong_van", order_by="CongVanVersion.ngay_tao", primaryjoin="CongVanVersion.cong_van_id==CongVan.id")
+    tat_ca_trao_doi = relationship("TraoDoiCongVan", backref="cong_van", primaryjoin="TraoDoiCongVan.id_cong_van==CongVan.id")
    
     create_at = Column(DateTime, nullable=False)
     update_at = Column(DateTime, nullable=False)
