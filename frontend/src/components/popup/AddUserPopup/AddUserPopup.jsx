@@ -207,10 +207,11 @@ export default function AddUserPopup(props) {
                                     <input
                                         type="text"
                                         className='userAddInput'
-                                        onChange={(e) => setHoVaTen(e.target.value)}
+                                        onChange={handleChangeHoVaTen}
                                         required
                                         pattern='^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$'
                                     />
+                                    <span className='errorMessage'>Họ và tên không hợp lệ</span>
                                 </div>
                             </Col>
                             <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
