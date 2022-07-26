@@ -43,6 +43,10 @@ export default function AddUserPopup(props) {
     const [tk_ngan_hang, setTKNganHang] = useState(null);
     const [ngan_hang, setNganHang] = useState(null);
 
+    const handleChangeHoVaTen = (event) => {
+        setHoVaTen(event.target.value)
+    }
+
     const handleChangeChucVu = (event) => {
         setChucVu(event.target.value);
     };
@@ -205,7 +209,7 @@ export default function AddUserPopup(props) {
                                         className='userAddInput'
                                         onChange={(e) => setHoVaTen(e.target.value)}
                                         required
-                                        // pattern='^[a-zA-Z]{1,}(?: [a-zA-Z]+){0,5}$'
+                                        pattern='^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$'
                                     />
                                 </div>
                             </Col>

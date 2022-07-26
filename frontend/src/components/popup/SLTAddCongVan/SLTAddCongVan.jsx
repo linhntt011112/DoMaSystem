@@ -26,7 +26,8 @@ export default function SLTAddCongVan(props) {
     const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(null);
     const [nguoi_ky, setNguoiKy] = React.useState(null);
     const [ngay_ky, setNgayKy] = React.useState(null);
-
+    const [nguoi_nhap, setNguoiNhap] = React.useState({ho_ten: null});
+    
     const [muc_do_uu_tien, setMucDoUuTien] = React.useState(null);
     const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState("Đã xử lý");
     const [ngay_tao, setNgayTao] = React.useState(null);
@@ -89,10 +90,17 @@ export default function SLTAddCongVan(props) {
           .then((data) => {setLoaiCongVanTable(data)})
     }
 
+    const fetchCurrentUser = () =>{
+        backend_config.makeRequest("GET", backend_config.USER_GET_CURRENT_API, token)
+          .then((data) => data.json())
+          .then((data) => {setNguoiNhap(data)})
+    }
+
     useEffect(() => {
         fetchOneStaticTableData('muc_do_uu_tien', setMucDoUuTienTable);
         fetchOneStaticTableData('tinh_trang_xu_ly', setTinhTrangXuLyTable);
         fetchLoaiCongVanTable();
+        fetchCurrentUser();
     }, [])
 
     const addCongVanSuccessNotify = (response_json) => {
@@ -247,13 +255,12 @@ export default function SLTAddCongVan(props) {
                             <div className='cong-van-add-item'>
                                 <label>
                                     Người nhận và xử lý
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input
                                     type="text"
                                     className='cong-van-add-input'
                                     onChange={(e) => setNguoiXuLy(e.target.value)}
-                                    required
+                                    // required
                                 />
                             </div>
                             <div className='cong-van-add-item'>
@@ -297,6 +304,20 @@ export default function SLTAddCongVan(props) {
                                         fontSize: '15px',
                                         paddingLeft: '10.5px'
                                     }}
+                                />
+                            </div>
+                            <div className='cong-van-add-item'>
+                                <label>
+                                    Người nhập
+                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    className='cong-van-add-input'
+                                    value={nguoi_nhap?.ho_ten}
+                                    disabled
+                                    // onChange={(e) => setNguoiNhap(e.target.value)}
+                                    // required
                                 />
                             </div>
                         </div>
@@ -359,7 +380,6 @@ export default function SLTAddCongVan(props) {
                             <div className='cong-van-add-item'>
                                 <label>
                                     Ngày tạo
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input 
                                     type="date" 
@@ -379,13 +399,11 @@ export default function SLTAddCongVan(props) {
                             <div className='cong-van-add-item'>
                                 <label>
                                     Người tạo
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
                                 </label>
                                 <input
                                     type="text"
                                     className='cong-van-add-input'
                                     onChange={(e) => setNguoiTao(e.target.value)}
-                                    required
                                 />
                             </div>
                             <div className='cong-van-add-item'>

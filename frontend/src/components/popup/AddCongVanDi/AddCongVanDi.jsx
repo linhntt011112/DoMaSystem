@@ -215,7 +215,7 @@ export default function AddCongVanDi(props) {
             ngay_tao: ngay_tao,
             // ngay_duyet: ngay_duyet,
             ly_do: ly_do,
-            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', '. '),
+            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', ""),
         }
         // console.log(body);
         let new_body = {}
@@ -602,12 +602,12 @@ export default function AddCongVanDi(props) {
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
                                             onChange={handleChangeTinhTrangXuLy}
-                                            // defaultValue={1}
+                                            value={1}
                                             style={{
                                                 height: '36px'
                                             }}
-                                            //required
-                                            // disabled
+                                            required
+                                            disabled
                                         >
                                             {tinh_trang_xu_ly_table.map((item) => {
                                                     

@@ -45,6 +45,7 @@ export default function EditCongVanDi(props) {
     const [ly_do, setLyDo] = React.useState(cong_van_versionData.ly_do);
 
     const [file_dinh_kem, setFileDinhKem] = React.useState(null);
+    console.log(cong_van_versionData.noi_dung);
 
     const [editorState, setEditorState] = React.useState(
         () => EditorState.createWithContent(stateFromHTML(cong_van_versionData.noi_dung)),
@@ -201,7 +202,7 @@ export default function EditCongVanDi(props) {
             id_muc_do_uu_tien: muc_do_uu_tien,
             id_nguoi_xu_ly: nguoi_xu_ly,
             ly_do: ly_do,
-            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', '. '),
+            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', ""),
         }
         // console.log(body);
         let new_body = {}

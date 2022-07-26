@@ -24,7 +24,15 @@ const CommentForm = ({
                 onChange={(e) => setText(e.target.value)}
             />
             <div className="comment-form-buttons">
-                <Button className="comment-form-button" variant="contained" color="primary" component="span" disabled={isTextareaDisabled} onClick={onSubmit}>
+                <Button 
+                    className="comment-form-button" 
+                    variant="contained" 
+                    color="primary" 
+                    component="span" 
+                    disabled={isTextareaDisabled} 
+                    onClick={onSubmit}
+                    style={{position: 'inherit'}}
+                >
                     {submitLabel}
                 </Button>
                 {hasCancelButton && (

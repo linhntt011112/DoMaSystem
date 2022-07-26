@@ -46,7 +46,7 @@ export default function AddCongVanDi(props) {
     const [muc_do_uu_tien, setMucDoUuTien] = React.useState(null);
     // const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
     const [nguoi_xu_ly, setNguoiXuLy] = React.useState(null);
-    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(null);
+    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState(1);
     const [ngay_tao, setNgayTao] = React.useState(today_date);
     // const [ngay_duyet, setNgayDuyet] = React.useState(null);
     const [ly_do, setLyDo] = React.useState(null);
@@ -217,7 +217,7 @@ export default function AddCongVanDi(props) {
             ngay_tao: ngay_tao,
             // ngay_duyet: ngay_duyet,
             ly_do: ly_do,
-            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', '. '),
+            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', ""),
         }
         // console.log(body);
         let new_body = {}
@@ -564,13 +564,14 @@ export default function AddCongVanDi(props) {
                                         <Select
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            onChange={handleChangeTinhTrangXuLy}
+                                            // onChange={handleChangeTinhTrangXuLy}
                                             // defaultValue={1}
+                                            value={1}
                                             style={{
                                                 height: '36px'
                                             }}
-                                            //required
-                                            // disabled
+                                            required
+                                            disabled
                                         >
                                             {tinh_trang_xu_ly_table.map((item) => {
                                                     
