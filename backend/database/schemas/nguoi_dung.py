@@ -95,31 +95,45 @@ class UserCreate(BaseModel):
     
 class UserSelfUpdateInfo(BaseModel):
     dia_chi: str = None
-    # ngay_vao_lam: Union[datetime.datetime, datetime.date] = None
     dien_thoai: str = None
     email: str = None
 
-    # phan_quyen: PhanQuyen.type 
-    # gioi_tinh: GioiTinh.type
-
-
-    # ngay_cap: Union[datetime.datetime, datetime.date] = None
-    # noi_cap: str = None
-    # que_quan: str = None
 
     tk_ngan_hang: str = None
     ngan_hang: str = None
 
-
-    # id_phong_ban: int = None
-    # id_chuc_vu: int = None
     id_hoc_van: int = None
     id_dan_toc: int = None
     id_quoc_tich: int = None
     id_ton_giao: int = None
     
     ngay_cap_nhat: Union[datetime.datetime, datetime.date] = None
+    
+    
 
+class UserAdminUpdateInfo(BaseModel):
+    ho_ten: str = None
+    
+    ngay_sinh: Union[datetime.datetime, datetime.date] = None
+    dia_chi: str = None
+    ngay_vao_lam: Union[datetime.datetime, datetime.date] = None
+    
+
+    phan_quyen: PhanQuyen.type = None
+    gioi_tinh: GioiTinh.type = None
+
+    cccd: str = None
+    ngay_cap: Union[datetime.datetime, datetime.date] = None
+    noi_cap: str = None
+    que_quan: str = None
+
+    tk_ngan_hang: str = None
+    ngan_hang: str = None
+
+    id_phong_ban: int = None
+    id_chuc_vu: int = None
+    
+    ngay_cap_nhat: Union[datetime.datetime, datetime.date] = None
 
 class UserUpdatePassword(BaseModel):
     current_plain_password: str 

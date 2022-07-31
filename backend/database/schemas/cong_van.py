@@ -147,6 +147,20 @@ class CongVanVersionFull(BaseModel):
     
     class Config:
         orm_mode = True
+        
+        
+class CongVanVersionShort(BaseModel):
+    id: int
+    version_name: str = None
+    
+    thoi_gian_cap_nhat: Union[datetime.datetime, datetime.date]
+    id_nguoi_cap_nhat: int
+    nguoi_cap_nhat: nguoi_dung.UserShort
+    noi_dung_thay_doi: str = None
+    cong_van_id: int = None
+    
+    class Config:
+        orm_mode = True
     
     
 
@@ -265,6 +279,19 @@ class CongVanCurrent(BaseModel):
     
     cong_van_current_version_id: int
     cong_van_current_version: CongVanVersionFull
+    
+    create_at: Union[datetime.datetime, datetime.date]
+    update_at: Union[datetime.datetime, datetime.date]
+    
+    class Config:
+        orm_mode = True
+        
+        
+class CongVanListVersion(BaseModel):
+    id: int 
+    
+    cong_van_current_version_id: int
+    cong_van_versions: List[CongVanVersionShort]
     
     create_at: Union[datetime.datetime, datetime.date]
     update_at: Union[datetime.datetime, datetime.date]

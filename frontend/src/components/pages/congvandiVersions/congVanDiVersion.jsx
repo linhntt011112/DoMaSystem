@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from "react";
-import './congVanDiChiTiet.css';
+import './congVanDiVersion.css';
 import { ArrowBack } from '@material-ui/icons';
 import { useHistory, useParams } from "react-router-dom";
 import { ErrorOutlineRounded, Create, ContentPaste, AttachFile, People } from '@mui/icons-material';
+import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Comments from "../../comments/Comments";
 import EditCongVanDi from "../../popup/EditCongVanDi/EditCongVanDi";
@@ -10,24 +11,25 @@ import * as backend_config from "../../../config/backend"
 
 import { useUserInfo } from "../../../context/TokenContext";
 
-export default function CongVanDiChiTiet(props) {
+export default function CongVanDiVersion(props) {
     const token = props.token;
-    const {user} = useUserInfo();
+    // const {user} = useUserInfo();
     // console.log(user)
     let history = useHistory();
-    const [buttonPopup, setButtonPopup] = useState(false);
+    // const [buttonPopup, setButtonPopup] = useState(false);
 
     let { cong_vanId } = useParams();
     if ("cong_vanId" in props) cong_vanId = props.cong_vanId;
     
-
+    const [cong_van, setCong_van] = useState();
+    const [allVersions, setAllVersions] =  useState([]);
     const [cong_van_versionData, setCong_van_versionData] = useState("");
     // const [downloadTep_dinh_kemUrl, setDownloadTep_dinh_kemUrl] = useState("");
 
-    const refreshFunc = () => {
-        backend_config.makeRequest("GET", backend_config.CONG_VAN_GET_BY_ID.replace('{id}', cong_vanId), token)
+    const refreshFunc = (version_id) => {
+        backend_config.makeRequest("GET", backend_config.CONG_VAN_VERSION_GET_BY_ID.replace('{cong_van_id}', cong_vanId).replace('{version_id}', version_id), token)
             .then((data) => data.json())
-            .then((data) => setCong_van_versionData(data.cong_van_current_version))
+            .then((data) => setCong_van_versionData(data))
     }
 
 
@@ -41,72 +43,50 @@ export default function CongVanDiChiTiet(props) {
     }
 
 
-    const duyet = () => {
-        backend_config.makeRequest("PUT", backend_config.CONG_VAN_PUT_DUYET.replace("{id}", cong_van_versionData.cong_van_id), token)
-        .then((response) => {
-            if (response.ok){
-                response.json().then((response_json) => {
-                    // addPhongBanSuccessNotify(response_json);
-                    history.push('/cong-van-di/cho_xu_ly')
-                })
-            }
-            else {
-                response.text().then((text) => {
-                    let error = JSON.parse(text).detail;
-                    switch (error) {
-                        default:
-                            alert(text);
-                            return;
-                    }
-                })
-            }
-        })
-    }
-
-    const xu_ly = () => {
-        backend_config.makeRequest("PUT", backend_config.CONG_VAN_PUT_XU_LY.replace("{id}", cong_van_versionData.cong_van_id), token)
-        .then((response) => {
-            if (response.ok){
-                response.json().then((response_json) => {
-                    // addPhongBanSuccessNotify(response_json);
-                    history.push('/cong-van-den/da_hoan_tat')
-                })
-            }
-            else {
-                response.text().then((text) => {
-                    let error = JSON.parse(text).detail;
-                    switch (error) {
-                        default:
-                            alert(text);
-                            return;
-                    }
-                })
-            }
-        })
-    }
-
 
     useEffect(() => {
-        refreshFunc()
+        backend_config.makeRequest("GET", backend_config.CONG_VAN_VERSION_GET_LIST.replace('{cong_van_id}', cong_vanId), token)
+            .then((data) => data.json())
+            .then((data) => {
+                // console.log(data)
+                setCong_van(data)
+                setAllVersions(data.cong_van_versions);
+                refreshFunc(data.cong_van_current_version_id);
+                // console.log(data.cong_van_current_version_id)
+            }
+                )
+        
     }, []);
 
     return (
         <div className="PageChiTietCongVan">
             <main>
                 <div className="congVanDiTitleContainer">
-                    <ArrowBack className='congVanDiTitleContainerIcon' onClick={() => history.goBack()} ></ArrowBack>
+                    <ArrowBack className='congVanDiTitleContainerIcon' onClick={() => history.push("/cong-van-di/" + cong_vanId)} ></ArrowBack>
                     <h1 className='congVanDiTitle'>Thông tin chi tiết</h1>
                     <div>
-                        {cong_van_versionData.id_tinh_trang_xu_ly === 1 && user.id === cong_van_versionData.id_nguoi_ky &&
-                            <button className='congVanDiEdit' onClick={() => duyet()}>Duyệt</button>}
-                        {cong_van_versionData.id_tinh_trang_xu_ly === 2 && user.id === cong_van_versionData.id_nguoi_xu_ly &&
-                            <button className='congVanDiEdit' onClick={() => xu_ly()}>Xử lý</button>}
-
-                        {cong_van_versionData.id_tinh_trang_xu_ly === 1 && (user.id === cong_van_versionData.id_nguoi_tao || user.id === cong_van_versionData.id_nguoi_ky) &&
-                            <button className='congVanDiEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>}
-                        {cong_van_versionData !== "" && <EditCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token} cong_van_versionData={cong_van_versionData} refreshFunc={refreshFunc}></EditCongVanDi>}
-
-                        <button className='congVanDiEdit' onClick={() => history.push(`/cong-van/${cong_vanId}/versions`)}>Lịch sử chỉnh sửa</button>
+                        <div style={{ width: '200px', display: 'flex', flexDirection: 'column' }}>
+                            <span className="dropdown-title">Phiên bản</span>
+                            <Select
+                                labelId="cong_van_version"
+                                id="id"
+                                style={{
+                                    height: '36px',
+                                    position: 'relative',
+                                    color: '#333',
+                                    cursor: 'default',
+                                    margin: '10px 0 20px 20px',
+                                }}
+                                value={cong_van?.cong_van_current_version_id}
+                                onChange={(event) => {refreshFunc(event.target.value)}}
+                            >
+                                {allVersions.map((item) => {      
+                                    if (item.id === cong_van?.cong_van_current_version_id)    
+                                        return (<MenuItem value={item.id}> Phiên bản hiện tại</MenuItem>)
+                                    else return (<MenuItem value={item.id}>{item.thoi_gian_cap_nhat}</MenuItem> )
+                                })}
+                            </Select>
+                        </div>
                     </div>
                 </div>
                 <div className="thongTinChungContainer">
@@ -212,13 +192,13 @@ export default function CongVanDiChiTiet(props) {
                         <a href=""></a>
                     </div>
                 </div>
-                <div className="commentsContainer">
+                {/* <div className="commentsContainer">
                     <div className="commentsTitle">
                         <People style={{margin: '2px 5px 0 0'}}/> 
                         <h5>Trao đổi</h5>
                     </div>
                     <Comments token={token} cong_van_id={cong_vanId} is_active={cong_van_versionData.id_tinh_trang_xu_ly === 3? false: true}/>
-                </div>
+                </div> */}
             </main>
         </div>
     )

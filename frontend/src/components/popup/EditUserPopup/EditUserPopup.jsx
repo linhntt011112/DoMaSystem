@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function EditUserPopup(props) {
-    const {userData, token} = props
+    const {userData, token, refreshFunc} = props
 
     const [phan_quyen, setPhanQuyen] = React.useState(userData.phan_quyen === "admin" ? true : false);
     const [gioi_tinh, setGioiTinh] = React.useState(userData.gioi_tinh === "Nu" ? true : false);
@@ -54,17 +54,42 @@ export default function EditUserPopup(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         submitEditUser();
-        props.setTrigger(false);
-        editUserNotify();
     }
 
     const submitEditUser = () => {
         const body = JSON.stringify({
             phan_quyen: phan_quyen === true ? "admin" : "user",
-            phong_ban: phong_ban,
-            chuc_vu: chuc_vu
+            id_phong_ban: phong_ban,
+            id_chuc_vu: chuc_vu
         })
         console.log(body);
+        backend_config.makeRequest("PUT", 
+            backend_config.USER_PUT_ADMIN_UPDATE.replace("{id}", userData.id), 
+            token,
+            body
+        )
+        .then((response) => {
+            if (response.ok){
+                response.json().then((response_json) => {
+                    props.setTrigger(false);
+                    editUserNotify();
+                    refreshFunc();
+                })
+            }
+            else {
+                response.text().then((text) => {
+                    let error = JSON.parse(text).detail;
+                    switch (error) {
+                        // case "Duplicate ten_tai_khoan!": 
+                        //     addUserNotifyDuplicateUsername();
+                        //     return;
+                        default:
+                            alert(text);
+                            return;
+                    }
+                })
+            }
+        })
     }
 
     return (props.trigger) ? (

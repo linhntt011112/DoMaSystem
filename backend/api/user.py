@@ -40,14 +40,13 @@ async def read_users_me(current_user = Depends(get_current_active_user)):
 async def get_list_users(current_user = Depends(get_current_active_user), db=Depends(get_db),
                         limit: int=None, offset: int=None,
                         order_by=None):    
-    # if current_user.phan_quyen == db_models.PhanQuyen.admin:
-    #     users = crud_user.select_list_user(db, limit=limit, offset=offset)
-    #     return [user_schemas.UserBase.from_orm(user) for user in users]
-    # else:
-    #     raise exceptions.PERMISSION_EXCEPTION()
+    if current_user.phan_quyen == db_models.PhanQuyen.admin:
+        users = crud_user.select_list_user(db, limit=limit, offset=offset)
+        return [user_schemas.UserBase.from_orm(user) for user in users]
+    else:
+        raise api_exceptions.PERMISSION_EXCEPTION()
     
-    users = crud_user.select_list_user(db, limit=limit, offset=offset)
-    return [user_schemas.UserBase.from_orm(user) for user in users]
+    
 
 
 @router.get("/id/{user_id}")
@@ -147,6 +146,23 @@ async def update_info_user_self(user_schema_model: user_schemas.UserSelfUpdateIn
     try:
         current_user = user_core.update_user_self(db, current_user, user_schema_model)
         return user_schemas.UserBase.from_orm(current_user)
+    
+    except Exception as e:
+        return api_exceptions.handle_simple_exception(e, logger)
+    
+
+
+@router.put("/{user_id}/admin-update")
+async def update_info_user_self(user_id: int, user_schema_model: user_schemas.UserAdminUpdateInfo,
+    current_user=Depends(get_current_active_user), db=Depends(get_db)):
+    if current_user.phan_quyen != db_models.PhanQuyen.admin:
+        raise api_exceptions.PERMISSION_EXCEPTION()
+    try:
+        user = crud_user.get_user_by_id(db, user_id)
+        if user is None:
+            raise api_exceptions.NOT_FOUND_EXCEPTION()
+        user = user_core.update_user_admin(db, user, user_schema_model)
+        return user_schemas.UserBase.from_orm(user)
     
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
