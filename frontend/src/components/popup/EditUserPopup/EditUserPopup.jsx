@@ -226,6 +226,38 @@ export default function EditUserPopup(props) {
                                     </div>
                                 </Col>
                             </Row>
+                            <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                            <div className='userAddItem' style={{padding: '15px 0px 0px 15px'}}>
+                                <label>
+                                    Địa chỉ
+                                </label>
+                                <input
+                                    type="text"
+                                    className='userAddInput'
+                                    style={{width: '826px'}}
+                                    // onChange={(e) => setDiaChi(e.target.value)}
+                                    value={userData.dia_chi}
+                                    disabled
+                                />
+                            </div>
+                        </Row>
+                        <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
+                            <div className='userAddItem' style={{padding: '15px 0px 0px 15px'}}>
+                                <label>
+                                    Quê quán
+                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    className='userAddInput'
+                                    style={{width: '826px'}}
+                                    // onChange={(e) => setQueQuan(e.target.value)}
+                                    required
+                                    value={userData.que_quan}
+                                    disabled
+                                />
+                            </div>
+                        </Row>
                             <h6 style={{fontSize: '22px', paddingTop: '20px'}}>Thông tin công việc</h6>
                             <Row style={{display: 'flex', flex: 'wrap', marginLeft: '15px', marginRight: '15px'}}>
                                 <Col sm={4} style={{padding: '15px 15px 0 15px'}}>
