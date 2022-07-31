@@ -17,10 +17,14 @@ export default function User(props) {
 
     const [userData, setUserData] = useState("");
 
-    useEffect(() => {
+    const refreshFunc = () =>{
         backend_config.makeRequest("GET", backend_config.USER_GET_BY_ID_API.replace('{id}', userId), token)
           .then((data) => data.json())
           .then((data) => setUserData(data))
+    }
+
+    useEffect(() => {
+        refreshFunc();
     }, [])
 
     return (
@@ -32,7 +36,7 @@ export default function User(props) {
                     {userData !== "" &&
                     <div>
                         <button className='profileEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
-                        <EditUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token}>
+                        <EditUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token} refreshFunc={refreshFunc}>
                         </EditUserPopup>
                     </div>
                     }

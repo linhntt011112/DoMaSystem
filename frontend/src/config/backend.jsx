@@ -12,6 +12,7 @@ export const USER_POST_CREATE = BACKEND_URL + '/user/create';
 export const USER_DELETE_BY_ID = BACKEND_URL + '/user/delete/{user_id}'
 export const USER_PUT_CHANGE_PASSWORD = BACKEND_URL + '/user/update_password'
 export const USER_PUT_SELF_UPDATE = BACKEND_URL + '/user/update'
+export const USER_PUT_ADMIN_UPDATE = BACKEND_URL + '/user/{id}/admin-update'
 
 
 export const LOAI_CONG_VAN_PREFIX = BACKEND_URL + '/cong_van/loai_cong_van'
