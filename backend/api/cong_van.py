@@ -202,7 +202,7 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
 
 
 @router.get('/{id}')
-async def get_list_cong_van(id: int,
+async def get_cong_van_by_id(id: int,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
 
     try:
