@@ -521,7 +521,7 @@ export default function EditCongVanDi(props) {
                         <h5>{file_dinh_kem == null && cong_van_versionData.tep_dinh_kem?.name}</h5>
                     </div>
                     <div className='cong-van-di-update-footer'>
-                        <button className='cong-van-di-update-button'>Thêm</button>
+                        <button className='cong-van-di-update-button'>Lưu</button>
                     </div>
                 </div>
             </form>
