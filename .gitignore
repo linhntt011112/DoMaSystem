@@ -5,10 +5,9 @@ backend/database/__pycache__/
 backend/database/models/__pycache__/
 backend/log
 backend/test.ipynb
-backend/config.py
+backend/local_config.json
 **/__pycache__/
 backend/database/start_db_docker-compose.yml
-backend/config.py
 storage/
 backend/database/docker-db/
 
