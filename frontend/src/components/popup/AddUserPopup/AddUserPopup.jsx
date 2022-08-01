@@ -312,6 +312,7 @@ export default function AddUserPopup(props) {
                                 <div className='userAddItem'>
                                     <label>
                                         Ngày cấp
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
                                     </label>
                                     <input 
                                         type="date" 
@@ -320,6 +321,7 @@ export default function AddUserPopup(props) {
                                             e.preventDefault();
                                         }}
                                         onChange={(e) => setNgayCap(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </Col>
@@ -327,11 +329,13 @@ export default function AddUserPopup(props) {
                                 <div className='userAddItem'>
                                     <label>
                                         Nơi cấp
+                                        <span className='text-danger' style={{color: 'red'}}>  *</span>
                                     </label>
                                     <input
                                         type="text"
                                         className='userAddInput'
                                         onChange={(e) => setNoiCap(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </Col>
@@ -353,12 +357,14 @@ export default function AddUserPopup(props) {
                             <div className='userAddItem' style={{padding: '15px 0px 0px 15px'}}>
                                 <label>
                                     Quê quán
+                                    <span className='text-danger' style={{color: 'red'}}>  *</span>
                                 </label>
                                 <input
                                     type="text"
                                     className='userAddInput'
                                     style={{width: '826px'}}
                                     onChange={(e) => setQueQuan(e.target.value)}
+                                    required
                                 />
                             </div>
                         </Row>

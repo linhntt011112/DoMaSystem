@@ -19,7 +19,7 @@ export default function Topbar({user, setToken}) {
                 </div>
                 
                 <ul className="topRight">
-                    <li className='topbarIconContainer'>
+                    <li className='topbarIconContainer' style={{display: 'none'}}>
                         <div class="dropdown-toggle nav-link">
                             <NotificationsNone/>
                             <span className='topIconBadge'>2</span>

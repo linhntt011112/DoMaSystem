@@ -48,7 +48,7 @@ export default function MyProfile(props) {
                                     {userData.ho_ten}
                                 </span>
                                 <span className='my-profile-ShowUserCode'><b>Mã nhân viên: </b>
-                                    {userData.ma_nguoi_dung}
+                                    {userData.id}
                                 </span>
                                 <span className='my-profile-ShowUserDateOfJoined'><b>Ngày vào làm: </b>
                                     {userData.ngay_vao_lam}
