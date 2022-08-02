@@ -240,7 +240,26 @@ def create_sample_loai_cong_van():
     ]
     
     [common_queries.add_and_commit(get_session(), loai_cong_van) for loai_cong_van in loai_cong_van_s]
-    
+
+
+def create_sample_notification():
+    notification_templates = [
+        NotificationTemplate(
+            entity_type="cong_van",
+            template="{{actor_id}} đã thêm mới {{entity_id}}"
+        ),
+        NotificationTemplate(
+            entity_type="cong_van",
+            template="{{actor_id}} đã sửa đổi {{entity_id}}"
+        ),
+        NotificationTemplate(
+            entity_type="cong_van",
+            template="{{actor_id}} đã thay đổi trạng thái của {{entity_id}}"
+        )
+    ]
+    [common_queries.add_and_commit(get_session(), notification_template) for notification_template in notification_templates]
+
+
 
 def run_all():
     # print(timeit.timeit(lambda : drop_all_tables(), number=1))
@@ -249,8 +268,19 @@ def run_all():
     # print(timeit.timeit(lambda : create_sample_nguoi_dung(), number=1))
     # print(timeit.timeit(lambda : create_sample_loai_cong_van(), number=1))
     
+    
     # db_models.TraoDoiCongVan.__table__.drop(engine)
-    db_models.Lich.__table__.create(engine)
+    # db_models.Lich.__table__.create(engine)
+    
+    # db_models.Notification.__table__.drop(engine)
+    # db_models.NotificationObject.__table__.drop(engine)
+    # db_models.NotificationTemplate.__table__.drop(engine)
+    
+    
+    db_models.NotificationTemplate.__table__.create(engine)
+    db_models.NotificationObject.__table__.create(engine)
+    db_models.Notification.__table__.create(engine)
+    print(timeit.timeit(lambda : create_sample_notification(), number=1))
     
     # drop_all_tables()
     # create_tables()

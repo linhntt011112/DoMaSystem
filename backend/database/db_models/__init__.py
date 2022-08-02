@@ -3,3 +3,5 @@ from .nguoi_dung import NguoiDung
 from .static_tables import *
 from .cong_van import *
 from .utils import *
+
+from .notification import *

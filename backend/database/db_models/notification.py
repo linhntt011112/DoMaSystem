@@ -25,7 +25,7 @@ class NotificationObject(Base):
     
     created_on = Column(DateTime, nullable=False)
     
-    actor_id = Column(Integer, nullable=False)
+    actor_id = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
     actor = relationship('NguoiDung', backref="notification_object", uselist=False)
     
     entity_id = Column(Integer, nullable=False)
@@ -39,7 +39,7 @@ class Notification(Base):
     notification_object = relationship('NotificationObject', backref="notification", uselist=False)
     
     notifier_id = Column(Integer, ForeignKey('nguoi_dung.id'), nullable=False)
-    notifier = relationship('nguoiDung', backref="notification", uselist=False)
+    notifier = relationship('NguoiDung', backref="notification", uselist=False)
     
     status = Column(Integer, nullable=False)
 
