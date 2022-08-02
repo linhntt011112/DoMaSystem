@@ -14,3 +14,4 @@ backend/database/docker-db/
 # github_token.txt
 
 frontend/node_venv/
+frontend/build/
