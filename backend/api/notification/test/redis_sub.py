@@ -20,7 +20,7 @@ async def reader():
                     if message["data"].decode() == STOPWORD:
                         print("(Reader) STOP")
                         break
-                await asyncio.sleep(0.01)
+                await asyncio.sleep(0.1)
         except asyncio.TimeoutError:
             pass
 
