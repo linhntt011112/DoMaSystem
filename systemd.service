@@ -7,7 +7,7 @@ User=ubuntu
 Group=www-data
 WorkingDirectory=/home/ubuntu/personal/DoMaSystem/backend
 Environment="PATH=/home/ubuntu/personal/DoMaSystem/backend/venv/bin"
-ExecStart=/bin/bash /home/ubuntu/markitone/markitone-custom-company/backend/run.sh
+ExecStart=/bin/bash /home/ubuntu/personal/DoMaSystem/backend/run.sh
 
 
 [Install]

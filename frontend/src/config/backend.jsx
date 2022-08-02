@@ -1,4 +1,5 @@
-export const BACKEND_URL = process.env.DMS_BACKEND_URL; // 'http://localhost:3009/api/v1';
+// export const BACKEND_URL = 'http://localhost:3009/api/v1';
+export const BACKEND_URL = 'http://18.179.198.25/api/v1';
 export const BACKEND_URL_TOKEN = BACKEND_URL + '/token';
 export const BACKEND_URL_TOKEN_CHECK = BACKEND_URL + '/user/me';
 
