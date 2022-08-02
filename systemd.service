@@ -5,9 +5,9 @@ After=network.target
 [Service]
 User=ubuntu
 Group=www-data
-WorkingDirectory=/home/ubuntu/personal/DoMaSystem/backend
-Environment="PATH=/home/ubuntu/personal/DoMaSystem/backend/venv/bin"
-ExecStart=/bin/bash /home/ubuntu/personal/DoMaSystem/backend/run.sh
+WorkingDirectory=/home/ubuntu/DoMaSystem/backend
+Environment="PATH=/home/ubuntu/DoMaSystem/backend/venv/bin"
+ExecStart=/bin/bash /home/ubuntu/DoMaSystem/backend/run.sh
 
 
 [Install]
@@ -24,9 +24,9 @@ After=network.target
 [Service]
 User=ubuntu
 Group=www-data
-WorkingDirectory=/home/ubuntu/personal/DoMaSystem/frontend
-Environment="PATH=/home/ubuntu/.nvm/versions/node/v17.3.0/bin"
-ExecStart=/home/ubuntu/.nvm/versions/node/v17.3.0/bin/serve -s build -l 3008
+WorkingDirectory=/home/ubuntu/DoMaSystem/frontend
+Environment="PATH=/home/ubuntu/DoMaSystem/frontend/node_venv/bin"
+ExecStart=/home/ubuntu/DoMaSystem/frontend/node_venv/bin/serve -s build -l 3008
 
 
 [Install]
