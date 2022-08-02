@@ -13,12 +13,12 @@ from config import frontend_config, server_config
 from api import user, login, static_tables, cong_van, common, cong_van_version, loai_cong_van, api_utils
 
 
-# origins = frontend_config.possible_urls
-origins = [
-    'localhost:3008',
-    'http://localhost:3008',
-    'http://127.0.0.1:3008/'
-    ]
+origins = frontend_config.possible_urls
+# origins = [
+#     'localhost:3008',
+#     'http://localhost:3008',
+#     'http://127.0.0.1:3008/'
+#     ]
 
 app = FastAPI(title=server_config.app_name)
 
