@@ -37,10 +37,14 @@ class ServerConfig:
     tep_dinh_kem_save_dir = os.path.join(base_save_dir, 'tep_dinh_kem')
 
     class Caching:
-        redis_url = "redis://default:DMS@localhost:3012"
+        redis_url = "redis://default:DMS@localhost:3012/0"
         default_expiration_time_in_seconds = 60*30
 
     caching = Caching()
+    
+    class PubSub:
+        redis_url = "redis://default:DMS@localhost:3012/1"
+    pubsub = PubSub()
     notification_key = "MIICXAIBAAKBgQC/Ttc4mWodTGbczo6wbabrsQs74tel2y7/WpRZ3I1JnlDoaYSk"
 
 
