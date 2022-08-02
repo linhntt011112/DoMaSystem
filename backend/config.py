@@ -18,7 +18,7 @@ db_config = DBConfig()
 
 
 class FrontEndConfig:
-    URL = 'http://localhost:3008'
+    URL = os.environ["DMS_FRONT_END_URL"]
 
     possible_urls = [
         "*"
