@@ -36,7 +36,7 @@ async def read_users_me(current_user = Depends(get_current_active_user)):
     return user_schemas.UserBase.from_orm(current_user)
 
 
-@router.get("/list")
+@router.get("/list-full")
 async def get_list_users(current_user = Depends(get_current_active_user), db=Depends(get_db),
                         limit: int=None, offset: int=None,
                         order_by=None):    
@@ -46,6 +46,16 @@ async def get_list_users(current_user = Depends(get_current_active_user), db=Dep
     else:
         raise api_exceptions.PERMISSION_EXCEPTION()
     
+
+@router.get("/list")
+async def get_list_users(current_user = Depends(get_current_active_user), db=Depends(get_db),
+                        limit: int=None, offset: int=None,
+                        order_by=None):    
+    try:
+        users = crud_user.select_list_user(db, limit=limit, offset=offset)
+        return [user_schemas.UserShort.from_orm(user) for user in users]
+    except Exception as e:
+        raise api_exceptions.INTERNAL_SERVER_ERROR(str(e))
     
 
 

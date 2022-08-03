@@ -1,4 +1,4 @@
-export const BACKEND_URL = process.env.DMS_BACKEND_URL; // 'http://localhost:3009/api/v1';
+export const BACKEND_URL = "http://localhost:3009/api/v1"; 
 export const BACKEND_URL_TOKEN = BACKEND_URL + '/token';
 export const BACKEND_URL_TOKEN_CHECK = BACKEND_URL + '/user/me';
 
@@ -6,6 +6,7 @@ export const COMMON_GET_DOWNLOAD_TOKEN = BACKEND_URL + '/common/get_download_tok
 
 
 export const USER_GET_LIST_API = BACKEND_URL + '/user/list';
+export const USER_GET_LIST_FULL_API = BACKEND_URL + '/user/list-full';
 export const USER_GET_CURRENT_API = BACKEND_URL + '/user/me';
 export const USER_GET_BY_ID_API = BACKEND_URL + '/user/id/{id}';
 export const USER_POST_CREATE = BACKEND_URL + '/user/create';

@@ -1,1 +1,1 @@
-. node_venv/bin/activate && DMS_BACKEND_URL=http://localhost:3009/api/v1 npm start
+. node_venv/bin/activate && npm start
