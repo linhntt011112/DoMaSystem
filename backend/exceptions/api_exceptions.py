@@ -46,6 +46,10 @@ UNPROCESSABLE_ENTITY = lambda msg='Unprocessable entity!': HTTPException(
             ) 
 
 
+class NotificationException(Exception):
+    pass
+
+
 
 def filter_duplicate_entry_error(e: Exception):
     if isinstance(e, sqlalchemy.exc.IntegrityError) and str(e.args[0]).startswith("(mysql.connector.errors.IntegrityError) 1062 (23000)"):

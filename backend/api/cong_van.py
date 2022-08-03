@@ -12,6 +12,7 @@ from database.common_queries import query_all, query_filter
 from database.db import get_db
 from database.crud import cong_van as crud_cong_van
 from database.schemas import cong_van as cong_van_schemas
+from .notification import cong_van_noti_push 
 
 
 from config import server_config
@@ -231,6 +232,8 @@ async def create_cong_van_di(
         logger.info(cong_van_version.__dict__)
         new_cong_van = crud_cong_van.create_cong_van(db, cong_van_version)
         # logger.info(f"{new_cong_van.__dict__}")
+        
+        cong_van_noti_push.create_cong_van_notify(db, new_cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(new_cong_van)
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
