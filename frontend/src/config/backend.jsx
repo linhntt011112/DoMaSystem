@@ -43,7 +43,6 @@ export const CONG_VAN_PUT_UPDATE = CONG_VAN_PREFIX + '/{id}/update'
 export const CONG_VAN_GET_BY_ID = CONG_VAN_PREFIX + '/{id}'
 export const CONG_VAN_DELETE_BY_ID = CONG_VAN_PREFIX + '/{id}/delete'
 
-
 export const CONG_VAN_VERSION_PREFIX = BACKEND_URL + '/cong_van/version'
 export const CONG_VAN_VERSION_GET_LIST = BACKEND_URL + '/cong_van/{cong_van_id}/version/list'
 export const CONG_VAN_VERSION_GET_BY_ID = BACKEND_URL + '/cong_van/{cong_van_id}/version/{version_id}'
@@ -69,6 +68,10 @@ export const STATIC_TABLE_POST_CREATE = STATIC_TABLE_PREFIX + '/{static_table_na
 export const STATIC_TABLE_GET_RESET_CACHE = STATIC_TABLE_PREFIX + '/{static_table_name}/reset_cache';
 export const STATIC_TABLE_PUT_UPDATE = STATIC_TABLE_PREFIX + '/{static_table_name}/update';
 export const STATIC_TABLE_DELETE_BY_ID = STATIC_TABLE_PREFIX + '/{static_table_name}/delete/{id}';
+
+
+export const NOTIFICATION_PREFIX = BACKEND_URL + "/notifications"
+export const NOTIFICATION_GET_LIST_UNREAD = NOTIFICATION_PREFIX + "/unread"
 
 
 export const makeRequest = async (method, url, token, body=null, contentType="application/json", delete_contentType=false) => {

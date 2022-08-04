@@ -1,10 +1,22 @@
-import React from 'react'
+import {React, useEffect, useState} from 'react'
 import "./topbar.css"
 import { NotificationsNone, Settings} from '@material-ui/icons';
 import Logo from '../../img/logo_4.png';
 import { Link } from "react-router-dom";
+import * as backend_config from "../../config/backend"
 
-export default function Topbar({user, setToken}) {
+export default function Topbar({user, token}) {
+    const [notification, setNotification] = useState([]);
+
+    const getUnreadNotifications = () => {
+        backend_config.makeRequest("GET", backend_config.NOTIFICATION_GET_LIST_UNREAD, token)
+          .then((data) => data.json())
+          .then((data) => {setNotification(data)})
+    }
+
+    useEffect(() => {
+        getUnreadNotifications();
+    }, [])
 
     return (
         <div className='topbar'>  
@@ -19,10 +31,10 @@ export default function Topbar({user, setToken}) {
                 </div>
                 
                 <ul className="topRight">
-                    <li className='topbarIconContainer' style={{display: 'none'}}>
+                    <li className='topbarIconContainer' style={{display: 'block'}}>
                         <div class="dropdown-toggle nav-link">
-                            <NotificationsNone/>
-                            <span className='topIconBadge'>2</span>
+                            <NotificationsNone onClick={() => console.log(notification)}/>
+                            <span className='topIconBadge'>{notification.length}</span>
                         </div>
                     </li>
                     <li className='change-password-icon-Container'>
