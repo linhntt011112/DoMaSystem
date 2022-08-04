@@ -11,6 +11,7 @@ from fastapi_cache.backends.redis import RedisBackend
 
 from config import frontend_config, server_config
 from api import user, login, static_tables, cong_van, common, cong_van_version, loai_cong_van, api_utils
+from api.notification.api import router as notification_router
 
 
 origins = frontend_config.possible_urls
@@ -39,6 +40,7 @@ router.include_router(loai_cong_van.router)
 router.include_router(cong_van.router)
 router.include_router(cong_van_version.router)
 router.include_router(api_utils.router)
+router.include_router(notification_router)
 app.include_router(router)
 
 

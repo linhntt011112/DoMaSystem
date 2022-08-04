@@ -29,6 +29,11 @@ def create_notification_object(db,  actor_id, notification_template_id, entity_i
     
 
 
+
+def select_list_unread_notification(db, user_id, **kwargs):
+    return crud_notification.select_list_unread_notification(db, user_id, **kwargs)
+
+
 # @error_wrap
 def create_notification(db, notification_object_id, notifier_id):
     return crud_notification.create_notification(db, notification_object_id, notifier_id)

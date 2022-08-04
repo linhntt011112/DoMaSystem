@@ -16,7 +16,7 @@ def create_notification_object(db,  actor_id, notification_template_id, entity_i
     now = datetime.now()
     notification_object = db_models.NotificationObject(
         notification_template_id=notification_template_id,
-        create_on=now,
+        created_on=now,
         actor_id=actor_id,
         entity_id=entity_id
     )

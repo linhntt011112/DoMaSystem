@@ -248,9 +248,9 @@ export default function AddCongVanDi(props) {
                         }
                         
                     }
-                    props.setTrigger(false);
-                    addCongVanSuccessNotify();
-                    refreshFunc();
+                    // props.setTrigger(false);
+                    // addCongVanSuccessNotify();
+                    // refreshFunc();
                 })
             }
             else {

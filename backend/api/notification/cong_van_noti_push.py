@@ -17,11 +17,15 @@ def cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung,
         "{{entity_id}}": cong_van.cong_van_current_version.ten_cong_van,
         "template": notification_object.notification_template.template
     }
-    # for field in user_fields:
-    #     if field != actor_field:
-    #         notifier_id = getattr(cong_van, field)
-    #         crud_notification.create_notitfication(db, notification_object.id, notifier_id)
-    #         pusher_client.trigger(notifier_id, event, msg)
+    
+    # cvversion_data_dict = cong_van.cong_van_current_version.__dict__
+    # logger.info(cvversion_data_dict)
+    for field in user_fields:
+        if field != actor_field:
+            notifier_id = getattr(cong_van.cong_van_current_version, field)
+            if notifier_id is not None:
+                crud_notification.create_notitfication(db, notification_object.id, notifier_id)
+                # pusher_client.trigger(notifier_id, event, msg)
     
     return notification_object
 
