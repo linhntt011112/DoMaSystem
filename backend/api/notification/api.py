@@ -24,6 +24,6 @@ router = APIRouter(prefix='/notifications')
 async def get_list_unread_notifications(current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):    
     try:
         unread_notifications = crud.select_list_unread_notification(db, current_user.id)
-        return [notification_schemas.NotificationFull.from_orm(notification) for notification in unread_notifications]
+        return [notification_schemas.NotificationFull.from_orm(notification).get_msg() for notification in unread_notifications]
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)

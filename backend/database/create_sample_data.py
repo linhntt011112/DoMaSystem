@@ -246,19 +246,19 @@ def create_sample_notification():
     notification_templates = [
         NotificationTemplate(
             entity_type="cong_van",
-            template="{{actor_id}} đã thêm mới {{entity_id}}"
+            template="{{actor_id}} đã thêm mới công văn {{entity_id}}"
         ),
         NotificationTemplate(
             entity_type="cong_van",
-            template="{{actor_id}} đã sửa đổi {{entity_id}}"
+            template="{{actor_id}} đã sửa đổi công văn {{entity_id}}"
         ),
         NotificationTemplate(
             entity_type="cong_van",
-            template="{{actor_id}} đã  duyệt {{entity_id}}"
+            template="{{actor_id}} đã  duyệt công văn {{entity_id}}"
         ),
         NotificationTemplate(
             entity_type="cong_van",
-            template="{{actor_id}} đã xử lý {{entity_id}}"
+            template="{{actor_id}} đã xử lý công văn {{entity_id}}"
         )
     ]
     [common_queries.add_and_commit(get_session(), notification_template) for notification_template in notification_templates]

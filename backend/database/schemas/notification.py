@@ -49,3 +49,13 @@ class NotificationFull(BaseModel):
     
     class Config:
         orm_mode = True
+        
+    
+    def get_msg(self):
+        return {
+            "id": self.notification_object.id,
+            "{{actor_id}}": self.notification_object.actor.ho_ten,
+            "{{entity_id}}": self.notification_object.entity_id,
+            "entity_type": self.notification_object.notification_template.entity_type,
+            "template": self.notification_object.notification_template.template
+        }

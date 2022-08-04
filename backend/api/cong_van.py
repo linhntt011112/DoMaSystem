@@ -308,6 +308,8 @@ async def update_cong_van(
         
         cong_van_version_pydantic.id_nguoi_cap_nhat = current_user.id
         cong_van = crud_cong_van.update_cong_van(db, cong_van, cong_van_version_pydantic)
+        
+        cong_van_noti_push.update_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
@@ -332,6 +334,8 @@ async def update_cong_van(
         cong_van.cong_van_current_version.ngay_ky = datetime.now()
         cong_van.update_at = datetime.now()
         cong_van = crud_cong_van.update_cong_van(db, cong_van)
+        
+        cong_van_noti_push.duyet_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
@@ -357,6 +361,8 @@ async def update_cong_van(
         cong_van.cong_van_current_version.ngay_hoan_tat = datetime.now()
         cong_van.update_at = datetime.now()
         cong_van = crud_cong_van.update_cong_van(db, cong_van)
+        
+        cong_van_noti_push.xu_ly_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
