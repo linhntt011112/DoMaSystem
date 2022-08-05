@@ -246,6 +246,7 @@ def create_sample_notification():
     notification_templates = [
         NotificationTemplate(
             entity_type="cong_van",
+<<<<<<< HEAD
             template="{{actor_id}} đã thêm mới {{entity_id}}"
         ),
         NotificationTemplate(
@@ -255,6 +256,25 @@ def create_sample_notification():
         NotificationTemplate(
             entity_type="cong_van",
             template="{{actor_id}} đã thay đổi trạng thái của {{entity_id}}"
+=======
+            template="{{actor_id}} đã thêm mới công văn {{entity_id}}"
+        ),
+        NotificationTemplate(
+            entity_type="cong_van",
+            template="{{actor_id}} đã sửa đổi công văn {{entity_id}}"
+        ),
+        NotificationTemplate(
+            entity_type="cong_van",
+            template="{{actor_id}} đã  duyệt công văn {{entity_id}}"
+        ),
+        NotificationTemplate(
+            entity_type="cong_van",
+            template="{{actor_id}} đã xử lý công văn {{entity_id}}"
+        ),
+        NotificationTemplate(
+            entity_type="cong_van",
+            template="{{actor_id}} đã thêm một trao đổi về công văn {{entity_id}}"
+>>>>>>> be1e8e806616a7c9efb0b4ade3d7363a7f80045b
         )
     ]
     [common_queries.add_and_commit(get_session(), notification_template) for notification_template in notification_templates]
@@ -269,6 +289,7 @@ def run_all():
     print(timeit.timeit(lambda : create_sample_loai_cong_van(), number=1))
     
     
+    
     # db_models.TraoDoiCongVan.__table__.drop(engine)
     # db_models.Lich.__table__.create(engine)
     
@@ -280,11 +301,16 @@ def run_all():
     # db_models.NotificationTemplate.__table__.create(engine)
     # db_models.NotificationObject.__table__.create(engine)
     # db_models.Notification.__table__.create(engine)
+<<<<<<< HEAD
     print(timeit.timeit(lambda : create_sample_notification(), number=1))
+=======
+    # print(timeit.timeit(lambda : create_sample_notification(), number=1))
+>>>>>>> be1e8e806616a7c9efb0b4ade3d7363a7f80045b
     
     # drop_all_tables()
     # create_tables()
     # create_sample_nguoi_dung()
     # create_sample_loai_cong_van()
+    pass
 
 run_all()

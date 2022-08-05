@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import Dashboard from "../dashboard/dashboard";
 
 // import ErrorMessage from "./ErrorMessage";
 // import { UserContext } from "../../context/UserContext";
@@ -48,7 +49,10 @@ const Login = () => {
       // console.log(data);
       setToken(data.access_token);
       // console.log(token);
-      history.push("/");
+      // history.push("/");
+      // window.history.replaceState(null, "Dashboard", "/dashboard")
+      // return <Dashboard />
+      window.location = "/dashboard"
     }
     else{
       alert("Tên người dùng hoặc mật khẩu sai!")

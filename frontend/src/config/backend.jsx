@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 // export const BACKEND_URL = 'http://localhost:3009/api/v1';
 export const BACKEND_URL = 'http://18.143.5.220/api/v1';
+=======
+export const BACKEND_URL = "http://localhost:3009/api/v1"; 
+>>>>>>> be1e8e806616a7c9efb0b4ade3d7363a7f80045b
 export const BACKEND_URL_TOKEN = BACKEND_URL + '/token';
 export const BACKEND_URL_TOKEN_CHECK = BACKEND_URL + '/user/me';
 
@@ -7,6 +11,7 @@ export const COMMON_GET_DOWNLOAD_TOKEN = BACKEND_URL + '/common/get_download_tok
 
 
 export const USER_GET_LIST_API = BACKEND_URL + '/user/list';
+export const USER_GET_LIST_FULL_API = BACKEND_URL + '/user/list-full';
 export const USER_GET_CURRENT_API = BACKEND_URL + '/user/me';
 export const USER_GET_BY_ID_API = BACKEND_URL + '/user/id/{id}';
 export const USER_POST_CREATE = BACKEND_URL + '/user/create';
@@ -43,7 +48,6 @@ export const CONG_VAN_PUT_UPDATE = CONG_VAN_PREFIX + '/{id}/update'
 export const CONG_VAN_GET_BY_ID = CONG_VAN_PREFIX + '/{id}'
 export const CONG_VAN_DELETE_BY_ID = CONG_VAN_PREFIX + '/{id}/delete'
 
-
 export const CONG_VAN_VERSION_PREFIX = BACKEND_URL + '/cong_van/version'
 export const CONG_VAN_VERSION_GET_LIST = BACKEND_URL + '/cong_van/{cong_van_id}/version/list'
 export const CONG_VAN_VERSION_GET_BY_ID = BACKEND_URL + '/cong_van/{cong_van_id}/version/{version_id}'
@@ -69,6 +73,10 @@ export const STATIC_TABLE_POST_CREATE = STATIC_TABLE_PREFIX + '/{static_table_na
 export const STATIC_TABLE_GET_RESET_CACHE = STATIC_TABLE_PREFIX + '/{static_table_name}/reset_cache';
 export const STATIC_TABLE_PUT_UPDATE = STATIC_TABLE_PREFIX + '/{static_table_name}/update';
 export const STATIC_TABLE_DELETE_BY_ID = STATIC_TABLE_PREFIX + '/{static_table_name}/delete/{id}';
+
+
+export const NOTIFICATION_PREFIX = BACKEND_URL + "/notifications"
+export const NOTIFICATION_GET_LIST_UNREAD = NOTIFICATION_PREFIX + "/unread"
 
 
 export const makeRequest = async (method, url, token, body=null, contentType="application/json", delete_contentType=false) => {

@@ -40,12 +40,12 @@ export default function EditCongVanDi(props) {
     const [muc_do_uu_tien, setMucDoUuTien] = React.useState(cong_van_versionData.id_muc_do_uu_tien);
     // const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
     const [nguoi_xu_ly, setNguoiXuLy] = React.useState(cong_van_versionData.id_nguoi_xu_ly);
-    console.log(cong_van_versionData)
+    // console.log(cong_van_versionData)
 
     const [ly_do, setLyDo] = React.useState(cong_van_versionData.ly_do);
 
     const [file_dinh_kem, setFileDinhKem] = React.useState(null);
-    console.log(cong_van_versionData.noi_dung);
+    // console.log(cong_van_versionData.noi_dung);
 
     const [editorState, setEditorState] = React.useState(
         () => EditorState.createWithContent(stateFromHTML(cong_van_versionData.noi_dung)),

@@ -80,7 +80,7 @@ export default function UserList(props) {
     const [tableData, setTableData] = useState([]);
 
     const refreshTable = () => {
-        backend_config.makeRequest("GET", backend_config.USER_GET_LIST_API, token)
+        backend_config.makeRequest("GET", backend_config.USER_GET_LIST_FULL_API, token)
           .then((data) => data.json())
           .then((data) => {setTableData(data)})
     }
