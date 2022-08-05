@@ -259,6 +259,10 @@ def create_sample_notification():
         NotificationTemplate(
             entity_type="cong_van",
             template="{{actor_id}} đã xử lý công văn {{entity_id}}"
+        ),
+        NotificationTemplate(
+            entity_type="cong_van",
+            template="{{actor_id}} đã thêm một trao đổi về công văn {{entity_id}}"
         )
     ]
     [common_queries.add_and_commit(get_session(), notification_template) for notification_template in notification_templates]

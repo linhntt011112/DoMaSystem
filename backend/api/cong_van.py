@@ -421,6 +421,8 @@ async def create_trao_doi(cong_van_id: int, trao_doi_pydantic: cong_van_schemas.
         trao_doi_pydantic.id_nguoi_tao = current_user.id
         trao_doi_pydantic.id_cong_van = cong_van_id
         trao_doi = crud_cong_van.create_trao_doi(db, cong_van, trao_doi=trao_doi_pydantic)
+        
+        cong_van_noti_push.add_trao_doi_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.TraoDoiCongVanFull.from_orm(trao_doi)
     except db_exceptions.PermissionException as e:
         raise api_exceptions.PERMISSION_EXCEPTION()

@@ -17,44 +17,46 @@ export default function NotificationList(props) {
     }
 
   return props.trigger ? (
-    // <List
-    //   sx={{
-    //     width: '100%',
-    //     maxWidth: 360,
-    //     bgcolor: 'background.paper',
-    //     position: "relative"
-    //   }}
-    // >
-    //     {all_data.map((item) => {
-                              
-    //         // return (<MenuItem value={item.id} >{item.name}</MenuItem> )
-    //         return (
-    //             <>
-    //             <ListItem  key={item["id"]}>
-    //                 {/* <ListItemAvatar>
-    //                 <Avatar>
-    //                     <ImageIcon />
-    //                 </Avatar>
-    //                 </ListItemAvatar> */}
-    //                 <ListItemText primary={show_data(item)}/>
-    //             </ListItem>
-    //             <Divider variant="inset" component="li" /></>
-    //         )
-    //     })}
-    // </List>
-
     <>
-        <ul>
-            {all_data.map((item) => {
-                                    
-                        // return (<MenuItem value={item.id} >{item.name}</MenuItem> )
-                        return (
-                            <li>{show_data(item)}</li>
-                            
-                        );
-                    })}
-    </ul>
+      <List
+        sx={{
+          width: '100%',
+          maxWidth: 360,
+          bgcolor: 'background.paper',
+          position: "relative"
+        }}
+      >
+          {all_data.map((item) => {
+                                
+              // return (<MenuItem value={item.id} >{item.name}</MenuItem> )
+              return (
+                  <>
+                  <ListItem  key={item["id"]}>
+                      {/* <ListItemAvatar>
+                      <Avatar>
+                          <ImageIcon />
+                      </Avatar>
+                      </ListItemAvatar> */}
+                      <ListItemText primary={show_data(item)}/>
+                  </ListItem>
+                  <Divider variant="inset" component="li" /></>
+              )
+          })}
+      </List>
     </>
+
+    // <>
+    //     <ul>
+    //         {all_data.map((item) => {
+                                    
+    //                     // return (<MenuItem value={item.id} >{item.name}</MenuItem> )
+    //                     return (
+    //                         <li>{show_data(item)}</li>
+                            
+    //                     );
+    //                 })}
+    // </ul>
+    // </>
     
   ): "";
 }

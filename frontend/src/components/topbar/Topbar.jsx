@@ -1,29 +1,43 @@
-import {React, useEffect, useState} from 'react'
+import {React, useEffect, useState, useCallback} from 'react'
 import "./topbar.css"
 import { NotificationsNone, Settings} from '@material-ui/icons';
 import Logo from '../../img/logo_4.png';
 import { Link } from "react-router-dom";
 import * as backend_config from "../../config/backend"
 import NotificationList from './Notifications';
+import * as Pusher from 'pusher-js';
 
 export default function Topbar({user, token}) {
     const [notifications, setNotifications] = useState([]);
     const [showNotificationList, setShowNotificationList] = useState(false);
+    const notificationEvents = ["create_cong_van", "update_cong_van", "duyet_cong_van", "xu_ly_cong_van", "add_trao_doi_cong_van"]
 
     const getUnreadNotifications = () => {
         backend_config.makeRequest("GET", backend_config.NOTIFICATION_GET_LIST_UNREAD, token)
           .then((data) => data.json())
-          .then((data) => {setNotifications(data)})
+          .then((data) => {setNotifications(data); return data})
     }
 
     useEffect(() => {
-        getUnreadNotifications();
-        const myInterval = setInterval(() => {
-            getUnreadNotifications();
-          }, 5000);
-          // clear out the interval using the id when unmounting the component
-          return () => clearInterval(myInterval);
-    }, [])
+        getUnreadNotifications()
+
+        const pusher = new Pusher("0ec381f4de9bc7aa5e7b", {
+            cluster: 'ap1'
+        });
+        
+        // console.log(user.id)
+        var channel = pusher.subscribe(user.id.toString());
+
+        channel.bind_global((eventName, data) => {
+            console.log(eventName, data)
+            console.log(notifications.concat([data]))
+            if (data?.id) setNotifications((notifications) => notifications.concat([data]));
+        });
+
+        return () => {
+            channel.unbind();
+        };
+    }, []);
 
     return (
         <div className='topbar'>  
@@ -41,7 +55,7 @@ export default function Topbar({user, token}) {
                     <li className='topbarIconContainer' style={{display: 'block'}}>
                         <div class="dropdown-toggle nav-link">
                             <NotificationsNone onClick={() => {console.log(notifications); setShowNotificationList(!showNotificationList)}}/>
-                            {/* {notifications.length > 0 && <NotificationList all_data={notifications} trigger={showNotificationList}></NotificationList>} */}
+                            
                             <span className='topIconBadge'>{notifications.length}</span>
                         </div>
                     </li>
@@ -65,6 +79,8 @@ export default function Topbar({user, token}) {
                     </li>
                 </ul>
             </div>
+
+            {notifications.length > 0 && <NotificationList all_data={notifications} trigger={showNotificationList}></NotificationList>}
         </div>
     )
 }

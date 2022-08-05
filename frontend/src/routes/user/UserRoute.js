@@ -25,7 +25,7 @@ const UserRoute = ({component: Component, ...rest}) => {
         component = {props => {
             return (
                 <div>
-                    <Topbar user={user} token={token} />
+                    {/* <Topbar user={user} token={token} /> */}
                     <div className="adminContainer">
                         <Sidebar userPermission={userPermission} setToken={setToken}/>
                         <Component {...props} token={token} {...rest}/>

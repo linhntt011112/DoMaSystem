@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useEffect} from 'react';
 
 import { BrowserRouter, Route , Switch } from 'react-router-dom';
 import './App.css';
@@ -26,12 +26,35 @@ import CongVanDiVersion from './components/pages/congvandiVersions/congVanDiVers
 import * as backend_config from './config/backend'
 import SLTcongVanChiTiet from './components/pages/SLTcongvanChitiet/SLTCongVanChiTiet';
 
+import { useUserInfo } from './context/TokenContext';
+import { useToken } from './context/TokenContext';
+import Topbar from './components/topbar/Topbar';
+
 const App = () => {
 
-  return (
+  const {token, setToken} = useToken();
+  const {userPermission, user} = useUserInfo();
+//   const {isLogin, setIsLogin} = useState(false)
+
+//   useEffect(() => {
+//     // getUnreadNotifications()
+//     console.log("22222")
+//     // setIsInit(true);
+// }, []);
+
+  const allUserPermissions = new Set(['admin', 'user']);
+  if(!userPermission || !allUserPermissions.has(userPermission)) {
+    // history.push('/login');
+    window.history.replaceState(null, "Login to Domasy", "/login")
+    return (
+      <div><Login /></div>
+    )
+  }
+  else return (
     <>
       <div>
         <BrowserRouter>
+        <Topbar user={user} token={token} />
           <Switch>
             <Route exact path="/login" component={Login} />
             <UserRoute exact path="/" component={Dashboard} />

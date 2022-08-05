@@ -22,12 +22,20 @@ def cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung,
     
     # cvversion_data_dict = cong_van.cong_van_current_version.__dict__
     # logger.info(cvversion_data_dict)
+    
+    not_notify = {actor_field}
+    if cong_van.cong_van_current_version.id_tinh_trang_xu_ly < 2:
+        not_notify.add("id_nguoi_xu_ly")  # nguoi xu ly chua nhan duoc do chua duyet 
+    
+    notified = set()
     for field in user_fields:
-        if field != actor_field:
+        if field not in not_notify:
             notifier_id = getattr(cong_van.cong_van_current_version, field)
-            if notifier_id is not None and notifier_id != actor.id:
+            if notifier_id is not None and notifier_id != actor.id and notifier_id not in notified:
                 crud_notification.create_notitfication(db, notification_object.id, notifier_id)
-                # pusher_client.trigger(notifier_id, event, msg)
+                logger.info(f"{str(notifier_id), event, msg}")
+                pusher_client.trigger(str(notifier_id), event, msg)
+                notified.add(notifier_id)
     
     return notification_object
 
@@ -43,15 +51,17 @@ def update_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.Ngu
         if cong_van.cong_van_current_version.id_nguoi_cap_nhat == getattr(cong_van.cong_van_current_version, field):
             actor_field = field
             break
-    return cong_van_notify(db, cong_van, actor, notification_template_id=1, actor_field=actor_field, event="update_cong_van")
+    return cong_van_notify(db, cong_van, actor, notification_template_id=2, actor_field=actor_field, event="update_cong_van")
 
 
 def duyet_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
-    return cong_van_notify(db, cong_van, actor, notification_template_id=1, actor_field="id_nguoi_ky", event="duyet_cong_van")
+    return cong_van_notify(db, cong_van, actor, notification_template_id=3, actor_field="id_nguoi_ky", event="duyet_cong_van")
 
 
 def xu_ly_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
-    return cong_van_notify(db, cong_van, actor, notification_template_id=1, actor_field="id_nguoi_xu_ly", event="create_cong_van")
+    return cong_van_notify(db, cong_van, actor, notification_template_id=4, actor_field="id_nguoi_xu_ly", event="xu_ly_cong_van")
 
 
+def add_trao_doi_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
+    return cong_van_notify(db, cong_van, actor, notification_template_id=5, actor_field="", event="add_trao_doi_cong_van")
 
