@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 // export const BACKEND_URL = 'http://localhost:3009/api/v1';
 export const BACKEND_URL = 'http://18.143.5.220/api/v1';
-=======
-export const BACKEND_URL = "http://localhost:3009/api/v1"; 
->>>>>>> be1e8e806616a7c9efb0b4ade3d7363a7f80045b
 export const BACKEND_URL_TOKEN = BACKEND_URL + '/token';
 export const BACKEND_URL_TOKEN_CHECK = BACKEND_URL + '/user/me';
 
