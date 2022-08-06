@@ -282,19 +282,6 @@ export default function EditCongVan(props) {
                                     // disabled
                                 />
                             </div>
-                            <div className="cong-van-di-update-item">
-                                <label>
-                                    Người nhận và xử lý
-                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
-                                </label>
-                                <input
-                                    type="text"
-                                    value={nguoi_xu_ly}
-                                    className='cong-van-di-update-input'
-                                    onChange={(e) => setNguoiXuLy(e.target.value)}
-                                    // required
-                                />
-                            </div>
                         <div className="cong-van-di-update-item">
                                 <label>
                                     Loại công văn
