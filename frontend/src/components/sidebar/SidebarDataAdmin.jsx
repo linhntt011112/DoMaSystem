@@ -13,7 +13,7 @@ export const SidebarDataAdmin = [
         iconOpened: <RiIcons.RiArrowUpSFill />,
         subNav: [
             {
-                title: 'Nhân viên',
+                title: 'Người dùng',
                 path: '/management/users',
                 icon: <FaIcons.FaUserFriends />,
             },
