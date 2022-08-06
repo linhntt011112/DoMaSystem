@@ -17,7 +17,8 @@ def cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung,
         "{{actor_id}}": actor.ho_ten,
         "{{entity_id}}": cong_van.id,
         "entity_type": notification_object.notification_template.entity_type,
-        "template": notification_object.notification_template.template
+        "template": notification_object.notification_template.template,
+        "create_on": notification_object.created_on
     }
     
     # cvversion_data_dict = cong_van.cong_van_current_version.__dict__

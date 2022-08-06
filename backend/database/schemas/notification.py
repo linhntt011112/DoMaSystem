@@ -57,5 +57,6 @@ class NotificationFull(BaseModel):
             "{{actor_id}}": self.notification_object.actor.ho_ten,
             "{{entity_id}}": self.notification_object.entity_id,
             "entity_type": self.notification_object.notification_template.entity_type,
-            "template": self.notification_object.notification_template.template
+            "template": self.notification_object.notification_template.template,
+            "create_on": self.notification_object.created_on
         }

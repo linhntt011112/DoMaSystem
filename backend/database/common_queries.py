@@ -1,6 +1,7 @@
 from collections import Iterable
 from sqlalchemy import select
 from sqlalchemy.orm import Session, scoped_session
+from sqlalchemy.sql.expression import desc as desc_f
 
 
 from database import db_models
@@ -39,7 +40,7 @@ def add_and_commit(session: scoped_session, data):
 
 def select_with_options(session: Session, class_: db_models.Base, 
                         condition=None, limit=None, offset=None, order_by=None, 
-                        join_field=None,
+                        join_field=None, desc=None,
                         **kwargs):
     query = session.query(class_)
     if join_field is not None:
@@ -47,8 +48,13 @@ def select_with_options(session: Session, class_: db_models.Base,
     if condition is not None:
         query = query.filter(condition)
     
+    if order_by is not None:
+        query = query.order_by(order_by)
+        
+    if desc is not None:
+        query = query.order_by(desc_f(desc))
     if limit is not None:
-        query = query.order_by(order_by).limit(limit)
+        query = query.limit(limit)
     
     if offset is not None:
         query = query.offset(offset)

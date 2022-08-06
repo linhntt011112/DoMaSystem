@@ -74,6 +74,9 @@ export const STATIC_TABLE_DELETE_BY_ID = STATIC_TABLE_PREFIX + '/{static_table_n
 
 export const NOTIFICATION_PREFIX = BACKEND_URL + "/notifications"
 export const NOTIFICATION_GET_LIST_UNREAD = NOTIFICATION_PREFIX + "/unread"
+export const NOTIFICATION_GET_LIST_READ = NOTIFICATION_PREFIX + "/read"
+export const NOTIFICATION_GET_READ_ALL = NOTIFICATION_PREFIX + "/read-all"
+export const NOTIFICATION_GET_READ_ID = NOTIFICATION_PREFIX + "/{id}/read"
 
 
 export const makeRequest = async (method, url, token, body=null, contentType="application/json", delete_contentType=false) => {

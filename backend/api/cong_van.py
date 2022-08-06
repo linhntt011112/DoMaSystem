@@ -208,6 +208,8 @@ async def get_cong_van_by_id(id: int,
 
     try:
         cong_van = crud_cong_van.get_cong_van_by_id(db, cong_van_id=id)
+        if cong_van is None:
+            raise api_exceptions.NOT_FOUND_EXCEPTION()
         authorize_user_for_cong_van(current_user, cong_van)
         if cong_van is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
