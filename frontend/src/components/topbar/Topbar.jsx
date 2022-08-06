@@ -6,16 +6,21 @@ import { Link } from "react-router-dom";
 import * as backend_config from "../../config/backend"
 import NotificationList from './Notifications';
 import * as Pusher from 'pusher-js';
+import Notifications from "react-notifications-menu";
 
 export default function Topbar({user, token}) {
     const [notifications, setNotifications] = useState([]);
     const [showNotificationList, setShowNotificationList] = useState(false);
     const notificationEvents = ["create_cong_van", "update_cong_van", "duyet_cong_van", "xu_ly_cong_van", "add_trao_doi_cong_van"]
 
+    const show_data = (data) =>{
+        return data["template"].replace("{{actor_id}}", data["{{actor_id}}"]). replace("{{entity_id}}", data["{{entity_id}}"])
+    }
+
     const getUnreadNotifications = () => {
         backend_config.makeRequest("GET", backend_config.NOTIFICATION_GET_LIST_UNREAD, token)
           .then((data) => data.json())
-          .then((data) => {setNotifications(data); return data})
+          .then((data) => {setNotifications(data); console.log(data); return data; })
     }
 
     useEffect(() => {
@@ -52,6 +57,16 @@ export default function Topbar({user, token}) {
                 </div>
                 
                 <ul className="topRight">
+                    <Notifications
+                        data={notifications}
+                        header={{
+                        title: "Thông báo",
+                        option: { text: "Xem tất cả", onClick: () => console.log("Clicked") }
+                        }}
+                        // markAsRead={(data) => {
+                        //     console.log(data);
+                        // }}
+                    />
                     <li className='topbarIconContainer' style={{display: 'block'}}>
                         <div class="dropdown-toggle nav-link">
                             <NotificationsNone onClick={() => {console.log(notifications); setShowNotificationList(!showNotificationList)}}/>

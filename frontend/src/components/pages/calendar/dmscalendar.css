@@ -13,3 +13,11 @@
 .event-notify{
     top: 4em !important;
 }
+
+.rbc-btn-group > button:not(:first-child):not(:last-child) {
+    display: none;
+}
+
+.rbc-button-link {
+    pointer-events: none;
+}
