@@ -478,6 +478,26 @@ async def create_cong_van_luu_tru(
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
     
+
+
+@router.put('/luu_tru/{cong_van_luu_tru_id}')
+async def get_cong_van_luu_tru_by_id(
+    cong_van_luu_tru_id: int,
+    cong_van_luu_tru_pydantic: cong_van_schemas.CongVanLuuTruCreate,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
+):
+    if current_user.phan_quyen != "admin":
+        raise api_exceptions.PERMISSION_EXCEPTION()
+    try:
+        cong_van = crud_cong_van.get_cong_van_luu_tru_by_id(db, cong_van_id=cong_van_luu_tru_id)
+        # authorize_user_for_cong_van(current_user, cong_van)
+        if cong_van is None:
+            raise api_exceptions.NOT_FOUND_EXCEPTION()
+        cong_van = crud_cong_van.update_cong_van_luu_tru(db, cong_van, cong_van_luu_tru_pydantic)
+        return cong_van_schemas.CongVanLuuTruFull.from_orm(cong_van)
+    except Exception as e:
+        return api_exceptions.handle_simple_exception(e, logger)
+    
     
     
 @router.post('/luu_tru/{cong_van_luu_tru_id}/update/tep_dinh_kem')
@@ -514,7 +534,7 @@ async def update_cong_van_luu_tru__tep_dinh_kem(
     
     
 
-@router.delete('/luu_tru/{cong_van_luu_tru_id}/delete')
+@router.delete('/luu_tru/{cong_van_luu_tru_id}')
 async def delete_cong_van_luu_tru(
     cong_van_luu_tru_id: int,
     # cong_van: cong_van_schemas.CongVanCreate,

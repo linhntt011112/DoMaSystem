@@ -8,3 +8,8 @@
     padding: 10px;
     text-align: center;
 }
+
+.congVanDiListDelete{
+    color: red;
+    cursor: pointer;
+}

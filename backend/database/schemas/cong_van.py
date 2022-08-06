@@ -354,7 +354,12 @@ class CongVanLuuTruFull(CongVanLuuTruCreate):
     
     class Config:
         orm_mode=True
-        
+
+
+class CongVanLuuTruUpdate(CongVanCreate):
+    id_tep_dinh_kem: int = None
+    create_at: Union[datetime.datetime, datetime.date] = None
+    update_at: Union[datetime.datetime, datetime.date] = None
         
         
 class TraoDoiCongVanFull(BaseModel):
