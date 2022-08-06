@@ -286,10 +286,10 @@ def run_all():
     # db_models.NotificationTemplate.__table__.drop(engine)
     
     
-    # db_models.NotificationTemplate.__table__.create(engine)
-    # db_models.NotificationObject.__table__.create(engine)
-    # db_models.Notification.__table__.create(engine)
-    # print(timeit.timeit(lambda : create_sample_notification(), number=1))
+    db_models.NotificationTemplate.__table__.create(engine)
+    db_models.NotificationObject.__table__.create(engine)
+    db_models.Notification.__table__.create(engine)
+    print(timeit.timeit(lambda : create_sample_notification(), number=1))
     
     # drop_all_tables()
     # create_tables()

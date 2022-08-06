@@ -24,15 +24,15 @@ export default function CongvandiList(props) {
 
     const [tableData, setTableData] = useState([]);
     const [buttonPopup, setButtonPopup] = useState(false);
-    const [value_loaicongvan, setValue_LoaiCongVan] = useState(null);
-    const [value_mucdouutien, setValue_MucDoUuTien] = useState(null);
-    const [value_tinhtrangxuly, setValue_TinhTrangXuLy] = useState(null);
+    
     const [buttonDeletePopup, setButtonDeletePopup] = useState(false);
     const [mark, setMark] = useState(null);
 
+    const [value_loaicongvan, setValue_LoaiCongVan] = useState(-1);
+    const [value_mucdouutien, setValue_MucDoUuTien] = useState(-1);
+
     const [loai_cong_van_table, setLoaiCongVanTable] = React.useState([]);
     const [muc_do_uu_tien_table, setMucDoUuTienTable] = React.useState([]);   
-    const [tinh_trang_xu_ly_table, setTinhTrangXuLyTable] = React.useState([]);
 
     const handleChangeLoaiCongVan = (event) => {
         setValue_LoaiCongVan(event.target.value);
@@ -42,13 +42,16 @@ export default function CongvandiList(props) {
         setValue_MucDoUuTien(event.target.value);
     }
 
-    const handleChangeTinhTrangXuLy = (event) => {
-        setValue_TinhTrangXuLy(event.target.value);
-    }
+    // const handleChangeTinhTrangXuLy = (event) => {
+    //     setValue_TinhTrangXuLy(event.target.value);
+    // }
 
 
     const refreshTable = () => {
-        backend_config.makeRequest("GET", cong_van_di_get_list_url, token)
+        var url = cong_van_di_get_list_url + "?";
+        if (value_loaicongvan !== -1) url += "&id_loai_cong_van=" + value_loaicongvan
+        if (value_mucdouutien !== -1) url += "&id_muc_do_uu_tien="  + value_mucdouutien
+        backend_config.makeRequest("GET", url, token)
           .then((data) => data.json())
           .then((data) => {
             let data_of_current_version = [];
@@ -58,6 +61,8 @@ export default function CongvandiList(props) {
               }
             setTableData(data_of_current_version)
         })
+        // setValue_MucDoUuTien(null)
+        // setValue_LoaiCongVan(null)
     }
 
     // const handleDelete = (id)=>{
@@ -142,14 +147,14 @@ export default function CongvandiList(props) {
     const fetchLoaiCongVanTable = () =>{
         backend_config.makeRequest("GET", backend_config.LOAI_CONG_VAN_GET_LIST, token)
           .then((data) => data.json())
-          .then((data) => {setLoaiCongVanTable(data)})
+          .then((data) => {setLoaiCongVanTable([{id: -1, name: "Tất cả"}, ...data])})
     }
 
     const fetchOneStaticTableData = (name, setData) => {
         return backend_config.makeRequest("GET", backend_config.STATIC_TABLE_GET_LIST.replace('{static_table_name}', name), token)
         .then((response) => response.json())
         .then((data) => {
-            setData(data);
+            setData([{id: -1, name: "Tất cả"}, ...data]);
             // console.log(data);
         })
     }
@@ -158,13 +163,12 @@ export default function CongvandiList(props) {
     useEffect(() => {
         fetchLoaiCongVanTable();
         fetchOneStaticTableData('muc_do_uu_tien', setMucDoUuTienTable);
-        fetchOneStaticTableData('tinh_trang_xu_ly', setTinhTrangXuLyTable);
         refreshTable();
     }, [])
 
     const handleFilter = (e) => {
         e.preventDefault();
-        history.push("/dashboard")
+        refreshTable();
     }
 
     return (
@@ -198,6 +202,7 @@ export default function CongvandiList(props) {
                         <Select
                             labelId="loai_cong_van"
                             id="id"
+                            value={value_loaicongvan}
                             style={{
                                 height: '36px',
                                 position: 'relative',
@@ -218,6 +223,7 @@ export default function CongvandiList(props) {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
+                            value={value_mucdouutien}
                             onChange={handleChangeMucDoUuTien}
                             style={{
                                 height: '36px',

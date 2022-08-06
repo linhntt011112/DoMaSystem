@@ -13,6 +13,7 @@ import AddEvent from '../../popup/AddEvent/AddEvent';
 import { ToastContainer} from 'react-toastify';
 import * as backend_config from '../../../config/backend'
 import { useUserInfo } from "../../../context/TokenContext";
+import Event from './Event';
 
 const locales = {
     "en-US": require("date-fns/locale/en-US")
@@ -101,7 +102,10 @@ function DMSCalendar(props) {
                 endAccessor="end_time"
                 selectable
                 tooltipAccessor={null}
-                style={{position: 'inherit'}}
+                components={{ event: Event}}
+                style={{
+                    position: 'inherit', 
+                }}
             />
             <AddEvent trigger={addButtonPopup} setTrigger={setAddButtonPopup}
                 token={token} user_id={user.id} refreshFunc={refreshFunc}>

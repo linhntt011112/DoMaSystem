@@ -1,0 +1,65 @@
+.edit-event-popup-inner{
+    position: relative;
+    padding: 20px;
+    width: fit-content;
+    background-color: #FFF;
+    overflow: scroll;
+    top: 5px;
+}
+
+.edit-event{
+    width: 550px;
+}
+
+.edit-event-title{
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    color: #1f1f1f;
+}
+
+.edit-event-item{
+    padding: 15px;
+}
+
+.edit-event-item>label{
+    margin-right: 5px;
+    font-size: 15px;
+    padding: 1px 0px;
+    color: #1f1f1f;
+    float: left;
+    width: 20%;
+}
+
+.edit-event-input{
+    width: 50%;
+    height: 30px;
+    box-shadow: none;
+    font-size: 15px;
+    padding-left: 10.5px;
+}
+
+.edit-event-button-submit{
+    cursor: pointer;
+    background-color: #ff9b44;
+    border: 1px solid #ff9b44;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    min-width: 200px;
+    padding: 10px 20px;
+    color: white;
+}
+
+.delete-event-button-submit{
+    color: white;
+    cursor: pointer;
+    background-color: #ff9b44;
+    border: 1px solid #ff9b44;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    min-width: 200px;
+    padding: 10px 20px;
+}

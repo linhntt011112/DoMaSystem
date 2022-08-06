@@ -26,7 +26,7 @@ User=ubuntu
 Group=www-data
 WorkingDirectory=/home/ubuntu/DoMaSystem/frontend
 Environment="PATH=/home/ubuntu/DoMaSystem/frontend/node_venv/bin"
-ExecStart=/home/ubuntu/DoMaSystem/frontend/node_venv/bin/serve -s build -l 3008
+ExecStart=/home/ubuntu/DoMaSystem/frontend/node_venv/bin/serve -s prod_build -l 3008
 
 
 [Install]

@@ -15,3 +15,4 @@ backend/database/docker-db/
 
 frontend/node_venv/
 frontend/build/
+frontend/prod_build/
