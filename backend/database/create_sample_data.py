@@ -270,11 +270,11 @@ def create_sample_notification():
 
 
 def run_all():
-    print(timeit.timeit(lambda : drop_all_tables(), number=1))
-    print(timeit.timeit(lambda : create_tables(), number=1))
-    print(timeit.timeit(lambda : create_sample_static_table(), number=1))
-    print(timeit.timeit(lambda : create_sample_nguoi_dung(), number=1))
-    print(timeit.timeit(lambda : create_sample_loai_cong_van(), number=1))
+    # print(timeit.timeit(lambda : drop_all_tables(), number=1))
+    # print(timeit.timeit(lambda : create_tables(), number=1))
+    # print(timeit.timeit(lambda : create_sample_static_table(), number=1))
+    # print(timeit.timeit(lambda : create_sample_nguoi_dung(), number=1))
+    # print(timeit.timeit(lambda : create_sample_loai_cong_van(), number=1))
     
     
     
