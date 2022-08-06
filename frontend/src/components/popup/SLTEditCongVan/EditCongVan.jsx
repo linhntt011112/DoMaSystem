@@ -1,83 +1,69 @@
 import React, { useEffect, useState } from "react";
 import { Close } from '@material-ui/icons';
-import "./SLTAddCongVan.css";
+import "./editCongVanDi.css";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import Button from '@material-ui/core/Button';
 import * as backend_config from "../../../config/backend"
 import draftToHtml from 'draftjs-to-html';
+import { stateFromHTML } from 'draft-js-import-html'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function SLTAddCongVan(props) {
-
-    const {token, refreshFunc} = props;
-    // console.log(token)
-    const [loai_cong_van_table, setLoaiCongVanTable] = React.useState([]);
-    const [muc_do_uu_tien_table, setMucDoUuTienTable] = React.useState([]);   
-    const [tinh_trang_xu_ly_table, setTinhTrangXuLyTable] = React.useState([]); 
-
-    const [usersData, setUsersData] = useState([]);
-
-    const [ten_cong_van, setTenCongVan] = React.useState(null);
-    const [noi_nhan, setNoiNhan] = React.useState(null);
-    const [nguoi_xu_ly, setNguoiXuLy] = React.useState(null);
-    const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(null);
-    const [nguoi_ky, setNguoiKy] = React.useState(null);
-    const [ngay_ky, setNgayKy] = React.useState(null);
-    const [nguoi_nhap, setNguoiNhap] = React.useState({ho_ten: null});
+export default function EditCongVan(props) {
     
-    const [muc_do_uu_tien, setMucDoUuTien] = React.useState(null);
-    const [tinh_trang_xu_ly, setTinhTrangXuLy] = React.useState("Đã xử lý");
-    const [ngay_tao, setNgayTao] = React.useState(null);
-    const [nguoi_tao, setNguoiTao] = React.useState(null);
-    const [loai_cong_van, setLoaiCongVan] = React.useState(null);
-    const [ngay_hoan_tat, setNgayHoanTat] = React.useState(null);
+    const {token, cong_van_luu_truData, refreshFunc} = props;
+
+    const [ten_cong_van, setTenCongVan] = React.useState(cong_van_luu_truData.ten_cong_van);
+    const [noi_nhan, setNoiNhan] = React.useState(cong_van_luu_truData.phong_ban_nhan);
+
+    const [nguoi_tao, setNguoiKTao] = React.useState(cong_van_luu_truData.nguoi_tao);
+    const [ngay_tao, setNgayTao] = React.useState(cong_van_luu_truData.ngay_tao);
+    const [nguoi_ky, setNguoiKy] = React.useState(cong_van_luu_truData.nguoi_ky);
+    const [ngay_ky, setNgayKy] = React.useState(cong_van_luu_truData.ngay_ky);
+
+    const [bo_phan_phat_hanh, setBoPhanPhatHanh] = React.useState(cong_van_luu_truData.phong_ban_phat_hanh);
+    const [loai_cong_van, setLoaiCongVan] = React.useState(cong_van_luu_truData.loai_cong_van);
     
-    const [ly_do, setLyDo] = React.useState(null);
+    const [so_luong_van_ban, setSoLuongVanBan] = React.useState(cong_van_luu_truData.so_luong_van_ban);
+    const [muc_do_uu_tien, setMucDoUuTien] = React.useState(cong_van_luu_truData.muc_do_uu_tien);
+    // const [ngay_phat_hanh, setNgayPhatHanh] = React.useState(null);
+    const [nguoi_xu_ly, setNguoiXuLy] = React.useState(cong_van_luu_truData.nguoi_xu_ly);
+    // console.log(cong_van_luu_truData)
+
+    const [ly_do, setLyDo] = React.useState(cong_van_luu_truData.ly_do);
+
     const [file_dinh_kem, setFileDinhKem] = React.useState(null);
+    // console.log(cong_van_luu_truData.noi_dung);
+
     const [editorState, setEditorState] = React.useState(
-        () => EditorState.createEmpty(),
+        () => EditorState.createWithContent(stateFromHTML(cong_van_luu_truData.noi_dung)),
       );
 
- 
+
     const fetchOneStaticTableData = (name, setData) => {
         return backend_config.makeRequest("GET", backend_config.STATIC_TABLE_GET_LIST.replace('{static_table_name}', name), token)
         .then((response) => response.json())
         .then((data) => {
             setData(data);
+            // console.log(data);
         })
     }
 
-    const fetchLoaiCongVanTable = () =>{
-        backend_config.makeRequest("GET", backend_config.LOAI_CONG_VAN_GET_LIST, token)
-          .then((data) => data.json())
-          .then((data) => {setLoaiCongVanTable(data)})
-    }
 
-    const handleChangeMucDoUuTien = (event) => {
-        setMucDoUuTien(event.target.value);
-    }
 
-    const fetchCurrentUser = () =>{
-        backend_config.makeRequest("GET", backend_config.USER_GET_CURRENT_API, token)
-          .then((data) => data.json())
-          .then((data) => {setNguoiNhap(data)})
-    }
+    // useEffect(() => {
+    // }, [])
 
-    useEffect(() => {
-        fetchOneStaticTableData('muc_do_uu_tien', setMucDoUuTienTable);
-        fetchLoaiCongVanTable();
-        fetchCurrentUser();
-    }, [])
-
-    const addCongVanSuccessNotify = (response_json) => {
-        toast.success(<div>Tạo mới công văn thành công!</div>, {
+    const updateCongVanSuccessNotify = (response_json) => {
+        toast.success(<div>Chỉnh sửa công văn lưu trữ thành công!</div>, {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: true
         })
     }
+
+
 
     const uploadTepDinhKem = (id) => {
         let formData = new FormData();
@@ -96,6 +82,7 @@ export default function SLTAddCongVan(props) {
         )
         .then((response) => {
             if (response.ok) {
+                setFileDinhKem(null);
                 return true;
             }
         else {
@@ -110,26 +97,24 @@ export default function SLTAddCongVan(props) {
         }})
     }
 
-    const addCongVan = () => {
+    const updateCongVan = () => {
         const body = {
             ten_cong_van: ten_cong_van,
             phong_ban_nhan: noi_nhan,
             nguoi_xu_ly: nguoi_xu_ly,
-            ngay_hoan_tat: ngay_hoan_tat,
+            // ngay_hoan_tat: ngay_hoan_tat,
             phong_ban_phat_hanh: bo_phan_phat_hanh,
             nguoi_ky: nguoi_ky,
             ngay_ky: ngay_ky,
 
             muc_do_uu_tien: muc_do_uu_tien,
-            tinh_trang_xu_ly: tinh_trang_xu_ly,
             ngay_tao: ngay_tao,
-            nguoi_tao: nguoi_tao,
             loai_cong_van: loai_cong_van,
-            so_luong_van_ban: 0,
+            so_luong_van_ban: so_luong_van_ban,
             ly_do: ly_do,
             noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', '. '),
         }
-        
+        // console.log(body);
         let new_body = {}
         let formData = new FormData();
         for (const [key, value] of Object.entries(body)) {
@@ -143,10 +128,10 @@ export default function SLTAddCongVan(props) {
         new_body = JSON.stringify(new_body)
         console.log(new_body)
 
-        backend_config.makeRequest("POST", 
-            backend_config.CONG_VAN_LUU_TRU_POST_CREATE, 
+        backend_config.makeRequest("PUT", 
+            backend_config.CONG_VAN_LUU_TRU_PUT_UPDATE.replace("{id}", cong_van_luu_truData.id), 
             token,
-            new_body,
+            new_body
         )
         .then((response) => {
             if (response.ok){
@@ -161,7 +146,7 @@ export default function SLTAddCongVan(props) {
                         
                     }
                     props.setTrigger(false);
-                    addCongVanSuccessNotify();
+                    updateCongVanSuccessNotify();
                     refreshFunc();
                 })
             }
@@ -177,92 +162,99 @@ export default function SLTAddCongVan(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addCongVan();
+        updateCongVan();
         // props.setTrigger(false);
     }
 
     const handleClose = (e) => {
         e.preventDefault();
         props.setTrigger(false);
-        setEditorState(() => EditorState.createEmpty())
+        // setEditorState(() => EditorState.createEmpty())
     }
 
     return (props.trigger) ? (
-        <div className="popup-main">
+        <div className="popup-main" style={{left: '115px'}}>
             <form className="popup-inner" onSubmit={handleSubmit}>
                 <Close className="close-btn" onClick={handleClose}/>
-                <div className="cong-van-add">
-                    <div className="cong-van-add-header">
-                        <span className="cong-van-add-title">Thêm mới công văn lưu trữ</span>
+                <div className="cong-van-di-update">
+                    <div className="cong-van-di-update-header">
+                        <span className="cong-van-di-update-title">Chỉnh sửa công văn đi</span>
                     </div>
-                    <div className="cong-van-add-body">
-                        <div className="cong-van-add-body-column-1">
-                            <div className="cong-van-add-item">
+                    <div className="cong-van-di-update-body">
+                        <div className="cong-van-di-update-body-column-1">
+                            <div className="cong-van-di-update-item">
                                 <label>
                                     Tên công văn
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
                                 </label>
                                 <input
                                     type="text"
-                                    className='cong-van-add-input'
+                                    value={ten_cong_van}
+                                    className='cong-van-di-update-input'
                                     onChange={(e) => setTenCongVan(e.target.value)}
-                                    required
+                                    // required
                                 />
                             </div>
-                            <div className="cong-van-add-item">
+                            <div className="cong-van-di-update-item">
                                 <label>
                                     Nơi nhận
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
                                 </label>
                                 <input
                                     type="text"
-                                    className='cong-van-add-input'
+                                    value={noi_nhan}
+                                    className='cong-van-di-update-input'
                                     onChange={(e) => setNoiNhan(e.target.value)}
-                                    required
+                                    // required
                                 />
                             </div>
-                            <div className='cong-van-add-item'>
+                            <div className="cong-van-di-update-item">
                                 <label>
                                     Người nhận và xử lý
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
                                 </label>
                                 <input
                                     type="text"
-                                    className='cong-van-add-input'
+                                    value={nguoi_xu_ly}
+                                    className='cong-van-di-update-input'
                                     onChange={(e) => setNguoiXuLy(e.target.value)}
                                     // required
                                 />
                             </div>
-                            <div className='cong-van-add-item'>
+                            <div className="cong-van-di-update-item">
                                 <label>
                                     Bộ phận phát hành
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
                                 </label>
                                 <input
                                     type="text"
-                                    className='cong-van-add-input'
+                                    value={bo_phan_phat_hanh}
+                                    className='cong-van-di-update-input'
                                     onChange={(e) => setBoPhanPhatHanh(e.target.value)}
-                                    required
+                                    // required
+                                />
+                            </div>
+                            <div className="cong-van-di-update-item">
+                                <label>
+                                    Người duyệt và ký
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
+                                </label>
+                                <input
+                                    type="text"
+                                    value={nguoi_ky}
+                                    className='cong-van-di-update-input'
+                                    onChange={(e) => setNguoiKy(e.target.value)}
+                                    // required
                                 />
                             </div>
                             <div className='cong-van-add-item'>
-                                <label>
-                                    Người duyệt và ký
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    className='cong-van-add-input'
-                                    onChange={(e) => setNguoiKy(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <div className='cong-van-di-add-item'>
                                 <label>
                                     Ngày ký
                                 </label>
                                 <input 
                                     type="date" 
                                     className='datepicker' 
+                                    value={ngay_ky}
                                     onKeyDown={(e) => {
                                         e.preventDefault();
                                     }}
@@ -275,75 +267,72 @@ export default function SLTAddCongVan(props) {
                                     }}
                                 />
                             </div>
-                            {/* <div className='cong-van-add-item'>
+                        </div>
+                        <div className="cong-van-di-update-body-column-2">
+                            <div className="cong-van-di-update-item">
                                 <label>
-                                    Người nhập
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                    Người tạo
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
                                 </label>
                                 <input
                                     type="text"
-                                    className='cong-van-add-input'
-                                    value={nguoi_nhap?.ho_ten}
-                                    disabled
-                                    // onChange={(e) => setNguoiNhap(e.target.value)}
+                                    value={nguoi_tao}
+                                    className='cong-van-di-update-input'
+                                    onChange={(e) => setNguoiXuLy(e.target.value)}
+                                    // disabled
+                                />
+                            </div>
+                            <div className="cong-van-di-update-item">
+                                <label>
+                                    Người nhận và xử lý
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
+                                </label>
+                                <input
+                                    type="text"
+                                    value={nguoi_xu_ly}
+                                    className='cong-van-di-update-input'
+                                    onChange={(e) => setNguoiXuLy(e.target.value)}
                                     // required
                                 />
-                            </div> */}
-                        </div>
-                        <div className="cong-van-di-add-body-column-2">
-                            <div className='cong-van-add-item'>
+                            </div>
+                        <div className="cong-van-di-update-item">
+                                <label>
+                                    Loại công văn
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
+                                </label>
+                                <input
+                                    type="text"
+                                    value={loai_cong_van}
+                                    className='cong-van-di-update-input'
+                                    onChange={(e) => setLoaiCongVan(e.target.value)}
+                                    // required
+                                />
+                            </div>
+                           
+                            <div className="cong-van-di-update-item">
                                 <label>
                                     Mức độ ưu tiên
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
                                 </label>
-                                <Box className='cong-van-add-select'>
-                                    <FormControl fullWidth>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            onChange={handleChangeMucDoUuTien}
-                                            // defaultValue={3}
-                                            style={{
-                                                height: '36px'
-                                            }}
-                                            //required
-                                        >
-                                            {muc_do_uu_tien_table.map((item) => {
-                                                return (<MenuItem value={item.name}>{item.name}</MenuItem> )
-                                            })}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
+                                <input
+                                    type="text"
+                                    value={muc_do_uu_tien}
+                                    className='cong-van-di-update-input'
+                                    onChange={(e) => setMucDoUuTien(e.target.value)}
+                                    // required
+                                />
                             </div>
-                            <div className="cong-van-add-item" style={{display: 'none'}}>
+                            <div className="cong-van-di-update-item">
                                 <label>
-                                    Số lượng văn bản đính kèm
+                                    Số lượng văn bản
+                                    {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
                                 </label>
                                 <input
                                     type="number"
-                                    defaultValue={1}
-                                    onKeyPress={(event) => {
-                                        if (!/[0-9]/.test(event.key)) {
-                                          event.preventDefault();
-                                        }
-                                    }}
-                                    className='cong-van-add-input'
-                                    // onChange={(e) => setSoLuongVanBan(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <div className='cong-van-add-item'>
-                                <label>
-                                    Tình trạng xử lý
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    className='cong-van-add-input'
-                                    value="Đã xử lý"
-                                    onChange={(e) => setTinhTrangXuLy(e.target.value)}
-                                    required
-                                    disabled
+                                    value={so_luong_van_ban}
+                                    className='cong-van-di-update-input'
+                                    onChange={(e) => setSoLuongVanBan(e.target.value)}
+                                    // required
                                 />
                             </div>
                             <div className='cong-van-add-item'>
@@ -353,6 +342,7 @@ export default function SLTAddCongVan(props) {
                                 <input 
                                     type="date" 
                                     className='datepicker' 
+                                    value={ngay_tao}
                                     onKeyDown={(e) => {
                                         e.preventDefault();
                                     }}
@@ -365,63 +355,23 @@ export default function SLTAddCongVan(props) {
                                     }}
                                 />
                             </div>
-                            <div className='cong-van-add-item'>
-                                <label>
-                                    Người tạo
-                                </label>
-                                <input
-                                    type="text"
-                                    className='cong-van-add-input'
-                                    onChange={(e) => setNguoiTao(e.target.value)}
-                                    value={nguoi_nhap.ho_ten}
-                                    disabled
-                                />
-                            </div>
-                            <div className='cong-van-add-item'>
-                                <label>
-                                    Loại công văn
-                                    <span className='text-danger' style={{color: 'red'}}> *</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    className='cong-van-add-input'
-                                    onChange={(e) => setLoaiCongVan(e.target.value)}
-                                    required
-                                />
-                            </div>
-                            <div className='cong-van-di-add-item'>
-                                <label>
-                                    Ngày hoàn tất
-                                </label>
-                                <input 
-                                    type="date" 
-                                    className='datepicker' 
-                                    onKeyDown={(e) => {
-                                        e.preventDefault();
-                                    }}
-                                    onChange={(e) => setNgayHoanTat(e.target.value)}
-                                    //required
-                                    style={{
-                                        width: '244px',
-                                        fontSize: '15px',
-                                        paddingLeft: '10.5px'
-                                    }}
-                                />
-                            </div>
+                            
+                            
+                                            
                         </div>
                     </div>
-                    <div className="cong-van-add-item-reason">
+                    <div className="cong-van-di-update-item-reason">
                         <label>
                             Lý do
                         </label>
                         <input
                             type="text"
-                            // value="3969"
-                            className='cong-van-add-input-reason'
+                            value={ly_do}
+                            className='cong-van-di-update-input-reason'
                             onChange={(e) => setLyDo(e.target.value)}
                         />
                     </div>
-                    <div className="cong-van-add-item-content">
+                    <div className="cong-van-di-update-item-content">
                         Nội dung
                         <span className='text-danger' style={{color: 'red'}}> *</span>
                     </div>
@@ -432,7 +382,7 @@ export default function SLTAddCongVan(props) {
                             //required
                         />
                     </div>
-                    <div className="cong-van-add-item-file">
+                    <div className="cong-van-di-update-item-file">
                         <label>
                             Tệp đính kèm
                         </label>
@@ -441,12 +391,13 @@ export default function SLTAddCongVan(props) {
                             accept="*"
                             // style={{ display: 'none' }}
                             id="contained-button-file"
-                            className="cong-van-add-input-file"
+                            className="cong-van-di-update-input-file"
                             onChange={(event)=>{setFileDinhKem(event.target.files[0])}}
                         />
+                        <h5>{file_dinh_kem == null && cong_van_luu_truData.tep_dinh_kem?.name}</h5>
                     </div>
-                    <div className='cong-van-add-footer'>
-                        <button className='cong-van-add-button'>Thêm</button>
+                    <div className='cong-van-di-update-footer'>
+                        <button className='cong-van-di-update-button'>Lưu</button>
                     </div>
                 </div>
             </form>

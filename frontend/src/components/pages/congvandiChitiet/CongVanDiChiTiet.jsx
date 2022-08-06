@@ -4,6 +4,7 @@ import { ArrowBack } from '@material-ui/icons';
 import { useHistory, useParams } from "react-router-dom";
 import { ErrorOutlineRounded, Create, ContentPaste, AttachFile, People } from '@mui/icons-material';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { ToastContainer, toast } from 'react-toastify';
 import Comments from "../../comments/Comments";
 import EditCongVanDi from "../../popup/EditCongVanDi/EditCongVanDi";
 import * as backend_config from "../../../config/backend"
@@ -220,6 +221,7 @@ export default function CongVanDiChiTiet(props) {
                     <Comments token={token} cong_van_id={cong_vanId} is_active={cong_van_versionData.id_tinh_trang_xu_ly === 3? false: true}/>
                 </div>
             </main>
+            <ToastContainer className="cong-van-di-notify" />
         </div>
     )
 }

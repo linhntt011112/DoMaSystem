@@ -388,10 +388,15 @@ def create_cong_van_luu_tru(db, cong_van_luu_tru_pydantic: cong_van_schemas.Cong
     return  common_queries.add_and_commit(db, cong_van)
     
 
-def update_cong_van_luu_tru(db, cong_van_luu_tru: db_models.CongVanLuuTru):
+def update_cong_van_luu_tru(db, cong_van_luu_tru: db_models.CongVanLuuTru, cong_van_luu_tru_pydantic: cong_van_schemas.CongVanLuuTruUpdate = None):
 
-    now = datetime.now()
-    cong_van_luu_tru.update_at = now
+    if cong_van_luu_tru_pydantic is not None:
+        data_dict = cong_van_luu_tru_pydantic.__dict__
+        data_dict = {k:  data_dict[k] for k in data_dict if data_dict[k] is not None}
+        now = datetime.now()
+        data_dict["update_at"] = now
+        for k in data_dict:
+            setattr(cong_van_luu_tru, k, data_dict[k])
     return  common_queries.add_and_commit(db, cong_van_luu_tru)
 
 

@@ -12,6 +12,9 @@ class UserShort(BaseModel):
     id: int
     ho_ten: str
     ten_tai_khoan: str
+    ngay_sinh: Union[datetime.datetime, datetime.date] = None
+    dia_chi: str = None
+    ngay_cap_nhat: Union[datetime.datetime, datetime.date]
 
     phan_quyen: PhanQuyen.type 
 

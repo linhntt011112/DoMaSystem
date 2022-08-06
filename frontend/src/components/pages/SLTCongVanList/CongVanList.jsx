@@ -106,7 +106,7 @@ export default function CongVanList(props) {
         {
             field:"action",
             headerName: "Action",
-            width: 150,
+            width: 300,
             renderCell: (params)=>{
                 return(
                     <>
@@ -118,7 +118,7 @@ export default function CongVanList(props) {
                             className='cong-van-di-delete-popup'
                             trigger={buttonDeletePopup} setTrigger={setButtonDeletePopup} 
                             token={token} 
-                            url={backend_config.CONG_VAN_DELETE_BY_ID.replace('{id}', params.row.id)}
+                            url={backend_config.CONG_VAN_LUU_TRU_DELETE.replace('{id}', params.row.id)}
                             mark={mark} 
                             id={params.row.id} 
                             message={"Bạn có chắc muốn xóa công văn này không?"}
@@ -184,49 +184,6 @@ export default function CongVanList(props) {
                         Thêm mới
                     </Button>
                 </div>
-                <div className="dowpdown-filter">
-                    <div style={{ width: '200px', display: 'flex', flexDirection: 'column' }}>
-                        <span className="dropdown-title">Loại công văn</span>
-                        <Select
-                            labelId="loai_cong_van"
-                            id="id"
-                            style={{
-                                height: '36px',
-                                position: 'relative',
-                                color: '#333',
-                                cursor: 'default',
-                                margin: '10px 0 20px 20px',
-                            }}
-                            onChange={handleChangeLoaiCongVan}
-                        >
-                            {loai_cong_van_table.map((item) => {
-                                                    
-                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
-                            })}
-                        </Select>
-                    </div>
-                    <div style={{ width: 200, display: 'flex', flexDirection: 'column' }}>
-                        <span className="dropdown-title">Mức độ ưu tiên</span>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            onChange={handleChangeMucDoUuTien}
-                            style={{
-                                height: '36px',
-                                position: 'relative',
-                                color: '#333',
-                                cursor: 'default',
-                                margin: '10px 0 20px 20px',
-                            }}
-                        >
-                            {muc_do_uu_tien_table.map((item) => {
-                                return (<MenuItem value={item.id}>{item.name}</MenuItem> )
-                            })}
-                        </Select>
-                    </div>
-                    <button className="dropdown-button" onClick={handleFilter}>Lọc</button>
-                </div>
-                
                 <div style={{ height: 'calc(90vh - 200px)' }}>
                     <DataGrid
                         getRowId={(r) => r.id}
