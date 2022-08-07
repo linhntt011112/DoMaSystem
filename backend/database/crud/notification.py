@@ -50,7 +50,7 @@ def create_notitfication(db, notification_object_id, notifier_id):
 
 def mark_as_read(db, user_id, notification_id):
     db.query(db_models.Notification).filter(db_models.Notification.id == notification_id, db_models.Notification.notifier_id==user_id).\
-        update({db_models.Notification.status: db_models.NotificationStatus.read}, synchronize_session=False)
+        update({db_models.Notification.status: db_models.NotificationStatus.read})
     db.commit()
     return True
 
@@ -58,6 +58,6 @@ def mark_as_read(db, user_id, notification_id):
 
 def mark_all_as_read(db, user_id):
     db.query(db_models.Notification).filter(db_models.Notification.notifier_id == user_id, db_models.Notification.status == db_models.NotificationStatus.unread).\
-        update({db_models.Notification.status: db_models.NotificationStatus.read}, synchronize_session=False)
+        update({db_models.Notification.status: db_models.NotificationStatus.read})
     db.commit()
     return True
