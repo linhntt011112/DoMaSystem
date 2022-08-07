@@ -98,12 +98,12 @@ export default function CongVanDiChiTiet(props) {
                     <ArrowBack className='congVanDiTitleContainerIcon' onClick={() => history.goBack()} ></ArrowBack>
                     <h1 className='congVanDiTitle'>Thông tin chi tiết</h1>
                     <div>
-                        {cong_van_versionData.id_tinh_trang_xu_ly === 1 && user.id === cong_van_versionData.id_nguoi_ky &&
+                        {cong_van_versionData !== "" && cong_van_versionData.id_tinh_trang_xu_ly === 1 && user.id === cong_van_versionData.id_nguoi_ky &&
                             <button className='congVanDiEdit' onClick={() => duyet()}>Duyệt</button>}
-                        {cong_van_versionData.id_tinh_trang_xu_ly === 2 && user.id === cong_van_versionData.id_nguoi_xu_ly &&
+                        {cong_van_versionData !== "" && cong_van_versionData.id_tinh_trang_xu_ly === 2 && user.id === cong_van_versionData.id_nguoi_xu_ly &&
                             <button className='congVanDiEdit' onClick={() => xu_ly()}>Xử lý</button>}
 
-                        {cong_van_versionData.id_tinh_trang_xu_ly === 1 && (user.id === cong_van_versionData.id_nguoi_tao || user.id === cong_van_versionData.id_nguoi_ky) &&
+                        {cong_van_versionData !== "" && cong_van_versionData.id_tinh_trang_xu_ly === 1 && (user.id === cong_van_versionData.id_nguoi_tao || user.id === cong_van_versionData.id_nguoi_ky) &&
                             <button className='congVanDiEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>}
                         {cong_van_versionData !== "" && <EditCongVanDi trigger={buttonPopup} setTrigger={setButtonPopup} token={token} cong_van_versionData={cong_van_versionData} refreshFunc={refreshFunc}></EditCongVanDi>}
 

@@ -25,7 +25,7 @@ export default function Topbar({user, token}) {
             image: "https://www.w3schools.com/howto/img_avatar2.png" ,
             message: data["template"].replace("{{actor_id}}", data["{{actor_id}}"]). replace("{{entity_id}}", data["{{entity_id}}"]),
             // detailPage: data.entity_type === "cong_van" ? `/cong-van-di/${data["{{entity_id}}"]}`: null,
-            detailPage: data.entity_type === "cong_van" ? history.push(`/cong-van-di/${data["{{entity_id}}"]}`): null,
+            detailPage: data.entity_type === "cong_van" ? `/cong-van-di/${data["{{entity_id}}"]}`: null,
             receivedTime: time.toLocaleString("vi-VN")
         }
         return result
