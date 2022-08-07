@@ -386,6 +386,39 @@ def create_cong_van_luu_tru(db, cong_van_luu_tru_pydantic: cong_van_schemas.Cong
     data_dict["update_at"] = now
     cong_van = db_models.CongVanLuuTru(**data_dict)
     return  common_queries.add_and_commit(db, cong_van)
+
+
+def create_cvlt_from_cong_van(db, cong_van: db_models.CongVan):
+    cong_van_last_version: db_models.CongVanVersion = cong_van.cong_van_current_version
+    
+    cvlt = db_models.CongVanLuuTru(
+        ten_cong_van=cong_van_last_version.ten_cong_van,
+        phong_ban_nhan=cong_van_last_version.phong_ban_nhan.name,
+        nguoi_ky=cong_van_last_version.nguoi_ky.ho_ten,
+        ngay_ky=cong_van_last_version.ngay_ky,
+        phong_ban_phat_hanh=cong_van_last_version.phong_ban_phat_hanh.name,
+        loai_cong_van=cong_van_last_version.loai_cong_van.name,
+        noi_dung=cong_van_last_version.noi_dung,
+        nguoi_xu_ly=cong_van_last_version.nguoi_xu_ly.ho_ten,
+        
+        ngay_hoan_tat=cong_van_last_version.ngay_hoan_tat,
+        tinh_trang_xu_ly=cong_van_last_version.tinh_trang_xu_ly.name,
+    
+        ly_do=cong_van_last_version.ly_do,
+        so_luong_van_ban=cong_van_last_version.so_luong_van_ban,
+        muc_do_uu_tien = cong_van_last_version.muc_do_uu_tien.name,
+    
+        id_tep_dinh_kem=cong_van_last_version.id_tep_dinh_kem,
+    
+        nguoi_tao=cong_van_last_version.nguoi_tao.ho_ten,
+        ngay_tao=cong_van_last_version.ngay_tao,
+        
+        create_at=cong_van.create_at,
+        update_at=cong_van.update_at
+    )
+    
+    return common_queries.add_and_commit(db, cvlt)
+    
     
 
 def update_cong_van_luu_tru(db, cong_van_luu_tru: db_models.CongVanLuuTru, cong_van_luu_tru_pydantic: cong_van_schemas.CongVanLuuTruUpdate = None):
@@ -398,6 +431,7 @@ def update_cong_van_luu_tru(db, cong_van_luu_tru: db_models.CongVanLuuTru, cong_
         for k in data_dict:
             setattr(cong_van_luu_tru, k, data_dict[k])
     return  common_queries.add_and_commit(db, cong_van_luu_tru)
+
 
 
 def delete_cong_van_luu_tru(db, cong_van_luu_tru):

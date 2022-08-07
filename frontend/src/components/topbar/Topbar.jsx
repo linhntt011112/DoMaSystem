@@ -1,26 +1,65 @@
 import {React, useEffect, useState, useCallback} from 'react'
 import "./topbar.css"
+import { useHistory } from 'react-router-dom';
 import { NotificationsNone, Settings} from '@material-ui/icons';
 import Logo from '../../img/logo_4.png';
+// import defaultAvatar from "../../img/img_avatar2.png"
 import { Link } from "react-router-dom";
 import * as backend_config from "../../config/backend"
 import NotificationList from './Notifications';
 import * as Pusher from 'pusher-js';
-import Notifications from "react-notifications-menu";
+// import Notifications from "react-notifications-menu";
+import Notifications from "./NotificationMenu";
+
 
 export default function Topbar({user, token}) {
     const [notifications, setNotifications] = useState([]);
+    const history = useHistory();
     const [showNotificationList, setShowNotificationList] = useState(false);
     const notificationEvents = ["create_cong_van", "update_cong_van", "duyet_cong_van", "xu_ly_cong_van", "add_trao_doi_cong_van"]
 
-    const show_data = (data) =>{
-        return data["template"].replace("{{actor_id}}", data["{{actor_id}}"]). replace("{{entity_id}}", data["{{entity_id}}"])
+    const convert_data = (data) =>{
+        const time = new Date(data.create_on)
+        const result= { 
+            id: data.id,
+            image: "https://www.w3schools.com/howto/img_avatar2.png" ,
+            message: data["template"].replace("{{actor_id}}", data["{{actor_id}}"]). replace("{{entity_id}}", data["{{entity_id}}"]),
+            // detailPage: data.entity_type === "cong_van" ? `/cong-van-di/${data["{{entity_id}}"]}`: null,
+            detailPage: data.entity_type === "cong_van" ? history.push(`/cong-van-di/${data["{{entity_id}}"]}`): null,
+            receivedTime: time.toLocaleString("vi-VN")
+        }
+        return result
     }
 
     const getUnreadNotifications = () => {
         backend_config.makeRequest("GET", backend_config.NOTIFICATION_GET_LIST_UNREAD, token)
           .then((data) => data.json())
-          .then((data) => {setNotifications(data); console.log(data); return data; })
+          .then((data) => {
+
+            setNotifications(data.map(convert_data))
+        })
+    }
+
+    const read_all_notifications = () => {
+        backend_config.makeRequest("GET", backend_config.NOTIFICATION_GET_READ_ALL, token)
+          .then((data) => data.json())
+          .then((data) => {
+            setNotifications([]);
+        })
+    }
+
+    const onclick_notification = (data) => {
+        // console.log(data.id);
+        backend_config.makeRequest("GET", backend_config.NOTIFICATION_GET_READ_ID.replace("{id}", data.id), token)
+          .then((_) => _.json())
+          .then((_) => {
+            // console.log(_)
+            setNotifications(notifications.filter((item) => item.id !== data.id));
+            history.push(data.detailPage);
+            
+        })
+        // setNotifications(notifications.filter((item) => item !== data.id));
+        //     history.push(data.detailPage);
     }
 
     useEffect(() => {
@@ -34,9 +73,9 @@ export default function Topbar({user, token}) {
         var channel = pusher.subscribe(user.id.toString());
 
         channel.bind_global((eventName, data) => {
-            console.log(eventName, data)
-            console.log(notifications.concat([data]))
-            if (data?.id) setNotifications((notifications) => notifications.concat([data]));
+            // console.log(eventName, data)
+            // console.log(notifications.concat([data]))
+            if (data?.id) setNotifications([convert_data(data), ...notifications]);
         });
 
         return () => {
@@ -48,7 +87,7 @@ export default function Topbar({user, token}) {
         <div className='topbar'>  
             <div className="topbarWrapper">
                 <div className="topLeft">
-                    <a href='/dashboard'>
+                    <a onClick={() => history.push("/dashboard")}>
                         <img src={Logo} alt='' className='logoIcon'/>
                     </a>
                     <div className='page-title-box'>
@@ -57,7 +96,7 @@ export default function Topbar({user, token}) {
                 </div>
                 
                 <ul className="topRight">
-                    <Notifications
+                    {/* <Notifications
                         data={notifications}
                         header={{
                         title: "Thông báo",
@@ -66,14 +105,26 @@ export default function Topbar({user, token}) {
                         // markAsRead={(data) => {
                         //     console.log(data);
                         // }}
-                    />
-                    <li className='topbarIconContainer' style={{display: 'block'}}>
+                    /> */}
+                        <Notifications
+                            data={notifications}
+                            cardOption={onclick_notification}
+                            dataOnclick={onclick_notification}
+                            header={{
+                            title: "Thông báo",
+                            option: { text: "Xem tất cả", onClick: read_all_notifications }
+                            }}
+                            
+                        />
+                            
+
+                    {/* <li className='topbarIconContainer' style={{display: 'block'}}>
                         <div class="dropdown-toggle nav-link">
                             <NotificationsNone onClick={() => {console.log(notifications); setShowNotificationList(!showNotificationList)}}/>
                             
                             <span className='topIconBadge'>{notifications.length}</span>
                         </div>
-                    </li>
+                    </li> */}
                     <li className='change-password-icon-Container'>
                         <Link to={"/change-password/"} className='top-bar-link'>
                             <Settings>

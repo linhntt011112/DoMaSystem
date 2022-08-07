@@ -208,6 +208,8 @@ async def get_cong_van_by_id(id: int,
 
     try:
         cong_van = crud_cong_van.get_cong_van_by_id(db, cong_van_id=id)
+        if cong_van is None:
+            raise api_exceptions.NOT_FOUND_EXCEPTION()
         authorize_user_for_cong_van(current_user, cong_van)
         if cong_van is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
@@ -361,6 +363,7 @@ async def update_cong_van(
         cong_van.cong_van_current_version.ngay_hoan_tat = datetime.now()
         cong_van.update_at = datetime.now()
         cong_van = crud_cong_van.update_cong_van(db, cong_van)
+        crud_cong_van.create_cvlt_from_cong_van(db, cong_van)
         
         cong_van_noti_push.xu_ly_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
