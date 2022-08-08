@@ -28,7 +28,7 @@ const UserRoute = ({component: Component, ...rest}) => {
                     {/* <Topbar user={user} token={token} /> */}
                     <div className="adminContainer">
                         <Sidebar userPermission={userPermission} setToken={setToken}/>
-                        <Component {...props} token={token} {...rest}/>
+                        <Component {...props} token={token} userPermission={userPermission} {...rest} />
                     </div>
                 </div>
             )

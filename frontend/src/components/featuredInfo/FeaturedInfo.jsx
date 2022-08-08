@@ -3,20 +3,23 @@ import './featuredInfo.css';
 import { Group } from '@material-ui/icons';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 
-export default function FeaturedInfo() {
+export default function FeaturedInfo({userPermission, setToken}) {
     return (
         <div className='featured'>
-            <div className='featuredItem'>
-                <div className='featuredMoneyContainer'>
-                    <span className='featuredMoney'>
-                        <Group/>
-                    </span>
-                    <span className='featuredMoneyRate'>
-                        <h3>218</h3>
-                        <span>Người dùng</span>
-                    </span>
+            {
+                userPermission === "admin" && 
+                <div className='featuredItem'>
+                    <div className='featuredMoneyContainer'>
+                        <span className='featuredMoney'>
+                            <Group/>
+                        </span>
+                        <span className='featuredMoneyRate'>
+                            <h3>218</h3>
+                            <span>Người dùng</span>
+                        </span>
+                    </div>
                 </div>
-            </div>
+            }
             <div className='featuredItem'>
                 <div className='featuredMoneyContainer'>
                     <span className='featuredMoney'>

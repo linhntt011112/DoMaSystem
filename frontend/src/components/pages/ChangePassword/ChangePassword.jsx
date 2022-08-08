@@ -98,7 +98,10 @@ export default function ChangePassword(props) {
                     </h2>
 
                     <div className="change-password-inputDiv">
-                        <label className="change-password-inputLabel" for="password">Mật khẩu hiện tại</label>
+                        <label className="change-password-inputLabel" for="password">
+                            Mật khẩu hiện tại
+                            <span className='text-danger' style={{color: 'red'}}>  *</span>
+                        </label>
                         <input 
                             type="password" 
                             id="currentPassword" 
@@ -109,7 +112,10 @@ export default function ChangePassword(props) {
                     </div>
             
                     <div className="change-password-inputDiv">
-                        <label className="change-password-inputLabel" for="password">Mật khẩu mới</label>
+                        <label className="change-password-inputLabel" for="password">
+                            Mật khẩu mới
+                            <span className='text-danger' style={{color: 'red'}}>  *</span>
+                        </label>
                         <input 
                             type="password" 
                             id="newPassword" 
@@ -119,7 +125,10 @@ export default function ChangePassword(props) {
                     </div>
             
                     <div className="change-password-inputDiv">
-                        <label className="change-password-inputLabel" for="confirmPassword">Xác nhận mật khẩu mới</label>
+                        <label className="change-password-inputLabel" for="confirmPassword">
+                            Xác nhận mật khẩu mới
+                            <span className='text-danger' style={{color: 'red'}}>  *</span>
+                        </label>
                         <input type="password" id="confirmPassword" className="change-password-input" onChange={(e) => setConfirmPassword(e.target.value)} required/>
                     </div>
             

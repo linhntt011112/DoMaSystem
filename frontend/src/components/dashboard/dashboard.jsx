@@ -42,7 +42,7 @@ const Dashboard = (props) => {
   return (
     <div className="dashboard">
       <h3 className="pageTitle">Xin chào!</h3>
-      <FeaturedInfo />
+      <FeaturedInfo userPermission={props.userPermission}/>
     </div>
     );
 };

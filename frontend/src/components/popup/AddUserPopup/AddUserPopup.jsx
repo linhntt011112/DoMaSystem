@@ -10,6 +10,7 @@ import OutsideAlerter from '../Common/OutsideClick';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { width } from '@mui/system';
+import moment from "moment";
 
 export default function AddUserPopup(props) {
     const {token, refreshFunc} = props;
@@ -104,9 +105,17 @@ export default function AddUserPopup(props) {
         })
     }
 
+    const addUserNotifyHoVaTen = (response_json) => {
+        toast.error("Họ và tên không hợp lệ", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: true
+        })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        submitAddUser();
+        if (ho_va_ten.trim() !== "") submitAddUser();
+        else addUserNotifyHoVaTen();
     }
 
     const submitAddUser = () => {
@@ -288,6 +297,7 @@ export default function AddUserPopup(props) {
                                             e.preventDefault();
                                         }}
                                         onChange={(e) => setNgaySinh(e.target.value)}
+                                        max="2004-12-31"
                                         required
                                     />
                                 </div>
@@ -304,6 +314,7 @@ export default function AddUserPopup(props) {
                                         onKeyPress={(e) => !/[0-9]/.test(e.key) && e.preventDefault()}
                                         className='userAddInput'
                                         onChange={(e) => setCCCD(e.target.value)}
+                                        maxlength="12"
                                         required
                                     />
                                 </div>

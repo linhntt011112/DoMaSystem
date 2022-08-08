@@ -25,7 +25,7 @@ export default function UserList(props) {
     };
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 100 },
+        { field: 'id', headerName: 'Mã người dùng', width: 120 },
         { field: 'ho_ten', headerName: 'Họ và tên', flex: 1, renderCell: (params)=>{
             return (
                 <div className="userListUser">
@@ -47,12 +47,12 @@ export default function UserList(props) {
         {
             field: 'ngay_cap_nhat',
             headerName: 'Ngày cập nhật',
-            width: 200,
+            width: 115,
         },
         {
             field:"action",
             headerName: "Action",
-            flex: 1,
+            flex: 0.5,
             renderCell: (params)=>{
                 return(
                     <>
@@ -93,7 +93,7 @@ export default function UserList(props) {
         <div className='userList'>
             <main>
                 <div className='userListTop'>
-                    <h1 className='userListTitle'>Danh sách nhân viên</h1>
+                    <h1 className='userListTitle'>Danh sách người dùng</h1>
                     <Button
                         className='userAddButton'
                         style={{

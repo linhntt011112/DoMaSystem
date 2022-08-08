@@ -105,7 +105,7 @@ export default function EditUserPopup(props) {
                             <div className='userUpdateUpload'>
                                 <img
                                     className='userUpdateImg'
-                                    src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=338&ext=jpg"
+                                    src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"
                                     alt=''
                                 />
                             </div>
@@ -121,7 +121,7 @@ export default function EditUserPopup(props) {
                                         </label>
                                         <input
                                             type="text"
-                                            value={userData.ho_ten}
+                                            value={userData.ho_ten.trim()}
                                             className='userUpdateInput'
                                             disabled
                                         />
@@ -195,6 +195,7 @@ export default function EditUserPopup(props) {
                                     <div className='userUpdateItem'>
                                         <label>
                                             Ngày sinh
+                                            <span className='text-danger' style={{color: 'red'}}>  *</span>
                                         </label>
                                         <input 
                                             type="date" 
@@ -228,6 +229,7 @@ export default function EditUserPopup(props) {
                                     <div className='userUpdateItem'>
                                         <label>
                                             Ngày cấp
+                                            <span className='text-danger' style={{color: 'red'}}>  *</span>
                                         </label>
                                         <input
                                             type="text"
@@ -241,6 +243,7 @@ export default function EditUserPopup(props) {
                                     <div className='userUpdateItem'>
                                         <label>
                                             Nơi cấp
+                                            <span className='text-danger' style={{color: 'red'}}>  *</span>
                                         </label>
                                         <input
                                             type="text"
@@ -289,6 +292,7 @@ export default function EditUserPopup(props) {
                                     <div className='userUpdateItem'>
                                         <label>
                                             Ngày vào làm
+                                            <span className='text-danger' style={{color: 'red'}}>  *</span>
                                         </label>
                                         <input 
                                             type="date" 

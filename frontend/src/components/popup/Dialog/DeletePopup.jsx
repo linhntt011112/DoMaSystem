@@ -70,7 +70,7 @@ export function DeletePopup(props) {
       <form className="delete-popup-main" onSubmit={handleSubmit}>
         <Close
           className="delete-close"
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", display: "none" }}
           onClick={() => props.setTrigger(false)}
         />
         <div className="delete-container">
