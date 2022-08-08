@@ -41,8 +41,9 @@ async def get_list_read_notifications(current_user: db_models.NguoiDung = Depend
 @router.get('/{notification_id}/read')
 async def get_list_read_notifications(notification_id: int, current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):    
     try:
-        crud.crud_notification.mark_as_read(db, current_user.id, notification_id)
-        return True
+        # logger.info(notification_id)
+        return crud.crud_notification.mark_as_read(db, current_user.id, notification_id)
+        
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
     
@@ -50,8 +51,7 @@ async def get_list_read_notifications(notification_id: int, current_user: db_mod
 @router.get('/read-all')
 async def get_list_read_notifications(current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):    
     try:
-        crud.crud_notification.mark_all_as_read(db, current_user.id)
-        return True
+        return crud.crud_notification.mark_all_as_read(db, current_user.id)
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
     

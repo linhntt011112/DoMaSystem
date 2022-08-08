@@ -8,7 +8,9 @@ import { Link } from "react-router-dom";
 import * as backend_config from "../../config/backend"
 import NotificationList from './Notifications';
 import * as Pusher from 'pusher-js';
-import Notifications from "react-notifications-menu";
+// import Notifications from "react-notifications-menu";
+import Notifications from "./NotificationMenu";
+
 
 export default function Topbar({user, token}) {
     const [notifications, setNotifications] = useState([]);
@@ -22,7 +24,8 @@ export default function Topbar({user, token}) {
             id: data.id,
             image: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" ,
             message: data["template"].replace("{{actor_id}}", data["{{actor_id}}"]). replace("{{entity_id}}", data["{{entity_id}}"]),
-            _detailPage: data.entity_type === "cong_van" ? `/cong-van-di/${data["{{entity_id}}"]}`: null,
+            // detailPage: data.entity_type === "cong_van" ? `/cong-van-di/${data["{{entity_id}}"]}`: null,
+            detailPage: data.entity_type === "cong_van" ? `/cong-van-di/${data["{{entity_id}}"]}`: null,
             receivedTime: time.toLocaleString("vi-VN")
         }
         return result
@@ -46,12 +49,17 @@ export default function Topbar({user, token}) {
     }
 
     const onclick_notification = (data) => {
+        // console.log(data.id);
         backend_config.makeRequest("GET", backend_config.NOTIFICATION_GET_READ_ID.replace("{id}", data.id), token)
           .then((_) => _.json())
           .then((_) => {
-            history.push(data._detailPage);
-            getUnreadNotifications();
+            // console.log(_)
+            setNotifications(notifications.filter((item) => item.id !== data.id));
+            history.push(data.detailPage);
+            
         })
+        // setNotifications(notifications.filter((item) => item !== data.id));
+        //     history.push(data.detailPage);
     }
 
     useEffect(() => {
@@ -79,7 +87,7 @@ export default function Topbar({user, token}) {
         <div className='topbar'>  
             <div className="topbarWrapper">
                 <div className="topLeft">
-                    <a href='/dashboard'>
+                    <a onClick={() => history.push("/dashboard")}>
                         <img src={Logo} alt='' className='logoIcon'/>
                     </a>
                     <div className='page-title-box'>
@@ -101,13 +109,12 @@ export default function Topbar({user, token}) {
                         <Notifications
                             data={notifications}
                             cardOption={onclick_notification}
+                            dataOnclick={onclick_notification}
                             header={{
                             title: "Thông báo",
                             option: { text: "Xem tất cả", onClick: read_all_notifications }
                             }}
-                            markAsRead={(data) => {
-                                console.log(data);
-                            }}
+                            
                         />
                             
 

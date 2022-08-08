@@ -94,7 +94,8 @@ export default function AddUserPopup(props) {
     const addUserNotify = (response_json) => {
         toast.success(<div>Thêm người dùng thành công! <br /> Mật khẩu là: {response_json.plain_password}</div>, {
             position: toast.POSITION.TOP_RIGHT,
-            autoClose: false
+            autoClose: false,
+            closeOnClick: false,
         })
     }
 

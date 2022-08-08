@@ -7,6 +7,7 @@ import { UserContext } from "../../context/UserContext";
 import { useToken } from "../../context/TokenContext";
 import * as backend_config from "../../config/backend"
 import FeaturedInfo from "../featuredInfo/FeaturedInfo";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 axios.defaults.withCredentials = true;
@@ -43,6 +44,7 @@ const Dashboard = (props) => {
     <div className="dashboard">
       <h3 className="pageTitle">Xin chào!</h3>
       <FeaturedInfo userPermission={props.userPermission}/>
+      <ToastContainer/>
     </div>
     );
 };

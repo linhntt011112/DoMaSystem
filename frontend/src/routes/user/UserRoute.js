@@ -9,6 +9,7 @@ import './AdminRoute.css'
 
 const UserRoute = ({component: Component, ...rest}) => {
     const {token, setToken} = useToken();
+
     let location = useLocation();
     const {userPermission, user} = useUserInfo();
     // console.log(userPermission, 'in user route');
