@@ -8,7 +8,7 @@ import { useToken } from '../../../context/TokenContext';
     
 
 export default function ChangePassword(props) {
-    const {token, setToken} = useToken();
+    const {token, setToken} = props;
     let history = useHistory();
 
     const [currentPassword, setCurrentPassword] = useState(null)
@@ -55,7 +55,7 @@ export default function ChangePassword(props) {
             current_plain_password: currentPassword,
             new_plain_password: newPassword
         })
-        console.log(body)
+        // console.log(body)
 
         backend_config.makeRequest("PUT", 
             backend_config.USER_PUT_CHANGE_PASSWORD, 
@@ -63,14 +63,14 @@ export default function ChangePassword(props) {
             body
         )
         .then((response) => {
-            console.log(body);
+            // console.log(body);
             if (response.ok){
-                console.log(body);
+                // console.log(body);
                 response.json().then((response_json) => {
                     console.log(response_json);
-                    setToken(null);
+                    // setToken(null);
                     changePasswordSuccess();
-                    history.push('/login');
+                    setTimeout(() => history.push("/dashboard"), 2000);
                 })
             }
             else {

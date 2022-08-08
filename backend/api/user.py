@@ -144,7 +144,23 @@ async def update_info_user(user_update_password: user_schemas.UserUpdatePassword
         # db.rollback()
         return api_exceptions.handle_simple_exception(e, logger)
     
-    
+
+
+@router.put("/{user_id}/reset_password")
+async def update_info_user(user_id: int,
+    current_user=Depends(get_current_active_user), db=Depends(get_db)):
+
+    try:
+        if current_user.phan_quyen != db_models.PhanQuyen.admin:
+            raise api_exceptions.PERMISSION_EXCEPTION()
+        user_to_update = crud_user.get_user_by_id(db, user_id)
+        if user_to_update is  None:
+            raise api_exceptions.NOT_FOUND_EXCEPTION()
+        
+        return user_core.reset_password(db, user_to_update)
+    except Exception as e:
+        # db.rollback()
+        return api_exceptions.handle_simple_exception(e, logger)
 
 
 
