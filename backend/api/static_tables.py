@@ -85,8 +85,7 @@ async def get_list(
     static_table_name: str,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), 
     db=Depends(get_db)):  
-    
-    # logger.debug('CACHE MISS')  
+
     
     try:
         check_static_table_name(static_table_name)
@@ -115,8 +114,7 @@ async def create(
     static_table_create_pydantic: schema_static_tables.StaticTableCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), 
     db=Depends(get_db)):  
-    
-    # logger.debug('CACHE MISS')  
+
     
     try:
         check_static_table_name(static_table_name)
@@ -134,8 +132,7 @@ async def update(
     static_table_update_pydantic: schema_static_tables.StaticTableUpdate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), 
     db=Depends(get_db)):  
-    
-    # logger.debug('CACHE MISS')  
+
     
     try:
         check_static_table_name(static_table_name)
@@ -154,8 +151,7 @@ async def delete(
     # static_table_delete_pydantic: schema_static_tables.StaticTableDelete,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), 
     db=Depends(get_db)):  
-    
-    # logger.debug('CACHE MISS')  
+
     
     
     try:
