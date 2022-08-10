@@ -25,7 +25,7 @@ from .core.user import (
 )
 
 
-router = APIRouter(prefix='/user')
+router = APIRouter(prefix='/users')
 
 
 
@@ -47,7 +47,7 @@ async def get_list_users(current_user = Depends(get_current_active_user), db=Dep
         raise api_exceptions.PERMISSION_EXCEPTION()
     
 
-@router.get("/list")
+@router.get("/")
 async def get_list_users(current_user = Depends(get_current_active_user), db=Depends(get_db),
                         limit: int=None, offset: int=None,
                         order_by=None):    
@@ -59,7 +59,7 @@ async def get_list_users(current_user = Depends(get_current_active_user), db=Dep
     
 
 
-@router.get("/id/{user_id}")
+@router.get("/{user_id}")
 async def get_user_by_id(user_id: int, current_user = Depends(get_current_active_user), db=Depends(get_db)):
     if current_user.phan_quyen == db_models.PhanQuyen.admin:
         user = crud_user.get_user_by_id(db, user_id)
@@ -71,7 +71,7 @@ async def get_user_by_id(user_id: int, current_user = Depends(get_current_active
         raise api_exceptions.PERMISSION_EXCEPTION()
 
 
-@router.post("/create")
+@router.post("/")
 async def create_user(user_register: user_schemas.UserCreate, 
                       current_user=Depends(get_current_active_user),
                       db=Depends(get_db)):
@@ -98,40 +98,9 @@ async def create_user(user_register: user_schemas.UserCreate,
         else:
             raise e
         
-        
-@router.post("/test")
-async def create_user(user_register: user_schemas.UserCreate, 
-                    #   current_user=Depends(get_current_active_user), db=Depends(get_db)
-                      ):
-    logger.info(user_register)
-    return user_register
-    # db=Depends(get_db)
-    # db = get_db()
-    # if current_user.phan_quyen != db_models.PhanQuyen.admin:
-    #     raise exceptions.PERMISSION_EXCEPTION()
-    
-    # try:
-    #     user, plain_password = create_user_core(db, user_register, create_password=True)
-    #     user_schema = user_schemas.UserBaseFirstTime.from_orm(user)
-    #     user_schema.plain_password = plain_password
-    #     return user_schema
-        
-    # except Exception as e:
-    #     # db.rollback()
-    #     error_message = str(e)
-    #     # logger.info(type(e))
-    #     if exceptions.filter_duplicate_entry_error(e):
-    #         error_message = 'Duplicate ten_tai_khoan!'
-            
-    #     if not isinstance(e, HTTPException):
-    #         logger.error(f'{error_message}: {traceback.format_exc()}')
-    #         raise exceptions.INTERNAL_SERVER_ERROR(error_message)
-    #     else:
-    #         raise e
-    
 
 
-@router.put("/update_password")
+@router.put("/update-password")
 async def update_info_user(user_update_password: user_schemas.UserUpdatePassword,
     current_user=Depends(get_current_active_user), db=Depends(get_db)):
     # if current_user.id != user_update_password.id:
@@ -146,7 +115,7 @@ async def update_info_user(user_update_password: user_schemas.UserUpdatePassword
     
 
 
-@router.put("/{user_id}/reset_password")
+@router.put("/{user_id}/reset-password")
 async def update_info_user(user_id: int,
     current_user=Depends(get_current_active_user), db=Depends(get_db)):
 
@@ -164,7 +133,7 @@ async def update_info_user(user_id: int,
 
 
 
-@router.put("/update")
+@router.put("/")
 async def update_info_user_self(user_schema_model: user_schemas.UserSelfUpdateInfo,
     current_user=Depends(get_current_active_user), db=Depends(get_db)):
     # if current_user.id != user_update_password.id:
@@ -196,7 +165,7 @@ async def update_info_user_self(user_id: int, user_schema_model: user_schemas.Us
 
 
 
-@router.delete("/delete/{user_id}")
+@router.delete("/{user_id}")
 async def delete_user_by_id(user_id: int, current_user = Depends(get_current_active_user), db=Depends(get_db)):
     if current_user.phan_quyen == db_models.PhanQuyen.admin:
         try:
