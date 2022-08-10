@@ -47,7 +47,7 @@ async def get_list_users(current_user = Depends(get_current_active_user), db=Dep
         raise api_exceptions.PERMISSION_EXCEPTION()
     
 
-@router.get("/")
+@router.get("/list-short")
 async def get_list_users(current_user = Depends(get_current_active_user), db=Depends(get_db),
                         limit: int=None, offset: int=None,
                         order_by=None):    

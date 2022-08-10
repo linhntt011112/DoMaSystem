@@ -5,7 +5,7 @@ export const BACKEND_URL_TOKEN_CHECK = BACKEND_URL + '/users/me';
 export const COMMON_GET_DOWNLOAD_TOKEN = BACKEND_URL + '/common/get_download_token';
 
 
-export const USER_GET_LIST_API = BACKEND_URL + '/users/';
+export const USER_GET_LIST_API = BACKEND_URL + '/users/list-short';
 export const USER_GET_LIST_FULL_API = BACKEND_URL + '/users/list-full';
 export const USER_GET_CURRENT_API = BACKEND_URL + '/users/me';
 export const USER_GET_BY_ID_API = BACKEND_URL + '/users/{id}';
