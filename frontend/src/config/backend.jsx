@@ -2,20 +2,21 @@
 // export const BACKEND_URL = 'http://18.143.5.220/api/v1';
 export const BACKEND_URL = 'https://domasy.site/api/v1';
 export const BACKEND_URL_TOKEN = BACKEND_URL + '/token';
-export const BACKEND_URL_TOKEN_CHECK = BACKEND_URL + '/user/me';
+export const BACKEND_URL_TOKEN_CHECK = BACKEND_URL + '/users/me';
 
 export const COMMON_GET_DOWNLOAD_TOKEN = BACKEND_URL + '/common/get_download_token';
 
 
-export const USER_GET_LIST_API = BACKEND_URL + '/user/list';
-export const USER_GET_LIST_FULL_API = BACKEND_URL + '/user/list-full';
-export const USER_GET_CURRENT_API = BACKEND_URL + '/user/me';
-export const USER_GET_BY_ID_API = BACKEND_URL + '/user/id/{id}';
-export const USER_POST_CREATE = BACKEND_URL + '/user/create';
-export const USER_DELETE_BY_ID = BACKEND_URL + '/user/delete/{user_id}'
-export const USER_PUT_CHANGE_PASSWORD = BACKEND_URL + '/user/update_password'
-export const USER_PUT_SELF_UPDATE = BACKEND_URL + '/user/update'
-export const USER_PUT_ADMIN_UPDATE = BACKEND_URL + '/user/{id}/admin-update'
+export const USER_GET_LIST_API = BACKEND_URL + '/users/list-short';
+export const USER_GET_LIST_FULL_API = BACKEND_URL + '/users/list-full';
+export const USER_GET_CURRENT_API = BACKEND_URL + '/users/me';
+export const USER_GET_BY_ID_API = BACKEND_URL + '/users/{id}';
+export const USER_POST_CREATE = BACKEND_URL + '/users/';
+export const USER_DELETE_BY_ID = BACKEND_URL + '/users/{user_id}'
+export const USER_PUT_CHANGE_PASSWORD = BACKEND_URL + '/users/update-password'
+export const USER_PUT_SELF_UPDATE = BACKEND_URL + '/users/'
+export const USER_PUT_ADMIN_UPDATE = BACKEND_URL + '/users/{id}/admin-update'
+export const USER_PUT_RESET_PASSWORD = BACKEND_URL + '/users/{user_id}/reset-password'
 
 
 export const LOAI_CONG_VAN_PREFIX = BACKEND_URL + '/cong_van/loai_cong_van'
@@ -26,6 +27,8 @@ export const LOAI_CONG_VAN_DELETE_BY_ID = LOAI_CONG_VAN_PREFIX + '/delete/{id}'
 
 
 export const CONG_VAN_PREFIX = BACKEND_URL + '/cong_van'
+export const CONG_VAN_GET_LIST_CVDEN = CONG_VAN_PREFIX + '/cvden'
+export const CONG_VAN_GET_LIST_CVDI = CONG_VAN_PREFIX + '/cvdi'
 export const CONG_VAN_GET_LIST_CHO_DUYET = CONG_VAN_PREFIX + '/list/cho_duyet'
 export const CONG_VAN_GET_LIST_CHUA_DUYET = CONG_VAN_PREFIX + '/list/chua_duyet'
 export const CONG_VAN_GET_LIST_CHO_XU_LY = CONG_VAN_PREFIX + '/list/cho_xu_ly'

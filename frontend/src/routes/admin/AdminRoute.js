@@ -8,9 +8,9 @@ import './AdminRoute.css'
 
 
 const AdminRoute = ({component: Component, ...rest}) => {
-    const {token, setToken} = useToken();
+    const {token, setToken, user, userPermission, updateSidebar} = rest;
     let location = useLocation();
-    const {userPermission, user} = useUserInfo();
+    // const {userPermission, user} = useUserInfo();
     // console.log(userPermission, 'in user route');
 
     const allUserPermissions = new Set(['admin']);
@@ -27,7 +27,7 @@ const AdminRoute = ({component: Component, ...rest}) => {
                 <div>
                     {/* <Topbar user={user} token={token} /> */}
                     <div className="adminContainer">
-                        <Sidebar user={user} setToken={setToken} userPermission={userPermission}/>
+                        <Sidebar updateSidebar={updateSidebar} user={user} setToken={setToken} token={token} userPermission={userPermission}/>
                         <Component {...props} token={token}/>
                     </div>
                 </div>

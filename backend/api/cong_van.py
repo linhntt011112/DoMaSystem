@@ -76,6 +76,46 @@ async def create_location_and_save_tep_dinh_kem(data_file, db=Depends(get_db)):
 
 
 
+@router.get('/cvdi')
+async def get_list_cong_van_di(limit: int=None, offset: int=None, order_by: str=None,
+                        id_loai_cong_van: int = None, 
+                        id_muc_do_uu_tien: int = None,
+                        count: bool = False,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+    """List ra tất cả các công văn đi chưa hoàn tất"""
+    
+    try:
+        condition = ((db_models.CongVanVersion.id_nguoi_tao == current_user.id) | (db_models.CongVanVersion.id_nguoi_ky == current_user.id) ) & (db_models.CongVanVersion.id_tinh_trang_xu_ly < 3)
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, None, id_muc_do_uu_tien, condition=condition, count=count)
+        if count:
+            return cong_van_s
+        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
+    except Exception as e:
+
+        return api_exceptions.handle_simple_exception(e, logger)
+    
+    
+
+@router.get('/cvden')
+async def get_list_cong_van_den_da_hoan_tat(limit: int=None, offset: int=None, order_by: str=None,
+                        id_loai_cong_van: int = None, 
+                        id_muc_do_uu_tien: int = None,
+                        count: bool = False,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
+    """ List ra tất cả các công văn đến chưa hoàn tất"""
+    
+    try:
+        condition = (db_models.CongVanVersion.id_nguoi_xu_ly == current_user.id) & (db_models.CongVanVersion.id_tinh_trang_xu_ly < 3) 
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, None, id_muc_do_uu_tien, condition=condition, count=count)
+        if count:
+            return cong_van_s
+        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
+    except Exception as e:
+
+        return api_exceptions.handle_simple_exception(e, logger)
+    
+
+
 @router.get('/cvdi/list/da_hoan_tat')
 async def get_list_cong_van_di_da_hoan_tat(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
@@ -116,13 +156,16 @@ async def get_list_cong_van_den_da_hoan_tat(limit: int=None, offset: int=None, o
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_muc_do_uu_tien: int = None,
+                        count: bool = False,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
     """ List ra các công văn được tạo bởi current_user mà đang chờ duyệt (id_tinh_trang_xu_ly = 1)"""
     
     try:
         id_tinh_trang_xu_ly = 1
         condition = (db_models.CongVanVersion.id_nguoi_tao == current_user.id)
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition, count=count)
+        if count:
+            return cong_van_s
         return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
 
@@ -134,13 +177,16 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_muc_do_uu_tien: int = None,
+                        count: bool = False,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
     """ List ra các công văn đang chờ current_user duyệt (id_tinh_trang_xu_ly = 1)"""
     
     try:
         id_tinh_trang_xu_ly = 1
         condition = (db_models.CongVanVersion.id_nguoi_ky == current_user.id)
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition, count=count)
+        if count:
+            return cong_van_s
         return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
 
@@ -152,13 +198,16 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_muc_do_uu_tien: int = None,
+                        count: bool = False,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
     """ List ra các công văn được tạo hoặc duyệt (ký) bởi current_user mà đang chờ xử lý (id_tinh_trang_xu_ly = 2)"""
     
     try:
         id_tinh_trang_xu_ly = 2
         condition = (db_models.CongVanVersion.id_nguoi_tao == current_user.id) | (db_models.CongVanVersion.id_nguoi_ky == current_user.id)
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition, count=count)
+        if count:
+            return cong_van_s
         return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
 
@@ -170,13 +219,16 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_muc_do_uu_tien: int = None,
+                        count: bool = False,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
     """ List ra các công văn đang chờ current_user xử lý (id_tinh_trang_xu_ly = 2)"""
     
     try:
         id_tinh_trang_xu_ly = 2
         condition = (db_models.CongVanVersion.id_nguoi_xu_ly == current_user.id) 
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition, count=count)
+        if count:
+            return cong_van_s
         return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
 
@@ -188,13 +240,16 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
 async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_muc_do_uu_tien: int = None,
+                        count: bool = False,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
     """ List ra các công văn current_user đang theo dõi mà chưa hoàn tất (id_tinh_trang_xu_ly != 3)"""
     
     try:
         id_tinh_trang_xu_ly = -3 # temporary
         condition = (db_models.CongVanVersion.id_nguoi_theo_doi == current_user.id) 
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
+        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition, count=count)
+        if count:
+            return cong_van_s
         return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
     except Exception as e:
 

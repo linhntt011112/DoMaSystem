@@ -23,7 +23,8 @@ class FrontEndConfig:
         URL = os.environ["DMS_FRONT_END_URL"]
 
     possible_urls = [
-        "*"
+        "http://localhost:3008",
+        "localhost:3008"
     ]
 
 frontend_config = FrontEndConfig()

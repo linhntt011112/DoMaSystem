@@ -8,6 +8,7 @@ import random
 import hashlib
 import typing as t
 import random
+import string
 
 from typing import Optional, Union
 from pydantic import BaseModel
@@ -211,6 +212,22 @@ def update_password(db, user: db_models.NguoiDung, user_update_password: user_sc
     user.password = new_password
     
     return crud_user.update_user(db, user)
+
+
+source = string.ascii_letters + string.digits
+def reset_password(db, user: db_models.NguoiDung):
+    password_salt = user.password_salt
+    
+    new_plain_password = ''.join((random.choice(source) for i in range(8)))
+    new_password = Hasher.get_password_hash(Hasher.salt_password(new_plain_password, password_salt))
+    
+    # if new_password == user.password:
+    #     raise exceptions.UNPROCESSABLE_ENTITY("")
+    user.password = new_password
+    
+    crud_user.update_user(db, user)
+    
+    return new_plain_password
 
 
 

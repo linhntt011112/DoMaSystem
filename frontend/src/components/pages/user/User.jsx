@@ -17,10 +17,24 @@ export default function User(props) {
 
     const [userData, setUserData] = useState("");
 
+    const resetPasswordUserNotify = (response_json) => {
+        toast.success(<div>Đặt lại mật khẩu thành công! <br /> Mật khẩu mới là: {response_json}</div>, {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: false,
+            closeOnClick: false,
+        })
+    }
+
     const refreshFunc = () =>{
         backend_config.makeRequest("GET", backend_config.USER_GET_BY_ID_API.replace('{id}', userId), token)
           .then((data) => data.json())
           .then((data) => setUserData(data))
+    }
+
+    const resetPassword = () =>{
+        backend_config.makeRequest("PUT", backend_config.USER_PUT_RESET_PASSWORD.replace('{user_id}', userId), token)
+          .then((data) => data.json())
+          .then((data) => resetPasswordUserNotify(data))
     }
 
     useEffect(() => {
@@ -36,6 +50,7 @@ export default function User(props) {
                     {userData !== "" &&
                     <div>
                         <button className='profileEdit' onClick={() => setButtonPopup(true)}>Chỉnh sửa</button>
+                        <button className='profile-reset-password' onClick={() => resetPassword()}>Đặt lại mật khẩu</button>
                         <EditUserPopup trigger={buttonPopup} setTrigger={setButtonPopup} userData={userData} token={token} refreshFunc={refreshFunc}>
                         </EditUserPopup>
                     </div>

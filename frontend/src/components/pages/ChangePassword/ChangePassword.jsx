@@ -8,7 +8,7 @@ import { useToken } from '../../../context/TokenContext';
     
 
 export default function ChangePassword(props) {
-    const {token, setToken} = useToken();
+    const {token, setToken} = props;
     let history = useHistory();
 
     const [currentPassword, setCurrentPassword] = useState(null)
@@ -55,7 +55,7 @@ export default function ChangePassword(props) {
             current_plain_password: currentPassword,
             new_plain_password: newPassword
         })
-        console.log(body)
+        // console.log(body)
 
         backend_config.makeRequest("PUT", 
             backend_config.USER_PUT_CHANGE_PASSWORD, 
@@ -63,14 +63,14 @@ export default function ChangePassword(props) {
             body
         )
         .then((response) => {
-            console.log(body);
+            // console.log(body);
             if (response.ok){
-                console.log(body);
+                // console.log(body);
                 response.json().then((response_json) => {
                     console.log(response_json);
-                    setToken(null);
+                    // setToken(null);
                     changePasswordSuccess();
-                    history.push('/login');
+                    setTimeout(() => history.push("/dashboard"), 2000);
                 })
             }
             else {
@@ -98,7 +98,10 @@ export default function ChangePassword(props) {
                     </h2>
 
                     <div className="change-password-inputDiv">
-                        <label className="change-password-inputLabel" for="password">Mật khẩu hiện tại</label>
+                        <label className="change-password-inputLabel" for="password">
+                            Mật khẩu hiện tại
+                            <span className='text-danger' style={{color: 'red'}}>  *</span>
+                        </label>
                         <input 
                             type="password" 
                             id="currentPassword" 
@@ -109,17 +112,25 @@ export default function ChangePassword(props) {
                     </div>
             
                     <div className="change-password-inputDiv">
-                        <label className="change-password-inputLabel" for="password">Mật khẩu mới</label>
+                        <label className="change-password-inputLabel" for="password">
+                            Mật khẩu mới
+                            <span className='text-danger' style={{color: 'red'}}>  *</span>
+                        </label>
                         <input 
                             type="password" 
                             id="newPassword" 
                             className="change-password-input" 
                             onChange={(e) => setNewPassword(e.target.value)} 
+                            pattern="(?=.*\d)(?=.*[a-z]).{8,}" 
+                            title="Mật khẩu phải chứa ít nhất một số, một chữ cái và ít nhất 8 ký tự trở lên"
                             required />
                     </div>
             
                     <div className="change-password-inputDiv">
-                        <label className="change-password-inputLabel" for="confirmPassword">Xác nhận mật khẩu mới</label>
+                        <label className="change-password-inputLabel" for="confirmPassword">
+                            Xác nhận mật khẩu mới
+                            <span className='text-danger' style={{color: 'red'}}>  *</span>
+                        </label>
                         <input type="password" id="confirmPassword" className="change-password-input" onChange={(e) => setConfirmPassword(e.target.value)} required/>
                     </div>
             

@@ -50,6 +50,7 @@ export const SidebarDataUser = [
                 title: 'Chưa xử lý',
                 path: '/cong-van-den/chua_xu_ly',
                 icon: <IoIcons.IoIosDocument />,
+                number: 3,
             },
             {
                 title: 'Đã hoàn tất',

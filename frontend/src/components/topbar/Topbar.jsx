@@ -22,7 +22,7 @@ export default function Topbar({user, token}) {
         const time = new Date(data.create_on)
         const result= { 
             id: data.id,
-            image: "https://www.w3schools.com/howto/img_avatar2.png" ,
+            image: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" ,
             message: data["template"].replace("{{actor_id}}", data["{{actor_id}}"]). replace("{{entity_id}}", data["{{entity_id}}"]),
             // detailPage: data.entity_type === "cong_van" ? `/cong-van-di/${data["{{entity_id}}"]}`: null,
             detailPage: data.entity_type === "cong_van" ? `/cong-van-di/${data["{{entity_id}}"]}`: null,
@@ -136,7 +136,7 @@ export default function Topbar({user, token}) {
                         <Link to={"/my-profile/"} className='link'>
                             <div className='user-current'>
                                 <span className='user-img'>
-                                    <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="" className="topAvatar" />
+                                    <img src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" alt="" className="topAvatar" />
                                     <span className="status online"></span>
                                 </span>    
                                 <span className='username'>{user?.name}</span>

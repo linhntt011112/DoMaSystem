@@ -17,6 +17,7 @@ export default function SubMenu({item}) {
                 <div style={{display: 'flex'}}>
                     <div style={{margin: '5px 0px 0px 0px'}}>{item.icon}</div>
                     <h3 className="sub-menu-span">{item.title}</h3>
+                    {item?.number &&  <span style={{marginLeft: "20px"}}>{item?.number}</span>}
                 </div>
                 <div>
                     {
@@ -32,6 +33,7 @@ export default function SubMenu({item}) {
                     <Link className="dropdown-link" to={item.path} key={index}>
                         {item.icon}
                         <span className="sub-menu-span">{item.title}</span>
+                        {item?.number &&  <span style={{marginLeft: "20px"}}>{item?.number}</span>}
                     </Link>
                 )
             })}
