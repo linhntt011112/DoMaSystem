@@ -40,7 +40,7 @@ def add_and_commit(session: scoped_session, data):
 
 def select_with_options(session: Session, class_: db_models.Base, 
                         condition=None, limit=None, offset=None, order_by=None, 
-                        join_field=None, desc=None, count=False,
+                        join_field=None, desc=None, count=False, distinct=None,
                         **kwargs):
     query = session.query(class_)
     if join_field is not None:
@@ -59,6 +59,9 @@ def select_with_options(session: Session, class_: db_models.Base,
     
     if offset is not None:
         query = query.offset(offset)
+    
+    if distinct is not None:
+        query = query.distinct(distinct)
     
     if count:
         return query.count()

@@ -10,40 +10,12 @@ import FeaturedInfo from "../featuredInfo/FeaturedInfo";
 import { ToastContainer, toast } from 'react-toastify';
 
 
-axios.defaults.withCredentials = true;
-
 const Dashboard = (props) => {
-  let history = useHistory();
-  const token = props.token;
-  
-  const getCurrentUser = async () => {
-
-    const response = await backend_config.makeRequest("GET", backend_config.USER_GET_CURRENT_API, token);
-    const data = await response.json();
-    console.log(data);
-  };
-
-  const getUserList = async () => {
-
-    const response = await backend_config.makeRequest("GET", backend_config.USER_GET_LIST_API, token);
-    const data = await response.json();
-    console.log(data);
-  };
-
-  const getUserById = async () => {
-
-    const response = await backend_config.makeRequest("GET", backend_config.USER_GET_BY_ID_API.replace('{id}', 1), token);
-    const data = await response.json();
-    console.log(data);
-
-  };
-
-
 
   return (
     <div className="dashboard">
       <h3 className="pageTitle">Xin chào!</h3>
-      <FeaturedInfo userPermission={props.userPermission}/>
+      <FeaturedInfo {...props}/>
       <ToastContainer/>
     </div>
     );

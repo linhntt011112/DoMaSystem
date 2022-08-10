@@ -196,6 +196,10 @@ def select_list_cong_van(db, limit: int=None, offset: int=None, order_by: str=No
         else:
             condition = condition & (class_.id_muc_do_uu_tien == id_muc_do_uu_tien)
     # print(condition)
+
+    distinct = None
+    if count:
+        distinct = db_models.CongVanVersion.cong_van_id
     
     list_of_objs = common_queries.select_with_options(db, db_models.CongVan, 
                                                       limit=limit,
@@ -203,7 +207,8 @@ def select_list_cong_van(db, limit: int=None, offset: int=None, order_by: str=No
                                                       order_by=order_by,
                                                       condition=condition,
                                                       join_field=db_models.CongVan.cong_van_current_version,
-                                                      count=count)
+                                                      count=count,
+                                                      distinct=distinct)
     return list_of_objs
 
 

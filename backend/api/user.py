@@ -50,9 +50,11 @@ async def get_list_users(current_user = Depends(get_current_active_user), db=Dep
 @router.get("/list-short")
 async def get_list_users(current_user = Depends(get_current_active_user), db=Depends(get_db),
                         limit: int=None, offset: int=None,
-                        order_by=None):    
+                        order_by=None, count: bool = False):    
     try:
-        users = crud_user.select_list_user(db, limit=limit, offset=offset)
+        users = crud_user.select_list_user(db, limit=limit, offset=offset, count=count)
+        if count:
+            return users
         return [user_schemas.UserShort.from_orm(user) for user in users]
     except Exception as e:
         raise api_exceptions.INTERNAL_SERVER_ERROR(str(e))

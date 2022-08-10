@@ -25,6 +25,8 @@ export const LOAI_CONG_VAN_DELETE_BY_ID = LOAI_CONG_VAN_PREFIX + '/delete/{id}'
 
 
 export const CONG_VAN_PREFIX = BACKEND_URL + '/cong_van'
+export const CONG_VAN_GET_LIST_CVDEN = CONG_VAN_PREFIX + '/cvden'
+export const CONG_VAN_GET_LIST_CVDI = CONG_VAN_PREFIX + '/cvdi'
 export const CONG_VAN_GET_LIST_CHO_DUYET = CONG_VAN_PREFIX + '/list/cho_duyet'
 export const CONG_VAN_GET_LIST_CHUA_DUYET = CONG_VAN_PREFIX + '/list/chua_duyet'
 export const CONG_VAN_GET_LIST_CHO_XU_LY = CONG_VAN_PREFIX + '/list/cho_xu_ly'
