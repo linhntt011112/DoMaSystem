@@ -36,7 +36,7 @@ async def get_list_lich_by_user_id(user_id: int,
 
 
 
-@router.post('/create')
+@router.post('/')
 async def create_lich(
     lich_model: utils_schemas.LichCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
@@ -46,6 +46,24 @@ async def create_lich(
         new_lich = crud_utils.create_lich(db, lich_model)
         # logger.info(f"{new_cong_van.__dict__}")
         return utils_schemas.LichFull.from_orm(new_lich)
+    except Exception as e:
+        return api_exceptions.handle_simple_exception(e, logger)
+    
+    
+    
+@router.put('/{lich_id}')
+async def delete_lich(
+    lich_id: int,
+    lich_model: utils_schemas.LichUpdate,
+    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
+):
+    try:
+        lich: db_models.Lich = crud_utils.get_lich_by_id(db, lich_id)
+        if lich is None:
+            raise api_exceptions.NOT_FOUND_EXCEPTION()
+        elif lich.id_nguoi_tao != current_user.id:
+            raise api_exceptions.PERMISSION_EXCEPTION()
+        return crud_utils.update_lich(db, lich_model, lich)
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
     

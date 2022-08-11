@@ -13,7 +13,7 @@ import AddEvent from '../../popup/AddEvent/AddEvent';
 import { ToastContainer} from 'react-toastify';
 import * as backend_config from '../../../config/backend'
 import { useUserInfo } from "../../../context/TokenContext";
-import Event from './Event';
+import EditEventPopup from './EditEventPopup'
 
 const locales = {
     "en-US": require("date-fns/locale/en-US")
@@ -53,6 +53,9 @@ function DMSCalendar(props) {
     const [newEvent, setNewEvent] = useState({title: "", start: "", end: ""})
     const [allEvents, setAllEvents] = useState([]);
     const [addButtonPopup, setAddButtonPopup] = useState(false);
+    // const [mark, setMark] = useState(null)
+    const [markedEvent, setMarkedEvent] = useState(null);
+    const [openEditPopup, setOpenEditPopUp] = useState(false);
 
     function handleAddEvent() {
         setAllEvents([...allEvents, newEvent])
@@ -62,6 +65,7 @@ function DMSCalendar(props) {
         backend_config.makeRequest("GET", backend_config.LICH_GET_LIST_BY_USER_ID.replace("{user_id}", user.id), token)
           .then((data) => data.json())
           .then((data) => {
+            // console.log(data)
             setAllEvents(data)
         })
     }
@@ -102,7 +106,8 @@ function DMSCalendar(props) {
                 endAccessor="end_time"
                 selectable
                 tooltipAccessor={null}
-                components={{ event: Event}}
+                onSelectEvent={(event) => {setMarkedEvent(event); setOpenEditPopUp(true)}}
+                // components={{ event: Event}}
                 style={{
                     position: 'inherit', 
                 }}
@@ -110,6 +115,13 @@ function DMSCalendar(props) {
             <AddEvent trigger={addButtonPopup} setTrigger={setAddButtonPopup}
                 token={token} user_id={user.id} refreshFunc={refreshFunc}>
             </AddEvent>
+            <EditEventPopup 
+                trigger={openEditPopup} 
+                setTrigger={setOpenEditPopUp}
+                eventUser={markedEvent}
+                token={token}
+                refreshFunc={refreshFunc}
+            ></EditEventPopup>
             <ToastContainer className="event-notify"/>
         </div>
     );

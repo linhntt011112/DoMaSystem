@@ -3,11 +3,11 @@ import { Close } from '@material-ui/icons';
 import "./editCongVanDi.css";
 import {Box, FormControl, MenuItem, Select} from "@mui/material";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState, convertToRaw, ContentState } from "draft-js";
 import Button from '@material-ui/core/Button';
 import * as backend_config from "../../../config/backend"
 import draftToHtml from 'draftjs-to-html';
-import { stateFromHTML } from 'draft-js-import-html'
+import htmlToDraft from 'html-to-draftjs';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -47,8 +47,9 @@ export default function EditCongVanDi(props) {
     const [file_dinh_kem, setFileDinhKem] = React.useState(null);
     // console.log(cong_van_versionData.noi_dung);
 
+    const { contentBlocks, entityMap } = htmlToDraft(cong_van_versionData.noi_dung)
     const [editorState, setEditorState] = React.useState(
-        () => EditorState.createWithContent(stateFromHTML(cong_van_versionData.noi_dung)),
+        () => EditorState.createWithContent(ContentState.createFromBlockArray(contentBlocks, entityMap)),
       );
 
     const handleChangeNoiNhan = (event) => {
