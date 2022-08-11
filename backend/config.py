@@ -18,13 +18,12 @@ db_config = DBConfig()
 
 
 class FrontEndConfig:
-    URL = "http://localhost:3008"
+    URL = "https://domasy.site"
     if "DMS_FRONT_END_URL" in os.environ:
         URL = os.environ["DMS_FRONT_END_URL"]
 
     possible_urls = [
-        "http://localhost:3008",
-        "localhost:3008"
+        "https://domasy.site",
     ]
 
 frontend_config = FrontEndConfig()
