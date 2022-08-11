@@ -64,7 +64,7 @@ export const CONG_VAN_LUU_TRU_PUT_UPDATE = CONG_VAN_LUU_TRU_PREFIX + '/{id}'
 
 export const UTILS_API_PREFIX = BACKEND_URL + "/utils"
 export const LICH_GET_LIST_BY_USER_ID = UTILS_API_PREFIX + "/lich/?user_id={user_id}"
-export const LICH_POST_CREATE = UTILS_API_PREFIX + "/lich/create"
+export const LICH_POST_CREATE = UTILS_API_PREFIX + "/lich"
 export const LICH_DELETE = UTILS_API_PREFIX + "/lich/{id}/delete"
 
 export const STATIC_TABLE_PREFIX = BACKEND_URL + "/static_table"

@@ -1,22 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './EditEventPopup.css';
 import { Close } from "@material-ui/icons";
 
 export default function EditEventPopup (props) {
-    const {eventUser, token, refreshFunc } = props;
-    const [name, setName] = useState(eventUser?.name);
-    const [start, setStart] = useState(eventUser?.start_time);
-    const [end, setEnd] = useState(eventUser?.start_time);
+    const {eventUser, token, refreshFunc} = props;
+    const [eventName, setEventName] = useState(eventUser?.name);
+    const [start_time, setStartTime] = useState(eventUser?.start_time);
+    const [end_time, setEndTime] = useState(eventUser?.end_time);
 
     // let ngay_bat_dau_month = eventUser?.slotStart.getMonth() + 1,
     // ngay_bat_dau = eventUser?.slotStart.getFullYear() + '-' + (ngay_bat_dau_month < 10 ? '0' + ngay_bat_dau_month : ngay_bat_dau_month) + '-' + (eventUser?.slotStart.getDate() < 10 ? '0' + eventUser?.slotStart.getDate() : eventUser?.slotStart.getDate()),
     // ngay_ket_thuc_month = eventUser?.slotEnd.getMonth() + 1,
     // ngay_ket_thuc = eventUser?.slotEnd.getFullYear() + '-' + (ngay_ket_thuc_month < 10 ? '0' + ngay_ket_thuc_month : ngay_ket_thuc_month) + '-' + (eventUser?.slotEnd.getDate() < 10 ? '0' + eventUser?.slotEnd.getDate() : eventUser?.slotEnd.getDate());
 
-  const handleSubmit = (e) => {
+  const handleEdit = (e) => {
     e.preventDefault();
-    // updateCongVan();
-    // props.setTrigger(false);
+    console.log(eventUser)
   }
   
   const handleClose = (e) => {
@@ -25,9 +24,15 @@ export default function EditEventPopup (props) {
     // setEditorState(() => EditorState.createEmpty())
   }
 
-  return (props.trigger) ? (
+  useEffect(() => {
+    setEventName(eventUser?.name)
+    setStartTime(eventUser?.start_time)
+    setEndTime(eventUser?.end_time)
+  }, [eventUser])
+
+  return (props.trigger && eventUser) ? (
     <div className="popup-main">
-      <form className="edit-event-popup-inner" onSubmit={handleSubmit}>
+      <form className="edit-event-popup-inner" onSubmit={handleEdit}>
           <Close className="close-btn" onClick={() => props.setTrigger(false)}/>
           <div className="edit-event">
               <h5 className="edit-event-title">Chỉnh sửa sự kiện</h5>
@@ -41,8 +46,9 @@ export default function EditEventPopup (props) {
                           type="text"
                           className='edit-event-input'
                           required
-                          onChange={(e) => setName(e.target.value)}
-                          defaultValue={eventUser?.title}
+                          onChange={(e) => setEventName(e.target.value)}
+                          defaultValue={eventName}
+                          value={eventName}
                       />
                   </div>
                   <div className="edit-event-item">
@@ -62,8 +68,9 @@ export default function EditEventPopup (props) {
                               paddingLeft: '10.5px'
                           }}
                           required
-                          onChange={(e) => setStart(e.target.value)}
-                          defaultValue={eventUser?.start_time}
+                          onChange={(e) => setStartTime(e.target.value)}
+                          defaultValue={start_time}
+                          value={start_time}
                       />
                   </div>
                   <div className="edit-event-item">
@@ -83,8 +90,9 @@ export default function EditEventPopup (props) {
                               paddingLeft: '10.5px'
                           }}
                           required
-                          onChange={(e) => setEnd(e.target.value)}
-                          defaultValue={eventUser?.start_time}
+                          onChange={(e) => setEndTime(e.target.value)}
+                          defaultValue={end_time}
+                            value={end_time}
                       />
                   </div>
               </div>

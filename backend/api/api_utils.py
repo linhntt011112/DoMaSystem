@@ -36,7 +36,7 @@ async def get_list_lich_by_user_id(user_id: int,
 
 
 
-@router.post('/create')
+@router.post('/')
 async def create_lich(
     lich_model: utils_schemas.LichCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
