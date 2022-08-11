@@ -26,7 +26,6 @@ export default function AddEvent(props) {
             start_time: start,
             end_time: end,
         })
-        console.log(body);
 
         backend_config.makeRequest("POST", 
             backend_config.LICH_POST_CREATE, 

@@ -29,3 +29,10 @@ class LichCreate(BaseModel):
     start_time: Union[datetime.datetime, datetime.date]
     end_time: Union[datetime.datetime, datetime.date]
     
+
+class LichUpdate(BaseModel):
+    name: str
+    
+    start_time: Union[datetime.datetime, datetime.date] = None
+    end_time: Union[datetime.datetime, datetime.date] = None
+    
