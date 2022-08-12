@@ -55,4 +55,3 @@ async def get_list_read_notifications(current_user: db_models.NguoiDung = Depend
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
     
-    
