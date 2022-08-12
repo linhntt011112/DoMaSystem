@@ -90,7 +90,7 @@ def decode_token_f(token: str):
     id = int(payload.get("id"))
     if username is None or id is None:
         return None
-    token_data = TokenData(id=id, username=username)
+    token_data = TokenData(id=id, username=username).__dict__
     return token_data
 
 
@@ -118,7 +118,7 @@ async def get_current_user(token_data=Depends(decode_token), db=Depends(get_db))
         headers={"WWW-Authenticate": "Bearer"},
     )
     
-    user = crud_user.get_user(db, ten_tai_khoan=token_data.username)
+    user = crud_user.get_user(db, ten_tai_khoan=token_data["username"])
     if user is None:
         raise credentials_exception
     # logger.debug(user)
