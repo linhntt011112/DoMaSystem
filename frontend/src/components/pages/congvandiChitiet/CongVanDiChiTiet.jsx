@@ -27,8 +27,17 @@ export default function CongVanDiChiTiet(props) {
 
     const refreshFunc = () => {
         backend_config.makeRequest("GET", backend_config.CONG_VAN_GET_BY_ID.replace('{id}', cong_vanId), token)
-            .then((data) => data.json())
-            .then((data) => setCong_van_versionData(data.cong_van_current_version))
+            .then((response) => {
+                if (response.ok){
+                    response.json().then((response_json) => {
+                        // addPhongBanSuccessNotify(response_json);
+                        setCong_van_versionData(response_json)
+                    })
+                }
+                else {
+                    history.push("/page-not-found")
+                }
+            })
     }
 
 

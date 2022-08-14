@@ -58,7 +58,7 @@ export default function CongVanList(props) {
 
     const columns = [
         {field: 'id', headerName: 'Số công văn', width: 115},
-        {field: 'ten_cong_van', headerName: 'Tên công văn', flex: 1,
+        {field: 'ten_cong_van', headerName: 'Tên công văn', flex: 1.5,
             // valueGetter: (params) => {
             //     return params.row.cong_van_di_current_version.ten_cong_van
             // }
@@ -82,7 +82,7 @@ export default function CongVanList(props) {
         {
             field: 'phong_ban_phat_hanh',
             headerName: 'Bộ phận phát hành',
-            width: 200,
+            width: 150,
             // valueGetter: (params) => {
             //     return params.row.cong_van_di_current_version.phong_ban_phat_hanh?.name
             // }
@@ -90,7 +90,7 @@ export default function CongVanList(props) {
         {
             field: 'create_at',
             headerName: 'Ngày tạo',
-            width: 200,
+            width: 150,
             valueGetter: (params) => {
                 return params.row.create_at.split('T')[0];
             }
@@ -106,7 +106,7 @@ export default function CongVanList(props) {
         {
             field:"action",
             headerName: "Action",
-            width: 300,
+            width: 120,
             renderCell: (params)=>{
                 return(
                     <>
@@ -184,13 +184,13 @@ export default function CongVanList(props) {
                         Thêm mới
                     </Button>
                 </div>
-                <div style={{ height: 'calc(90vh - 200px)' }}>
+                <div style={{ height: 'calc(90vh - 110px)' }}>
                     <DataGrid
                         getRowId={(r) => r.id}
                         rows={tableData}
                         disableSelectionOnClick
                         columns={columns}
-                        pageSize={6}
+                        pageSize={8}
                         rowsPerPageOptions={[5]}
                         checkboxSelection
                     />

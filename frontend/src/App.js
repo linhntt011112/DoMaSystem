@@ -31,6 +31,7 @@ import { useToken } from './context/TokenContext';
 import Topbar from './components/topbar/Topbar';
 import Sidebar from './components/sidebar/Sidebar';
 import './routes/admin/AdminRoute.css'
+import PageNotFound from './components/pages/404Page/404Page';
 
 const App = () => {
 
@@ -89,6 +90,7 @@ const App = () => {
               <UserRoute exact path="/calendar" component={DMSCalendar} user={user} token={token} setToken={setToken} userPermission={userPermission}/>
               <UserRoute exact path="/my-profile" component={MyProfile} user={user} token={token} setToken={setToken} userPermission={userPermission}/>
               <UserRoute exact path="/change-password" component={ChangePassword} user={user} token={token} setToken={setToken} userPermission={userPermission}/>
+              <Route path='*' component={PageNotFound}/>
             </Switch>
           {/* </div> */}
         </BrowserRouter>        

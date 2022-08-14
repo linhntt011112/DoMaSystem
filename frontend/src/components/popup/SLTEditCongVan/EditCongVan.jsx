@@ -112,7 +112,7 @@ export default function EditCongVan(props) {
             loai_cong_van: loai_cong_van,
             so_luong_van_ban: so_luong_van_ban,
             ly_do: ly_do,
-            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', '. '),
+            noi_dung: draftToHtml(convertToRaw(editorState.getCurrentContent())).replace('\n', ""),
         }
         // console.log(body);
         let new_body = {}
@@ -261,7 +261,7 @@ export default function EditCongVan(props) {
                                     onChange={(e) => setNgayKy(e.target.value)}
                                     //required
                                     style={{
-                                        width: '244px',
+                                        width: '252px',
                                         fontSize: '15px',
                                         paddingLeft: '10.5px'
                                     }}
@@ -309,7 +309,7 @@ export default function EditCongVan(props) {
                                     // required
                                 />
                             </div>
-                            <div className="cong-van-di-update-item">
+                            <div className="cong-van-di-update-item" style={{display: 'none'}}>
                                 <label>
                                     Số lượng văn bản
                                     {/* <span className='text-danger' style={{color: 'red'}}> *</span> */}
@@ -336,7 +336,7 @@ export default function EditCongVan(props) {
                                     onChange={(e) => setNgayTao(e.target.value)}
                                     //required
                                     style={{
-                                        width: '244px',
+                                        width: '252px',
                                         fontSize: '15px',
                                         paddingLeft: '10.5px'
                                     }}

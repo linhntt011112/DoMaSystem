@@ -160,7 +160,7 @@ export default function SLTcongVanChiTiet(props) {
                         </div> */}
                         <div style={{display:'flex'}}>
                             <div className="column2Title">Tình trạng xử lý:</div>
-                            <div className="column2Info">{cong_van_luu_truData.tinh_trang_xu_ly}</div>
+                            <div className="column2Info">Đã xử lý</div>
                         </div>
                         <div style={{display:'flex'}}>
                             <div className="column2Title">Người tạo:</div>

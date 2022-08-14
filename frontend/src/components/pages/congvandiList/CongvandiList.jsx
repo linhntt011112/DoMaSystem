@@ -71,7 +71,7 @@ export default function CongvandiList(props) {
 
     const columns = [
         {field: 'id', headerName: 'Số công văn', width: 115},
-        {field: 'ten_cong_van', headerName: 'Tên công văn', flex: 1,
+        {field: 'ten_cong_van', headerName: 'Tên công văn', flex: 1.5,
             valueGetter: (params) => {
                 return params.row.cong_van_current_version.ten_cong_van
             }},
@@ -102,7 +102,7 @@ export default function CongvandiList(props) {
         {
             field: 'create_at',
             headerName: 'Ngày tạo',
-            width: 200,
+            width: 150,
             valueGetter: (params) => {
                 return params.row.create_at.split('T')[0];
             }
@@ -110,7 +110,7 @@ export default function CongvandiList(props) {
         {
             field: 'ly_do',
             headerName: 'Lý do',
-            flex: 1,
+            flex: 1.5,
             valueGetter: (params) => {
                 return params.row.cong_van_current_version.ly_do
             }
@@ -118,7 +118,7 @@ export default function CongvandiList(props) {
         {
             field:"action",
             headerName: "Action",
-            width: 150,
+            width: 120,
             renderCell: (params)=>{
                 return(
                     <>
