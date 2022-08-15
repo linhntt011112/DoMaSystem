@@ -53,6 +53,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         expires_delta=access_token_expires
     )
     # logger.info(f'username: {user.ten_tai_khoan} ; token: {access_token}')
+    logger.debug(f"{access_token}")
     logger.info(f'username: {user.ten_tai_khoan}')
     return {"access_token": access_token, "token_type": "bearer"}
 

@@ -14,13 +14,16 @@ import Notifications from "./NotificationMenu";
 
 export default function Topbar({user, token}) {
     const [notifications, setNotifications] = useState([]);
+    let notifications_stateless = [];
+
+
     const history = useHistory();
-    const [showNotificationList, setShowNotificationList] = useState(false);
+    // const [showNotificationList, setShowNotificationList] = useState(false);
     const notificationEvents = ["create_cong_van", "update_cong_van", "duyet_cong_van", "xu_ly_cong_van", "add_trao_doi_cong_van"]
 
     const convert_data = (data) =>{
         const time = new Date(data.create_on)
-        const result= { 
+        const result = { 
             id: data.id,
             image: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" ,
             message: data["template"].replace("{{actor_id}}", data["{{actor_id}}"]). replace("{{entity_id}}", data["{{entity_id}}"]),
@@ -35,8 +38,9 @@ export default function Topbar({user, token}) {
         backend_config.makeRequest("GET", backend_config.NOTIFICATION_GET_LIST_UNREAD, token)
           .then((data) => data.json())
           .then((data) => {
-
+            
             setNotifications(data.map(convert_data))
+            notifications_stateless = data.map(convert_data)
         })
     }
 
@@ -45,6 +49,7 @@ export default function Topbar({user, token}) {
           .then((data) => data.json())
           .then((data) => {
             setNotifications([]);
+            notifications_stateless = []
         })
     }
 
@@ -55,6 +60,7 @@ export default function Topbar({user, token}) {
           .then((_) => {
             // console.log(_)
             setNotifications(notifications.filter((item) => item.id !== data.id));
+            notifications_stateless = notifications_stateless.filter((item) => item.id !== data.id)
             history.push(data.detailPage);
             
         })
@@ -74,14 +80,23 @@ export default function Topbar({user, token}) {
 
         channel.bind_global((eventName, data) => {
             // console.log(eventName, data)
-            // console.log(notifications.concat([data]))
-            if (data?.id) setNotifications([convert_data(data), ...notifications]);
+            let converted = convert_data(data)
+            // console.log(converted)
+            console.log(notifications_stateless)
+            notifications_stateless = [converted, ...notifications_stateless]
+            setNotifications([...notifications_stateless]);
+            // if (converted["id"]) {
+            //     notifications_stateless = [converted, ...notifications_stateless]
+            //     setNotifications(notifications_stateless);
+            //     // setNotifications(notifications.concat(convert_data(data)));
+            // }
         });
 
         return () => {
             channel.unbind();
         };
     }, []);
+
 
     return (
         <div className='topbar'>  
@@ -106,6 +121,7 @@ export default function Topbar({user, token}) {
                         //     console.log(data);
                         // }}
                     /> */}
+                    {notifications &&
                         <Notifications
                             data={notifications}
                             cardOption={onclick_notification}
@@ -114,8 +130,10 @@ export default function Topbar({user, token}) {
                             title: "Thông báo",
                             option: { text: "Xem tất cả", onClick: read_all_notifications }
                             }}
-                            
                         />
+                    }
+                        
+                        {/* {notifications.length} */}
                             
 
                     {/* <li className='topbarIconContainer' style={{display: 'block'}}>
@@ -146,7 +164,7 @@ export default function Topbar({user, token}) {
                 </ul>
             </div>
 
-            {notifications.length > 0 && <NotificationList all_data={notifications} trigger={showNotificationList}></NotificationList>}
+            {/* {notifications.length > 0 && <NotificationList all_data={notifications} trigger={showNotificationList}></NotificationList>} */}
         </div>
     )
 }

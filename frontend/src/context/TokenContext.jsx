@@ -82,7 +82,6 @@ export function useUserInfo() {
       // console.log(checkToken(decodeToken), decodedToken);
     } catch(e) {}
     
-    
     return decodedToken;
   };
 

@@ -53,6 +53,7 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
+    id: int = None
     email: Optional[str] = None
     username: Optional[str] = None
 
@@ -82,6 +83,18 @@ def authenticate_user(db, username: str=None, password: str=None):
 #         return False
 
 
+def decode_token_f(token: str):
+    payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    username: str = payload.get("sub")
+    exp: int = int(payload.get("exp"))
+    id = int(payload.get("id"))
+    if username is None or id is None:
+        return None
+    token_data = TokenData(id=id, username=username).__dict__
+    return token_data
+
+
+
 @caching.cache(namespace='user', key_builder=caching.user_token_key_builder, expire=600)
 async def decode_token(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
@@ -90,26 +103,22 @@ async def decode_token(token: str = Depends(oauth2_scheme)):
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
-        # logger.debug(token)
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        exp: int = int(payload.get("exp"))
-        if username is None:
+        token_data = decode_token_f(token)
+        if token_data is None:
             raise credentials_exception
-        token_data = TokenData(username=username)
-        return token_data.username
+        return token_data
     except JWTError:
         raise credentials_exception
 
 
-async def get_current_user(username=Depends(decode_token), db=Depends(get_db)):
+async def get_current_user(token_data=Depends(decode_token), db=Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
     
-    user = crud_user.get_user(db, ten_tai_khoan=username)
+    user = crud_user.get_user(db, ten_tai_khoan=token_data["username"])
     if user is None:
         raise credentials_exception
     # logger.debug(user)

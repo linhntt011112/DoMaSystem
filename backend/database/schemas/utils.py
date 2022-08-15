@@ -31,7 +31,7 @@ class LichCreate(BaseModel):
     
 
 class LichUpdate(BaseModel):
-    name: str
+    name: str = None
     
     start_time: Union[datetime.datetime, datetime.date] = None
     end_time: Union[datetime.datetime, datetime.date] = None

@@ -1,7 +1,5 @@
 import asyncio
-
 import async_timeout
-
 import aioredis
 
 STOPWORD = "STOP"

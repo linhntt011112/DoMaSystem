@@ -1,4 +1,6 @@
 
+'use strict';
+
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var React = require('react');
@@ -1727,9 +1729,9 @@ var Notifications = function (_Component) {
       var dataLength = data.length;
 
       var cardList = Array.isArray(data) && (CustomComponent ? data.map(function (item) {
-        return React__default.createElement(CustomComponent, _extends$1({ key: item.message }, _this4.props, { data: item }));
+        return React__default.createElement(CustomComponent, _extends$1({ key: item.id }, _this4.props, { data: item }));
       }) : data.map(function (item) {
-        return React__default.createElement(Card, _extends$1({ key: item.message }, _this4.props, { data: item }));
+        return React__default.createElement(Card, _extends$1({ key: item.id }, _this4.props, { data: item }));
       }));
 
       return React__default.createElement(
