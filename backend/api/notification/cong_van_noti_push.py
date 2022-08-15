@@ -5,7 +5,7 @@ from loguru import logger
 from exceptions import api_exceptions
 from database.crud import notification as crud_notification
 
-from .notification_push import pusher_client
+from .notification_push import pusher_client, redis_send_data
 from .crud import error_wrap
 
 
@@ -39,7 +39,8 @@ def cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung,
                 # logger.info(f"{str(notifier_id), event, msg}")
                 msg["id"] = notification.id
                 
-                pusher_client.trigger(str(notifier_id), event, json.dumps(msg, ensure_ascii=False, default=str))
+                # pusher_client.trigger(str(notifier_id), event, json.dumps(msg, ensure_ascii=False, default=str))
+                redis_send_data(str(notifier_id), json.dumps(msg, ensure_ascii=False, default=str))
                 notified.add(notifier_id)
     
     return notification_object

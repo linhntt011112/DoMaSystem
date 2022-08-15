@@ -10,5 +10,13 @@ pusher_client = pusher.Pusher(
 
 # pusher_client.trigger('my-channel', 'my-event', {'message': 'hello world'})
     
-    
-    
+  
+from config import server_config
+import aioredis
+
+async def redis_send_data(channel, message):
+    redis = aioredis.from_url(server_config.pubsub.redis_url)
+    await redis.publish(
+            channel=channel,
+            message=message
+        )
