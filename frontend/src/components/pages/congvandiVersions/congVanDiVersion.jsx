@@ -98,7 +98,7 @@ export default function CongVanDiVersion(props) {
                         <div className="columnChildren1">
                             <div style={{display: 'flex'}}>
                                 <div className="columnChildren1Title">Số công văn:</div>
-                                <div className="columnChildren1Info">{cong_van_versionData.id}</div>
+                                <div className="columnChildren1Info">{cong_vanId}</div>
                             </div>
                             <div style={{display: 'flex'}}>
                                 <div className="columnChildren1Title">Tên công văn:</div>

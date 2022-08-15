@@ -17,6 +17,7 @@ export default function EditCongVanDi(props) {
     today_date = today.getFullYear() + '-' + (today_month < 10 ? '0' + today_month : today_month) + '-' + (today.getDate() < 10 ? '0' + today.getDate() : today.getDate());
 
     const {token, cong_van_versionData, refreshFunc} = props;
+    // console.log(cong_van_versionData)
     // console.log(token)
     const [loai_cong_van_table, setLoaiCongVanTable] = React.useState([]);
     const [phong_ban_table, setPhongBanTable] = React.useState([]);

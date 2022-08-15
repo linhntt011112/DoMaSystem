@@ -31,7 +31,8 @@ export default function CongVanDiChiTiet(props) {
                 if (response.ok){
                     response.json().then((response_json) => {
                         // addPhongBanSuccessNotify(response_json);
-                        setCong_van_versionData(response_json)
+                        // console.log(response_json)
+                        setCong_van_versionData(response_json.cong_van_current_version)
                     })
                 }
                 else {
@@ -210,7 +211,7 @@ export default function CongVanDiChiTiet(props) {
                         <h5>Tệp đính kèm: </h5>
                         {cong_van_versionData !== "" && cong_van_versionData.id_tep_dinh_kem !== null &&
                         <div style={{display: 'flex'}}>
-                            <h5 style={{marginLeft: "5px"}}>{cong_van_versionData.tep_dinh_kem.name}</h5>
+                            <h5 style={{marginLeft: "5px"}}>{cong_van_versionData.tep_dinh_kem?.name}</h5>
                             <FileDownloadIcon style={{cursor: 'pointer', "background-color": "#086cae", color: "white", marginLeft: "10px"}}
                             onClick={() => downloadTep_dinh_kem(backend_config.CONG_VAN_VERSION_DOWNLOAD_TEP_DINH_KEM.replace(
                                 "{cong_van_version_id}", cong_van_versionData.id))}>

@@ -28,8 +28,9 @@ export default function EditPhongBan(props) {
         .then((response) => {
             if (response.ok){
                 response.json().then((response_json) => {
-                    props.setTrigger(false);
                     refreshFunc();
+                    // window.location.reload()
+                    props.setTrigger(false);
                     editPhongBanSuccessNotify();
                 })
             }

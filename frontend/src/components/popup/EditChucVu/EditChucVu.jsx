@@ -4,7 +4,7 @@ import { Close } from '@material-ui/icons';
 import * as backend_config from '../../../config/backend';
 import { toast } from 'react-toastify';
 
-export default function EditPhongBan(props) {
+export default function EditChucVu(props) {
     const {chuc_vu, token, refreshFunc } = props;
     const [ten_chuc_vu, setTenChucVu] = React.useState(chuc_vu?.name);
 
@@ -28,8 +28,8 @@ export default function EditPhongBan(props) {
         .then((response) => {
             if (response.ok){
                 response.json().then((response_json) => {
-                    props.setTrigger(false);
                     refreshFunc();
+                    props.setTrigger(false);
                     editChucVuSuccessNotify();
                 })
             }

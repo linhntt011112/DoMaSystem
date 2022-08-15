@@ -270,7 +270,7 @@ export default function CongvandiList(props) {
                         rows={tableData}
                         disableSelectionOnClick
                         columns={columns}
-                        pageSize={8}
+                        pageSize={7}
                         rowsPerPageOptions={[5]}
                         checkboxSelection
                     />

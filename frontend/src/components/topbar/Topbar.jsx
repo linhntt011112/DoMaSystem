@@ -68,17 +68,49 @@ export default function Topbar({user, token}) {
         //     history.push(data.detailPage);
     }
 
+    useEffect(() => {
+        getUnreadNotifications()
+
+        const pusher = new Pusher("0ec381f4de9bc7aa5e7b", {
+            cluster: 'ap1'
+        });
+        
+        // console.log(user.id)
+        var channel = pusher.subscribe(user.id.toString());
+
+        channel.bind_global((eventName, data) => {
+            // console.log(eventName, data)
+            if (data?.id){
+                let converted = convert_data(data)
+                // console.log(converted)
+                console.log(notifications_stateless)
+                notifications_stateless = [converted, ...notifications_stateless]
+                setNotifications([...notifications_stateless]);
+            }
+            // if (converted["id"]) {
+            //     notifications_stateless = [converted, ...notifications_stateless]
+            //     setNotifications(notifications_stateless);
+            //     // setNotifications(notifications.concat(convert_data(data)));
+            // }
+        });
+
+        return () => {
+            channel.unbind();
+        };
+    }, []);
+
+
     // useEffect(() => {
     //     getUnreadNotifications()
 
-    //     const pusher = new Pusher("0ec381f4de9bc7aa5e7b", {
-    //         cluster: 'ap1'
-    //     });
-        
-    //     // console.log(user.id)
-    //     var channel = pusher.subscribe(user.id.toString());
+    //     const ws = new WebSocket(backend_config.BACKEND_WS_TEST.replace("{token}", token));
+    //     // ws.onopen = (event) => {
+    //     //     ws.send(JSON.stringify(apiCall));
+    //     // };
+    //     ws.onmessage = function (event) {
+    //         // console.log(event)
+    //         const data = JSON.parse(event.data);
 
-    //     channel.bind_global((eventName, data) => {
     //         // console.log(eventName, data)
     //         let converted = convert_data(data)
     //         // console.log(converted)
@@ -90,40 +122,10 @@ export default function Topbar({user, token}) {
     //         //     setNotifications(notifications_stateless);
     //         //     // setNotifications(notifications.concat(convert_data(data)));
     //         // }
-    //     });
-
-    //     return () => {
-    //         channel.unbind();
     //     };
+    //     //clean up function
+    //     return () => ws.close();
     // }, []);
-
-
-    useEffect(() => {
-        getUnreadNotifications()
-
-        const ws = new WebSocket(backend_config.BACKEND_WS_TEST.replace("{token}", token));
-        // ws.onopen = (event) => {
-        //     ws.send(JSON.stringify(apiCall));
-        // };
-        ws.onmessage = function (event) {
-            // console.log(event)
-            const data = JSON.parse(event.data);
-
-            // console.log(eventName, data)
-            let converted = convert_data(data)
-            // console.log(converted)
-            console.log(notifications_stateless)
-            notifications_stateless = [converted, ...notifications_stateless]
-            setNotifications([...notifications_stateless]);
-            // if (converted["id"]) {
-            //     notifications_stateless = [converted, ...notifications_stateless]
-            //     setNotifications(notifications_stateless);
-            //     // setNotifications(notifications.concat(convert_data(data)));
-            // }
-        };
-        //clean up function
-        return () => ws.close();
-    }, []);
 
 
     return (

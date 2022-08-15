@@ -29,22 +29,30 @@ export default function AddChucVu(props) {
         .then((response) => {
             if (response.ok){
                 response.json().then((response_json) => {
+                    refreshFunc();
                     addChucVuSuccessNotify(response_json);
                     props.setTrigger(false);
-                    refreshFunc();
                     setTenChucVu(null);
                 })
             }
             else {
                 response.text().then((text) => {
                     let error = JSON.parse(text).detail;
-                    switch (error) {
-                        // case "Duplicate ten_tai_khoan!": 
-                        //     addUserNotifyDuplicateUsername();
-                        //     return;
-                        default:
-                            alert(text);
-                            return;
+                    if (error.includes("Duplicate")) {
+                        toast.error(<div>Đã có chức vụ này!</div>, {
+                            position: toast.POSITION.TOP_RIGHT,
+                            autoClose: false
+                        })
+                    }
+                    else{
+                        switch (error) {
+                            // case "Duplicate ten_tai_khoan!": 
+                            //     addUserNotifyDuplicateUsername();
+                            //     return;
+                            default:
+                                alert(text);
+                                return;
+                        }
                     }
                 })
             }
