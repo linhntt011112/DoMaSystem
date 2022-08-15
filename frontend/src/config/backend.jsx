@@ -85,6 +85,10 @@ export const NOTIFICATION_GET_READ_ALL = NOTIFICATION_PREFIX + "/read-all"
 export const NOTIFICATION_GET_READ_ID = NOTIFICATION_PREFIX + "/{id}/read"
 
 
+export const BACKEND_WS = "ws://localhost:3009/ws/"
+export const BACKEND_WS_TEST = BACKEND_WS + "?token={token}"
+
+
 export const makeRequest = async (method, url, token, body=null, contentType="application/json", delete_contentType=false) => {
   let requestOptions = {
     method: method,
