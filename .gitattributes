@@ -1,0 +1,2 @@
+backend/database/start_db_docker-compose.yml merge=ours
+backend/local_config.json merge=ours
