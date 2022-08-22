@@ -11,6 +11,6 @@ backend/database/start_db_docker-compose.yml
 storage/
 backend/database/docker-db/
 
-# github_token.txt
+github_token.txt
 
 frontend/node_venv/
