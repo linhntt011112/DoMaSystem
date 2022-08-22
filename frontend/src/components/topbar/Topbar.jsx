@@ -26,7 +26,7 @@ export default function Topbar({user, token}) {
         const result = { 
             id: data.id,
             image: "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" ,
-            message: data["template"].replace("{{actor_id}}", data["{{actor_id}}"]). replace("{{entity_id}}", data["{{entity_id}}"]),
+            message: data["template"]?.replace("{{actor_id}}", data["{{actor_id}}"]). replace("{{entity_id}}", data["{{entity_id}}"]),
             // detailPage: data.entity_type === "cong_van" ? `/cong-van-di/${data["{{entity_id}}"]}`: null,
             detailPage: data.entity_type === "cong_van" ? `/cong-van-di/${data["{{entity_id}}"]}`: null,
             receivedTime: time.toLocaleString("vi-VN")
@@ -126,6 +126,34 @@ export default function Topbar({user, token}) {
     //     //clean up function
     //     return () => ws.close();
     // }, []);
+
+
+    useEffect(() => {
+        getUnreadNotifications()
+
+        const ws = new WebSocket(backend_config.BACKEND_WS_TEST.replace("{token}", token));
+        // ws.onopen = (event) => {
+        //     ws.send(JSON.stringify(apiCall));
+        // };
+        ws.onmessage = function (event) {
+            // console.log(event)
+            const data = JSON.parse(event.data);
+
+            // console.log(eventName, data)
+            let converted = convert_data(data)
+            // console.log(converted)
+            console.log(converted)
+            notifications_stateless = [converted, ...notifications_stateless]
+            setNotifications([...notifications_stateless]);
+            // if (converted["id"]) {
+            //     notifications_stateless = [converted, ...notifications_stateless]
+            //     setNotifications(notifications_stateless);
+            //     // setNotifications(notifications.concat(convert_data(data)));
+            // }
+        };
+        //clean up function
+        return () => ws.close();
+    }, []);
 
 
     return (

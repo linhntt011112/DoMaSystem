@@ -30,7 +30,6 @@ export default function CongVanDiChiTiet(props) {
             .then((response) => {
                 if (response.ok){
                     response.json().then((response_json) => {
-                        // addPhongBanSuccessNotify(response_json);
                         // console.log(response_json)
                         setCong_van_versionData(response_json.cong_van_current_version)
                     })

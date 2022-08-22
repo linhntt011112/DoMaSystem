@@ -21,7 +21,7 @@ from .core import file_utils, user as user_core
 from exceptions import api_exceptions, db_exceptions
 
 
-router = APIRouter(prefix='/cong_van')
+router = APIRouter(prefix='/cong-van')
 
 
 def authorize_user_for_cong_van(user: db_models.NguoiDung, cong_van: db_models.CongVan):
@@ -75,94 +75,32 @@ async def create_location_and_save_tep_dinh_kem(data_file, db=Depends(get_db)):
 #         return api_exceptions.handle_simple_exception(e, logger)
 
 
+def category_to_query_params(category, user_id):
+    MAP_CV_CATEGORY = {
+        "cvdi": [-3, (db_models.CongVanVersion.id_nguoi_tao == user_id) | (db_models.CongVanVersion.id_nguoi_ky == user_id)],
+        "cvdi_da_hoan_tat": [3, (db_models.CongVanVersion.id_nguoi_tao == user_id) | (db_models.CongVanVersion.id_nguoi_ky == user_id)],
+        "cvden_da_hoan_tat": [3, (db_models.CongVanVersion.id_nguoi_xu_ly == user_id)],
+        "cho_duyet": [1, (db_models.CongVanVersion.id_nguoi_tao == user_id)],
+        "chua_duyet": [1, (db_models.CongVanVersion.id_nguoi_ky == user_id)],
+        "cho_xu_ly": [2, (db_models.CongVanVersion.id_nguoi_tao == user_id) | (db_models.CongVanVersion.id_nguoi_ky == user_id)],
+        "chua_xu_ly": [2, (db_models.CongVanVersion.id_nguoi_xu_ly == user_id) ],
+        "dang_theo_doi": [-3, (db_models.CongVanVersion.id_nguoi_theo_doi == user_id)]
+    }
+    if category not in  MAP_CV_CATEGORY:
+        category = "dang_theo_doi"
+    return MAP_CV_CATEGORY[category]
 
-@router.get('/cvdi')
-async def get_list_cong_van_di(limit: int=None, offset: int=None, order_by: str=None,
+
+@router.get('/')
+async def get_list_cong_van_di(category: str=None, limit: int=None, offset: int=None, order_by: str=None,
                         id_loai_cong_van: int = None, 
                         id_muc_do_uu_tien: int = None,
                         count: bool = False,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
-    """List ra tất cả các công văn đi chưa hoàn tất"""
     
     try:
-        condition = ((db_models.CongVanVersion.id_nguoi_tao == current_user.id) | (db_models.CongVanVersion.id_nguoi_ky == current_user.id) ) & (db_models.CongVanVersion.id_tinh_trang_xu_ly < 3)
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, None, id_muc_do_uu_tien, condition=condition, count=count)
-        if count:
-            return cong_van_s
-        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
-    except Exception as e:
-
-        return api_exceptions.handle_simple_exception(e, logger)
-    
-    
-
-@router.get('/cvden')
-async def get_list_cong_van_den_da_hoan_tat(limit: int=None, offset: int=None, order_by: str=None,
-                        id_loai_cong_van: int = None, 
-                        id_muc_do_uu_tien: int = None,
-                        count: bool = False,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
-    """ List ra tất cả các công văn đến chưa hoàn tất"""
-    
-    try:
-        condition = (db_models.CongVanVersion.id_nguoi_xu_ly == current_user.id) & (db_models.CongVanVersion.id_tinh_trang_xu_ly < 3) 
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, None, id_muc_do_uu_tien, condition=condition, count=count)
-        if count:
-            return cong_van_s
-        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
-    except Exception as e:
-
-        return api_exceptions.handle_simple_exception(e, logger)
-    
-
-
-@router.get('/cvdi/list/da_hoan_tat')
-async def get_list_cong_van_di_da_hoan_tat(limit: int=None, offset: int=None, order_by: str=None,
-                        id_loai_cong_van: int = None, 
-                        id_muc_do_uu_tien: int = None,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
-    """ List ra các công văn đi đã được xử lý xong (id_tinh_trang_xu_ly = 3)"""
-    
-    try:
-        id_tinh_trang_xu_ly = 3
-        condition = (db_models.CongVanVersion.id_nguoi_tao == current_user.id) | (db_models.CongVanVersion.id_nguoi_ky == current_user.id)        
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
-        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
-    except Exception as e:
-
-        return api_exceptions.handle_simple_exception(e, logger)
-    
-    
-
-@router.get('/cvden/list/da_hoan_tat')
-async def get_list_cong_van_den_da_hoan_tat(limit: int=None, offset: int=None, order_by: str=None,
-                        id_loai_cong_van: int = None, 
-                        id_muc_do_uu_tien: int = None,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
-    """ List ra các công văn đến đã xử lý xong (id_tinh_trang_xu_ly = 3)"""
-    
-    try:
-        id_tinh_trang_xu_ly = 3
-        condition = (db_models.CongVanVersion.id_nguoi_xu_ly == current_user.id)
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition)
-        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
-    except Exception as e:
-
-        return api_exceptions.handle_simple_exception(e, logger)
-
-
-
-@router.get('/list/cho_duyet')
-async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
-                        id_loai_cong_van: int = None, 
-                        id_muc_do_uu_tien: int = None,
-                        count: bool = False,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
-    """ List ra các công văn được tạo bởi current_user mà đang chờ duyệt (id_tinh_trang_xu_ly = 1)"""
-    
-    try:
-        id_tinh_trang_xu_ly = 1
-        condition = (db_models.CongVanVersion.id_nguoi_tao == current_user.id)
+        id_tinh_trang_xu_ly, condition = category_to_query_params(category, current_user.id)
+            
         cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition, count=count)
         if count:
             return cong_van_s
@@ -171,91 +109,6 @@ async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=Non
 
         return api_exceptions.handle_simple_exception(e, logger)
     
-    
-
-@router.get('/list/chua_duyet')
-async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
-                        id_loai_cong_van: int = None, 
-                        id_muc_do_uu_tien: int = None,
-                        count: bool = False,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
-    """ List ra các công văn đang chờ current_user duyệt (id_tinh_trang_xu_ly = 1)"""
-    
-    try:
-        id_tinh_trang_xu_ly = 1
-        condition = (db_models.CongVanVersion.id_nguoi_ky == current_user.id)
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition, count=count)
-        if count:
-            return cong_van_s
-        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
-    except Exception as e:
-
-        return api_exceptions.handle_simple_exception(e, logger)
-    
-    
-    
-@router.get('/list/cho_xu_ly')
-async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
-                        id_loai_cong_van: int = None, 
-                        id_muc_do_uu_tien: int = None,
-                        count: bool = False,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
-    """ List ra các công văn được tạo hoặc duyệt (ký) bởi current_user mà đang chờ xử lý (id_tinh_trang_xu_ly = 2)"""
-    
-    try:
-        id_tinh_trang_xu_ly = 2
-        condition = (db_models.CongVanVersion.id_nguoi_tao == current_user.id) | (db_models.CongVanVersion.id_nguoi_ky == current_user.id)
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition, count=count)
-        if count:
-            return cong_van_s
-        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
-    except Exception as e:
-
-        return api_exceptions.handle_simple_exception(e, logger)
-    
-    
-
-@router.get('/list/chua_xu_ly')
-async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
-                        id_loai_cong_van: int = None, 
-                        id_muc_do_uu_tien: int = None,
-                        count: bool = False,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
-    """ List ra các công văn đang chờ current_user xử lý (id_tinh_trang_xu_ly = 2)"""
-    
-    try:
-        id_tinh_trang_xu_ly = 2
-        condition = (db_models.CongVanVersion.id_nguoi_xu_ly == current_user.id) 
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition, count=count)
-        if count:
-            return cong_van_s
-        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
-    except Exception as e:
-
-        return api_exceptions.handle_simple_exception(e, logger)
-    
-    
-
-@router.get('/list/dang_theo_doi')
-async def get_list_cong_van(limit: int=None, offset: int=None, order_by: str=None,
-                        id_loai_cong_van: int = None, 
-                        id_muc_do_uu_tien: int = None,
-                        count: bool = False,
-    current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
-    """ List ra các công văn current_user đang theo dõi mà chưa hoàn tất (id_tinh_trang_xu_ly != 3)"""
-    
-    try:
-        id_tinh_trang_xu_ly = -3 # temporary
-        condition = (db_models.CongVanVersion.id_nguoi_theo_doi == current_user.id) 
-        cong_van_s = crud_cong_van.select_list_cong_van(db, limit, offset, order_by, id_loai_cong_van, id_tinh_trang_xu_ly, id_muc_do_uu_tien, condition=condition, count=count)
-        if count:
-            return cong_van_s
-        return [cong_van_schemas.CongVanCurrent.from_orm(cong_van) for cong_van in cong_van_s]
-    except Exception as e:
-
-        return api_exceptions.handle_simple_exception(e, logger)
-
-
 
 @router.get('/{id}')
 async def get_cong_van_by_id(id: int,
@@ -274,12 +127,11 @@ async def get_cong_van_by_id(id: int,
 
 
 
-@router.post('/create')
+@router.post('/')
 async def create_cong_van_di(
     cong_van_version: cong_van_schemas.CongVanVersionCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
 ):
-    """some"""
     # if current_user.phan_quyen != db_models.PhanQuyen.admin:
     #     raise exceptions.PERMISSION_EXCEPTION()
     # logger.info(cong_van_version.__dict__)
@@ -290,7 +142,7 @@ async def create_cong_van_di(
         new_cong_van = crud_cong_van.create_cong_van(db, cong_van_version)
         # logger.info(f"{new_cong_van.__dict__}")
         
-        cong_van_noti_push.create_cong_van_notify(db, new_cong_van, current_user)
+        await cong_van_noti_push.create_cong_van_notify(db, new_cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(new_cong_van)
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
@@ -316,7 +168,7 @@ async def create_cong_van_di(
     
     
 
-@router.post('/{cong_van_id}/update/tep_dinh_kem')
+@router.post('/{cong_van_id}/tep_dinh_kem')
 async def update_cong_van__tep_dinh_kem(
     cong_van_id: int,
     tep_dinh_kem_input: UploadFile = File(...),
@@ -348,7 +200,7 @@ async def update_cong_van__tep_dinh_kem(
     
     
     
-@router.put('/{cong_van_id}/update')
+@router.put('/{cong_van_id}')
 async def update_cong_van(
     cong_van_id: int,
     cong_van_version_pydantic: cong_van_schemas.CongVanVersionUpdateBT1,
@@ -366,7 +218,7 @@ async def update_cong_van(
         cong_van_version_pydantic.id_nguoi_cap_nhat = current_user.id
         cong_van = crud_cong_van.update_cong_van(db, cong_van, cong_van_version_pydantic)
         
-        cong_van_noti_push.update_cong_van_notify(db, cong_van, current_user)
+        await cong_van_noti_push.update_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
@@ -374,7 +226,7 @@ async def update_cong_van(
     
 
 
-@router.put('/{cong_van_id}/update/duyet')
+@router.put('/{cong_van_id}/duyet')
 async def update_cong_van(
     cong_van_id: int,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
@@ -392,7 +244,7 @@ async def update_cong_van(
         cong_van.update_at = datetime.now()
         cong_van = crud_cong_van.update_cong_van(db, cong_van)
         
-        cong_van_noti_push.duyet_cong_van_notify(db, cong_van, current_user)
+        await cong_van_noti_push.duyet_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
@@ -401,7 +253,7 @@ async def update_cong_van(
 
 
 
-@router.put('/{cong_van_id}/update/xu_ly')
+@router.put('/{cong_van_id}/xu_ly')
 async def update_cong_van(
     cong_van_id: int,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
@@ -420,7 +272,7 @@ async def update_cong_van(
         cong_van = crud_cong_van.update_cong_van(db, cong_van)
         crud_cong_van.create_cvlt_from_cong_van(db, cong_van)
         
-        cong_van_noti_push.xu_ly_cong_van_notify(db, cong_van, current_user)
+        await cong_van_noti_push.xu_ly_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
@@ -428,7 +280,7 @@ async def update_cong_van(
     
     
 
-@router.delete('/{id}/delete')
+@router.delete('/{id}')
 async def delete_cong_van(
     id: int,
     # cong_van: cong_van_schemas.CongVanCreate,
@@ -453,7 +305,7 @@ async def delete_cong_van(
     
 
 #################################################################### 
-@router.get("/{cong_van_id}/trao_doi/list")
+@router.get("/{cong_van_id}/trao-doi")
 async def get_list_cong_van_luu_tru(
     cong_van_id: int, limit: int=None, offset: int=None, order_by=None,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
@@ -465,7 +317,7 @@ async def get_list_cong_van_luu_tru(
         return api_exceptions.handle_simple_exception(e, logger)
     
 
-@router.post('/{cong_van_id}/trao_doi/create')
+@router.post('/{cong_van_id}/trao-doi')
 async def create_trao_doi(cong_van_id: int, trao_doi_pydantic: cong_van_schemas.TraoDoiCongVanCreate,
                           current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
                           ):
@@ -480,7 +332,7 @@ async def create_trao_doi(cong_van_id: int, trao_doi_pydantic: cong_van_schemas.
         trao_doi_pydantic.id_cong_van = cong_van_id
         trao_doi = crud_cong_van.create_trao_doi(db, cong_van, trao_doi=trao_doi_pydantic)
         
-        cong_van_noti_push.add_trao_doi_cong_van_notify(db, cong_van, current_user)
+        await cong_van_noti_push.add_trao_doi_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.TraoDoiCongVanFull.from_orm(trao_doi)
     except db_exceptions.PermissionException as e:
         raise api_exceptions.PERMISSION_EXCEPTION()
@@ -490,7 +342,7 @@ async def create_trao_doi(cong_van_id: int, trao_doi_pydantic: cong_van_schemas.
     
 #################################################################### 
 
-@router.get("/luu_tru/list")
+@router.get("/luu-tru")
 async def get_list_cong_van_luu_tru(limit: int=None, offset: int=None,
                         order_by=None,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
@@ -503,7 +355,7 @@ async def get_list_cong_van_luu_tru(limit: int=None, offset: int=None,
         return api_exceptions.handle_simple_exception(e, logger)
 
 
-@router.get('/luu_tru/{cong_van_luu_tru_id}')
+@router.get('/luu-tru/{cong_van_luu_tru_id}')
 async def get_cong_van_luu_tru_by_id(
     cong_van_luu_tru_id: int,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
@@ -521,7 +373,7 @@ async def get_cong_van_luu_tru_by_id(
 
 
 
-@router.post('/luu_tru/create')
+@router.post('/luu-tru/')
 async def create_cong_van_luu_tru(
     cong_van_luu_tru_pydantic: cong_van_schemas.CongVanLuuTruCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
@@ -538,7 +390,7 @@ async def create_cong_van_luu_tru(
     
 
 
-@router.put('/luu_tru/{cong_van_luu_tru_id}')
+@router.put('/luu-tru/{cong_van_luu_tru_id}')
 async def get_cong_van_luu_tru_by_id(
     cong_van_luu_tru_id: int,
     cong_van_luu_tru_pydantic: cong_van_schemas.CongVanLuuTruCreate,
@@ -558,7 +410,7 @@ async def get_cong_van_luu_tru_by_id(
     
     
     
-@router.post('/luu_tru/{cong_van_luu_tru_id}/update/tep_dinh_kem')
+@router.post('/luu-tru/{cong_van_luu_tru_id}/tep_dinh_kem')
 async def update_cong_van_luu_tru__tep_dinh_kem(
     cong_van_luu_tru_id: int,
     tep_dinh_kem_input: UploadFile = File(...),
@@ -592,7 +444,7 @@ async def update_cong_van_luu_tru__tep_dinh_kem(
     
     
 
-@router.delete('/luu_tru/{cong_van_luu_tru_id}')
+@router.delete('/luu-tru/{cong_van_luu_tru_id}')
 async def delete_cong_van_luu_tru(
     cong_van_luu_tru_id: int,
     # cong_van: cong_van_schemas.CongVanCreate,
@@ -613,7 +465,7 @@ async def delete_cong_van_luu_tru(
         return api_exceptions.handle_simple_exception(e, logger)
     
 
-@router.get("/luu_tru/{cong_van_id}/download/tep_dinh_kem")
+@router.get("/luu-tru/{cong_van_id}/download/tep_dinh_kem")
 async def download_tep_dinh_kem(
                         cong_van_id: int,
                         user=Depends(user_core.get_user_of_download_token),

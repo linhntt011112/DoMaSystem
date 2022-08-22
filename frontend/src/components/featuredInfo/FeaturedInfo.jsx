@@ -14,8 +14,8 @@ export default function FeaturedInfo({userPermission, token}) {
 
     const urlOf = {
         Users: backend_config.USER_GET_LIST_API + "?count=true",
-        Cvdi: backend_config.CONG_VAN_GET_LIST_CVDI + "?count=true",
-        Cvden: backend_config.CONG_VAN_GET_LIST_CVDEN + "?count=true"
+        Cvdi: backend_config.CONG_VAN_GET_LIST_CVDI + "&count=true",
+        Cvden: backend_config.CONG_VAN_GET_LIST_CVDEN + "&count=true"
     }
 
     if (userPermission !== "admin"){

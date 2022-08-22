@@ -11,7 +11,7 @@ backend/test.ipynb
 storage/
 backend/database/docker-db/
 
-# github_token.txt
+github_token.txt
 
 frontend/node_venv/
 frontend/build/

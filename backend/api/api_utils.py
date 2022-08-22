@@ -22,7 +22,7 @@ from exceptions import api_exceptions
 router = APIRouter(prefix='/utils/lich')
 
 
-@router.get('/')
+@router.get('')
 async def get_list_lich_by_user_id(user_id: int,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
 
@@ -36,7 +36,7 @@ async def get_list_lich_by_user_id(user_id: int,
 
 
 
-@router.post('/')
+@router.post('')
 async def create_lich(
     lich_model: utils_schemas.LichCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)
@@ -69,7 +69,7 @@ async def delete_lich(
     
     
 
-@router.delete('/{lich_id}/delete')
+@router.delete('/{lich_id}')
 async def delete_lich(
     lich_id: int,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)

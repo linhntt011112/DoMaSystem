@@ -127,7 +127,7 @@ export default function EditMyProfile(props) {
         })
 
         backend_config.makeRequest("PUT", 
-            backend_config.USER_PUT_SELF_UPDATE, 
+            backend_config.USER_PUT_SELF_UPDATE.replace("{id}", userData?.id), 
             token,
             body
         )

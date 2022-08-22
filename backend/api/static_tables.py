@@ -79,7 +79,7 @@ def _get_static_table_by_id(db, static_table_id, class_) :
 
 
 
-@router.get("/{static_table_name}/list")
+@router.get("/{static_table_name}/")
 @caching.cache(namespace='static_table', key_builder=caching.static_tables_key_builder)
 async def get_list(
     static_table_name: str,
@@ -108,7 +108,7 @@ async def reset_cache(
     return res
 
 
-@router.post("/{static_table_name}/create")
+@router.post("/{static_table_name}/")
 async def create(
     static_table_name: str,
     static_table_create_pydantic: schema_static_tables.StaticTableCreate,
@@ -126,7 +126,7 @@ async def create(
         
 
 
-@router.put("/{static_table_name}/update")
+@router.put("/{static_table_name}/")
 async def update(
     static_table_name: str,
     static_table_update_pydantic: schema_static_tables.StaticTableUpdate,
@@ -144,7 +144,7 @@ async def update(
     
     
     
-@router.delete("/{static_table_name}/delete/{obj_id}")
+@router.delete("/{static_table_name}/{obj_id}")
 async def delete(
     static_table_name: str,
     obj_id: int,

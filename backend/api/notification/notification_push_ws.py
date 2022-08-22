@@ -39,7 +39,8 @@ async def websocket_endpoint(
     try:
         redis = aioredis.from_url(server_config.pubsub.redis_url)
         channel = redis.pubsub()
-        await channel.subscribe("test")
+        # await channel.subscribe("test")
+        await channel.subscribe(token_data["id"])
         
         await websocket.accept()
         while True:
@@ -48,7 +49,7 @@ async def websocket_endpoint(
                 async with async_timeout.timeout(1):
                     message = await channel.get_message(ignore_subscribe_messages=True)
                     if message is not None:
-                        logger.debug(f"(Reader) Message Received: {message}")
+                        # logger.debug(f"(Reader) Message Received: {message}")
                         # data = await websocket.receive_text()
                         # await websocket.send_text(f"{data}")
                            
@@ -59,6 +60,6 @@ async def websocket_endpoint(
             except asyncio.TimeoutError:
                 pass
     except Exception as e:
-        logger.error(f'{str(e)}: {traceback.format_exc()}')
+        # logger.warning(f'{str(e)}: {traceback.format_exc()}')
         await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
         

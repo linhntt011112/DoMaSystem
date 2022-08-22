@@ -135,8 +135,8 @@ async def update_info_user(user_id: int,
 
 
 
-@router.put("/")
-async def update_info_user_self(user_schema_model: user_schemas.UserSelfUpdateInfo,
+@router.put("/{user_id}")
+async def update_info_user_self(user_id: int, user_schema_model: user_schemas.UserSelfUpdateInfo,
     current_user=Depends(get_current_active_user), db=Depends(get_db)):
     # if current_user.id != user_update_password.id:
     #     raise exceptions.PERMISSION_EXCEPTION()
@@ -188,6 +188,6 @@ async def delete_user_by_id(user_id: int, current_user = Depends(get_current_act
     
     
 
-@router.get("/get_download_token")
+@router.get("/get-download-token")
 async def get_download_tokenn(download_token=Depends(request_download_token)):
     return download_token

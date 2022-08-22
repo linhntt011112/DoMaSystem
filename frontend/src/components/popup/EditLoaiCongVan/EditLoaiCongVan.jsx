@@ -39,7 +39,7 @@ export default function EditLoaiCongVan(props) {
         // console.log(body)
         // setTrangThai(null);
         backend_config.makeRequest("PUT", 
-            backend_config.LOAI_CONG_VAN_PUT_UPDATE, 
+            backend_config.LOAI_CONG_VAN_PUT_UPDATE.replace("{id}", loai_cong_van?.id), 
             token,
             body
         )

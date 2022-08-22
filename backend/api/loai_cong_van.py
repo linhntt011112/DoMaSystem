@@ -16,8 +16,8 @@ from .user import get_current_active_user
 from .core import file_utils
 
 
-router = APIRouter(prefix='/cong_van')
-@router.get("/loai_cong_van/list")
+router = APIRouter(prefix='/cong-van')
+@router.get("/loai-cong-van")
 async def get_list_loai_cong_van(limit: int=None, offset: int=None,
                         order_by=None,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
@@ -30,7 +30,7 @@ async def get_list_loai_cong_van(limit: int=None, offset: int=None,
         return api_exceptions.handle_simple_exception(e, logger)
 
 
-@router.post("/loai_cong_van/create")
+@router.post("/loai-cong-van")
 async def create_loai_cong_van(loai_cong_van: cong_van_schemas.LoaiCongVanCreate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
     if current_user.phan_quyen != db_models.PhanQuyen.admin:
@@ -46,15 +46,15 @@ async def create_loai_cong_van(loai_cong_van: cong_van_schemas.LoaiCongVanCreate
     
     
 
-@router.put("/loai_cong_van/update")
-async def get_list_users(loai_cong_van_pydantic: cong_van_schemas.LoaiCongVanUpdate,
+@router.put("/loai-cong-van/{id}")
+async def get_list_users(id: int, loai_cong_van_pydantic: cong_van_schemas.LoaiCongVanUpdate,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
     if current_user.phan_quyen != db_models.PhanQuyen.admin:
         raise api_exceptions.PERMISSION_EXCEPTION()
 
     
     try:
-        loai_cong_van = crud_cong_van.get_loai_cong_van_by_id(db, loai_cong_van_pydantic.id)
+        loai_cong_van = crud_cong_van.get_loai_cong_van_by_id(db, id)
         if loai_cong_van is None:
             raise api_exceptions.NOT_FOUND_EXCEPTION()
         
@@ -68,7 +68,7 @@ async def get_list_users(loai_cong_van_pydantic: cong_van_schemas.LoaiCongVanUpd
 
 
 
-@router.delete("/loai_cong_van/delete/{id}")
+@router.delete("/loai-cong-van/{id}")
 async def delete_loai_cong_van(id: int,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
     if current_user.phan_quyen != db_models.PhanQuyen.admin:
