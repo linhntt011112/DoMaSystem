@@ -20,11 +20,11 @@ from .cong_van import authorize_user_for_cong_van
 from exceptions import api_exceptions
 
 
-router = APIRouter(prefix='/cong_van')
+router = APIRouter(prefix='/cong-van')
 
 
 
-@router.get('/{cong_van_id}/version/list')
+@router.get('/{cong_van_id}/version')
 async def get_cong_van_version_by_id(cong_van_id: int,
     current_user: db_models.NguoiDung = Depends(get_current_active_user), db=Depends(get_db)):
 
@@ -60,7 +60,7 @@ async def get_cong_van_version_by_id(cong_van_id: int, version_id: int,
     
     
 
-@router.get("/version/{cong_van_version_id}/download/tep_dinh_kem")
+@router.get("/version/{cong_van_version_id}/download/tep-dinh-kem")
 async def download_tep_dinh_kem(
                         cong_van_version_id: int,
                         user=Depends(user_core.get_user_of_download_token),
