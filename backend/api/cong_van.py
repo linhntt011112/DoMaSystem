@@ -142,7 +142,7 @@ async def create_cong_van_di(
         new_cong_van = crud_cong_van.create_cong_van(db, cong_van_version)
         # logger.info(f"{new_cong_van.__dict__}")
         
-        cong_van_noti_push.create_cong_van_notify(db, new_cong_van, current_user)
+        await cong_van_noti_push.create_cong_van_notify(db, new_cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(new_cong_van)
     except Exception as e:
         return api_exceptions.handle_simple_exception(e, logger)
@@ -218,7 +218,7 @@ async def update_cong_van(
         cong_van_version_pydantic.id_nguoi_cap_nhat = current_user.id
         cong_van = crud_cong_van.update_cong_van(db, cong_van, cong_van_version_pydantic)
         
-        cong_van_noti_push.update_cong_van_notify(db, cong_van, current_user)
+        await cong_van_noti_push.update_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
@@ -244,7 +244,7 @@ async def update_cong_van(
         cong_van.update_at = datetime.now()
         cong_van = crud_cong_van.update_cong_van(db, cong_van)
         
-        cong_van_noti_push.duyet_cong_van_notify(db, cong_van, current_user)
+        await cong_van_noti_push.duyet_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
@@ -272,7 +272,7 @@ async def update_cong_van(
         cong_van = crud_cong_van.update_cong_van(db, cong_van)
         crud_cong_van.create_cvlt_from_cong_van(db, cong_van)
         
-        cong_van_noti_push.xu_ly_cong_van_notify(db, cong_van, current_user)
+        await cong_van_noti_push.xu_ly_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.CongVanFull.from_orm(cong_van)
     except Exception as e:
 
@@ -332,7 +332,7 @@ async def create_trao_doi(cong_van_id: int, trao_doi_pydantic: cong_van_schemas.
         trao_doi_pydantic.id_cong_van = cong_van_id
         trao_doi = crud_cong_van.create_trao_doi(db, cong_van, trao_doi=trao_doi_pydantic)
         
-        cong_van_noti_push.add_trao_doi_cong_van_notify(db, cong_van, current_user)
+        await cong_van_noti_push.add_trao_doi_cong_van_notify(db, cong_van, current_user)
         return cong_van_schemas.TraoDoiCongVanFull.from_orm(trao_doi)
     except db_exceptions.PermissionException as e:
         raise api_exceptions.PERMISSION_EXCEPTION()

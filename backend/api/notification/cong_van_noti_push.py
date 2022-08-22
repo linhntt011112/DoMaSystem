@@ -11,7 +11,9 @@ from .crud import error_wrap
 
 user_fields = set(["id_nguoi_tao", "id_nguoi_ky", "id_nguoi_xu_ly", "id_nguoi_theo_doi"])
 
-def cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung, notification_template_id, actor_field, event):
+
+@error_wrap
+async def cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung, notification_template_id, actor_field, event):
     notification_object = crud_notification.create_notification_object(db, actor.id, notification_template_id, cong_van.id)
     msg = {
         "id": notification_object.id,
@@ -40,34 +42,34 @@ def cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung,
                 msg["id"] = notification.id
                 
                 # pusher_client.trigger(str(notifier_id), event, json.dumps(msg, ensure_ascii=False, default=str))
-                redis_send_data(str(notifier_id), json.dumps(msg, ensure_ascii=False, default=str))
+                await redis_send_data(str(notifier_id), json.dumps(msg, ensure_ascii=False, default=str))
                 notified.add(notifier_id)
     
     return notification_object
 
     
 
-def create_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
-    return cong_van_notify(db, cong_van, actor, notification_template_id=1, actor_field="id_nguoi_tao", event="create_cong_van")
+async def create_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
+    return await cong_van_notify(db, cong_van, actor, notification_template_id=1, actor_field="id_nguoi_tao", event="create_cong_van")
 
 
-def update_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
+async def update_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
     actor_field = None
     for field in user_fields:
         if cong_van.cong_van_current_version.id_nguoi_cap_nhat == getattr(cong_van.cong_van_current_version, field):
             actor_field = field
             break
-    return cong_van_notify(db, cong_van, actor, notification_template_id=2, actor_field=actor_field, event="update_cong_van")
+    return await cong_van_notify(db, cong_van, actor, notification_template_id=2, actor_field=actor_field, event="update_cong_van")
 
 
-def duyet_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
-    return cong_van_notify(db, cong_van, actor, notification_template_id=3, actor_field="id_nguoi_ky", event="duyet_cong_van")
+async def duyet_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
+    return await cong_van_notify(db, cong_van, actor, notification_template_id=3, actor_field="id_nguoi_ky", event="duyet_cong_van")
 
 
-def xu_ly_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
-    return cong_van_notify(db, cong_van, actor, notification_template_id=4, actor_field="id_nguoi_xu_ly", event="xu_ly_cong_van")
+async def xu_ly_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
+    return await cong_van_notify(db, cong_van, actor, notification_template_id=4, actor_field="id_nguoi_xu_ly", event="xu_ly_cong_van")
 
 
-def add_trao_doi_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
-    return cong_van_notify(db, cong_van, actor, notification_template_id=5, actor_field="", event="add_trao_doi_cong_van")
+async def add_trao_doi_cong_van_notify(db, cong_van: db_models.CongVan, actor: db_models.NguoiDung):
+    return await cong_van_notify(db, cong_van, actor, notification_template_id=5, actor_field="", event="add_trao_doi_cong_van")
 

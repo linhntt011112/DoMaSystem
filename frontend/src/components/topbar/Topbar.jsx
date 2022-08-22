@@ -112,7 +112,7 @@ export default function Topbar({user, token}) {
             // console.log(eventName, data)
             let converted = convert_data(data)
             // console.log(converted)
-            console.log(notifications_stateless)
+            console.log(converted)
             notifications_stateless = [converted, ...notifications_stateless]
             setNotifications([...notifications_stateless]);
             // if (converted["id"]) {
