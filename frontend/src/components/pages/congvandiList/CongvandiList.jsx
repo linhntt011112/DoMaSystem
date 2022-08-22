@@ -48,7 +48,8 @@ export default function CongvandiList(props) {
 
 
     const refreshTable = () => {
-        var url = cong_van_di_get_list_url + "?";
+        // var url = cong_van_di_get_list_url + "?";
+        var url = cong_van_di_get_list_url;
         if (value_loaicongvan !== -1) url += "&id_loai_cong_van=" + value_loaicongvan
         if (value_mucdouutien !== -1) url += "&id_muc_do_uu_tien="  + value_mucdouutien
         backend_config.makeRequest("GET", url, token)
