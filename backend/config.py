@@ -1,8 +1,15 @@
 import os
 import json
-
-with open("local_config.json") as f:
-    local_config = json.load(f)
+    
+try:
+    with open("local_config.json") as f:
+        local_config = json.load(f)
+    local_config["ServerConfig"]["base_save_dir"]
+except Exception as e:
+    save_dir = os.path.join(os.getcwd(), "storage")
+    os.makedirs(save_dir, exist_ok=True)
+    local_config = {"ServerConfig": {"base_save_dir": save_dir}}
+    
 
 
 class DBConfig:
@@ -38,6 +45,7 @@ class ServerConfig:
 
     base_save_dir = local_config["ServerConfig"]["base_save_dir"]
     tep_dinh_kem_save_dir = os.path.join(base_save_dir, 'tep_dinh_kem')
+    os.makedirs(tep_dinh_kem_save_dir, exist_ok=True)
 
     class Caching:
         redis_url = "redis://default:DMS@localhost:3012/0"
