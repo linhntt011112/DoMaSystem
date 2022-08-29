@@ -19,7 +19,7 @@ services:
             MYSQL_USER: admin
             MYSQL_PASSWORD: 123456
         volumes:
-            - "${DMS_DOCKER_DIR:-./docker-db/db-data}/mysql-container:/var/lib/mysql"
+            - "${DMS_DOCKER_DIR:-./docker/db-data}/mysql-container:/var/lib/mysql"
             # - ./docker-db/db-data:/var/lib/mysql
             # - ./docker-db/mysqld.sock:/var/run/mysqld/mysqld.sock
         # entrypoint:
@@ -49,7 +49,7 @@ services:
         # environment:
         #     - ALLOW_EMPTY_PASSWORD=yes
         volumes:
-            - "${DMS_DOCKER_DIR:-./docker-db/db-data}/redis:/data"
+            - "${DMS_DOCKER_DIR:-./docker/db-data}/redis:/data"
         command: redis-server --save 20 1 --requirepass DMS
         ports:
             - "3012:6379"
