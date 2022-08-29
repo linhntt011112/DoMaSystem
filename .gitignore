@@ -1,8 +1,5 @@
 backend/venv/
-backend/__pycache__/
 backend/database/db-data/
-backend/database/__pycache__/
-backend/database/models/__pycache__/
 backend/log
 backend/test.ipynb
 # backend/local_config.json
@@ -12,7 +9,7 @@ storage/
 backend/database/docker-db/
 
 github_token.txt
+scripts.txt
 
 frontend/node_venv/
-frontend/build/
-frontend/prod_build**/
+frontend/prod_build*/
