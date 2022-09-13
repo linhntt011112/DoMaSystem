@@ -1,6 +1,19 @@
 # Overview
+## Techonologies
+### Back-end
+* Framework: FastAPI (python), SQLAlchemy
+* Database: MySQL
+* Redis for caching and pushing notifications
+### Front-end
+* ReactJS, MUI
 ## Features
----
+* **Simple UI and User Flow**
+* **Real-time notification**. No quota limits since the application uses its own Redis server and websocket connections, but can easily switch to [Pusher](https://pusher.com/) to increase reliability and durability of the service.
+* **Document's version control**
+* **Simplified version of Oauth2 supported**. Only `access_token` is required, simpler but more vulnerable.
+
+![Alt text](relative/path/to/img.jpg?raw=true "Title")
+
 # How to run
 ## Prerequisite
 
@@ -8,11 +21,11 @@
 * Docker 20.10.16 and docker-compose 1.29.1
 * npm 8.4.1 and node 17.5.0
 
-Install all back-end requirements using
+Install back-end requirements using
 ```
 cd backend && pip install -r requirements.txt
 ```
-and all front-end requirements 
+and front-end requirements 
 ```
 cd frontend && npm install --force
 ```
@@ -67,11 +80,16 @@ mv build prod_build
 3. Run back-end and front-end as services (for creating these services, see ```systemd.service```)
 4. Configure nginx (see ```nginx.conf```) and add a HTTPS certificate using tools like [Certbot](https://certbot.eff.org/)
 
-This branch was deployed to AWS with these instructions and was available at [domasy.site](https://domasy.site) (I turned off the AWS server, but will re-open it when the time comes)
+This branch was deployed to AWS following these instructions and was available at [domasy.site](https://domasy.site) (The AWS server has been turned off due to low budget, but it will be re-opened when the time comes).
 
 ---
 # Database
 ## Schemas
+![](images/database/DMS-full-schema.svg)
 ## Notification-related tables
----
+![](images/database/noti-schema.png)
+
 # Realtime Notification
+
+# Screenshots
+
