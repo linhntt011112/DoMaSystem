@@ -1,21 +1,24 @@
 # Overview
+<p align="center">An Internal Document Management System that is used to receive, track, manage and store documents with version control and real-time notifications features.</p>  
+
 ## Techonologies
-### Back-end
+### Back-end ([TanHM-1211](https://github.com/TanHM-1211))
 * Framework: FastAPI (python), SQLAlchemy
 * Database: MySQL
 * Redis for caching and pushing notifications
-### Front-end
+### Front-end ([linhntt011112](https://github.com/linhntt011112))
 * ReactJS, MUI
+* UI is written in Vietnamese
 ## Features
 * **Simple UI and User Flow**
-* **Real-time notification**. No quota limits since the application uses its own Redis server and websocket connections, but can easily switch to [Pusher](https://pusher.com/) to increase reliability and durability of the service.
+* **Real-time notification**. No quota limits since the application uses its own Redis server and websocket connections, but can easily switch to [Pusher](https://pusher.com/).
 * **Document's version control**
 * **Simplified version of Oauth2 supported**. Only `access_token` is required, simpler but more vulnerable.
 
-![Alt text](relative/path/to/img.jpg?raw=true "Title")
+<!-- ![Alt text](relative/path/to/img.jpg?raw=true "Title") -->
 
 # How to run
-## Prerequisite
+## Prerequisites
 
 * Python 3.9.6
 * Docker 20.10.16 and docker-compose 1.29.1
@@ -84,12 +87,47 @@ This branch was deployed to AWS following these instructions and was available a
 
 ---
 # Database
+Since almost all of the UI is Vietnamese, we found it easier to have some core tables written in Vietnamese as well.  
 ## Schemas
 ![](images/database/DMS-full-schema.svg)
 ## Notification-related tables
+*nguoi_dung : User in Vietnamese*
 ![](images/database/noti-schema.png)
 
 # Realtime Notification
+A diagram is worth a thousand words.  
+![](images/notification/sequence.png)
 
 # Screenshots
 
+<div style="position: relative;
+  width: 50%;
+  float: left;
+  height: 100%;
+  z-index: 1010101010">
+  <img src="images/screenshots/chi_tiet_cvdi_full.png" width="95%" />
+</div>
+<div  style="position: relative;
+  width: 50%;
+  float: left;
+  height: 100%;
+  z-index: 1010101010">
+  <img src="images/screenshots/form_add_cv.png" width="95%" />
+  <img src="images/screenshots/ds_cv_di.png" width="95%" />
+</div>
+  
+<div style="position: relative;
+  width: 50%;
+  float: left;
+  height: 100%;
+  z-index: 1010101010">
+  <img src="images/screenshots/ds_ng_dung.png" width="95%" />
+  <img src="images/screenshots/ds_su_kien.png" width="95%" />
+</div>
+<div  style="position: relative;
+  width: 50%;
+  float: left;
+  height: 100%;
+  z-index: 1010101010">
+  <img src="images/screenshots/my-profile.png" width="95%" />
+</div>
