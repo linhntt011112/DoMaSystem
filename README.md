@@ -85,7 +85,10 @@ mv build prod_build
 
 This branch was deployed to AWS following these instructions and was available at [domasy.site](https://domasy.site) (The AWS server has been turned off due to low budget, but it will be re-opened when the time comes).
 
----
+<!-- --- -->
+# Main Flow
+A Sequence diagram illustrated by [linhntt011112](https://github.com/linhntt011112), written in Vietnamese.
+![](images/quy_trinh_xu_ly_cv.png)
 # Database
 Since almost all of the UI is Vietnamese, we found it easier to have some core tables written in Vietnamese as well.  
 ## Schemas
